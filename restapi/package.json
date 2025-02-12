@@ -1,0 +1,22 @@
+{
+  "name": "restapi",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "npx sequelize-cli db:migrate --config=config/config.js"
+  },
+  "author": "Farkas Bence",
+  "license": "ISC",
+  "description": "Node.js, Sequelize, MySQL and REST APIs with Fastify with ESM",
+  "dependencies": {
+    "@fastify/autoload": "^6.1.0",
+    "@fastify/cors": "^10.0.2",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5"
+  },
+  "type": "module"
+}
