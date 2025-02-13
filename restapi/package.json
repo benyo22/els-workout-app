@@ -3,20 +3,30 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "npx sequelize-cli db:migrate --config=config/config.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "migrate": "npx sequelize-cli db:migrate --config=config/config.js",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo --config=config/config.js",
+    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all --config=config/config.js",
+    "migrate:reset": "npx sequelize-cli db:migrate:undo:all --config=config/config.js",
+    "seed": "npx sequelize-cli db:seed:all --config=config/config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Farkas Bence",
   "license": "ISC",
   "description": "Node.js, Sequelize, MySQL and REST APIs with Fastify with ESM",
   "dependencies": {
+    "@faker-js/faker": "^9.5.0",
     "@fastify/autoload": "^6.1.0",
     "@fastify/cors": "^10.0.2",
     "bcrypt": "^5.1.1",
+    "chalk": "^4.1.2",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
     "mysql2": "^3.12.0",
     "sequelize": "^6.37.5"
   },
-  "type": "module"
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
 }

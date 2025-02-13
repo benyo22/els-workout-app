@@ -1,16 +1,13 @@
 "use strict";
-import { Model } from "sequelize";
-import bcrypt from "bcrypt";
+const { Model } = require("sequelize");
+const bcrypt = require("bcrypt");
 
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      this.hasMany(models.Workout, { foreignKey: "userId" });
+      this.hasMany(models.Sleep, { foreignKey: "userId" });
+      this.hasMany(models.Meal, { foreignKey: "userId" });
     }
   }
   User.init(
@@ -40,7 +37,6 @@ export default (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
-      timestamps: true,
       hooks: {
         beforeCreate: async (user) => {
           const saltRounds = 10;
