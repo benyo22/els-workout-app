@@ -8,8 +8,9 @@
     "migrate": "npx sequelize-cli db:migrate --config=config/config.js",
     "migrate:undo": "npx sequelize-cli db:migrate:undo --config=config/config.js",
     "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all --config=config/config.js",
-    "migrate:reset": "npx sequelize-cli db:migrate:undo:all --config=config/config.js",
     "seed": "npx sequelize-cli db:seed:all --config=config/config.js",
+    "seed:undo": "npx sequelize-cli db:seed:undo",
+    "seed:undo:all": "npx sequelize-cli db:seed:undo:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Farkas Bence",
@@ -19,6 +20,7 @@
     "@faker-js/faker": "^9.5.0",
     "@fastify/autoload": "^6.1.0",
     "@fastify/cors": "^10.0.2",
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "chalk": "^4.1.2",
     "dotenv": "^16.4.7",
