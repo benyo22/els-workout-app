@@ -20,12 +20,15 @@
     "@faker-js/faker": "^9.5.0",
     "@fastify/autoload": "^6.1.0",
     "@fastify/cors": "^10.0.2",
+    "@fastify/jwt": "^9.0.4",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "chalk": "^4.1.2",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
+    "http-status-codes": "^2.3.0",
     "mysql2": "^3.12.0",
+    "nodemon": "^3.1.9",
     "sequelize": "^6.37.5"
   },
   "devDependencies": {

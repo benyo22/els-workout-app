@@ -6,7 +6,7 @@ const { User } = require("../models");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const userCount = faker.number.int({ min: 4, max: 8 });
+    const userCount = 4;
 
     const users = Array.from({ length: userCount }, () => ({
       name: faker.person.firstName(),
