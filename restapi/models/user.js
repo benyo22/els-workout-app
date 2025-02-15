@@ -1,6 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
-const bcrypt = require("bcrypt");
+const argon2 = require("argon2");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -39,8 +39,10 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       hooks: {
         beforeCreate: async (user) => {
-          const saltRounds = 10;
-          user.password = await bcrypt.hash(user.password, saltRounds);
+          const hashedPassword = await argon2.hash(user.password, {
+            type: argon2.argon2id,
+          });
+          user.password = hashedPassword;
         },
       },
     }

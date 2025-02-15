@@ -1,17 +1,9 @@
 const { StatusCodes } = require("http-status-codes");
 const { User } = require("../models");
-const bcrypt = require("bcrypt");
+const argon2 = require("argon2");
+const { where } = require("sequelize");
 
 module.exports = async (fastify, options) => {
-  fastify.get(
-    "/user:id",
-    { onRequest: [fastify.auth] },
-    async (request, reply) => {
-      const user = request.user;
-      reply.send(user);
-    }
-  );
-
   fastify.post(
     "/register",
     {
@@ -32,30 +24,24 @@ module.exports = async (fastify, options) => {
       const { name, username, email, password } = request.body;
 
       // Check if user exists
-      const takenEmail = await User.findOne({
-        where: { email },
-      });
-      if (takenEmail) {
-        return reply
-          .status(StatusCodes.CONFLICT)
-          .send({ error: "Email already taken!" });
+      const [takenEmail, takenUsername] = await Promise.all([
+        User.findOne({ where: { email } }),
+        User.findOne({ where: { username } }),
+      ]);
+
+      if (takenEmail || takenUsername) {
+        return reply.status(StatusCodes.CONFLICT).send({
+          error: takenEmail
+            ? "Email already taken!"
+            : "Username already taken!",
+        });
       }
 
-      const takenUsername = await User.findOne({
-        where: { username },
-      });
-      if (takenUsername) {
-        return reply
-          .status(StatusCodes.CONFLICT)
-          .send({ error: "Username already taken!" });
-      }
-
-      const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({
         name,
         username,
         email,
-        password: hashedPassword,
+        password,
       });
 
       reply.send({ message: "User registered successfully!", user });
@@ -90,17 +76,34 @@ module.exports = async (fastify, options) => {
           .send({ error: "Invalid email or username!" });
       }
 
-      const isPasswordMatch = bcrypt.compare(password, user.password);
+      const isPasswordMatch = await argon2.verify(user.password, password);
       if (!isPasswordMatch) {
         reply
           .status(StatusCodes.NOT_FOUND)
           .send({ error: "Invalid password!" });
       }
-      const token = fastify.jwt.sign(
-        { id: user.id, username: user.username },
-        { expiresIn: "1h" }
-      );
+      const token = fastify.jwt.sign(user.toJSON(), { expiresIn: "1h" });
       reply.send({ message: "Login successful!", token });
+    }
+  );
+
+  fastify.get(
+    "/profile",
+    { onRequest: [fastify.auth] },
+    async (request, reply) => {
+      const user = request.user;
+      reply.send(user);
+    }
+  );
+
+  fastify.delete(
+    "/del-profile",
+    { onRequest: [fastify.auth] },
+    async (request, reply) => {
+      const id = request.user.id;
+      await User.destroy({ where: { id } });
+
+      reply.send(`Deleted a user with an id of ${id}!`);
     }
   );
 };
