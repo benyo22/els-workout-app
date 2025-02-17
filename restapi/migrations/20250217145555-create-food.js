@@ -2,29 +2,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("MealFood", {
+    await queryInterface.createTable("Food", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      mealId: {
+      name: {
         allowNull: false,
-        references: {
-          model: "meals",
-          key: "id",
-        },
-        onDelete: "cascade",
+        type: Sequelize.STRING,
+      },
+      caloriesPer100g: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      foodId: {
+      proteinPer100g: {
         allowNull: false,
-        references: {
-          model: "food",
-          key: "id",
-        },
-        onDelete: "cascade",
+        type: Sequelize.INTEGER,
+      },
+      carbsPer100g: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      fatsPer100g: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       createdAt: {
@@ -37,8 +39,7 @@ module.exports = {
       },
     });
   },
-
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("MealFood");
+    await queryInterface.dropTable("Food");
   },
 };

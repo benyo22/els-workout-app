@@ -10,28 +10,20 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING,
       },
       type: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: true,
       },
       muscle: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: true,
       },
       equipment: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: true,
-      },
-      difficulty: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      instructions: {
-        type: Sequelize.TEXT,
-        allowNull: true,
       },
       createdAt: {
         allowNull: false,

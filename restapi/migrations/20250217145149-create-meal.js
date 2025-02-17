@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Sleep", {
+    await queryInterface.createTable("Meals", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,13 +19,33 @@ module.exports = {
         onDelete: "cascade",
         type: Sequelize.INTEGER,
       },
-      duration: {
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      type: {
+        allowNull: false,
+        type: Sequelize.ENUM("breakfast", "lunch", "dinner", "snack"),
+      },
+      date: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      totalCalories: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      quality: {
+      protein: {
         allowNull: false,
-        type: Sequelize.ENUM("poor", "average", "good", "excellent"),
+        type: Sequelize.INTEGER,
+      },
+      carbs: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      fats: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +58,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Sleep");
+    await queryInterface.dropTable("Meals");
   },
 };

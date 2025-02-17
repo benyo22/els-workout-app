@@ -1,44 +1,46 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Sleep extends Model {
+  class Set extends Model {
     static associate(models) {
-      this.belongsTo(models.User, { foreignKey: "userId" });
+      this.belongsTo(models.WorkoutExercise, {
+        foreignKey: "workoutExerciseId",
+      });
     }
   }
-  Sleep.init(
+  Set.init(
     {
-      userId: {
+      workoutExerciseId: {
         allowNull: false,
         references: {
-          model: "users",
+          model: "workoutExercises",
           key: "id",
         },
         onUpdate: "cascade",
         onDelete: "cascade",
         type: DataTypes.INTEGER,
       },
-      sleepStart: {
-        allowNull: false,
-        type: DataTypes.DATE,
-      },
-      sleepEnd: {
-        allowNull: false,
-        type: DataTypes.DATE,
-      },
-      durationMin: {
+      setNumber: {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      quality: {
+      reps: {
         allowNull: false,
-        type: DataTypes.ENUM("poor", "average", "good", "excellent"),
+        type: DataTypes.INTEGER,
+      },
+      weight: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      dropSet: {
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
       },
     },
     {
       sequelize,
-      modelName: "Sleep",
+      modelName: "Set",
     }
   );
-  return Sleep;
+  return Set;
 };

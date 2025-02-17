@@ -1,12 +1,12 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Sleep extends Model {
+  class Weight extends Model {
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: "userId" });
     }
   }
-  Sleep.init(
+  Weight.init(
     {
       userId: {
         allowNull: false,
@@ -18,27 +18,15 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "cascade",
         type: DataTypes.INTEGER,
       },
-      sleepStart: {
-        allowNull: false,
-        type: DataTypes.DATE,
-      },
-      sleepEnd: {
-        allowNull: false,
-        type: DataTypes.DATE,
-      },
-      durationMin: {
+      userWeight: {
         allowNull: false,
         type: DataTypes.INTEGER,
-      },
-      quality: {
-        allowNull: false,
-        type: DataTypes.ENUM("poor", "average", "good", "excellent"),
       },
     },
     {
       sequelize,
-      modelName: "Sleep",
+      modelName: "Weight",
     }
   );
-  return Sleep;
+  return Weight;
 };

@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Workouts", {
+    await queryInterface.createTable("Weights", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,16 +12,16 @@ module.exports = {
       userId: {
         allowNull: false,
         references: {
-          model: "users", //TÁBLA neve!
-          key: "id", //kulcs amire hivatkozik
-        }, //külső hivatkozás
-        onDelete: "cascade",
+          model: "users",
+          key: "id",
+        },
         onUpdate: "cascade",
+        onDelete: "cascade",
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
+      userWeight: {
         allowNull: false,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Workouts");
+    await queryInterface.dropTable("Weights");
   },
 };

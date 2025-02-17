@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       this.hasMany(models.Workout, { foreignKey: "userId" });
+      this.hasMany(models.Weight, { foreignKey: "userId" });
       this.hasMany(models.Sleep, { foreignKey: "userId" });
       this.hasMany(models.Meal, { foreignKey: "userId" });
     }
@@ -13,25 +14,29 @@ module.exports = (sequelize, DataTypes) => {
   User.init(
     {
       name: {
-        type: DataTypes.STRING,
         allowNull: false,
+        type: DataTypes.STRING,
       },
-      username: {
-        type: DataTypes.STRING,
+      age: {
         allowNull: false,
-        unique: true,
+        type: DataTypes.INTEGER,
       },
       email: {
-        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
           isEmail: true,
         },
+        type: DataTypes.STRING,
+      },
+      username: {
+        allowNull: false,
+        unique: true,
+        type: DataTypes.STRING,
       },
       password: {
-        type: DataTypes.STRING,
         allowNull: false,
+        type: DataTypes.STRING,
       },
     },
     {

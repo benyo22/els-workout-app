@@ -2,29 +2,38 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Food", {
+    await queryInterface.createTable("Sets", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      workoutExerciseId: {
         allowNull: false,
-        type: Sequelize.STRING,
+        references: {
+          model: "workoutExercises",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
+        type: Sequelize.INTEGER,
       },
-      calories: {
+      setNumber: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      protein: {
+      reps: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      fat: {
+      weight: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      carbohydrate: {
-        type: Sequelize.INTEGER,
+      dropSet: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Food");
+    await queryInterface.dropTable("Sets");
   },
 };
