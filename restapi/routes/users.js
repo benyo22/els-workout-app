@@ -4,24 +4,26 @@ const argon2 = require("argon2");
 const { where } = require("sequelize");
 
 module.exports = async (fastify, options) => {
+  //register
   fastify.post(
     "/register",
     {
       schema: {
         body: {
           type: "object",
-          required: ["name", "username", "email", "password"],
+          required: ["name", "age", "email", "username", "password"],
           properties: {
             name: { type: "string" },
-            username: { type: "string" },
+            age: { type: "integer" },
             email: { type: "string", format: "email" },
+            username: { type: "string" },
             password: { type: "string", minLength: 6 },
           },
         },
       },
     },
     async (request, reply) => {
-      const { name, username, email, password } = request.body;
+      const { name, age, email, username, password } = request.body;
 
       // Check if user exists
       const [takenEmail, takenUsername] = await Promise.all([
@@ -39,8 +41,9 @@ module.exports = async (fastify, options) => {
 
       const user = await User.create({
         name,
-        username,
+        age,
         email,
+        username,
         password,
       });
 
@@ -48,6 +51,7 @@ module.exports = async (fastify, options) => {
     }
   );
 
+  //login
   fastify.post(
     "/login",
     {
@@ -67,6 +71,7 @@ module.exports = async (fastify, options) => {
     async (request, reply) => {
       const { username, email, password } = request.body;
 
+      //Check if user exists
       const user = await User.findOne({
         where: username ? { username } : { email },
       });
@@ -76,19 +81,37 @@ module.exports = async (fastify, options) => {
           .send({ error: "Invalid email or username!" });
       }
 
+      //Check password
       const isPasswordMatch = await argon2.verify(user.password, password);
       if (!isPasswordMatch) {
         reply
           .status(StatusCodes.NOT_FOUND)
           .send({ error: "Invalid password!" });
       }
+
+      //Create token
       const token = fastify.jwt.sign(user.toJSON(), { expiresIn: "1h" });
-      reply.send({ message: "Login successful!", token });
+      reply
+        .setCookie("token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "Strict",
+          path: "/",
+          maxAge: 3600,
+          signed: true,
+        })
+        .send({ message: "Login successful!" });
     }
   );
 
+  //logout
+  fastify.post("/logout", async (request, reply) => {
+    reply.clearCookie("token").send({ message: "Logged out successfully!" });
+  });
+
+  //view-profile
   fastify.get(
-    "/profile",
+    "/view-profile",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
       const user = request.user;
@@ -96,14 +119,17 @@ module.exports = async (fastify, options) => {
     }
   );
 
+  //delete-profile
   fastify.delete(
-    "/del-profile",
+    "/delete-profile",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
       const id = request.user.id;
       await User.destroy({ where: { id } });
 
-      reply.send(`Deleted a user with an id of ${id}!`);
+      reply.clearCookie("token").send({
+        message: `Deleted a user with an id of ${id}! Cleared token from cookie.`,
+      });
     }
   );
 };

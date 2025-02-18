@@ -13,9 +13,16 @@ fastify.register(autoload, {
 });
 
 // JWT auth
-const secret = process.env.JWT_SECRET;
+fastify.register(require("@fastify/cookie"), {
+  secret: process.env.COOKIE_SECRET,
+});
+
 fastify.register(require("@fastify/jwt"), {
-  secret,
+  secret: process.env.JWT_SECRET,
+  cookie: {
+    cookieName: "token",
+    signed: true,
+  },
 });
 
 fastify.decorate("auth", async function (request, reply) {
@@ -33,5 +40,5 @@ fastify.listen({ port }, (err, address) => {
     fastify.log.error(err);
     process.exit(1);
   }
-  console.log(chalk.green("Fastify app runs:", address));
+  console.log(chalk.green("Fastify app runs on:", address));
 });
