@@ -3,25 +3,17 @@ const { User } = require("../models");
 const argon2 = require("argon2");
 const { where } = require("sequelize");
 
+const {
+  registerSchema,
+  loginSchema,
+  updateProfileSchema,
+} = require("../utils/fastify.schemas");
+
 module.exports = async (fastify, options) => {
   //register
   fastify.post(
     "/register",
-    {
-      schema: {
-        body: {
-          type: "object",
-          required: ["name", "age", "email", "username", "password"],
-          properties: {
-            name: { type: "string" },
-            age: { type: "integer" },
-            email: { type: "string", format: "email" },
-            username: { type: "string" },
-            password: { type: "string", minLength: 6 },
-          },
-        },
-      },
-    },
+    { schema: registerSchema },
     async (request, reply) => {
       const { name, age, email, username, password } = request.body;
 
@@ -52,62 +44,50 @@ module.exports = async (fastify, options) => {
   );
 
   //login
-  fastify.post(
-    "/login",
-    {
-      schema: {
-        body: {
-          type: "object",
-          required: ["password"],
-          properties: {
-            username: { type: "string" },
-            email: { type: "string", format: "email" },
-            password: { type: "string" },
-          },
-          anyOf: [{ required: ["username"] }, { required: ["email"] }],
-        },
-      },
-    },
-    async (request, reply) => {
-      const { username, email, password } = request.body;
+  fastify.post("/login", { schema: loginSchema }, async (request, reply) => {
+    const { username, email, password } = request.body;
 
-      //Check if user exists
-      const user = await User.findOne({
-        where: username ? { username } : { email },
-      });
-      if (!user) {
-        reply
-          .status(StatusCodes.NOT_FOUND)
-          .send({ error: "Invalid email or username!" });
-      }
-
-      //Check password
-      const isPasswordMatch = await argon2.verify(user.password, password);
-      if (!isPasswordMatch) {
-        reply
-          .status(StatusCodes.NOT_FOUND)
-          .send({ error: "Invalid password!" });
-      }
-
-      //Create token
-      const token = fastify.jwt.sign(user.toJSON(), { expiresIn: "1h" });
+    //Check if user exists
+    const user = await User.findOne({
+      where: username ? { username } : { email },
+    });
+    if (!user) {
       reply
-        .setCookie("token", token, {
-          httpOnly: true,
-          secure: true,
-          sameSite: "Strict",
-          path: "/",
-          maxAge: 3600,
-          signed: true,
-        })
-        .send({ message: "Login successful!" });
+        .status(StatusCodes.NOT_FOUND)
+        .send({ error: "Invalid email or username!" });
     }
-  );
+
+    //Check password
+    const isPasswordMatch = await argon2.verify(user.password, password);
+    if (!isPasswordMatch) {
+      reply.status(StatusCodes.NOT_FOUND).send({ error: "Invalid password!" });
+    }
+
+    //Create token
+    const token = fastify.jwt.sign(
+      { id: user.id, credential: username || email },
+      { expiresIn: "1h" }
+    );
+    reply
+      .setCookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        path: "/",
+        maxAge: 3600,
+        signed: true,
+      })
+      .send({ message: "Login successful!" });
+  });
 
   //logout
-  fastify.post("/logout", async (request, reply) => {
-    reply.clearCookie("token").send({ message: "Logged out successfully!" });
-  });
+  fastify.post(
+    "/logout",
+    { onRequest: [fastify.auth] },
+    async (request, reply) => {
+      reply.clearCookie("token").send({ message: "Logged out successfully!" });
+    }
+  );
 
   //view-profile
   fastify.get(
@@ -118,6 +98,60 @@ module.exports = async (fastify, options) => {
       reply.send(user);
     }
   );
+
+  //modify profile
+  fastify.patch(
+    "/update-profile",
+    { schema: updateProfileSchema, onRequest: [fastify.auth] },
+    async (request, reply) => {
+      const userId = request.user.id;
+      const { name, age, username, email } = request.body;
+
+      const user = await User.findByPk(userId);
+
+      //Only the give attributes should be changed
+      if (name) user.name = name;
+      if (age) user.age = age;
+      //Check if username exists
+      if (username) {
+        const existtingUsername = await User.findOne({ where: { username } });
+
+        if (existtingUsername && existtingUsername.id != userId) {
+          return reply
+            .status(StatusCodes.CONFLICT)
+            .send({ error: "Username is taken!" });
+        }
+        user.username = username;
+      }
+      //Check if email exists
+      if (email) {
+        const existingEmail = await User.findOne({ where: { email } });
+
+        if (existingEmail && existingEmail.id != userId) {
+          return reply
+            .status(StatusCodes.CONFLICT)
+            .send({ error: "Email is taken!" });
+        }
+        user.email = email;
+      }
+
+      await user.save();
+
+      reply.clearCookie("token").send({
+        message: "Profile updated successfully!",
+        user: {
+          id: user.id,
+          name: user.name,
+          age: user.age,
+          username: user.username,
+          email: user.email,
+        },
+      });
+    }
+  );
+
+  //modify password
+  fastify.patch("/change-password");
 
   //delete-profile
   fastify.delete(
