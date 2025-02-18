@@ -37,4 +37,20 @@ const updateProfileSchema = {
   },
 };
 
-module.exports = { registerSchema, loginSchema, updateProfileSchema };
+const updatePasswordSchema = {
+  body: {
+    type: "object",
+    required: ["oldPassword", "newPassword"],
+    properties: {
+      oldPassword: { type: "string" },
+      newPassword: { type: "string", minLength: 6 },
+    },
+  },
+};
+
+module.exports = {
+  registerSchema,
+  loginSchema,
+  updateProfileSchema,
+  updatePasswordSchema,
+};

@@ -7,6 +7,7 @@ const {
   registerSchema,
   loginSchema,
   updateProfileSchema,
+  updatePasswordSchema,
 } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
@@ -99,7 +100,7 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  //modify profile
+  //update-profile
   fastify.patch(
     "/update-profile",
     { schema: updateProfileSchema, onRequest: [fastify.auth] },
@@ -150,8 +151,36 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  //modify password
-  fastify.patch("/change-password");
+  //update-password
+  fastify.patch(
+    "/update-password",
+    {
+      schema: updatePasswordSchema,
+      onRequest: [fastify.auth],
+    },
+    async (request, reply) => {
+      const userId = request.user.id;
+      const user = await User.findByPk(userId);
+      const { oldPassword, newPassword } = request.body;
+
+      const isPasswordMatch = await argon2.verify(user.password, oldPassword);
+      if (!isPasswordMatch) {
+        reply
+          .status(StatusCodes.CONFLICT)
+          .send({ message: "Old password does not match!" });
+      }
+
+      const hashedPassword = await argon2.hash(newPassword, {
+        type: argon2.argon2id,
+      });
+      user.password = hashedPassword;
+      await user.save();
+
+      reply
+        .clearCookie("token")
+        .send({ message: "Password changed successfully!" });
+    }
+  );
 
   //delete-profile
   fastify.delete(
