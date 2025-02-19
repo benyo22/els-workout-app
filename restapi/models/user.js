@@ -1,50 +1,53 @@
 "use strict";
-import { Model } from "sequelize";
-import bcrypt from "bcrypt";
+const { Model } = require("sequelize");
+const argon2 = require("argon2");
 
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      this.hasMany(models.Workout, { foreignKey: "userId" });
+      this.hasMany(models.Weight, { foreignKey: "userId" });
+      this.hasMany(models.Sleep, { foreignKey: "userId" });
+      this.hasMany(models.Meal, { foreignKey: "userId" });
     }
   }
   User.init(
     {
       name: {
-        type: DataTypes.STRING,
         allowNull: false,
+        type: DataTypes.STRING,
       },
-      username: {
-        type: DataTypes.STRING,
+      age: {
         allowNull: false,
-        unique: true,
+        type: DataTypes.INTEGER,
       },
       email: {
-        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
           isEmail: true,
         },
+        type: DataTypes.STRING,
+      },
+      username: {
+        allowNull: false,
+        unique: true,
+        type: DataTypes.STRING,
       },
       password: {
-        type: DataTypes.STRING,
         allowNull: false,
+        type: DataTypes.STRING,
       },
     },
     {
       sequelize,
       modelName: "User",
-      timestamps: true,
       hooks: {
         beforeCreate: async (user) => {
-          const saltRounds = 10;
-          user.password = await bcrypt.hash(user.password, saltRounds);
+          const hashedPassword = await argon2.hash(user.password, {
+            type: argon2.argon2id,
+          });
+          user.password = hashedPassword;
         },
       },
     }
