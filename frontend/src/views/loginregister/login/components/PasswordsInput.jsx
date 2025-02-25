@@ -12,7 +12,7 @@ export const PasswordsInput = ({ password, handleInput, error }) => (
       value={password}
       onChange={handleInput}
       feedback={false}
-      inputClassName="input"
+      inputClassName="loginInput"
     />
   </div>
 );

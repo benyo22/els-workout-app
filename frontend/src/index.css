@@ -8,19 +8,21 @@
 }
 
 @layer components {
-  .authCard {
-    @apply bg-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] w-[768px] max-w-full max-h-[480px] rounded-[30px] flex flex-col-reverse md:flex-row overflow-y-auto;
-  }
-
   .authButton {
     @apply bg-light-blue p-3 rounded-full border-2 border-cream-white hover:border-2 hover:border-dark-blue hover:bg-cream-white transition-all duration-300 w-[50%];
   }
 
   .errorMessage {
-    @apply text-red-500 text-sm;
+    @apply text-red-500 text-xs font-bold h-5;
   }
 
   .input {
-    @apply border-2 hover:border-medium-blue focus:border-medium-blue focus:outline-none p-2 rounded-xl;
+    @apply md:w-[13rem] w-[14rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-light-blue hover:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)] focus:border-light-blue focus:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)];
+    outline: none;
+  }
+
+  .loginInput {
+    @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-light-blue hover:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)] focus:border-light-blue focus:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)];
+    outline: none;
   }
 }

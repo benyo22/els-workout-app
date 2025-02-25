@@ -1,9 +1,5 @@
 import { Button } from "primereact/button";
 
-export const RegisterButton = () => {
-  return (
-    <>
-      <Button label="Regisztrálok" className="authButton" />
-    </>
-  );
-};
+export const RegisterButton = () => (
+  <Button label="Regisztrálok" className="authButton" />
+);

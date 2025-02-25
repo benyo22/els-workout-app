@@ -21,12 +21,14 @@ module.exports = async (fastify, options) => {
       const errors = {};
 
       // check null values
-      if (!name || !age || !email || !username || !password) {
-        errors.required = "Minden mező megadása kötelező!";
-      }
+      if (!name || !age || !email || !username || !password)
+        errors.required = "A *-al jelölt mezők megadása kötelező";
+
+      // check age
+      if (age < 14) errors.age = "Korhatár: 14év";
 
       // check email format
-      if (!validateEmail(email)) errors.email = "Nem jó e-mail formátum!";
+      if (!validateEmail(email)) errors.email = "Nem jó e-mail formátum";
 
       // check if user exists
       const [takenEmail, takenUsername] = await Promise.all([
@@ -34,12 +36,11 @@ module.exports = async (fastify, options) => {
         User.findOne({ where: { username } }),
       ]);
 
-      if (takenEmail) errors.email = "E-mail már használatban!";
-      if (takenUsername) errors.username = "Felhasználónév foglalt!";
+      if (takenEmail) errors.email = "E-mail már használatban";
+      if (takenUsername) errors.username = "Foglalt";
 
       // check password length (>6)
-      if (password.length < 6)
-        errors.password = "Jelszó hossza legalább 6 karakter!";
+      if (password.length < 6) errors.password = "Jelszó legalább 6 karakter";
 
       if (!isObjectEmpty(errors)) {
         return reply.status(StatusCodes.BAD_REQUEST).send({ error: errors });
@@ -53,33 +54,45 @@ module.exports = async (fastify, options) => {
         password,
       });
 
+      // TODO: remove user from reply
       reply.send({ message: "User registered successfully!", user });
     }
   );
 
   //login
   fastify.post("/login", { schema: loginSchema }, async (request, reply) => {
-    const { username, email, password } = request.body;
+    const { username, password } = request.body;
+    const errors = {};
 
-    //Check if user exists
+    // check null values
+    if (!username || !password)
+      errors.required = "A *-al jelölt mezők megadása kötelező";
+
+    // check if user exists
     const user = await User.findOne({
-      where: username ? { username } : { email },
+      where: { username },
     });
-    if (!user) {
-      reply
-        .status(StatusCodes.NOT_FOUND)
-        .send({ error: "Invalid email or username!" });
+    if (!user) errors.notfound = "A felhasználó nem található";
+
+    // check password length (>6)
+    if (password.length < 6) errors.password = "Jelszó legalább 6 karakter";
+
+    // we need to return here because if user is null the user.password is also null later, which results in: internal server error
+    if (!isObjectEmpty(errors)) {
+      return reply.status(StatusCodes.BAD_REQUEST).send({ error: errors });
     }
 
-    //Check password
+    // check if password matches saved one
     const isPasswordMatch = await argon2.verify(user.password, password);
-    if (!isPasswordMatch) {
-      reply.status(StatusCodes.NOT_FOUND).send({ error: "Invalid password!" });
+    if (!isPasswordMatch) errors.password = "Helytelen jelszó";
+
+    if (!isObjectEmpty(errors)) {
+      return reply.status(StatusCodes.BAD_REQUEST).send({ error: errors });
     }
 
     //Create token
     const token = fastify.jwt.sign(
-      { id: user.id, credential: username || email },
+      { id: user.id, username: username },
       { expiresIn: "1h" }
     );
     reply
@@ -91,7 +104,7 @@ module.exports = async (fastify, options) => {
         maxAge: 3600,
         signed: true,
       })
-      .send({ message: "Login successful!" });
+      .send({ message: "Login successful!", id: user.id, username });
   });
 
   //logout

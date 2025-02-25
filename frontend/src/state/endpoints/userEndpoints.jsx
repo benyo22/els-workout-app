@@ -15,7 +15,25 @@ export const userEndpoints = elsApi.injectEndpoints({
         },
       }),
     }),
+    login: builder.mutation({
+      query: ({ username, password }) => ({
+        url: "login",
+        method: "POST",
+        body: {
+          username,
+          password,
+        },
+      }),
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "logout",
+        method: "POST",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation } = userEndpoints;
+export const { useRegisterMutation, useLoginMutation, useLogoutMutation } =
+  userEndpoints;

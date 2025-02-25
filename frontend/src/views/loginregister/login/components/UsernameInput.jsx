@@ -1,7 +1,12 @@
 /* eslint-disable react/prop-types */
 import { InputText } from "primereact/inputtext";
 
-export const UsernameInput = ({ username, handleInput, error }) => (
+export const UsernameInput = ({
+  username,
+  handleInput,
+  usernameRef,
+  error,
+}) => (
   <div className="flex flex-col gap-0.5">
     <label>
       Felhasználónév* {error && <span className="errorMessage">{error}</span>}
@@ -11,7 +16,8 @@ export const UsernameInput = ({ username, handleInput, error }) => (
       name="username"
       value={username}
       onInput={handleInput}
-      className="input"
+      ref={usernameRef}
+      className="loginInput"
     />
   </div>
 );

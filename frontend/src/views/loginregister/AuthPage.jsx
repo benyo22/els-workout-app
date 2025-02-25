@@ -1,22 +1,33 @@
-import { useState } from "react";
 import { Login } from "./login/Login";
 import { Register } from "./register/Register";
 
 import { Button } from "primereact/button";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectLoginActive,
+  setLoginActive,
+  setRegisterActive,
+} from "../../state/slices/authUiSlice";
+
 export const AuthPage = () => {
-  const [loginActive, setLoginActive] = useState(true);
+  const dispatch = useDispatch();
+  const loginActive = useSelector(selectLoginActive);
 
   return (
     <>
-      <div className="authCard">
+      <div
+        className={`bg-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] w-[768px] max-w-full h-[500px] max-h-full rounded-[20px] flex ${
+          loginActive ? "flex-col" : "flex-col-reverse"
+        } md:flex-row overflow-y-auto`}
+      >
         {/* Left side */}
         {/* If loginActive is true then the right side is bigger with the login form on it and the left is not, otherwise the left side is bigger with the register form on it  */}
         <div
-          className={`flex flex-col gap-y-8 items-center md:justify-center justify-end md:transition-all md:duration-300 md:ease-out ${
+          className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-300 md:ease-out ${
             loginActive
-              ? "md:w-[288px] md:h-[480px] md:rounded-r-[225px] bg-dark-blue w-[768px] max-w-full h-[150px] p-2"
-              : "md:w-[480px] md:h-[480px]"
+              ? "md:w-[288px] md:h-[500px] md:rounded-r-[225px] bg-dark-blue w-[768px] max-w-full h-[150px] p-2"
+              : "md:w-[480px] md:h-[500px]"
           }`}
         >
           {loginActive ? (
@@ -31,7 +42,7 @@ export const AuthPage = () => {
               <Button
                 label="Regisztráció"
                 className="authButton"
-                onClick={() => setLoginActive(false)}
+                onClick={() => dispatch(setRegisterActive())}
               />
             </>
           ) : (
@@ -43,8 +54,8 @@ export const AuthPage = () => {
         <div
           className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-300 md:ease-out ${
             loginActive
-              ? "md:w-[480px] md:h-[480px]"
-              : "md:w-[288px] md:h-[480px] md:rounded-l-[225px] bg-dark-blue w-[768px] max-w-full h-[150px] p-2"
+              ? "md:w-[480px] md:h-[500px]"
+              : "md:w-[288px] md:h-[500px] md:rounded-l-[225px] bg-dark-blue w-[768px] max-w-full h-[150px] p-2"
           }`}
         >
           {loginActive ? (
@@ -61,7 +72,7 @@ export const AuthPage = () => {
               <Button
                 label="Bejelentkezés"
                 className="authButton"
-                onClick={() => setLoginActive(true)}
+                onClick={() => dispatch(setLoginActive())}
               />
             </>
           )}

@@ -2,7 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const elsApi = createApi({
   reducerPath: "elsApi",
-  // tagTypes: ["Jobs", "Experiences", "Applicants"],
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  tagTypes: ["Workouts", "Sleep", "Weights", "Meals"],
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:3000/",
+    credentials: "include",
+  }),
   endpoints: () => ({}),
 });

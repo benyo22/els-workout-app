@@ -14,13 +14,10 @@ const registerSchema = {
 const loginSchema = {
   body: {
     type: "object",
-    required: ["password"],
     properties: {
       username: { type: "string" },
-      email: { type: "string" },
       password: { type: "string" },
     },
-    anyOf: [{ required: ["username"] }, { required: ["email"] }],
   },
 };
 

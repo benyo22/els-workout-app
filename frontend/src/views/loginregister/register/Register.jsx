@@ -1,27 +1,28 @@
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { useRegisterMutation } from "../../../state/endpoints/userEndpoints";
 
-import { NameInput } from "./components/NameInput";
 import { AgeInput } from "./components/AgeInput";
+import { NameInput } from "./components/NameInput";
 import { EmailInput } from "./components/EmailInput";
 import { UsernameInput } from "./components/UsernameInput";
 import { PasswordsInput } from "./components/PasswordsInput";
 import { RegisterButton } from "./components/RegisterButton";
 
+import { setLoginActive } from "../../../state/slices/authUiSlice";
+import { useRegisterMutation } from "../../../state/endpoints/userEndpoints";
+
 export const Register = () => {
   const nameRef = useRef();
   const [credentials, setCredentials] = useState({
     name: "",
-    age: 0,
+    age: "",
     email: "",
     username: "",
     password: "",
   });
   const { name, age, email, username, password } = credentials;
-  const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [sendRegister, { error }] = useRegisterMutation();
 
   const handleInput = (e) => {
@@ -35,21 +36,24 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    credentials.age = parseInt(credentials.age);
-    await sendRegister(credentials);
+    credentials.age = parseInt(credentials.age) || 0;
+    const result = await sendRegister(credentials);
 
-    //navigating back to the main page if no error
-    navigate("/", { replace: true });
+    // navigating back to login if there is no error
+    if (result?.data?.message === "User registered successfully!") {
+      dispatch(setLoginActive());
+    }
   };
 
   // focus on page load
   useEffect(() => {
     nameRef.current.focus();
   }, []);
+
   return (
     <>
-      <div className="flex flex-col justify-center gap-2 items-center">
-        <h1 className="text-5xl text-center mb-5 font-extrabold">
+      <div className="flex flex-col justify-center items-center gap-2">
+        <h1 className="text-5xl text-center mb-3 font-extrabold">
           Regisztráció
         </h1>
         <form onSubmit={handleSubmit}>
@@ -61,22 +65,42 @@ export const Register = () => {
                 handleInput={handleInput}
                 nameRef={nameRef}
               />
-              <EmailInput email={email} handleInput={handleInput} />
+
+              <AgeInput
+                age={age}
+                handleInput={handleInput}
+                error={error?.data?.error?.age}
+              />
             </div>
 
             {/* Right side */}
             <div className="flex flex-col">
-              <UsernameInput username={username} handleInput={handleInput} />
-              <PasswordsInput password={password} handleInput={handleInput} />
+              <UsernameInput
+                username={username}
+                handleInput={handleInput}
+                error={error?.data?.error?.username}
+              />
+              <PasswordsInput
+                password={password}
+                handleInput={handleInput}
+                error={error?.data?.error?.password}
+              />
             </div>
           </div>
           <div className="flex flex-col items-center gap-5">
             <div className="flex flex-col">
-              <AgeInput age={age} handleInput={handleInput} />
-              {error?.data?.error?.required && (
-                <p className="errorMessage">{error.data.error.required}</p>
-              )}
+              <EmailInput
+                email={email}
+                handleInput={handleInput}
+                error={error?.data?.error?.email}
+              />
             </div>
+            {error?.data?.error?.required ? (
+              <span className="errorMessage">{error.data.error.required}</span>
+            ) : (
+              // h-5 because then the ui doesnt move when the error message is displayed
+              <span className="h-5"></span>
+            )}
             <RegisterButton />
           </div>
         </form>

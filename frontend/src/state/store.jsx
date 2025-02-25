@@ -1,6 +1,7 @@
-import { authReducer } from "./authSlice";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { elsApi } from "./elsApiSlice";
+import { authReducer } from "./slices/authSlice";
+import { authUiReducer } from "./slices/authUiSlice";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
@@ -8,13 +9,14 @@ import { persistStore, persistReducer } from "redux-persist";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "authUi"],
 };
 
 const persistedReducer = persistReducer(
   persistConfig,
   combineReducers({
     auth: authReducer,
+    authUi: authUiReducer,
     [elsApi.reducerPath]: elsApi.reducer,
   })
 );
