@@ -1,13 +1,12 @@
 const registerSchema = {
   body: {
     type: "object",
-    required: ["name", "age", "email", "username", "password"],
     properties: {
       name: { type: "string" },
       age: { type: "integer" },
-      email: { type: "string", format: "email" },
+      email: { type: "string" },
       username: { type: "string" },
-      password: { type: "string", minLength: 6 },
+      password: { type: "string" },
     },
   },
 };
@@ -18,7 +17,7 @@ const loginSchema = {
     required: ["password"],
     properties: {
       username: { type: "string" },
-      email: { type: "string", format: "email" },
+      email: { type: "string" },
       password: { type: "string" },
     },
     anyOf: [{ required: ["username"] }, { required: ["email"] }],
@@ -31,7 +30,7 @@ const updateProfileSchema = {
     properties: {
       name: { type: "string" },
       age: { type: "integer" },
-      email: { type: "string", format: "email" },
+      email: { type: "string" },
       username: { type: "string" },
     },
   },
@@ -43,7 +42,7 @@ const updatePasswordSchema = {
     required: ["oldPassword", "newPassword"],
     properties: {
       oldPassword: { type: "string" },
-      newPassword: { type: "string", minLength: 6 },
+      newPassword: { type: "string" },
     },
   },
 };

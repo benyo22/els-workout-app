@@ -12,6 +12,13 @@ fastify.register(autoload, {
   dir: join(__dirname, "routes"),
 });
 
+//Cors
+fastify.register(require("@fastify/cors"), {
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  credentials: true,
+});
+
 // JWT auth
 fastify.register(require("@fastify/cookie"), {
   secret: process.env.COOKIE_SECRET,

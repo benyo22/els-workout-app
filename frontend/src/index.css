@@ -6,3 +6,21 @@
   --color-light-blue: #a9b5df;
   --color-cream-white: #fff2f2;
 }
+
+@layer components {
+  .authCard {
+    @apply bg-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] w-[768px] max-w-full max-h-[480px] rounded-[30px] flex flex-col-reverse md:flex-row overflow-y-auto;
+  }
+
+  .authButton {
+    @apply bg-light-blue p-3 rounded-full border-2 border-cream-white hover:border-2 hover:border-dark-blue hover:bg-cream-white transition-all duration-300 w-[50%];
+  }
+
+  .errorMessage {
+    @apply text-red-500 text-sm;
+  }
+
+  .input {
+    @apply border-2 hover:border-medium-blue focus:border-medium-blue focus:outline-none p-2 rounded-xl;
+  }
+}

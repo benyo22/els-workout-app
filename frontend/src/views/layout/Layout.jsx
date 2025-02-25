@@ -7,7 +7,7 @@ export const Layout = () => (
     <>
       <Menu />
 
-      <div className="md:col-start-2 md:col-span-4 md:row-start-2 md:row-span-5 flex flex-1 items-center justify-center">
+      <div className="md:col-start-2 md:col-span-4 md:row-start-2 md:row-span-5 flex flex-1 items-center justify-center overflow-y-auto">
         <Outlet />
       </div>
 

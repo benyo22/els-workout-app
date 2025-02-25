@@ -9,12 +9,14 @@ export const AuthPage = () => {
 
   return (
     <>
-      <div className="bg-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] overflow-hidden w-[768px] max-w-full min-h-[480px] rounded-[30px] flex">
+      <div className="authCard">
+        {/* Left side */}
+        {/* If loginActive is true then the right side is bigger with the login form on it and the left is not, otherwise the left side is bigger with the register form on it  */}
         <div
-          className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-300 md:ease-out ${
+          className={`flex flex-col gap-y-8 items-center md:justify-center justify-end md:transition-all md:duration-300 md:ease-out ${
             loginActive
-              ? "md:w-[288px] md:h-[480px] md:rounded-r-full bg-dark-blue w-[768px] h-[150px]"
-              : "md:size-[480px] size-0"
+              ? "md:w-[288px] md:h-[480px] md:rounded-r-[225px] bg-dark-blue w-[768px] max-w-full h-[150px] p-2"
+              : "md:w-[480px] md:h-[480px]"
           }`}
         >
           {loginActive ? (
@@ -28,7 +30,7 @@ export const AuthPage = () => {
               </p>
               <Button
                 label="Regisztráció"
-                className="bg-light-blue p-3 rounded-full border-2 border-cream-white hover:border-2 hover:border-dark-blue hover:bg-cream-white transition-all duration-300"
+                className="authButton"
                 onClick={() => setLoginActive(false)}
               />
             </>
@@ -36,11 +38,13 @@ export const AuthPage = () => {
             <Register />
           )}
         </div>
+
+        {/* Right side */}
         <div
           className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-300 md:ease-out ${
             loginActive
-              ? "md:size-[480px] size-0"
-              : "md:w-[288px] md:h-[480px] md:rounded-l-full bg-dark-blue w-[768px] h-[150px]"
+              ? "md:w-[480px] md:h-[480px]"
+              : "md:w-[288px] md:h-[480px] md:rounded-l-[225px] bg-dark-blue w-[768px] max-w-full h-[150px] p-2"
           }`}
         >
           {loginActive ? (
@@ -56,7 +60,7 @@ export const AuthPage = () => {
               </p>
               <Button
                 label="Bejelentkezés"
-                className="bg-light-blue p-3 rounded-full border-2 border-cream-white hover:border-2 hover:border-dark-blue hover:bg-cream-white transition-all duration-300"
+                className="authButton"
                 onClick={() => setLoginActive(true)}
               />
             </>

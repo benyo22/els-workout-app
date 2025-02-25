@@ -1,7 +1,8 @@
-const { StatusCodes } = require("http-status-codes");
-const { User } = require("../models");
 const argon2 = require("argon2");
-const { where } = require("sequelize");
+const { StatusCodes } = require("http-status-codes");
+
+const { User } = require("../models");
+const { isObjectEmpty, validateEmail } = require("../utils/helper");
 
 const {
   registerSchema,
@@ -17,19 +18,31 @@ module.exports = async (fastify, options) => {
     { schema: registerSchema },
     async (request, reply) => {
       const { name, age, email, username, password } = request.body;
+      const errors = {};
 
-      // Check if user exists
+      // check null values
+      if (!name || !age || !email || !username || !password) {
+        errors.required = "Minden mező megadása kötelező!";
+      }
+
+      // check email format
+      if (!validateEmail(email)) errors.email = "Nem jó e-mail formátum!";
+
+      // check if user exists
       const [takenEmail, takenUsername] = await Promise.all([
         User.findOne({ where: { email } }),
         User.findOne({ where: { username } }),
       ]);
 
-      if (takenEmail || takenUsername) {
-        return reply.status(StatusCodes.CONFLICT).send({
-          error: takenEmail
-            ? "Email already taken!"
-            : "Username already taken!",
-        });
+      if (takenEmail) errors.email = "E-mail már használatban!";
+      if (takenUsername) errors.username = "Felhasználónév foglalt!";
+
+      // check password length (>6)
+      if (password.length < 6)
+        errors.password = "Jelszó hossza legalább 6 karakter!";
+
+      if (!isObjectEmpty(errors)) {
+        return reply.status(StatusCodes.BAD_REQUEST).send({ error: errors });
       }
 
       const user = await User.create({
