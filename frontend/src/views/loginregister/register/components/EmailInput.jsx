@@ -5,14 +5,14 @@ export const EmailInput = ({ email, handleInput, error }) => (
   <div className="flex flex-col gap-0.5">
     <label>
       Email*
-      {error && <span className="errorMessage">{error}</span>}
+      {error && <span className="error-message">{error}</span>}
     </label>
     <InputText
       id="email"
       name="email"
       value={email}
       onInput={handleInput}
-      className="input"
+      className="register-input"
     />
   </div>
 );

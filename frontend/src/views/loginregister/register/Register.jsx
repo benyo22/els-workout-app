@@ -96,7 +96,7 @@ export const Register = () => {
               />
             </div>
             {error?.data?.error?.required ? (
-              <span className="errorMessage">{error.data.error.required}</span>
+              <span className="error-message">{error.data.error.required}</span>
             ) : (
               // h-5 because then the ui doesnt move when the error message is displayed
               <span className="h-5"></span>

@@ -17,10 +17,10 @@ export const Menu = () => {
   return (
     <>
       {/* Sidebar */}
-      <div className="hidden md:flex md:row-start-1 md:row-span-7 bg-dark-blue md:justify-center pt-5 ">
+      <div className="hidden md:flex md:row-start-1 md:row-span-7 bg-primary-blue md:justify-center pt-5 ">
         <NavLink
           to="/"
-          className="text-white text-4xl font-extrabold hover:text-light-blue h-fit"
+          className="text-white text-4xl font-extrabold hover:text-primary-green h-fit"
         >
           ELS
         </NavLink>
@@ -39,8 +39,8 @@ export const Menu = () => {
               to="/auth"
               className={({ isActive }) =>
                 `hidden md:block mr-8 text-xl no-underline transition-all duration-200 ${
-                  isActive ? "text-medium-blue" : "text-black"
-                } hover:text-medium-blue`
+                  isActive ? "text-primary-blue" : "text-black"
+                } hover:text-primary-blue`
               }
               onClick={() => dispatch(setLoginActive())}
             >
@@ -51,8 +51,8 @@ export const Menu = () => {
               to="/auth"
               className={({ isActive }) =>
                 `hidden md:block text-xl no-underline transition-all duration-200 ${
-                  isActive ? "text-medium-blue" : "text-black"
-                } hover:text-medium-blue`
+                  isActive ? "text-primary-blue" : "text-black"
+                } hover:text-primary-blue`
               }
               onClick={() => dispatch(setRegisterActive())}
             >
@@ -64,7 +64,7 @@ export const Menu = () => {
         {isAuthenticated && (
           <>
             <NavLink
-              className="hidden md:block text-xl no-underline transition-all duration-200 hover:text-medium-blue"
+              className="hidden md:block text-xl no-underline transition-all duration-200 hover:text-primary-blue"
               onClick={async () => {
                 const result = await sendLogout();
                 dispatch(logout());

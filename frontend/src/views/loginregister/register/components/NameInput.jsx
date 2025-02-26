@@ -10,7 +10,7 @@ export const NameInput = ({ name, handleInput, nameRef }) => (
       value={name}
       onInput={handleInput}
       ref={nameRef}
-      className="input"
+      className="register-input"
     />
   </div>
 );

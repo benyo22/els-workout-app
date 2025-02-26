@@ -9,7 +9,7 @@ export const UsernameInput = ({
 }) => (
   <div className="flex flex-col gap-0.5">
     <label>
-      Felhasználónév* {error && <span className="errorMessage">{error}</span>}
+      Felhasználónév* {error && <span className="error-message">{error}</span>}
     </label>
     <InputText
       id="username"
@@ -17,7 +17,7 @@ export const UsernameInput = ({
       value={username}
       onInput={handleInput}
       ref={usernameRef}
-      className="loginInput"
+      className="login-input"
     />
   </div>
 );

@@ -26,7 +26,7 @@ export const AuthPage = () => {
         <div
           className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-300 md:ease-out ${
             loginActive
-              ? "md:w-[288px] md:h-[500px] md:rounded-r-[225px] bg-dark-blue w-[768px] max-w-full h-[150px] p-2"
+              ? "md:w-[288px] md:h-[500px] md:rounded-r-[225px] bg-primary-blue w-[768px] max-w-full h-[150px] p-2"
               : "md:w-[480px] md:h-[500px]"
           }`}
         >
@@ -41,7 +41,7 @@ export const AuthPage = () => {
               </p>
               <Button
                 label="Regisztráció"
-                className="authButton"
+                className="auth-button"
                 onClick={() => dispatch(setRegisterActive())}
               />
             </>
@@ -55,7 +55,7 @@ export const AuthPage = () => {
           className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-300 md:ease-out ${
             loginActive
               ? "md:w-[480px] md:h-[500px]"
-              : "md:w-[288px] md:h-[500px] md:rounded-l-[225px] bg-dark-blue w-[768px] max-w-full h-[150px] p-2"
+              : "md:w-[288px] md:h-[500px] md:rounded-l-[225px] bg-primary-blue w-[768px] max-w-full h-[150px] p-2"
           }`}
         >
           {loginActive ? (
@@ -71,7 +71,7 @@ export const AuthPage = () => {
               </p>
               <Button
                 label="Bejelentkezés"
-                className="authButton"
+                className="auth-button"
                 onClick={() => dispatch(setLoginActive())}
               />
             </>

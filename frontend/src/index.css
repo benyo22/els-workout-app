@@ -1,28 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-blue: #2d336b;
+  /* --color-dark-blue: #2d336b;
   --color-medium-blue: #7886c7;
   --color-light-blue: #a9b5df;
-  --color-cream-white: #fff2f2;
+  --color-cream-white: #fff2f2; */
+  --color-primary-blue: #3d50b9;
+  --color-primary-blue-2: #5060bc;
+  --color-primary-green: #31dcb7;
+  --color-primary-white: #fcfefd;
+  --color-primray-grey: #a9a9a9;
 }
 
 @layer components {
-  .authButton {
-    @apply bg-light-blue p-3 rounded-full border-2 border-cream-white hover:border-2 hover:border-dark-blue hover:bg-cream-white transition-all duration-300 w-[50%];
+  .auth-button {
+    @apply bg-primary-green p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-300 w-[50%];
   }
 
-  .errorMessage {
+  .error-message {
     @apply text-red-500 text-xs font-bold h-5;
   }
 
-  .input {
-    @apply md:w-[13rem] w-[14rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-light-blue hover:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)] focus:border-light-blue focus:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)];
+  .register-input {
+    @apply md:w-[13rem] w-[14rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)];
     outline: none;
   }
 
-  .loginInput {
-    @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-light-blue hover:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)] focus:border-light-blue focus:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)];
+  .login-input {
+    @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)];
     outline: none;
   }
 }
