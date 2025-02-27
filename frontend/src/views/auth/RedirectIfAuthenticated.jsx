@@ -2,12 +2,12 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { selectLoggedInUsername } from "../../state/slices/authSlice";
 
-// this prevents a not logged in user to go to pages that require auth
-export const RequireAuth = () => {
+// this prevents a logged in user to go to the welcome page or the login page
+export const RedirectIfAuthenticated = () => {
   const username = useSelector(selectLoggedInUsername);
 
-  if (!username) {
-    return <Navigate to="/auth" replace />;
+  if (username) {
+    return <Navigate to="/home" replace />;
   }
 
   return <Outlet />;

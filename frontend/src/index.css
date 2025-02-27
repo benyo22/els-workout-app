@@ -6,15 +6,19 @@
   --color-light-blue: #a9b5df;
   --color-cream-white: #fff2f2; */
   --color-primary-blue: #3d50b9;
-  --color-primary-blue-2: #5060bc;
+  --color-secondary-blue: #5060bc;
   --color-primary-green: #31dcb7;
   --color-primary-white: #fcfefd;
   --color-primray-grey: #a9a9a9;
 }
 
 @layer components {
+  .links {
+    @apply hidden md:block mr-8 p-2 text-xl no-underline border-2 border-primary-white bg-primary-green rounded-2xl hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400;
+  }
+
   .auth-button {
-    @apply bg-primary-green p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-300 w-[50%];
+    @apply bg-primary-green p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400 w-[50%];
   }
 
   .error-message {
@@ -22,12 +26,12 @@
   }
 
   .register-input {
-    @apply md:w-[13rem] w-[14rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)];
+    @apply md:w-[13rem] w-[14rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
     outline: none;
   }
 
   .login-input {
-    @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(169_181_223_/_30%)];
+    @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
     outline: none;
   }
 }

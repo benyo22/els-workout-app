@@ -24,7 +24,7 @@ export const AuthPage = () => {
         {/* Left side */}
         {/* If loginActive is true then the right side is bigger with the login form on it and the left is not, otherwise the left side is bigger with the register form on it  */}
         <div
-          className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-300 md:ease-out ${
+          className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-400 md:ease-out ${
             loginActive
               ? "md:w-[288px] md:h-[500px] md:rounded-r-[225px] bg-primary-blue w-[768px] max-w-full h-[150px] p-2"
               : "md:w-[480px] md:h-[500px]"
@@ -52,7 +52,7 @@ export const AuthPage = () => {
 
         {/* Right side */}
         <div
-          className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-300 md:ease-out ${
+          className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-400 md:ease-out ${
             loginActive
               ? "md:w-[480px] md:h-[500px]"
               : "md:w-[288px] md:h-[500px] md:rounded-l-[225px] bg-primary-blue w-[768px] max-w-full h-[150px] p-2"

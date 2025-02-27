@@ -42,7 +42,7 @@ export const Login = () => {
           username: result.data.username,
         })
       );
-      navigate("/", { replace: true });
+      navigate("/home", { replace: true });
     }
   };
 
