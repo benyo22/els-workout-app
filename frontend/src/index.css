@@ -10,7 +10,7 @@
 
 @layer components {
   .links {
-    @apply hidden md:block mr-8 p-2 text-xl no-underline border-2 border-primary-white bg-primary-green rounded-2xl hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400;
+    @apply hidden md:block mr-8 p-2 text-xl no-underline border-2 border-primary-white bg-primary-green rounded-full hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400;
   }
 
   .auth-button {

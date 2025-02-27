@@ -8,13 +8,42 @@ export const Menu = () => {
   return (
     <>
       {/* Sidebar */}
-      <div className="hidden md:flex md:row-start-1 md:row-span-7 bg-primary-blue md:justify-center pt-5 ">
+      <div className="hidden md:flex md:flex-col md:items-center md:justify-start md:row-start-1 md:row-span-7 md:bg-primary-blue md:pt-5 md:pb-5 overflow-y-auto">
         <NavLink
           to="/"
           className="text-white text-4xl font-extrabold hover:text-primary-green h-fit"
         >
           ELS
         </NavLink>
+        <div className="flex flex-col text-white text-xl font-semibold mt-30 space-y-8">
+          <NavLink to="/home" className="hover:text-primary-green">
+            <span className="pi pi-home mr-2"></span>Kezdőlap
+          </NavLink>
+
+          <NavLink to="/workouts" className="hover:text-primary-green">
+            <span className="pi pi-trophy mr-2"></span>Edzés
+          </NavLink>
+
+          <NavLink to="/meals" className="hover:text-primary-green">
+            <span className="pi pi-chart-pie mr-2"></span>Étkezés
+          </NavLink>
+
+          <NavLink to="/sleep" className="hover:text-primary-green">
+            <span className="pi pi-moon mr-2"></span>Alvás
+          </NavLink>
+
+          <NavLink to="/statistics" className="hover:text-primary-green">
+            <span className="pi pi-chart-bar mr-2"></span>Statisztika
+          </NavLink>
+
+          <NavLink to="/profile" className="hover:text-primary-green">
+            <span className="pi pi-user-edit mr-2"></span>Profil
+          </NavLink>
+
+          <NavLink to="/settings" className="hover:text-primary-green">
+            <span className="pi pi-cog mr-2"></span>Beállítások
+          </NavLink>
+        </div>
       </div>
 
       {/* Topbar */}

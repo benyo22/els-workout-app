@@ -21,11 +21,14 @@ const UserAvatar = () => {
       label: (
         <>
           <div className="p-1 font-bold text-xl border-b cursor-default">
-            Felhasználónév: {username}
+            Felhasználónév:{" "}
+            <span className="hover:text-primary-green !important">
+              {username}
+            </span>
           </div>
         </>
       ),
-      disabled: true,
+      // disabled: true,
     },
     {
       label: (

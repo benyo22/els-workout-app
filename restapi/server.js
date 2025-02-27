@@ -14,7 +14,7 @@ fastify.register(autoload, {
 
 //Cors
 fastify.register(require("@fastify/cors"), {
-  origin: "http://localhost:5174",
+  origin: "http://localhost:5173",
   methods: ["GET", "POST", "PATCH", "DELETE"],
   credentials: true,
 });
