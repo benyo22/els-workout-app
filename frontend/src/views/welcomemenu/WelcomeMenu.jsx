@@ -5,6 +5,8 @@ import {
   setRegisterActive,
 } from "../../state/slices/authUiSlice";
 
+import { BreadCrumbMenu } from "./components/BreadCrumbMenu";
+
 export const WelcomeMenu = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -13,21 +15,16 @@ export const WelcomeMenu = () => {
     <>
       {/* Topbar */}
       <div className="bg-primary-blue flex justify-end items-center px-5 border-b-2 border-primray-grey shadow-md h-18">
-        <button className="md:hidden px-4 py-3 my-2 mx-6 bg-gray-700 text-white rounded">
-          ☰
-        </button>
+        <BreadCrumbMenu />
 
+        {/* if on main page no "Főoldal" option in the menu */}
         {!location.pathname.endsWith("/") && (
-          <NavLink
-            to="/"
-            className="links"
-            onClick={() => dispatch(setLoginActive())}
-          >
+          <NavLink to="/" className="links">
             Főoldal
           </NavLink>
         )}
 
-        {/* if on auth page or logged in then no register and login option in the menu */}
+        {/* if on auth page in then no "Bejelentkezés" and "Regisztráció" option in the menu */}
         {!location.pathname.endsWith("/auth") && (
           <>
             <NavLink

@@ -34,4 +34,8 @@
     @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
     outline: none;
   }
+
+  .dropdown-menu {
+    @apply border-2 border-primary-blue rounded-xl bg-primary-white p-2 mt-2 shadow-2xl;
+  }
 }
