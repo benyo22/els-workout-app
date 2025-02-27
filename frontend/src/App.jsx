@@ -5,8 +5,8 @@ import { Layout } from "./views/layout/Layout";
 import { Welcome } from "./views/welcome/Welcome";
 import { RequireAuth } from "./views/auth/RequireAuth";
 import { AuthPage } from "./views/loginregister/AuthPage";
-import { RedirectIfAuthenticated } from "./views/auth/RedirectIfAuthenticated";
 import { WelcomeLayout } from "./views/welcomelayout/WelcomeLayout";
+import { RedirectIfAuthenticated } from "./views/auth/RedirectIfAuthenticated";
 
 function App() {
   return (

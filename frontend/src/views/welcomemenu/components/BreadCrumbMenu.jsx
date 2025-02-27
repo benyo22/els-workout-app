@@ -59,13 +59,13 @@ export const BreadCrumbMenu = () => {
       ];
 
   return (
-    <div className="md:hidden block">
+    <>
       <Button
         icon="pi pi-bars"
         className="md:hidden p-3 bg-primary-green rounded-lg border-2 hover:bg-primary-white hover:border-primary-green"
         onClick={(e) => menu.current.toggle(e)}
       />
       <Menu model={items} popup ref={menu} className="dropdown-menu" />
-    </div>
+    </>
   );
 };

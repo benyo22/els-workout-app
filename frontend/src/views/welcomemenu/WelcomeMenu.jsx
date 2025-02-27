@@ -15,7 +15,9 @@ export const WelcomeMenu = () => {
     <>
       {/* Topbar */}
       <div className="bg-primary-blue flex justify-end items-center px-5 border-b-2 border-primray-grey shadow-md h-18">
-        <BreadCrumbMenu />
+        <div className="md:hidden block">
+          <BreadCrumbMenu />
+        </div>
 
         {/* if on main page no "Főoldal" option in the menu */}
         {!location.pathname.endsWith("/") && (
