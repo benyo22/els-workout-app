@@ -1,8 +1,7 @@
-import "primeicons/primeicons.css";
-
 import { NavLink } from "react-router-dom";
 
 import UserAvatar from "./components/UserAvatar";
+import { MenuOptions } from "./components/MenuOptions";
 
 export const Menu = () => {
   return (
@@ -16,33 +15,7 @@ export const Menu = () => {
           ELS
         </NavLink>
         <div className="flex flex-col text-white text-xl font-semibold mt-30 space-y-10">
-          <NavLink to="home" className="logged-in-menu-links">
-            <span className="pi pi-home mr-2"></span>Kezdőlap
-          </NavLink>
-
-          <NavLink to="workouts" className="logged-in-menu-links">
-            <span className="pi pi-trophy mr-2"></span>Edzés
-          </NavLink>
-
-          <NavLink to="meals" className="logged-in-menu-links">
-            <span className="pi pi-chart-pie mr-2"></span>Étkezés
-          </NavLink>
-
-          <NavLink to="sleep" className="logged-in-menu-links">
-            <span className="pi pi-moon mr-2"></span>Alvás
-          </NavLink>
-
-          <NavLink to="statistics" className="logged-in-menu-links">
-            <span className="pi pi-chart-bar mr-2"></span>Statisztika
-          </NavLink>
-
-          <NavLink to="profile" className="logged-in-menu-links">
-            <span className="pi pi-user-edit mr-2"></span>Profil
-          </NavLink>
-
-          <NavLink to="settings" className="logged-in-menu-links">
-            <span className="pi pi-cog mr-2"></span>Beállítások
-          </NavLink>
+          <MenuOptions />
         </div>
       </div>
 

@@ -22,7 +22,7 @@ export const EditUser = () => {
         }}
         content={
           <form>
-            <div className="w-500 h-500 bg-red-500"></div>
+            <div className="w-100 h-100 bg-cyan-400">Szerkesztés</div>
           </form>
         }
       ></Dialog>
