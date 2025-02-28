@@ -1,26 +1,46 @@
 @import "tailwindcss";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
 
 @theme {
   --color-primary-blue: #3d50b9;
   --color-secondary-blue: #5060bc;
+  --color-third-blue: #419eba;
   --color-primary-green: #31dcb7;
   --color-primary-white: #fcfefd;
-  --color-primray-grey: #a9a9a9;
+  --color-primary-grey: #a9a9a9;
 }
 
 @layer components {
+  /* auth layout */
+  .authed-layout-container {
+    @apply md:grid md:grid-cols-[192px_1fr_1fr_1fr_1fr] md:grid-rows-[80px_1fr_1fr_1fr_1fr_1fr_35px] md:gap-0 h-screen w-screen flex flex-col;
+  }
+
+  .authed-outlet-container {
+    @apply md:col-start-2 md:col-span-4 md:row-start-2 md:row-span-5 flex flex-1 items-center justify-center overflow-y-auto;
+  }
+
+  /* links */
   .links {
     @apply hidden md:block mr-8 p-2 text-xl no-underline border-2 border-primary-white bg-primary-green rounded-full hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400;
   }
 
-  .auth-button {
-    @apply bg-primary-green p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400 w-[50%];
+  .logged-in-menu-links {
+    @apply relative uppercase text-lg font-semibold transition-[0.5s] z-[1] py-2 before:content-[''] before:absolute before:w-full before:h-full before:border-t-primary-green before:border-b-primary-green before:opacity-0 before:transition-[0.3s] before:border-y-2 before:border-solid before:scale-y-[2] before:left-0 before:top-0 after:content-[''] after:absolute after:w-full after:h-full  after:opacity-0 after:transition-[0.3s] after:z-[-1] after:scale-0 after:left-0 after:top-0.5 hover:text-primary-green hover:before:opacity-100 hover:before:scale-y-100 hover:after:opacity-100 hover:after:scale-y-100;
   }
 
+  /* buttons */
+  .auth-button {
+    @apply bg-primary-green p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400 w-[50%] cursor-pointer;
+  }
+
+  /* errors */
   .error-message {
     @apply text-red-500 text-xs font-bold h-5;
   }
 
+  /* inputs */
   .register-input {
     @apply md:w-[13rem] w-[14rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
     outline: none;
@@ -31,7 +51,16 @@
     outline: none;
   }
 
+  /* menus */
   .dropdown-menu {
     @apply border-2 border-primary-blue rounded-xl bg-primary-white p-2 mt-2 shadow-2xl;
+  }
+
+  /* footer */
+  .footer-div {
+    @apply md:col-start-2 md:col-span-4 md:row-start-7 flex items-center justify-center bg-white border-t-2 border-primary-grey;
+  }
+  .footer-p {
+    @apply text-xs md:text-sm font-bold text-secondary-blue;
   }
 }

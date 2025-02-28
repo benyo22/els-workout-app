@@ -15,39 +15,39 @@ export const Menu = () => {
         >
           ELS
         </NavLink>
-        <div className="flex flex-col text-white text-xl font-semibold mt-30 space-y-8">
-          <NavLink to="/home" className="hover:text-primary-green">
+        <div className="flex flex-col text-white text-xl font-semibold mt-30 space-y-10">
+          <NavLink to="home" className="logged-in-menu-links">
             <span className="pi pi-home mr-2"></span>Kezdőlap
           </NavLink>
 
-          <NavLink to="/workouts" className="hover:text-primary-green">
+          <NavLink to="workouts" className="logged-in-menu-links">
             <span className="pi pi-trophy mr-2"></span>Edzés
           </NavLink>
 
-          <NavLink to="/meals" className="hover:text-primary-green">
+          <NavLink to="meals" className="logged-in-menu-links">
             <span className="pi pi-chart-pie mr-2"></span>Étkezés
           </NavLink>
 
-          <NavLink to="/sleep" className="hover:text-primary-green">
+          <NavLink to="sleep" className="logged-in-menu-links">
             <span className="pi pi-moon mr-2"></span>Alvás
           </NavLink>
 
-          <NavLink to="/statistics" className="hover:text-primary-green">
+          <NavLink to="statistics" className="logged-in-menu-links">
             <span className="pi pi-chart-bar mr-2"></span>Statisztika
           </NavLink>
 
-          <NavLink to="/profile" className="hover:text-primary-green">
+          <NavLink to="profile" className="logged-in-menu-links">
             <span className="pi pi-user-edit mr-2"></span>Profil
           </NavLink>
 
-          <NavLink to="/settings" className="hover:text-primary-green">
+          <NavLink to="settings" className="logged-in-menu-links">
             <span className="pi pi-cog mr-2"></span>Beállítások
           </NavLink>
         </div>
       </div>
 
       {/* Topbar */}
-      <div className="md:col-start-2 md:col-span-4 bg-white flex justify-end items-center px-5 border-b-2 border-primray-grey shadow-md">
+      <div className="md:col-start-2 md:col-span-4 bg-white flex justify-end items-center px-5 border-b-2 border-primary-grey shadow-md">
         <UserAvatar />
       </div>
     </>

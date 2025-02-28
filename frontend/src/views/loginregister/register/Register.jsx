@@ -9,7 +9,7 @@ import { PasswordsInput } from "./components/PasswordsInput";
 import { RegisterButton } from "./components/RegisterButton";
 
 import { setLoginActive } from "../../../state/slices/authUiSlice";
-import { useRegisterMutation } from "../../../state/endpoints/userEndpoints";
+import { useRegisterMutation } from "../../../state/endpoints/authEndpoints";
 
 export const Register = () => {
   const nameRef = useRef();

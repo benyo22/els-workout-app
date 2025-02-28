@@ -21,7 +21,16 @@ const loginSchema = {
   },
 };
 
-const updateProfileSchema = {
+const getUserSchema = {
+  params: {
+    type: "object",
+    properties: {
+      id: { type: "integer" },
+    },
+  },
+};
+
+const updateUserSchema = {
   body: {
     type: "object",
     properties: {
@@ -47,6 +56,7 @@ const updatePasswordSchema = {
 module.exports = {
   registerSchema,
   loginSchema,
-  updateProfileSchema,
+  updateUserSchema,
   updatePasswordSchema,
+  getUserSchema,
 };

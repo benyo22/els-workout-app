@@ -1,4 +1,5 @@
 const argon2 = require("argon2");
+var omit = require("object.omit");
 const { StatusCodes } = require("http-status-codes");
 
 const { User } = require("../models");
@@ -7,8 +8,9 @@ const { isObjectEmpty, validateEmail } = require("../utils/helper");
 const {
   registerSchema,
   loginSchema,
-  updateProfileSchema,
+  updateUserSchema,
   updatePasswordSchema,
+  getUserSchema,
 } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
@@ -24,8 +26,11 @@ module.exports = async (fastify, options) => {
       if (!name || !age || !email || !username || !password)
         errors.required = "A *-al jelölt mezők megadása kötelező";
 
+      if (username.length > 15) errors.username = "Max hossz: 15";
+
       // check age
       if (age < 14) errors.age = "Korhatár: 14év";
+      if (age > 99) errors.age = "Max 99 év";
 
       // check email format
       if (!validateEmail(email)) errors.email = "Nem jó e-mail formátum";
@@ -46,7 +51,7 @@ module.exports = async (fastify, options) => {
         return reply.status(StatusCodes.BAD_REQUEST).send({ error: errors });
       }
 
-      const user = await User.create({
+      await User.create({
         name,
         age,
         email,
@@ -54,8 +59,9 @@ module.exports = async (fastify, options) => {
         password,
       });
 
-      // TODO: remove user from reply
-      reply.send({ message: "User registered successfully!", user });
+      reply
+        .status(StatusCodes.CREATED)
+        .send({ message: "User registered successfully!" });
     }
   );
 
@@ -116,64 +122,71 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  //view-profile
+  //user/:id
   fastify.get(
-    "/view-profile",
-    { onRequest: [fastify.auth] },
+    "/user/:id",
+    { schema: getUserSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const user = request.user;
-      reply.send(user);
+      const { id } = request.params;
+      const user = await User.findByPk(id);
+
+      //convert to plain object so omit works on it
+      const userObject = user.get({ plain: true });
+      const filteredUser = omit(userObject, [
+        "id",
+        "password",
+        "createdAt",
+        "updatedAt",
+      ]);
+
+      reply.send(filteredUser);
     }
   );
 
-  //update-profile
+  //update-user/:id
   fastify.patch(
-    "/update-profile",
-    { schema: updateProfileSchema, onRequest: [fastify.auth] },
+    "/update-user/:id",
+    { schema: updateUserSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const userId = request.user.id;
+      const { id } = request.params;
       const { name, age, username, email } = request.body;
 
-      const user = await User.findByPk(userId);
+      const user = await User.findByPk({ userId: id });
+      const errors = {};
 
       //Only the give attributes should be changed
       if (name) user.name = name;
       if (age) user.age = age;
+
       //Check if username exists
       if (username) {
-        const existtingUsername = await User.findOne({ where: { username } });
+        const existingUsername = await User.findOne({ where: { username } });
 
-        if (existtingUsername && existtingUsername.id != userId) {
-          return reply
-            .status(StatusCodes.CONFLICT)
-            .send({ error: "Username is taken!" });
+        if (existingUsername && existingUsername.id != userId) {
+          errors.username = "Foglalt";
+        } else {
+          user.username = username;
         }
-        user.username = username;
       }
+
       //Check if email exists
       if (email) {
         const existingEmail = await User.findOne({ where: { email } });
 
         if (existingEmail && existingEmail.id != userId) {
-          return reply
-            .status(StatusCodes.CONFLICT)
-            .send({ error: "Email is taken!" });
+          errors.email = "E-mail használatban";
+        } else {
+          user.email = email;
         }
-        user.email = email;
+      }
+
+      if (!isObjectEmpty(errors)) {
+        return reply.status(StatusCodes.BAD_REQUEST).send({ error: errors });
       }
 
       await user.save();
 
-      reply.clearCookie("token").send({
-        message: "Profile updated successfully!",
-        user: {
-          id: user.id,
-          name: user.name,
-          age: user.age,
-          username: user.username,
-          email: user.email,
-        },
-      });
+      reply.send({ message: "Profile updated successfully!" });
     }
   );
 

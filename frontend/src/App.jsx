@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import { Home } from "./views/home/Home";
 import { Layout } from "./views/layout/Layout";
+import { Profile } from "./views/profile/Profile";
 import { Welcome } from "./views/welcome/Welcome";
 import { RequireAuth } from "./views/auth/RequireAuth";
 import { AuthPage } from "./views/loginregister/AuthPage";
@@ -27,6 +28,7 @@ function App() {
           {/* Logged in layout */}
           <Route element={<Layout />}>
             <Route path="home" index element={<Home />} />
+            <Route path="profile" element={<Profile />} />
             {/* <Route path="*" element={<Navigate to="/home" />} /> */}
           </Route>
         </Route>
