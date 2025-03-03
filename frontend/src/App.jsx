@@ -4,6 +4,7 @@ import { Home } from "./views/home/Home";
 import { Layout } from "./views/layout/Layout";
 import { Profile } from "./views/profile/Profile";
 import { Welcome } from "./views/welcome/Welcome";
+import { Settings } from "./views/settings/Settings";
 import { RequireAuth } from "./views/auth/RequireAuth";
 import { AuthPage } from "./views/loginregister/AuthPage";
 import { WelcomeLayout } from "./views/welcomelayout/WelcomeLayout";
@@ -19,7 +20,6 @@ function App() {
           <Route element={<WelcomeLayout />}>
             <Route index element={<Welcome />} />
             <Route path="auth" element={<AuthPage />} />
-            {/* <Route path="*" element={<Navigate to="/" />}></Route> */}
           </Route>
         </Route>
 
@@ -29,7 +29,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="home" index element={<Home />} />
             <Route path="profile" element={<Profile />} />
-            {/* <Route path="*" element={<Navigate to="/home" />} /> */}
+            <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
 

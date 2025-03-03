@@ -2,6 +2,8 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
+@plugin 'tailwind-scrollbar';
+
 @theme {
   --color-primary-blue: #3d50b9;
   --color-secondary-blue: #5060bc;
@@ -9,6 +11,7 @@
   --color-primary-green: #31dcb7;
   --color-primary-white: #fcfefd;
   --color-primary-grey: #a9a9a9;
+  --color-primary-red: #fb2c36;
 }
 
 @layer components {
@@ -27,7 +30,7 @@
   }
 
   .logged-in-menu-links {
-    @apply relative uppercase text-lg font-semibold transition-[0.5s] z-[1] py-2 before:content-[''] before:absolute before:w-full before:h-full before:border-t-primary-green before:border-b-primary-green before:opacity-0 before:transition-[0.3s] before:border-y-2 before:border-solid before:scale-y-[2] before:left-0 before:top-0 after:content-[''] after:absolute after:w-full after:h-full  after:opacity-0 after:transition-[0.3s] after:z-[-1] after:scale-0 after:left-0 after:top-0.5 hover:text-primary-green hover:before:opacity-100 hover:before:scale-y-100 hover:after:opacity-100 hover:after:scale-y-100;
+    @apply relative uppercase text-[1.2rem] font-semibold transition-[0.5s] z-[1] py-2 before:content-[''] before:absolute before:w-full before:h-full before:border-t-primary-green before:border-b-primary-green before:opacity-0 before:transition-[0.3s] before:border-y-2 before:border-solid before:scale-y-[2] before:left-0 before:top-0 after:content-[''] after:absolute after:w-full after:h-full after:opacity-0 after:transition-[0.3s] after:z-[-1] after:scale-0 after:left-0 after:top-0.5 hover:text-primary-green hover:before:opacity-100 hover:before:scale-y-100 hover:after:opacity-100 hover:after:scale-y-100;
   }
 
   /* buttons */
@@ -35,9 +38,13 @@
     @apply bg-primary-green p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400 w-[50%] cursor-pointer;
   }
 
+  .delete-button {
+    @apply bg-primary-red p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-red hover:bg-primary-white transition-all duration-400 w-[50%] cursor-pointer;
+  }
+
   /* errors */
   .error-message {
-    @apply text-red-500 text-xs font-bold h-5;
+    @apply text-primary-red text-xs font-bold h-5;
   }
 
   /* inputs */
@@ -48,6 +55,11 @@
 
   .login-input {
     @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
+    outline: none;
+  }
+
+  .delete-input {
+    @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-red hover:shadow-[0_0_0_3px_rgb(251_44_54_/_30%)] focus:border-primary-red focus:shadow-[0_0_0_3px_rgb(251_44_54_/_30%)];
     outline: none;
   }
 

@@ -45,10 +45,18 @@ const updateUserSchema = {
 const updatePasswordSchema = {
   body: {
     type: "object",
-    required: ["oldPassword", "newPassword"],
     properties: {
       oldPassword: { type: "string" },
       newPassword: { type: "string" },
+    },
+  },
+};
+
+const deleteUserSchema = {
+  body: {
+    type: "object",
+    properties: {
+      password: { type: "string" },
     },
   },
 };
@@ -59,4 +67,5 @@ module.exports = {
   updateUserSchema,
   updatePasswordSchema,
   getUserSchema,
+  deleteUserSchema,
 };

@@ -6,6 +6,7 @@ export const userEndpoints = elsApi.injectEndpoints({
       query: ({ id }) => ({
         url: `user/${id}`,
       }),
+      providesTags: ["Users"],
       transformResponse: (response) => response,
     }),
     updateUserById: builder.mutation({
@@ -14,9 +15,30 @@ export const userEndpoints = elsApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Users"],
+    }),
+    deleteUserById: builder.mutation({
+      query: ({ id, password }) => ({
+        url: `delete-user/${id}`,
+        method: "DELETE",
+        body: { password },
+      }),
+      invalidatesTags: ["Users"],
+    }),
+    updatePasswordById: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `update-password/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
     }),
   }),
 });
 
-export const { useGetUserByUsernameQuery, useUpdateUserByIdMutation } =
-  userEndpoints;
+export const {
+  useGetUserByUsernameQuery,
+  useUpdateUserByIdMutation,
+  useDeleteUserByIdMutation,
+  useUpdatePasswordByIdMutation,
+} = userEndpoints;

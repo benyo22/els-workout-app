@@ -2,10 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const elsApi = createApi({
   reducerPath: "elsApi",
-  tagTypes: ["Workouts", "Sleep", "Weights", "Meals"],
+  tagTypes: ["Users", "Workouts", "Sleep", "Weights", "Meals"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:10001/",
+    baseUrl: `http://localhost:3000/`,
     credentials: "include",
   }),
   endpoints: () => ({}),
 });
+//TODO: add .env for baseurl

@@ -15,11 +15,12 @@ export const Login = () => {
     username: "",
     password: "",
   });
+  const [errors, setErrors] = useState({});
   const { username, password } = credentials;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [sendLogin, { error }] = useLoginMutation();
+  const [sendLogin] = useLoginMutation();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -33,15 +34,16 @@ export const Login = () => {
     e.preventDefault();
 
     const result = await sendLogin(credentials);
-
-    // navigatin back to the main page if there is no error
-    if (result?.data?.message === "Login successful!") {
+    if (result.error) {
+      setErrors(result.error.data?.error);
+    } else {
       dispatch(
         login({
           id: result.data.id,
           username: result.data.username,
         })
       );
+      // navigating back to the main page if there is no error
       navigate("/home", { replace: true });
     }
   };
@@ -63,16 +65,16 @@ export const Login = () => {
               username={username}
               handleInput={handleInput}
               usernameRef={usernameRef}
-              error={error?.data?.error?.notfound}
+              error={errors.username}
             />
 
             <PasswordsInput
               password={password}
               handleInput={handleInput}
-              error={error?.data?.error?.password}
+              error={errors.password}
             />
-            {error?.data?.error?.required ? (
-              <span className="error-message">{error.data.error.required}</span>
+            {errors.required ? (
+              <span className="error-message">{errors.required}</span>
             ) : (
               // h-5 because then the ui doesnt move when the error message is displayed
               <span className="h-5"></span>

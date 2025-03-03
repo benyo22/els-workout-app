@@ -21,9 +21,10 @@ export const Register = () => {
     password: "",
   });
   const { name, age, email, username, password } = credentials;
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
-  const [sendRegister, { error }] = useRegisterMutation();
+  const [sendRegister] = useRegisterMutation();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -39,8 +40,10 @@ export const Register = () => {
     credentials.age = parseInt(credentials.age) || 0;
     const result = await sendRegister(credentials);
 
-    // navigating back to login if there is no error
-    if (result?.data?.message === "User registered successfully!") {
+    if (result.error) {
+      setErrors(result.error.data?.error);
+    } else {
+      // navigating back to login if there is no error
       dispatch(setLoginActive());
     }
   };
@@ -69,7 +72,7 @@ export const Register = () => {
               <AgeInput
                 age={age}
                 handleInput={handleInput}
-                error={error?.data?.error?.age}
+                error={errors.age}
               />
             </div>
 
@@ -78,12 +81,12 @@ export const Register = () => {
               <UsernameInput
                 username={username}
                 handleInput={handleInput}
-                error={error?.data?.error?.username}
+                error={errors.username}
               />
               <PasswordsInput
                 password={password}
                 handleInput={handleInput}
-                error={error?.data?.error?.password}
+                error={errors.password}
               />
             </div>
           </div>
@@ -92,11 +95,11 @@ export const Register = () => {
               <EmailInput
                 email={email}
                 handleInput={handleInput}
-                error={error?.data?.error?.email}
+                error={errors.email}
               />
             </div>
-            {error?.data?.error?.required ? (
-              <span className="error-message">{error.data.error.required}</span>
+            {errors.required ? (
+              <span className="error-message">{errors.required}</span>
             ) : (
               // h-5 because then the ui doesnt move when the error message is displayed
               <span className="h-5"></span>
