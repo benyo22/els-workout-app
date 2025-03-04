@@ -44,7 +44,7 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
   };
 
   return (
-    <div className="border-t pt-2">
+    <div className="pt-2">
       <h2 className="text-lg font-semibold mb-2">Jelszó frissítése</h2>
       <form onSubmit={handlePasswordUpdate} className="space-y-2">
         <div className="flex flex-col gap-0.5">
@@ -57,6 +57,7 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
             value={passwords.oldPassword}
             onChange={handleInput}
             feedback={false}
+            unstyled
           />
         </div>
 
@@ -70,6 +71,7 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
             value={passwords.newPassword}
             onChange={handleInput}
             feedback={false}
+            unstyled
           />
         </div>
 
@@ -79,7 +81,7 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
         {errors.required && (
           <span className="error-message">{errors.required}</span>
         )}
-        <Button label="Jelszó frissítése" className="auth-button" />
+        <Button label="Jelszó frissítése" className="auth-button" unstyled />
       </form>
     </div>
   );

@@ -42,7 +42,7 @@ fastify.decorate("auth", async function (request, reply) {
 
 // Start fastify app on port
 const port = process.env.FASTIFY_PORT;
-fastify.listen({ port, host: "0.0.0.0" }, (err, address) => {
+fastify.listen({ port }, (err, address) => {
   if (err) {
     fastify.log.error(err);
     process.exit(1);

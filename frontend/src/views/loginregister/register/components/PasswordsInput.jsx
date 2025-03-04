@@ -13,6 +13,7 @@ export const PasswordsInput = ({ password, handleInput, error }) => (
       onChange={handleInput}
       feedback={false}
       inputClassName="register-input"
+      unstyled
     />
   </div>
 );

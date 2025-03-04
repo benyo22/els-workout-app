@@ -1,4 +1,7 @@
 import "./index.css";
+import "primeicons/primeicons.css";
+import "primereact/resources/primereact.min.css"; // Core styles
+import "primereact/resources/themes/lara-light-blue/theme.css"; // Change theme if needed
 
 import App from "./App.jsx";
 

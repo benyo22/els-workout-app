@@ -227,9 +227,9 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  //delete-profile
+  //delete user
   fastify.delete(
-    "/delete-user/:id",
+    "/user/:id",
     { schema: deleteUserSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { id } = request.params;
@@ -248,7 +248,7 @@ module.exports = async (fastify, options) => {
       await User.destroy({ where: { id } });
 
       reply.send({
-        message: `Deleted a user with an id of ${id}! Cleared token from cookie.`,
+        message: `Deleted a user with an id of ${id}!`,
       });
     }
   );

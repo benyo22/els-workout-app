@@ -12,7 +12,7 @@ export const Settings = () => {
   const [errors, setErrors] = useState({});
 
   return (
-    <div className="w-full max-w-sm md:max-w-md h-[350px] shadow-lg rounded-xl p-6 border border-primary-grey">
+    <div className="w-full max-w-sm md:max-w-md h-[420px] shadow-lg rounded-xl p-6 border border-primary-grey">
       <TabView
         pt={{
           nav: { className: "flex space-x-3 border-b border-gray-300" }, // Tab container with underline

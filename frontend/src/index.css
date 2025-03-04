@@ -49,12 +49,12 @@
 
   /* inputs */
   .register-input {
-    @apply md:w-[13rem] w-[14rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
+    @apply md:w-[13rem] w-[14rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-1 border-primary-grey border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
     outline: none;
   }
 
   .login-input {
-    @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-2 border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
+    @apply w-[18rem] leading-[30px] transition-[0.5s] duration-[ease] p-2 rounded-[10px] border-1 border-primary-grey border-solid hover:border-primary-green hover:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)] focus:border-primary-green focus:shadow-[0_0_0_3px_rgb(49_220_183_/_30%)];
     outline: none;
   }
 

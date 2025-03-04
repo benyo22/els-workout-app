@@ -18,6 +18,7 @@ export const UsernameInput = ({
       onInput={handleInput}
       ref={usernameRef}
       className="login-input"
+      unstyled
     />
   </div>
 );

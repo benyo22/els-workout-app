@@ -61,6 +61,18 @@ const deleteUserSchema = {
   },
 };
 
+const addSleepSchema = {
+  body: {
+    type: "object",
+    properties: {
+      sleepStart: { type: "string", format: "date-time" },
+      sleepEnd: { type: "string", format: "date-time" },
+      durationMin: { type: "integer" },
+      quality: { type: "string" },
+    },
+  },
+};
+
 module.exports = {
   registerSchema,
   loginSchema,
@@ -68,4 +80,5 @@ module.exports = {
   updatePasswordSchema,
   getUserSchema,
   deleteUserSchema,
+  addSleepSchema,
 };

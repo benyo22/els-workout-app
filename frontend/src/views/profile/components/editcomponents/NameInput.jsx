@@ -10,6 +10,7 @@ export const NameInput = ({ name, handleInput }) => (
       value={name}
       onInput={handleInput}
       className="register-input"
+      unstyled
     />
   </div>
 );

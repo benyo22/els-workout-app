@@ -11,6 +11,7 @@ export const NameInput = ({ name, handleInput, nameRef }) => (
       onInput={handleInput}
       ref={nameRef}
       className="register-input"
+      unstyled
     />
   </div>
 );

@@ -18,15 +18,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "cascade",
         type: DataTypes.INTEGER,
       },
-      sleepStart: {
+      date: {
         allowNull: false,
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
       },
-      sleepEnd: {
-        allowNull: false,
-        type: DataTypes.DATE,
-      },
-      durationMin: {
+      durationHour: {
         allowNull: false,
         type: DataTypes.INTEGER,
       },

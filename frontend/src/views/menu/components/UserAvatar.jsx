@@ -1,5 +1,3 @@
-import "primeicons/primeicons.css";
-
 import { Menu } from "primereact/menu";
 import { Avatar } from "primereact/avatar";
 
@@ -159,10 +157,11 @@ const UserAvatar = () => {
     <div>
       <Avatar
         icon="pi pi-user"
-        className="text-primary-white my-2 md:mr-2 p-6 border-2 border-primary-white bg-primary-blue rounded-2xl hover:border-2 hover:border-primary-blue hover:bg-primary-white hover:text-black transition-all duration-400;"
+        className="text-primary-white my-2 md:mr-2 p-4 text-center border-2 border-primary-white bg-primary-blue rounded-full w-14 h-14 hover:border-2 hover:border-primary-blue hover:bg-primary-white hover:text-black hover:cursor-pointer transition-all duration-400;"
         shape="circle"
         size="xlarge"
         onClick={(e) => menu.current.toggle(e)}
+        unstyled
       />
       <Menu
         model={
@@ -173,6 +172,7 @@ const UserAvatar = () => {
         popup
         ref={menu}
         className="dropdown-menu"
+        unstyled
       />
     </div>
   );

@@ -4,7 +4,7 @@ export const elsApi = createApi({
   reducerPath: "elsApi",
   tagTypes: ["Users", "Workouts", "Sleep", "Weights", "Meals"],
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://localhost:3000/`,
+    baseUrl: "http://localhost:3000/",
     credentials: "include",
   }),
   endpoints: () => ({}),

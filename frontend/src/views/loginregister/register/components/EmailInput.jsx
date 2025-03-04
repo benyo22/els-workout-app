@@ -12,6 +12,7 @@ export const EmailInput = ({ email, handleInput, error }) => (
       value={email}
       onInput={handleInput}
       className="register-input"
+      unstyled
     />
   </div>
 );

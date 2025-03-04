@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import { useGetUserByUsernameQuery } from "../../../state/endpoints/userEndpoints";
-import { selectUserId } from "../../../state/slices/authSlice";
+
 import { EditUser } from "./EditUser";
+import { selectUserId } from "../../../state/slices/authSlice";
+import { useGetUserByUsernameQuery } from "../../../state/endpoints/userEndpoints";
 
 export const UserData = () => {
   const id = parseInt(useSelector(selectUserId));

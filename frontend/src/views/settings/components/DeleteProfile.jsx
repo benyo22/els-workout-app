@@ -40,7 +40,7 @@ export const DeleteProfile = ({ errors, setErrors, userId }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-2 border-t pt-2">
+    <div className="flex flex-col space-y-2 pt-2">
       <h2 className="text-lg font-semibold text-red-600">Fiók törlése</h2>
       <p className="text-sm text-gray-600 mb-2">
         A fiók törlése végleges, és nem visszavonható.
@@ -53,6 +53,7 @@ export const DeleteProfile = ({ errors, setErrors, userId }) => {
         value={deletePassword}
         onChange={(e) => setDeletePassword(e.target.value)}
         feedback={false}
+        unstyled
       />
       {errors.delete && (
         <span className="error-message ml-5">{errors.delete}</span>
@@ -61,6 +62,7 @@ export const DeleteProfile = ({ errors, setErrors, userId }) => {
         label="Fiók törlése"
         onClick={handleDeleteAccount}
         className="delete-button"
+        unstyled
       />
     </div>
   );

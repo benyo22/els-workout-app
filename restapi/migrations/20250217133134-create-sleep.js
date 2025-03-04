@@ -19,15 +19,11 @@ module.exports = {
         onDelete: "cascade",
         type: Sequelize.INTEGER,
       },
-      sleepStart: {
+      date: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
       },
-      sleepEnd: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      durationMin: {
+      durationHour: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },

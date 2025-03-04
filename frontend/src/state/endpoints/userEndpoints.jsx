@@ -19,7 +19,7 @@ export const userEndpoints = elsApi.injectEndpoints({
     }),
     deleteUserById: builder.mutation({
       query: ({ id, password }) => ({
-        url: `delete-user/${id}`,
+        url: `user/${id}`,
         method: "DELETE",
         body: { password },
       }),

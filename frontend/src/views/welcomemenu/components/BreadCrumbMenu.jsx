@@ -1,6 +1,5 @@
 import { useRef } from "react";
 
-import "primeicons/primeicons.css";
 import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -64,8 +63,9 @@ export const BreadCrumbMenu = () => {
         icon="pi pi-bars"
         className="md:hidden p-3 bg-primary-green rounded-lg border-2 hover:bg-primary-white hover:border-primary-green"
         onClick={(e) => menu.current.toggle(e)}
+        unstyled
       />
-      <Menu model={items} popup ref={menu} className="dropdown-menu" />
+      <Menu model={items} popup ref={menu} className="dropdown-menu" unstyled />
     </>
   );
 };

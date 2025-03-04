@@ -43,6 +43,7 @@ export const AuthPage = () => {
                 label="Regisztráció"
                 className="auth-button"
                 onClick={() => dispatch(setRegisterActive())}
+                unstyled
               />
             </>
           ) : (
@@ -73,6 +74,7 @@ export const AuthPage = () => {
                 label="Bejelentkezés"
                 className="auth-button"
                 onClick={() => dispatch(setLoginActive())}
+                unstyled
               />
             </>
           )}

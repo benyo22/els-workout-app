@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import { Home } from "./views/home/Home";
+import { Sleep } from "./views/sleep/Sleep";
 import { Layout } from "./views/layout/Layout";
 import { Profile } from "./views/profile/Profile";
 import { Welcome } from "./views/welcome/Welcome";
@@ -29,6 +30,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="home" index element={<Home />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="sleep" element={<Sleep />} />
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>

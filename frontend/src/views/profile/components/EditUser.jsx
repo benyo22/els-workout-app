@@ -55,6 +55,7 @@ export const EditUser = () => {
         label="Szerkesztés"
         className="auth-button mt-5 font-semibold"
         onClick={() => setVisible(true)}
+        unstyled
       ></Button>
 
       <Dialog
@@ -81,13 +82,15 @@ export const EditUser = () => {
             <div className="flex flex-col md:flex-row w-full gap-3 mt-4">
               <Button
                 label="Mentés"
-                className="w-full md:w-auto bg-primary-blue text-white py-2 px-4 rounded-lg hover:bg-secondary-blue"
+                className="w-full md:w-auto bg-primary-blue text-white py-2 px-4 rounded-lg hover:bg-secondary-blue hover:cursor-pointer"
                 onClick={handleUpdate}
+                unstyled
               />
               <Button
                 label="Mégse"
-                className="w-full md:w-auto bg-primary-grey text-white py-2 px-4 rounded-lg hover:bg-gray-400"
+                className="w-full md:w-auto bg-primary-grey text-white py-2 px-4 rounded-lg hover:bg-gray-400 hover:cursor-pointer"
                 onClick={() => setVisible(false)}
+                unstyled
               />
             </div>
           </div>
