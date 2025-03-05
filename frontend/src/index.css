@@ -38,8 +38,12 @@
     @apply bg-primary-green p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400 w-[50%] cursor-pointer;
   }
 
+  .edit-button {
+    @apply bg-primary-blue p-3 rounded-full border-2 border-primary-white text-primary-white hover:text-black hover:border-2 hover:border-primary-blue hover:bg-primary-white transition-all duration-400 w-[50%] cursor-pointer;
+  }
+
   .delete-button {
-    @apply bg-primary-red p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-red hover:bg-primary-white transition-all duration-400 w-[50%] cursor-pointer;
+    @apply bg-primary-red p-3 rounded-full border-2 border-primary-white text-primary-white hover:text-black hover:border-2 hover:border-primary-red hover:bg-primary-white transition-all duration-400 w-[50%] cursor-pointer;
   }
 
   /* errors */

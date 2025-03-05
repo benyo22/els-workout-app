@@ -6,6 +6,8 @@ import {
   useDeleteSleepMutation,
 } from "../../../state/endpoints/sleepEndpoints";
 
+import { sleepQualityLabels } from "../../../utils/data";
+
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
@@ -21,6 +23,8 @@ export const SleepList = () => {
     confirmDialog({
       message: "Biztosan törölni szeretnéd ezt az alvási adatot?",
       header: "Megerősítés",
+      acceptLabel: "Igen",
+      rejectLabel: "Nem",
       accept: async () => await deleteSleep(id),
     });
   };
@@ -29,7 +33,7 @@ export const SleepList = () => {
     <div className="flex gap-2">
       <Button
         icon="pi pi-pencil"
-        className="p-button-rounded p-button-info"
+        className="p-button-rounded"
         onClick={() => {
           setEditingEntry(rowData);
           setShowForm(true);
@@ -43,17 +47,20 @@ export const SleepList = () => {
     </div>
   );
 
+  const qualityTemplate = (rowData) => sleepQualityLabels[rowData.quality];
+
   return (
     <div className="w-full max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Alvás Napló</h2>
       <Button
-        label="Új Bejegyzés"
+        label=" Új Bejegyzés"
         icon="pi pi-plus"
-        className="mb-4 p-button-success"
+        className="edit-button md:w-[30%] sm:w-[22%]"
         onClick={() => {
           setEditingEntry(null);
           setShowForm(true);
         }}
+        unstyled
       />
 
       {isLoading ? (
@@ -62,7 +69,7 @@ export const SleepList = () => {
         <DataTable value={sleepData} paginator rows={3} className="">
           <Column field="date" header="Dátum" sortable />
           <Column field="durationHour" header="Időtartam (óra)" sortable />
-          <Column field="quality" header="Minőség" sortable />
+          <Column body={qualityTemplate} header="Minőség" sortable />
           <Column body={actionsTemplate} header="Műveletek" />
         </DataTable>
       )}

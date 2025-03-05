@@ -65,9 +65,8 @@ const addSleepSchema = {
   body: {
     type: "object",
     properties: {
-      sleepStart: { type: "string", format: "date-time" },
-      sleepEnd: { type: "string", format: "date-time" },
-      durationMin: { type: "integer" },
+      date: { type: "string", format: "date-time" },
+      durationHour: { type: "integer" },
       quality: { type: "string" },
     },
   },

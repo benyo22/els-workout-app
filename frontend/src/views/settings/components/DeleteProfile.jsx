@@ -1,42 +1,51 @@
 /* eslint-disable react/prop-types */
-import { Button } from "primereact/button";
-import { Password } from "primereact/password";
-
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { Button } from "primereact/button";
+import { Password } from "primereact/password";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+
 import { logout } from "../../../state/slices/authSlice";
+import { ErrorMessage } from "../../../utils/ErrorMessage";
 import { setRegisterActive } from "../../../state/slices/authUiSlice";
 import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
 import { useDeleteUserByIdMutation } from "../../../state/endpoints/userEndpoints";
 
 export const DeleteProfile = ({ errors, setErrors, userId }) => {
   const dispatch = useDispatch();
-  const [sendLogout] = useLogoutMutation();
   const [deletePassword, setDeletePassword] = useState("");
 
+  const [sendLogout] = useLogoutMutation();
   const [deleteUser] = useDeleteUserByIdMutation();
-  const handleDeleteAccount = async () => {
+
+  const handleDelete = async () => {
     if (!deletePassword) {
       setErrors({ delete: "Kérlek, add meg a jelszavad!" });
       return;
     }
 
-    const confirmed = window.confirm(
-      "Biztosan törölni akarod a fiókodat? Ez nem visszavonható!"
-    );
-    if (!confirmed) return;
+    confirmDialog({
+      message: "Biztosan törölni akarod a fiókodat? Ez nem visszavonható!",
+      header: "Megerősítés",
+      acceptLabel: "Igen",
+      rejectLabel: "Nem",
+      accept: async () => {
+        const result = await deleteUser({
+          id: userId,
+          password: deletePassword,
+        });
 
-    const result = await deleteUser({ id: userId, password: deletePassword });
-    if (result.error?.data.error) {
-      setErrors(result.error.data.error);
-      return;
-    }
+        if (result.error?.data.error) {
+          setErrors(result.error.data.error);
+          return;
+        }
 
-    await sendLogout();
-    dispatch(logout());
-    dispatch(setRegisterActive());
-    alert("Fiókod törölve lett.");
+        await sendLogout();
+        dispatch(logout());
+        dispatch(setRegisterActive());
+      },
+    });
   };
 
   return (
@@ -55,15 +64,15 @@ export const DeleteProfile = ({ errors, setErrors, userId }) => {
         feedback={false}
         unstyled
       />
-      {errors.delete && (
-        <span className="error-message ml-5">{errors.delete}</span>
-      )}
+      {errors.delete && <ErrorMessage message={errors.delete} />}
+
       <Button
         label="Fiók törlése"
-        onClick={handleDeleteAccount}
+        onClick={handleDelete}
         className="delete-button"
         unstyled
       />
+      <ConfirmDialog />
     </div>
   );
 };

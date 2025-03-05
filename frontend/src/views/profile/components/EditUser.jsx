@@ -47,13 +47,19 @@ export const EditUser = () => {
     // if success, close the edit window
     setVisible(false);
     setErrors({});
+    setCredentials({
+      name: "",
+      age: "",
+      email: "",
+      username: "",
+    });
   };
 
   return (
     <>
       <Button
         label="Szerkesztés"
-        className="auth-button mt-5 font-semibold"
+        className="edit-button mt-5 font-semibold"
         onClick={() => setVisible(true)}
         unstyled
       ></Button>
@@ -82,15 +88,21 @@ export const EditUser = () => {
             <div className="flex flex-col md:flex-row w-full gap-3 mt-4">
               <Button
                 label="Mentés"
-                className="w-full md:w-auto bg-primary-blue text-white py-2 px-4 rounded-lg hover:bg-secondary-blue hover:cursor-pointer"
+                className="p-button-success"
                 onClick={handleUpdate}
-                unstyled
               />
               <Button
                 label="Mégse"
-                className="w-full md:w-auto bg-primary-grey text-white py-2 px-4 rounded-lg hover:bg-gray-400 hover:cursor-pointer"
-                onClick={() => setVisible(false)}
-                unstyled
+                className="p-button-secondary"
+                onClick={() => {
+                  setVisible(false);
+                  setCredentials({
+                    name: "",
+                    age: "",
+                    email: "",
+                    username: "",
+                  });
+                }}
               />
             </div>
           </div>

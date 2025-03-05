@@ -6,11 +6,11 @@ import { useGetUserByUsernameQuery } from "../../../state/endpoints/userEndpoint
 
 export const UserData = () => {
   const id = parseInt(useSelector(selectUserId));
-  const { data: userInfo, isFetching } = useGetUserByUsernameQuery({
+  const { data: userInfo, isLoading } = useGetUserByUsernameQuery({
     id,
   });
 
-  if (isFetching) return <div>Loading...</div>;
+  if (isLoading) return <div>Adatok betöltése...</div>;
 
   return (
     <div className="flex flex-col items-center space-y-4">

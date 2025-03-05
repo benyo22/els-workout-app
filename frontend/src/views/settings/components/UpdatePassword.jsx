@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { ErrorMessage } from "../../../utils/ErrorMessage";
 
 import { logout } from "../../../state/slices/authSlice";
 import { setLoginActive } from "../../../state/slices/authUiSlice";
@@ -13,76 +15,70 @@ import { useUpdatePasswordByIdMutation } from "../../../state/endpoints/userEndp
 export const UpdatePassword = ({ errors, setErrors, userId }) => {
   const dispatch = useDispatch();
   const [sendLogout] = useLogoutMutation();
+  const [updatePassword] = useUpdatePasswordByIdMutation();
 
   const [passwords, setPasswords] = useState({
     oldPassword: "",
     newPassword: "",
   });
 
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setPasswords({ ...passwords, [name]: value });
-  };
+  const handleInput = (e) =>
+    setPasswords({ ...passwords, [e.target.name]: e.target.value });
 
-  const [updatePassword] = useUpdatePasswordByIdMutation();
   const handlePasswordUpdate = async (e) => {
     e.preventDefault();
+    const result = await updatePassword({ id: userId, data: passwords });
 
-    const result = await updatePassword({
-      id: userId,
-      data: passwords,
-    });
     if (result.error) {
-      setErrors(result.error.data?.error || { general: "Hiba történt!" });
+      setErrors(result.error.data?.error);
       return;
     }
 
     await sendLogout();
     dispatch(logout());
     dispatch(setLoginActive());
-    alert("Jelszó frissítése sikeres volt!");
   };
 
   return (
     <div className="pt-2">
       <h2 className="text-lg font-semibold mb-2">Jelszó frissítése</h2>
       <form onSubmit={handlePasswordUpdate} className="space-y-2">
-        <div className="flex flex-col gap-0.5">
-          <label>Régi jelszó*</label>
-          <Password
-            id="oldPassword"
-            name="oldPassword"
-            placeholder="Jelenlegi jelszó"
-            inputClassName="register-input"
-            value={passwords.oldPassword}
-            onChange={handleInput}
-            feedback={false}
-            unstyled
-          />
-        </div>
+        <PasswordField
+          label="Régi jelszó*"
+          name="oldPassword"
+          value={passwords.oldPassword}
+          onChange={handleInput}
+        />
+        <PasswordField
+          label="Új jelszó*"
+          name="newPassword"
+          value={passwords.newPassword}
+          onChange={handleInput}
+        />
 
-        <div className="flex flex-col gap-0.5">
-          <label>Új jelszó*</label>
-          <Password
-            id="newPassword"
-            name="newPassword"
-            placeholder="Új jelszó"
-            inputClassName="register-input"
-            value={passwords.newPassword}
-            onChange={handleInput}
-            feedback={false}
-            unstyled
-          />
-        </div>
+        {errors.password && <ErrorMessage message={errors.password} />}
+        {errors.required && <ErrorMessage message={errors.required} />}
 
-        {errors.password && (
-          <span className="error-message">{errors.password}</span>
-        )}
-        {errors.required && (
-          <span className="error-message">{errors.required}</span>
-        )}
-        <Button label="Jelszó frissítése" className="auth-button" unstyled />
+        <Button
+          type="submit"
+          label="Jelszó frissítése"
+          className="edit-button"
+          unstyled
+        />
       </form>
     </div>
   );
 };
+
+const PasswordField = ({ label, name, value, onChange }) => (
+  <div className="flex flex-col gap-0.5">
+    <label>{label}</label>
+    <Password
+      name={name}
+      placeholder={label}
+      value={value}
+      onChange={onChange}
+      feedback={false}
+    />
+  </div>
+);

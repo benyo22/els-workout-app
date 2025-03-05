@@ -24,11 +24,6 @@ module.exports = async (fastify, options) => {
       const userId = request.user.id;
       const { date, durationHour, quality } = request.body;
 
-      if (!date || !durationHour || !quality)
-        return reply
-          .status(StatusCodes.BAD_REQUEST)
-          .send({ error: "A *-al jelölt mezők kitöltése kötelező" });
-
       await Sleep.create({
         userId,
         date,
@@ -39,6 +34,25 @@ module.exports = async (fastify, options) => {
       return reply
         .status(StatusCodes.CREATED)
         .send({ message: "Sleep created!" });
+    }
+  );
+
+  // edit sleep data
+  fastify.patch(
+    "/sleep/:id",
+    { schema: addSleepSchema, onRequest: [fastify.auth] },
+    async (request, reply) => {
+      const { id } = request.params;
+      const { date, durationHour, quality } = request.body;
+
+      const sleep = await Sleep.findByPk(id);
+      sleep.date = date;
+      sleep.durationHour = durationHour;
+      sleep.quality = quality;
+
+      await sleep.save();
+
+      return reply.send({ message: "Sleep updated!" });
     }
   );
 
