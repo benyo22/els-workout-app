@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { loginActive: true };
 
-const authUiSlice = createSlice({
-  name: "authUi",
+const authViewSlice = createSlice({
+  name: "authView",
   initialState,
   reducers: {
     setLoginActive(state) {
@@ -15,6 +15,6 @@ const authUiSlice = createSlice({
   },
 });
 
-export const authUiReducer = authUiSlice.reducer;
-export const { setLoginActive, setRegisterActive } = authUiSlice.actions;
-export const selectLoginActive = (state) => state.authUi.loginActive;
+export const authViewReducer = authViewSlice.reducer;
+export const { setLoginActive, setRegisterActive } = authViewSlice.actions;
+export const selectLoginActive = (state) => state.authView.loginActive;

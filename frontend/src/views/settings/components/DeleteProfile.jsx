@@ -8,7 +8,7 @@ import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 import { logout } from "../../../state/slices/authSlice";
 import { ErrorMessage } from "../../helper/ErrorMessage";
-import { setRegisterActive } from "../../../state/slices/authUiSlice";
+import { setRegisterActive } from "../../../state/slices/authViewSlice";
 import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
 import { useDeleteUserByIdMutation } from "../../../state/endpoints/userEndpoints";
 
@@ -29,6 +29,7 @@ export const DeleteProfile = ({ errors, setErrors, userId }) => {
       message: "Biztosan törölni akarod a fiókodat? Ez nem visszavonható!",
       header: "Megerősítés",
       acceptLabel: "Igen",
+      acceptClassName: "p-button-danger",
       rejectLabel: "Nem",
       accept: async () => {
         const result = await deleteUser({

@@ -1,13 +1,14 @@
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
 import {
   setLoginActive,
   setRegisterActive,
-} from "../../../state/slices/authUiSlice";
+} from "../../../state/slices/authViewSlice";
 
 export const BreadCrumbMenu = () => {
   const menu = useRef(null);
@@ -61,7 +62,7 @@ export const BreadCrumbMenu = () => {
     <>
       <Button
         icon="pi pi-bars"
-        className="md:hidden p-3 bg-primary-green rounded-lg border-2 hover:bg-primary-white hover:border-primary-green"
+        className="md:hidden p-3 flex items-center bg-primary-green rounded-lg border-2 hover:bg-primary-white hover:border-primary-green"
         onClick={(e) => menu.current.toggle(e)}
         unstyled
       />

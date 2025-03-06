@@ -8,7 +8,7 @@ import { Password } from "primereact/password";
 import { ErrorMessage } from "../../helper/ErrorMessage";
 
 import { logout } from "../../../state/slices/authSlice";
-import { setLoginActive } from "../../../state/slices/authUiSlice";
+import { setLoginActive } from "../../../state/slices/authViewSlice";
 import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
 import { useUpdatePasswordByIdMutation } from "../../../state/endpoints/userEndpoints";
 

@@ -8,11 +8,15 @@ import {
   selectLoginActive,
   setLoginActive,
   setRegisterActive,
-} from "../../state/slices/authUiSlice";
+} from "../../state/slices/authViewSlice";
 
 export const AuthPage = () => {
   const dispatch = useDispatch();
   const loginActive = useSelector(selectLoginActive);
+
+  const toggleView = () => {
+    loginActive ? dispatch(setRegisterActive()) : dispatch(setLoginActive());
+  };
 
   return (
     <>
@@ -26,7 +30,7 @@ export const AuthPage = () => {
         <div
           className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-400 md:ease-out ${
             loginActive
-              ? "md:w-[288px] md:h-[500px] md:rounded-r-[225px] bg-primary-blue w-[768px] max-w-full h-[150px] p-2"
+              ? "md:w-[288px] md:h-[500px] md:rounded-r-[150px] bg-primary-blue w-[768px] max-w-full h-[150px] p-2"
               : "md:w-[480px] md:h-[500px]"
           }`}
         >
@@ -42,7 +46,7 @@ export const AuthPage = () => {
               <Button
                 label="Regisztráció"
                 className="auth-button"
-                onClick={() => dispatch(setRegisterActive())}
+                onClick={toggleView}
                 unstyled
               />
             </>
@@ -56,7 +60,7 @@ export const AuthPage = () => {
           className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-400 md:ease-out ${
             loginActive
               ? "md:w-[480px] md:h-[500px]"
-              : "md:w-[288px] md:h-[500px] md:rounded-l-[225px] bg-primary-blue w-[768px] max-w-full h-[150px] p-2"
+              : "md:w-[288px] md:h-[500px] md:rounded-l-[150px] bg-primary-blue w-[768px] max-w-full h-[150px] p-2"
           }`}
         >
           {loginActive ? (
@@ -73,7 +77,7 @@ export const AuthPage = () => {
               <Button
                 label="Bejelentkezés"
                 className="auth-button"
-                onClick={() => dispatch(setLoginActive())}
+                onClick={toggleView}
                 unstyled
               />
             </>

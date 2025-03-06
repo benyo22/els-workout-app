@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
+
 import {
   setLoginActive,
   setRegisterActive,
-} from "../../state/slices/authUiSlice";
+} from "../../state/slices/authViewSlice";
 
 import { BreadCrumbMenu } from "./components/BreadCrumbMenu";
 

@@ -11,7 +11,8 @@ export const MenuOptions = () => (
     </NavLink>
 
     <NavLink to="meals" className="logged-in-menu-links">
-      <span className="pi pi-chart-pie mr-2"></span>Étkezés
+      <span className="pi pi-chart-pie mr-2"></span>
+      Étkezés
     </NavLink>
 
     <NavLink to="sleep" className="logged-in-menu-links">

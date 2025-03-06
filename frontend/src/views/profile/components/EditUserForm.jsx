@@ -9,6 +9,7 @@ import { AgeInput } from "./editcomponents/AgeInput";
 import { NameInput } from "./editcomponents/NameInput";
 import { EmailInput } from "./editcomponents/EmailInput";
 import { UsernameInput } from "./editcomponents/UsernameInput";
+
 import { selectUserId } from "../../../state/slices/authSlice";
 import { useUpdateUserByIdMutation } from "../../../state/endpoints/userEndpoints";
 
@@ -89,6 +90,7 @@ export const EditUser = ({ visible, setVisible }) => {
                 className="p-button-secondary"
                 onClick={() => {
                   setVisible(false);
+                  setErrors({});
                   setCredentials({
                     name: "",
                     age: "",

@@ -23,6 +23,11 @@ export const Login = () => {
   const dispatch = useDispatch();
   const [sendLogin] = useLoginMutation();
 
+  // focus on page load
+  useEffect(() => {
+    usernameRef.current.focus();
+  }, []);
+
   const handleInput = (e) => {
     const { name, value } = e.target;
     setCredentials({
@@ -48,11 +53,6 @@ export const Login = () => {
       navigate("/home", { replace: true });
     }
   };
-
-  // focus on page load
-  useEffect(() => {
-    usernameRef.current.focus();
-  }, []);
 
   return (
     <>

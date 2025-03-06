@@ -1,22 +1,24 @@
-import { elsApi } from "./elsApiSlice";
-import { authReducer } from "./slices/authSlice";
-import { authUiReducer } from "./slices/authUiSlice";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
 import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+
+import { elsApi } from "./elsApiSlice";
+import { authReducer } from "./slices/authSlice";
+import { authViewReducer } from "./slices/authViewSlice";
+import { darkModeReducer } from "./slices/darkModeSlice";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "authUi"],
+  whitelist: ["auth", "authView", "darkMode"],
 };
 
 const persistedReducer = persistReducer(
   persistConfig,
   combineReducers({
     auth: authReducer,
-    authUi: authUiReducer,
+    authView: authViewReducer,
+    darkMode: darkModeReducer,
     [elsApi.reducerPath]: elsApi.reducer,
   })
 );

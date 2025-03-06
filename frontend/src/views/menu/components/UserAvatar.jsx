@@ -1,9 +1,10 @@
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Menu } from "primereact/menu";
 import { Avatar } from "primereact/avatar";
 
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoginActive } from "../../../state/slices/authUiSlice";
+import { setLoginActive } from "../../../state/slices/authViewSlice";
 import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
 import {
   logout,

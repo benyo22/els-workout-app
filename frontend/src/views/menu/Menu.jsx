@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import UserAvatar from "./components/UserAvatar";
 import { MenuOptions } from "./components/MenuOptions";
+// import { DarkModeToggle } from "../darkmode/DarkModeToggle";
 
 export const Menu = () => {
   return (
@@ -21,6 +22,7 @@ export const Menu = () => {
 
       {/* Topbar */}
       <div className="md:col-start-2 md:col-span-4 bg-white flex justify-end items-center px-5 border-b-2 border-primary-grey shadow-md">
+        {/* <DarkModeToggle /> */}
         <UserAvatar />
       </div>
     </>

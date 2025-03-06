@@ -9,7 +9,7 @@ import { PasswordsInput } from "./components/PasswordsInput";
 import { RegisterButton } from "./components/RegisterButton";
 
 import { ErrorMessage } from "../../helper/ErrorMessage";
-import { setLoginActive } from "../../../state/slices/authUiSlice";
+import { setLoginActive } from "../../../state/slices/authViewSlice";
 import { useRegisterMutation } from "../../../state/endpoints/authEndpoints";
 
 export const Register = () => {
@@ -26,6 +26,11 @@ export const Register = () => {
 
   const dispatch = useDispatch();
   const [sendRegister] = useRegisterMutation();
+
+  // focus on page load
+  useEffect(() => {
+    nameRef.current.focus();
+  }, []);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -48,11 +53,6 @@ export const Register = () => {
       dispatch(setLoginActive());
     }
   };
-
-  // focus on page load
-  useEffect(() => {
-    nameRef.current.focus();
-  }, []);
 
   return (
     <>
