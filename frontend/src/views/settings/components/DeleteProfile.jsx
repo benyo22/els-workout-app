@@ -7,7 +7,7 @@ import { Password } from "primereact/password";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 import { logout } from "../../../state/slices/authSlice";
-import { ErrorMessage } from "../../../utils/ErrorMessage";
+import { ErrorMessage } from "../../helper/ErrorMessage";
 import { setRegisterActive } from "../../../state/slices/authUiSlice";
 import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
 import { useDeleteUserByIdMutation } from "../../../state/endpoints/userEndpoints";

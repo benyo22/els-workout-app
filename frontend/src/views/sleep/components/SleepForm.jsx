@@ -2,16 +2,16 @@
 import { useState, useEffect } from "react";
 
 import {
-  useCreateSleepMutation,
-  useUpdateSleepMutation,
+  useCreateSleepWithUserIdMutation,
+  useUpdateSleepByIdMutation,
 } from "../../../state/endpoints/sleepEndpoints";
 
 import { Form } from "./Form";
 
-export const SleepForm = ({ entry, onClose }) => {
+export const SleepForm = ({ entry, onClose, userId }) => {
   const [error, setError] = useState(null);
-  const [createSleep] = useCreateSleepMutation();
-  const [updateSleep] = useUpdateSleepMutation();
+  const [createSleep] = useCreateSleepWithUserIdMutation();
+  const [updateSleep] = useUpdateSleepByIdMutation();
   const [formData, setFormData] = useState({
     date: "",
     durationHour: "",
@@ -43,7 +43,7 @@ export const SleepForm = ({ entry, onClose }) => {
     if (entry) {
       await updateSleep({ id: entry.id, data: formData });
     } else {
-      await createSleep(formData);
+      await createSleep({ id: userId, data: formData });
     }
     onClose();
   };

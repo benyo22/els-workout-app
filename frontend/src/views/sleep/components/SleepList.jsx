@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { SleepForm } from "./SleepForm";
 import {
-  useGetSleepQuery,
-  useDeleteSleepMutation,
+  useGetSleepByUserIdQuery,
+  useDeleteSleepByIdMutation,
 } from "../../../state/endpoints/sleepEndpoints";
 
 import { sleepQualityLabels } from "../../../utils/data";
@@ -12,13 +13,16 @@ import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { selectUserId } from "../../../state/slices/authSlice";
 
 export const SleepList = () => {
-  const { data: sleepData, isLoading } = useGetSleepQuery();
-  const [editingEntry, setEditingEntry] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const userId = useSelector(selectUserId);
+  const { data: sleepData, isLoading } = useGetSleepByUserIdQuery(userId);
 
-  const [deleteSleep] = useDeleteSleepMutation();
+  const [showForm, setShowForm] = useState(false);
+  const [editingEntry, setEditingEntry] = useState(null);
+
+  const [deleteSleep] = useDeleteSleepByIdMutation();
   const handleDelete = (id) => {
     confirmDialog({
       message: "Biztosan törölni szeretnéd ezt az alvási adatot?",
@@ -75,7 +79,11 @@ export const SleepList = () => {
       )}
 
       {showForm && (
-        <SleepForm entry={editingEntry} onClose={() => setShowForm(false)} />
+        <SleepForm
+          entry={editingEntry}
+          onClose={() => setShowForm(false)}
+          userId={userId}
+        />
       )}
       <ConfirmDialog />
     </div>

@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 
-import { EditUser } from "./EditUser";
+import { Button } from "primereact/button";
+
 import { selectUserId } from "../../../state/slices/authSlice";
 import { useGetUserByUsernameQuery } from "../../../state/endpoints/userEndpoints";
 
-export const UserData = () => {
+export const UserData = ({ showEditForm }) => {
   const id = parseInt(useSelector(selectUserId));
   const { data: userInfo, isLoading } = useGetUserByUsernameQuery({
     id,
@@ -34,7 +36,12 @@ export const UserData = () => {
         </p>
       </div>
 
-      <EditUser />
+      <Button
+        label="Szerkesztés"
+        className="edit-button mt-5 font-semibold"
+        onClick={showEditForm}
+        unstyled
+      ></Button>
     </div>
   );
 };

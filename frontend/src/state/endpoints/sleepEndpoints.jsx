@@ -2,22 +2,22 @@ import { elsApi } from "../elsApiSlice";
 
 export const sleepEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
-    getSleep: builder.query({
-      query: () => ({
-        url: "sleep",
+    getSleepByUserId: builder.query({
+      query: (id) => ({
+        url: `sleep/${id}`,
       }),
       providesTags: ["Sleep"],
       transformResponse: (response) => response,
     }),
-    createSleep: builder.mutation({
-      query: (data) => ({
-        url: "sleep",
+    createSleepWithUserId: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `sleep/${id}`,
         method: "POST",
         body: data,
       }),
       invalidatesTags: ["Sleep"],
     }),
-    updateSleep: builder.mutation({
+    updateSleepById: builder.mutation({
       query: ({ id, data }) => ({
         url: `sleep/${id}`,
         method: "PATCH",
@@ -25,7 +25,7 @@ export const sleepEndpoints = elsApi.injectEndpoints({
       }),
       invalidatesTags: ["Sleep"],
     }),
-    deleteSleep: builder.mutation({
+    deleteSleepById: builder.mutation({
       query: (id) => ({
         url: `sleep/${id}`,
         method: "DELETE",
@@ -36,8 +36,8 @@ export const sleepEndpoints = elsApi.injectEndpoints({
 });
 
 export const {
-  useGetSleepQuery,
-  useCreateSleepMutation,
-  useUpdateSleepMutation,
-  useDeleteSleepMutation,
+  useGetSleepByUserIdQuery,
+  useCreateSleepWithUserIdMutation,
+  useUpdateSleepByIdMutation,
+  useDeleteSleepByIdMutation,
 } = sleepEndpoints;

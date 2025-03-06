@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import Slider from "react-slick";
 
-export const Carousel = () => {
+export const Carousel = ({ sleepData }) => {
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -10,6 +11,12 @@ export const Carousel = () => {
     autoplay: true,
     autoplaySpeed: 5000,
   };
+
+  const maxSleepHour = sleepData
+    .map((s) => s.durationHour)
+    .reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
+    }, 0);
 
   return (
     <div className="mt-6">
@@ -29,9 +36,9 @@ export const Carousel = () => {
         </div>
 
         {/* Sleep */}
-        <div className="p-4 bg-primary-green text-primary-white rounded-lg shadow-md flex flex-col items-center">
+        <div className="p-4 bg-third-blue text-primary-white rounded-lg shadow-md flex flex-col items-center">
           <h3 className="text-lg font-bold">Alvás</h3>
-          <p className="text-xl font-semibold">{30} hrs</p>
+          <p className="text-xl font-semibold">{maxSleepHour} hrs</p>
           <p className="text-sm">Összes alvás</p>
         </div>
       </Slider>

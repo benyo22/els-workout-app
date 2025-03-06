@@ -6,11 +6,11 @@ const { addSleepSchema } = require("../utils/fastify.schemas");
 module.exports = async (fastify, options) => {
   //get all sleep data
   fastify.get(
-    "/sleep",
+    "/sleep/:id",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const userId = request.user.id;
-      const sleepData = await Sleep.findAll({ userId });
+      const { id: userId } = request.params;
+      const sleepData = await Sleep.findAll({ where: { userId } });
 
       reply.send(sleepData);
     }
@@ -18,10 +18,10 @@ module.exports = async (fastify, options) => {
 
   // add sleep data
   fastify.post(
-    "/sleep",
+    "/sleep/:id",
     { schema: addSleepSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const userId = request.user.id;
+      const { id: userId } = request.params;
       const { date, durationHour, quality } = request.body;
 
       await Sleep.create({

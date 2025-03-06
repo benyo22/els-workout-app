@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -11,8 +12,7 @@ import { UsernameInput } from "./editcomponents/UsernameInput";
 import { selectUserId } from "../../../state/slices/authSlice";
 import { useUpdateUserByIdMutation } from "../../../state/endpoints/userEndpoints";
 
-export const EditUser = () => {
-  const [visible, setVisible] = useState(false);
+export const EditUser = ({ visible, setVisible }) => {
   const [credentials, setCredentials] = useState({
     name: "",
     age: "",
@@ -57,13 +57,6 @@ export const EditUser = () => {
 
   return (
     <>
-      <Button
-        label="Szerkesztés"
-        className="edit-button mt-5 font-semibold"
-        onClick={() => setVisible(true)}
-        unstyled
-      ></Button>
-
       <Dialog
         visible={visible}
         modal
