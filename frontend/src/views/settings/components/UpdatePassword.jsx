@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 
-import { ErrorMessage } from "../../../utils/ErrorMessage";
+import { ErrorMessage } from "../../helper/ErrorMessage";
 
 import { logout } from "../../../state/slices/authSlice";
 import { setLoginActive } from "../../../state/slices/authUiSlice";
@@ -43,18 +43,29 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
     <div className="pt-2">
       <h2 className="text-lg font-semibold mb-2">Jelszó frissítése</h2>
       <form onSubmit={handlePasswordUpdate} className="space-y-2">
-        <PasswordField
-          label="Régi jelszó*"
-          name="oldPassword"
-          value={passwords.oldPassword}
-          onChange={handleInput}
-        />
-        <PasswordField
-          label="Új jelszó*"
-          name="newPassword"
-          value={passwords.newPassword}
-          onChange={handleInput}
-        />
+        <div className="flex flex-col gap-0.5">
+          <label>Régi jelszó</label>
+          <Password
+            label="Régi jelszó*"
+            name="oldPassword"
+            placeholder="Régi jelszó"
+            value={passwords.oldPassword}
+            onChange={handleInput}
+            feedback={false}
+          />
+        </div>
+
+        <div className="flex flex-col gap-0.5">
+          <label>Új jelszó*</label>
+          <Password
+            label="Új jelszó*"
+            name="newPassword"
+            placeholder="Új jelszó"
+            value={passwords.newPassword}
+            onChange={handleInput}
+            feedback={false}
+          />
+        </div>
 
         {errors.password && <ErrorMessage message={errors.password} />}
         {errors.required && <ErrorMessage message={errors.required} />}
@@ -69,16 +80,3 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
     </div>
   );
 };
-
-const PasswordField = ({ label, name, value, onChange }) => (
-  <div className="flex flex-col gap-0.5">
-    <label>{label}</label>
-    <Password
-      name={name}
-      placeholder={label}
-      value={value}
-      onChange={onChange}
-      feedback={false}
-    />
-  </div>
-);

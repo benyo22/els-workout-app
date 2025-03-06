@@ -7,6 +7,7 @@ import { UsernameInput } from "./components/UsernameInput";
 import { PasswordsInput } from "./components/PasswordsInput";
 
 import { login } from "../../../state/slices/authSlice";
+import { ErrorMessage } from "../../helper/ErrorMessage";
 import { useLoginMutation } from "../../../state/endpoints/authEndpoints";
 
 export const Login = () => {
@@ -74,7 +75,7 @@ export const Login = () => {
               error={errors.password}
             />
             {errors.required ? (
-              <span className="error-message">{errors.required}</span>
+              <ErrorMessage message={errors.required} />
             ) : (
               // h-5 because then the ui doesnt move when the error message is displayed
               <span className="h-5"></span>

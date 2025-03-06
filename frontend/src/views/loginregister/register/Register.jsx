@@ -8,6 +8,7 @@ import { UsernameInput } from "./components/UsernameInput";
 import { PasswordsInput } from "./components/PasswordsInput";
 import { RegisterButton } from "./components/RegisterButton";
 
+import { ErrorMessage } from "../../helper/ErrorMessage";
 import { setLoginActive } from "../../../state/slices/authUiSlice";
 import { useRegisterMutation } from "../../../state/endpoints/authEndpoints";
 
@@ -99,7 +100,7 @@ export const Register = () => {
               />
             </div>
             {errors.required ? (
-              <span className="error-message">{errors.required}</span>
+              <ErrorMessage message={errors.required} />
             ) : (
               // h-5 because then the ui doesnt move when the error message is displayed
               <span className="h-5"></span>
