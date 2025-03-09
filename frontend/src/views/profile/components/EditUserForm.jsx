@@ -13,7 +13,7 @@ import { UsernameInput } from "./editcomponents/UsernameInput";
 import { selectUserId } from "../../../state/slices/authSlice";
 import { useUpdateUserByIdMutation } from "../../../state/endpoints/userEndpoints";
 
-export const EditUser = ({ visible, setVisible }) => {
+export const EditUserForm = ({ visible, setVisible }) => {
   const [credentials, setCredentials] = useState({
     name: "",
     age: "",

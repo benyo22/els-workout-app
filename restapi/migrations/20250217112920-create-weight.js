@@ -19,9 +19,13 @@ module.exports = {
         onDelete: "cascade",
         type: Sequelize.INTEGER,
       },
-      userWeight: {
+      weight: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
+      },
+      date: {
+        allowNull: false,
+        type: Sequelize.DATEONLY,
       },
       createdAt: {
         allowNull: false,

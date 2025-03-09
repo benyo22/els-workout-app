@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { SleepForm } from "./SleepForm";
-import {
-  useGetSleepByUserIdQuery,
-  useDeleteSleepByIdMutation,
-} from "../../../state/endpoints/sleepEndpoints";
+import { WeightForm } from "./WeightForm";
 
-import { sleepQualityLabels } from "../../../utils/data";
+import {
+  useGetWeightByUserIdQuery,
+  useDeleteWeightByIdMutation,
+} from "../../../state/endpoints/weightEndpoints";
 
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
@@ -15,22 +14,22 @@ import { DataTable } from "primereact/datatable";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { selectUserId } from "../../../state/slices/authSlice";
 
-export const SleepList = () => {
+export const WeightList = () => {
   const userId = useSelector(selectUserId);
-  const { data: sleepData, isLoading } = useGetSleepByUserIdQuery(userId);
+  const { data: weightData, isLoading } = useGetWeightByUserIdQuery(userId);
 
   const [showForm, setShowForm] = useState(false);
   const [editingEntry, setEditingEntry] = useState(null);
 
-  const [deleteSleep] = useDeleteSleepByIdMutation();
+  const [deleteWeight] = useDeleteWeightByIdMutation();
   const handleDelete = (id) => {
     confirmDialog({
-      message: "Biztosan törölni szeretnéd ezt az alvási adatot?",
+      message: "Biztosan törölni szeretnéd ezt a súly adatot?",
       header: "Megerősítés",
       acceptLabel: "Igen",
       acceptClassName: "p-button-danger",
       rejectLabel: "Nem",
-      accept: async () => await deleteSleep(id),
+      accept: async () => await deleteWeight(id),
     });
   };
 
@@ -52,11 +51,9 @@ export const SleepList = () => {
     </div>
   );
 
-  const qualityTemplate = (rowData) => sleepQualityLabels[rowData.quality];
-
   return (
     <div className="w-full max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Alvás Napló</h2>
+      <h2 className="text-2xl font-bold mb-4">Súly Napló</h2>
       <Button
         label=" Új Bejegyzés"
         icon="pi pi-plus"
@@ -71,16 +68,15 @@ export const SleepList = () => {
       {isLoading ? (
         <p>Adatok betöltése...</p>
       ) : (
-        <DataTable value={sleepData} paginator rows={3} className="">
+        <DataTable value={weightData} paginator rows={3} className="">
+          <Column field="weight" header="Súly (kg)" sortable />
           <Column field="date" header="Dátum" sortable />
-          <Column field="durationHour" header="Időtartam (óra)" sortable />
-          <Column body={qualityTemplate} header="Minőség" sortable />
           <Column body={actionsTemplate} header="Műveletek" />
         </DataTable>
       )}
 
       {showForm && (
-        <SleepForm
+        <WeightForm
           entry={editingEntry}
           onClose={() => setShowForm(false)}
           userId={userId}

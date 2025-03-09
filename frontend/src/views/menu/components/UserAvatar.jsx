@@ -113,6 +113,16 @@ const UserAvatar = () => {
     {
       label: (
         <div className="text-xl hover:text-primary-blue mt-2 ml-2">
+          <span className="pi pi-moon mr-2"></span> Súly
+        </div>
+      ),
+      command: () => {
+        navigate("weight");
+      },
+    },
+    {
+      label: (
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
           <span className="pi pi-chart-bar mr-2"></span> Statisztika
         </div>
       ),

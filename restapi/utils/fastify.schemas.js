@@ -72,6 +72,16 @@ const addSleepSchema = {
   },
 };
 
+const addWeightSchema = {
+  body: {
+    type: "object",
+    properties: {
+      weight: { type: "double" },
+      date: { type: "string", format: "date-time" },
+    },
+  },
+};
+
 module.exports = {
   registerSchema,
   loginSchema,

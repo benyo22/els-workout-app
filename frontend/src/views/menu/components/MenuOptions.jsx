@@ -19,6 +19,10 @@ export const MenuOptions = () => (
       <span className="pi pi-moon mr-2"></span>Alvás
     </NavLink>
 
+    <NavLink to="weight" className="logged-in-menu-links">
+      <span className="pi pi-shield mr-2"></span>Súly
+    </NavLink>
+
     <NavLink to="statistics" className="logged-in-menu-links">
       <span className="pi pi-chart-bar mr-2"></span>Statisztika
     </NavLink>
