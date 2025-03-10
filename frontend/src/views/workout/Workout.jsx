@@ -1,35 +1,16 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-
-import { WeightForm } from "./WeightForm";
-
-import {
-  useGetWeightByUserIdQuery,
-  useDeleteWeightByIdMutation,
-} from "../../../state/endpoints/weightEndpoints";
-
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { selectUserId } from "../../../state/slices/authSlice";
 
-export const WeightList = () => {
-  const userId = useSelector(selectUserId);
-  const { data: weightData, isLoading } = useGetWeightByUserIdQuery(userId);
-
-  const [showForm, setShowForm] = useState(false);
-  const [editingEntry, setEditingEntry] = useState(null);
-
-  const [deleteWeight] = useDeleteWeightByIdMutation();
+export const Workout = () => {
   const handleDelete = (id) => {
     confirmDialog({
-      message: "Biztosan törölni szeretnéd ezt a súly adatot?",
+      message: "Biztosan törölni szeretnéd ezt az alvási adatot?",
       header: "Megerősítés",
       acceptLabel: "Igen",
       acceptClassName: "p-button-danger",
       rejectLabel: "Nem",
-      accept: async () => await deleteWeight(id),
     });
   };
 
@@ -53,9 +34,9 @@ export const WeightList = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6 bg-primary-white shadow-md rounded-lg border border-primary-grey">
-      <h2 className="text-2xl font-bold mb-4">Súly Napló</h2>
+      <h2 className="text-2xl font-bold mb-4">Edzés Napló</h2>
       <Button
-        label=" Új Bejegyzés"
+        label=" Új Edzés"
         icon="pi pi-plus"
         className="edit-button md:w-[30%] sm:w-[22%] mb-2"
         onClick={() => {
@@ -65,30 +46,23 @@ export const WeightList = () => {
         unstyled
       />
 
-      {isLoading ? (
+      {1 === 2 ? (
         <p>Adatok betöltése...</p>
       ) : (
         <DataTable
-          value={weightData}
+          value={null}
           paginator
           rows={5}
           scrollable
           scrollHeight="400px"
           removableSort
         >
-          <Column field="weight" header="Súly (kg)" sortable />
+          <Column field="name" header="Név" sortable />
           <Column field="date" header="Dátum" sortable />
           <Column body={actionsTemplate} header="Műveletek" />
         </DataTable>
       )}
 
-      {showForm && (
-        <WeightForm
-          entry={editingEntry}
-          onClose={() => setShowForm(false)}
-          userId={userId}
-        />
-      )}
       <ConfirmDialog />
     </div>
   );

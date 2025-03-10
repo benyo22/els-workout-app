@@ -44,7 +44,7 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
       <h2 className="text-lg font-semibold mb-2">Jelszó frissítése</h2>
       <form onSubmit={handlePasswordUpdate} className="space-y-2">
         <div className="flex flex-col gap-0.5">
-          <label>Régi jelszó</label>
+          <label>Régi jelszó*</label>
           <Password
             label="Régi jelszó*"
             name="oldPassword"

@@ -55,12 +55,12 @@ export const SleepList = () => {
   const qualityTemplate = (rowData) => sleepQualityLabels[rowData.quality];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="w-full max-w-4xl mx-auto p-6 bg-primary-white shadow-md rounded-lg border border-primary-grey">
       <h2 className="text-2xl font-bold mb-4">Alvás Napló</h2>
       <Button
         label=" Új Bejegyzés"
         icon="pi pi-plus"
-        className="edit-button md:w-[30%] sm:w-[22%]"
+        className="edit-button md:w-[30%] sm:w-[22%] mb-2"
         onClick={() => {
           setEditingEntry(null);
           setShowForm(true);
@@ -71,7 +71,14 @@ export const SleepList = () => {
       {isLoading ? (
         <p>Adatok betöltése...</p>
       ) : (
-        <DataTable value={sleepData} paginator rows={3} className="">
+        <DataTable
+          value={sleepData}
+          paginator
+          rows={5}
+          scrollable
+          scrollHeight="400px"
+          removableSort
+        >
           <Column field="date" header="Dátum" sortable />
           <Column field="durationHour" header="Időtartam (óra)" sortable />
           <Column body={qualityTemplate} header="Minőség" sortable />

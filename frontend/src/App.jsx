@@ -6,6 +6,7 @@ import { Layout } from "./views/layout/Layout";
 import { Weight } from "./views/weight/Weight";
 import { Profile } from "./views/profile/Profile";
 import { Welcome } from "./views/welcome/Welcome";
+import { Workout } from "./views/workout/Workout";
 import { Settings } from "./views/settings/Settings";
 import { RequireAuth } from "./views/auth/RequireAuth";
 import { AuthPage } from "./views/loginregister/AuthPage";
@@ -30,9 +31,10 @@ function App() {
           {/* Logged in layout */}
           <Route element={<Layout />}>
             <Route path="home" index element={<Home />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="workouts" element={<Workout />} />
             <Route path="sleep" element={<Sleep />} />
             <Route path="weight" element={<Weight />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>

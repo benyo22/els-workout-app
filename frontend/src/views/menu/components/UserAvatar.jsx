@@ -35,7 +35,7 @@ const UserAvatar = () => {
       label: (
         <>
           <div className="p-1 font-bold text-xl border-b cursor-default">
-            Felhasználónév:{" "}
+            Felhasználó:{" "}
             <span className="hover:text-primary-green !important">
               {username}
             </span>
@@ -62,7 +62,7 @@ const UserAvatar = () => {
       label: (
         <>
           <div className="p-1 font-bold text-xl border-b cursor-default">
-            Felhasználónév:{" "}
+            Felhasználó:{" "}
             <span className="hover:text-primary-green !important">
               {username}
             </span>
