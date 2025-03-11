@@ -12,7 +12,7 @@ export const Welcome = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="h-[100%] bg-gradient-to-b from-primary-blue to-third-blue text-white flex flex-col items-center">
+    <div className="h-[100%] w-screen text-white flex flex-col items-center">
       <div className="w-full bg-primary-blue py-4 px-6 flex items-center shadow-md">
         <h2 className="text-2xl font-bold text-primary-green">ELS</h2>
       </div>
