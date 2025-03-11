@@ -45,7 +45,7 @@ export const AuthPage = () => {
               </p>
               <Button
                 label="Regisztráció"
-                className="auth-button"
+                className="register-button"
                 onClick={toggleView}
                 unstyled
               />
@@ -76,7 +76,7 @@ export const AuthPage = () => {
               </p>
               <Button
                 label="Bejelentkezés"
-                className="auth-button"
+                className="login-button"
                 onClick={toggleView}
                 unstyled
               />

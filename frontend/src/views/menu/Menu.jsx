@@ -8,7 +8,7 @@ export const Menu = () => {
   return (
     <>
       {/* Sidebar */}
-      <div className="hidden md:flex md:flex-col md:items-center md:justify-start md:row-start-1 md:row-span-7 md:bg-primary-blue md:pt-5 md:pb-5 overflow-y-auto scrollbar-thin scrollbar-thumb-primary-blue scrollbar-track-primary-grey">
+      <div className="hidden md:flex md:flex-col md:items-center md:justify-start md:row-start-1 md:row-span-7 md:bg-primary-blue md:pt-5 md:pb-5 overflow-y-auto">
         <NavLink
           to="/"
           className="text-white text-4xl font-extrabold hover:text-primary-green h-fit"

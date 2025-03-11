@@ -2,8 +2,6 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
-@plugin 'tailwind-scrollbar';
-
 @theme {
   --color-primary-blue: #3d50b9;
   --color-secondary-blue: #5060bc;
@@ -26,8 +24,8 @@
   }
 
   /* links */
-  .links {
-    @apply hidden md:block mr-8 p-2 text-xl no-underline border-2 border-primary-white bg-primary-green rounded-full hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400;
+  .welcome-menu-home-page-link {
+    @apply hidden md:block bg-primary-green text-primary-white mr-8 px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out hover:cursor-pointer;
   }
 
   .logged-in-menu-links {
@@ -37,6 +35,14 @@
   /* buttons */
   .auth-button {
     @apply bg-primary-green p-3 rounded-full border-2 border-primary-white hover:border-2 hover:border-primary-green hover:bg-primary-white transition-all duration-400 w-[50%] cursor-pointer;
+  }
+
+  .login-button {
+    @apply bg-primary-green text-primary-white px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out hover:cursor-pointer;
+  }
+
+  .register-button {
+    @apply bg-primary-white text-primary-blue px-6 py-3 font-bold rounded-lg hover:bg-gray-200 transition duration-300 ease-in-out hover:cursor-pointer;
   }
 
   .edit-button {
@@ -73,6 +79,10 @@
     @apply border-2 border-primary-blue rounded-xl bg-primary-white p-2 mt-2 shadow-2xl;
   }
 
+  .breadcrumb-menu {
+    @apply md:hidden flex items-center justify-center bg-primary-green text-primary-white px-4 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out hover:cursor-pointer;
+  }
+
   /* footer */
   .footer-div {
     @apply md:col-start-2 md:col-span-4 md:row-start-7 flex items-center justify-center bg-white border-t-2 border-primary-grey;
@@ -80,4 +90,19 @@
   .footer-p {
     @apply text-xs md:text-sm font-bold text-secondary-blue;
   }
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar-track {
+  border: 1px solid #31dcb7;
+  background-color: #fcfefd;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #fcfefd;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #31dcb7;
 }

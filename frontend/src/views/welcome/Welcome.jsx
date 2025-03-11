@@ -13,19 +13,8 @@ export const Welcome = () => {
 
   return (
     <div className="h-[100%] bg-gradient-to-b from-primary-blue to-third-blue text-white flex flex-col items-center">
-      <div className="w-full bg-primary-blue py-4 px-6 flex justify-between items-center shadow-md">
+      <div className="w-full bg-primary-blue py-4 px-6 flex items-center shadow-md">
         <h2 className="text-2xl font-bold text-primary-green">ELS</h2>
-        <div className="flex gap-4">
-          <a href="#features" className="text-white hover:text-primary-green">
-            Features
-          </a>
-          <a href="#about" className="text-white hover:text-primary-green">
-            About
-          </a>
-          <a href="#contact" className="text-white hover:text-primary-green">
-            Contact
-          </a>
-        </div>
       </div>
 
       <div className="w-full max-w-4xl text-center py-20 px-4">
@@ -40,14 +29,14 @@ export const Welcome = () => {
         <div className="flex justify-center gap-4">
           <NavLink
             to="auth"
-            className="bg-primary-green text-primary-white px-6 py-3 font-bold rounded-lg hover:bg-secondary-green"
+            className="login-button"
             onClick={() => dispatch(setLoginActive())}
           >
             Bejelentkezés
           </NavLink>
           <NavLink
             to="auth"
-            className="bg-primary-white text-primary-blue px-6 py-3 font-bold rounded-lg hover:bg-gray-200"
+            className="register-button"
             onClick={() => dispatch(setRegisterActive())}
           >
             Regisztráció
@@ -55,10 +44,7 @@ export const Welcome = () => {
         </div>
       </div>
 
-      <div
-        id="features"
-        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-10"
-      >
+      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-10">
         <FeatureCard
           icon={<FaDumbbell />}
           title="Edzések Nyomon Követése"
