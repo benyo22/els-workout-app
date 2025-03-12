@@ -1,38 +1,41 @@
 import { NavLink } from "react-router-dom";
 
+import {
+  FaHome,
+  FaTrophy,
+  FaAppleAlt,
+  FaMoon,
+  FaBalanceScale,
+  FaChartBar,
+  FaUserEdit,
+  FaCog,
+} from "react-icons/fa";
+
 export const MenuOptions = () => (
   <>
     <NavLink to="home" className="logged-in-menu-links">
-      <span className="pi pi-home mr-2"></span>Kezdőlap
+      <FaHome className="mr-2" /> Kezdőlap
     </NavLink>
-
     <NavLink to="workouts" className="logged-in-menu-links">
-      <span className="pi pi-trophy mr-2"></span>Edzés
+      <FaTrophy className="mr-2" /> Edzés
     </NavLink>
-
     <NavLink to="meals" className="logged-in-menu-links">
-      <span className="pi pi-chart-pie mr-2"></span>
-      Étkezés
+      <FaAppleAlt className="mr-2" /> Étkezés
     </NavLink>
-
     <NavLink to="sleep" className="logged-in-menu-links">
-      <span className="pi pi-moon mr-2"></span>Alvás
+      <FaMoon className="mr-2" /> Alvás
     </NavLink>
-
     <NavLink to="weight" className="logged-in-menu-links">
-      <span className="pi pi-shield mr-2"></span>Súly
+      <FaBalanceScale className="mr-2" /> Súly
     </NavLink>
-
     <NavLink to="statistics" className="logged-in-menu-links">
-      <span className="pi pi-chart-bar mr-2"></span>Statisztika
+      <FaChartBar className="mr-2" /> Statisztika
     </NavLink>
-
     <NavLink to="profile" className="logged-in-menu-links">
-      <span className="pi pi-user-edit mr-2"></span>Profil
+      <FaUserEdit className="mr-2" /> Profil
     </NavLink>
-
     <NavLink to="settings" className="logged-in-menu-links">
-      <span className="pi pi-cog mr-2"></span>Beállítások
+      <FaCog className="mr-2" /> Beállítások
     </NavLink>
   </>
 );

@@ -1,5 +1,7 @@
 import { TabView, TabPanel } from "primereact/tabview";
 
+import { FaKey, FaX } from "react-icons/fa6";
+
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -23,7 +25,10 @@ export const Settings = () => {
           }),
         }}
       >
-        <TabPanel header="Jelszó frissítése" leftIcon="pi pi-key mr-2">
+        <TabPanel
+          header="Jelszó frissítése"
+          leftIcon={<FaKey className="mr-1" />}
+        >
           <UpdatePassword
             errors={errors}
             setErrors={setErrors}
@@ -31,7 +36,7 @@ export const Settings = () => {
           />
         </TabPanel>
 
-        <TabPanel header="Fiók törlése" leftIcon="pi pi-times mr-2">
+        <TabPanel header="Fiók törlése" leftIcon={<FaX className="mr-1" />}>
           <DeleteProfile
             errors={errors}
             setErrors={setErrors}

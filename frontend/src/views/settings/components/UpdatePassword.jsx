@@ -54,7 +54,6 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
             feedback={false}
           />
         </div>
-
         <div className="flex flex-col gap-0.5">
           <label>Új jelszó*</label>
           <Password
@@ -66,10 +65,10 @@ export const UpdatePassword = ({ errors, setErrors, userId }) => {
             feedback={false}
           />
         </div>
-
-        {errors.password && <ErrorMessage message={errors.password} />}
+        {errors.password && (
+          <div className="error-message">{errors.password}</div>
+        )}
         {errors.required && <ErrorMessage message={errors.required} />}
-
         <Button
           type="submit"
           label="Jelszó frissítése"

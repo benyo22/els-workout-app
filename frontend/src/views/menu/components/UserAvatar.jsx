@@ -2,6 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Menu } from "primereact/menu";
+import {
+  FaUser,
+  FaHome,
+  FaTrophy,
+  FaAppleAlt,
+  FaMoon,
+  FaBalanceScale,
+  FaChartBar,
+  FaUserEdit,
+  FaCog,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import { Avatar } from "primereact/avatar";
 
 import { setLoginActive } from "../../../state/slices/authViewSlice";
@@ -33,18 +45,21 @@ const UserAvatar = () => {
   const biggerScreenItems = [
     {
       label: (
-        <>
-          <div className="p-1 font-bold text-xl border-b cursor-default">
-            Felhasználó:{" "}
-            <span className="hover:text-primary-green">{username}</span>
-          </div>
-        </>
+        <div className="p-1 font-bold text-xl border-b cursor-default">
+          Felhasználó:{" "}
+          <span
+            className="hover:text-primary-green cursor-pointer"
+            onClick={() => navigate("profile")}
+          >
+            {username}
+          </span>
+        </div>
       ),
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-sign-out"></span> Kijelentkezés
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaSignOutAlt className="mr-0.5" /> Kijelentkezés
         </div>
       ),
       command: async () => {
@@ -58,78 +73,9 @@ const UserAvatar = () => {
   const smallerScreenItems = [
     {
       label: (
-        <>
-          <div className="p-1 font-bold text-xl border-b cursor-default">
-            Felhasználó:{" "}
-            <span className="hover:text-primary-green">{username}</span>
-          </div>
-        </>
-      ),
-    },
-    {
-      label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-home mr-2"></span> Kezdőlap
-        </div>
-      ),
-      command: () => {
-        navigate("home");
-      },
-    },
-    {
-      label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-trophy mr-2"></span> Edzés
-        </div>
-      ),
-      command: () => {
-        navigate("workouts");
-      },
-    },
-    {
-      label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-chart-pie mr-2"></span> Étkezés
-        </div>
-      ),
-      command: () => {
-        navigate("meals");
-      },
-    },
-    {
-      label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-moon mr-2"></span> Alvás
-        </div>
-      ),
-      command: () => {
-        navigate("sleep");
-      },
-    },
-    {
-      label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-moon mr-2"></span> Súly
-        </div>
-      ),
-      command: () => {
-        navigate("weight");
-      },
-    },
-    {
-      label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-chart-bar mr-2"></span> Statisztika
-        </div>
-      ),
-      command: () => {
-        navigate("statistics");
-      },
-    },
-    {
-      label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-user-edit mr-2"></span> Profil
+        <div className="p-1 font-bold text-xl border-b cursor-default">
+          Felhasználó:{" "}
+          <span className="hover:text-primary-green">{username}</span>
         </div>
       ),
       command: () => {
@@ -138,8 +84,78 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-cog mr-2"></span> Beállítások
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaHome className="mr-2" /> Kezdőlap
+        </div>
+      ),
+      command: () => {
+        navigate("home");
+      },
+    },
+    {
+      label: (
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaTrophy className="mr-2" /> Edzés
+        </div>
+      ),
+      command: () => {
+        navigate("workouts");
+      },
+    },
+    {
+      label: (
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaAppleAlt className="mr-2" /> Étkezés
+        </div>
+      ),
+      command: () => {
+        navigate("meals");
+      },
+    },
+    {
+      label: (
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaMoon className="mr-2" /> Alvás
+        </div>
+      ),
+      command: () => {
+        navigate("sleep");
+      },
+    },
+    {
+      label: (
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaBalanceScale className="mr-2" /> Súly
+        </div>
+      ),
+      command: () => {
+        navigate("weight");
+      },
+    },
+    {
+      label: (
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaChartBar className="mr-2" /> Statisztika
+        </div>
+      ),
+      command: () => {
+        navigate("statistics");
+      },
+    },
+    {
+      label: (
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaUserEdit className="mr-2" /> Profil
+        </div>
+      ),
+      command: () => {
+        navigate("profile");
+      },
+    },
+    {
+      label: (
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaCog className="mr-2" /> Beállítások
         </div>
       ),
       command: () => {
@@ -148,8 +164,8 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2">
-          <span className="pi pi-sign-out"></span> Kijelentkezés
+        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+          <FaSignOutAlt className="mr-0.5" /> Kijelentkezés
         </div>
       ),
       command: async () => {
@@ -163,8 +179,8 @@ const UserAvatar = () => {
   return (
     <div>
       <Avatar
-        icon="pi pi-user"
-        className="text-primary-white my-2 md:mr-2 p-4 text-center border-2 border-primary-white bg-gradient-to-b from-primary-blue to-third-blue rounded-full w-14 h-14 hover:cursor-pointer transition-all duration-400 hover:scale-105 hover:shadow-lg hover:from-primary-blue hover:to-primary-green"
+        icon={<FaUser size={20} />}
+        className="flex items-center justify-center text-primary-white my-2 md:mr-2 bg-gradient-to-b from-primary-blue to-third-blue rounded-full w-14 h-14 hover:cursor-pointer hover:scale-105 hover:shadow-lg hover:from-primary-blue hover:to-primary-green transition-all duration-400 "
         shape="circle"
         size="xlarge"
         onClick={(e) => menu.current.toggle(e)}

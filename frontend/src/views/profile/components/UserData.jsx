@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 
+import { FaAt } from "react-icons/fa";
 import { Button } from "primereact/button";
 
 import { selectUserId } from "../../../state/slices/authSlice";
@@ -23,7 +24,10 @@ export const UserData = ({ showEditForm }) => {
 
       {/* User info */}
       <h2 className="text-xl font-bold text-secondary-blue">{userInfo.name}</h2>
-      <p className="text-gray-600 text-sm">@{userInfo.username}</p>
+      <p className="text-gray-600 text-sm flex items-center">
+        <FaAt className="mr-0.5" />
+        {userInfo.username}
+      </p>
 
       <div className="w-full border-t border-gray-300 pt-4">
         <p className="text-gray-700">

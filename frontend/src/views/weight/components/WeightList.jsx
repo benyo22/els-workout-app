@@ -8,6 +8,8 @@ import {
   useDeleteWeightByIdMutation,
 } from "../../../state/endpoints/weightEndpoints";
 
+import { FaPencil, FaTrashCan, FaPlus } from "react-icons/fa6";
+
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
@@ -36,7 +38,7 @@ export const WeightList = () => {
   const actionsTemplate = (rowData) => (
     <div className="flex gap-2">
       <Button
-        icon="pi pi-pencil"
+        icon={<FaPencil />}
         className="p-button-rounded"
         onClick={() => {
           setEditingEntry(rowData);
@@ -44,7 +46,7 @@ export const WeightList = () => {
         }}
       />
       <Button
-        icon="pi pi-trash"
+        icon={<FaTrashCan />}
         className="p-button-rounded p-button-danger"
         onClick={() => handleDelete(rowData.id)}
       />
@@ -56,8 +58,8 @@ export const WeightList = () => {
       <h2 className="text-2xl font-bold mb-4">Súly Napló</h2>
       <Button
         label=" Új Bejegyzés"
-        icon="pi pi-plus"
-        className="edit-button md:w-[30%] sm:w-[22%] mb-2"
+        icon={<FaPlus className="mr-1" />}
+        className="edit-button flex items-center mb-2"
         onClick={() => {
           setEditingEntry(null);
           setShowForm(true);
