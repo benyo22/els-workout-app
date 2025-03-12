@@ -19,24 +19,26 @@ export const AuthPage = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col items-center">
-      <div className="w-full bg-primary-blue py-4 px-6 flex items-center justify-between shadow-md">
-        <h2 className="text-2xl font-bold text-primary-green">ELS</h2>
+      <header className="w-full bg-primary-blue py-4 px-6 flex items-center justify-between shadow-md">
+        <h2 className="text-2xl font-bold text-primary-green">
+          Eat Lift Sleep
+        </h2>
         <NavLink to="/" className="welcome-menu-home-page-link">
           Főoldal
         </NavLink>
-      </div>
+      </header>
 
-      <div
-        className={`bg-primary-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] max-w-[768px] h-[500px] rounded-2xl flex my-10 mx-4 md:mx-6 ${
+      <main
+        className={`bg-primary-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] max-w-[768px] h-[500px] rounded-2xl flex my-10 mx-2 md:mx-6 ${
           loginActive ? "flex-col" : "flex-col-reverse"
         } md:flex-row overflow-y-auto`}
       >
         {/* Left side */}
         {/* If loginActive is true then the right side is bigger with the login form on it and the left is not, otherwise the left side is bigger with the register form on it  */}
         <div
-          className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-400 md:ease-out ${
+          className={`flex flex-col gap-y-4 items-center justify-center md:transition-all md:duration-400 md:ease-out ${
             loginActive
-              ? "md:w-[288px] md:h-[500px] md:rounded-r-[150px] bg-primary-blue w-full max-w-full h-[150px] p-4"
+              ? "md:w-[288px] md:h-[500px] md:rounded-r-[150px] bg-primary-blue w-full max-w-full h-[150px] py-2"
               : "md:w-[480px] md:h-[500px]"
           }`}
         >
@@ -63,10 +65,10 @@ export const AuthPage = () => {
 
         {/* Right side */}
         <div
-          className={`flex flex-col gap-y-8 items-center justify-center md:transition-all md:duration-400 md:ease-out ${
+          className={`flex flex-col gap-y-4 items-center justify-center md:transition-all md:duration-400 md:ease-out ${
             loginActive
               ? "md:w-[480px] md:h-[500px]"
-              : "md:w-[288px] md:h-[500px] md:rounded-l-[150px] bg-primary-blue w-full max-w-full h-[150px] p-4"
+              : "md:w-[288px] md:h-[500px] md:rounded-l-[150px] bg-primary-blue w-full max-w-full h-[150px] py-2"
           }`}
         >
           {loginActive ? (
@@ -89,7 +91,7 @@ export const AuthPage = () => {
             </>
           )}
         </div>
-      </div>
+      </main>
     </div>
   );
 };

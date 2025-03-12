@@ -12,12 +12,14 @@ export const Welcome = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="h-[100%] w-screen text-white flex flex-col items-center">
-      <div className="w-full bg-primary-blue py-4 px-6 flex items-center shadow-md">
-        <h2 className="text-2xl font-bold text-primary-green">ELS</h2>
-      </div>
+    <div className="h-screen w-screen text-primary-white flex flex-col items-center">
+      <header className="w-full bg-primary-blue py-6 px-6 flex items-center shadow-md">
+        <h2 className="text-2xl font-bold text-primary-green">
+          Eat Lift Sleep
+        </h2>
+      </header>
 
-      <div className="w-full max-w-4xl text-center py-20 px-4">
+      <main className="w-full max-w-4xl text-center py-20 px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
           Alakítsd át a fitnesz utadat az{" "}
           <span className="text-primary-green">ELS</span> segítségével
@@ -26,7 +28,7 @@ export const Welcome = () => {
           Kövesd nyomon az edzéseidet, az étkezéseidet és az alvásodat
           könnyedén, hogy gyorsabban elérd a fitnesz céljaidat!
         </p>
-        <div className="flex justify-center gap-4">
+        <nav className="flex justify-center gap-4">
           <NavLink
             to="auth"
             className="login-button"
@@ -41,10 +43,10 @@ export const Welcome = () => {
           >
             Regisztráció
           </NavLink>
-        </div>
-      </div>
+        </nav>
+      </main>
 
-      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-10">
+      <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-10">
         <FeatureCard
           icon={<FaDumbbell />}
           title="Edzések Nyomon Követése"
@@ -65,7 +67,7 @@ export const Welcome = () => {
           title="Részletes Elemzések"
           description="Vizuális statisztikák a fejlődésed követésére."
         />
-      </div>
+      </section>
     </div>
   );
 };

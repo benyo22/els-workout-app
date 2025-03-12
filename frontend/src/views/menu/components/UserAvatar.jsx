@@ -36,9 +36,7 @@ const UserAvatar = () => {
         <>
           <div className="p-1 font-bold text-xl border-b cursor-default">
             Felhasználó:{" "}
-            <span className="hover:text-primary-green !important">
-              {username}
-            </span>
+            <span className="hover:text-primary-green">{username}</span>
           </div>
         </>
       ),
@@ -63,9 +61,7 @@ const UserAvatar = () => {
         <>
           <div className="p-1 font-bold text-xl border-b cursor-default">
             Felhasználó:{" "}
-            <span className="hover:text-primary-green !important">
-              {username}
-            </span>
+            <span className="hover:text-primary-green">{username}</span>
           </div>
         </>
       ),
@@ -168,7 +164,7 @@ const UserAvatar = () => {
     <div>
       <Avatar
         icon="pi pi-user"
-        className="text-primary-white my-2 md:mr-2 p-4 text-center border-2 border-primary-white bg-primary-blue rounded-full w-14 h-14 hover:border-2 hover:border-primary-blue hover:bg-primary-white hover:text-black hover:cursor-pointer transition-all duration-400;"
+        className="text-primary-white my-2 md:mr-2 p-4 text-center border-2 border-primary-white bg-gradient-to-b from-primary-blue to-third-blue rounded-full w-14 h-14 hover:cursor-pointer transition-all duration-400 hover:scale-105 hover:shadow-lg hover:from-primary-blue hover:to-primary-green"
         shape="circle"
         size="xlarge"
         onClick={(e) => menu.current.toggle(e)}
