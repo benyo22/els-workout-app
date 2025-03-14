@@ -8,6 +8,7 @@ import { EditUserForm } from "./components/EditUserForm";
 import { selectUserId } from "../../state/slices/authSlice";
 import { useGetSleepByUserIdQuery } from "../../state/endpoints/sleepEndpoints";
 import { useGetWeightByUserIdQuery } from "../../state/endpoints/weightEndpoints";
+import { useGetWorkoutByUserIdQuery } from "../../state/endpoints/workoutEndpoints";
 
 export const Profile = () => {
   const [visible, setVisible] = useState(false);
@@ -17,15 +18,21 @@ export const Profile = () => {
     useGetSleepByUserIdQuery(userId);
   const { data: weightData, isLoading: isLoadingWeight } =
     useGetWeightByUserIdQuery(userId);
+  const { data: workoutData, isLoading: isLoadingWorkout } =
+    useGetWorkoutByUserIdQuery(userId);
 
   return (
     <div className="w-full max-w-sm md:max-w-md shadow-lg rounded-xl p-6 border border-primary-grey">
       <UserData showEditForm={() => setVisible(true)} />
       <EditUserForm visible={visible} setVisible={setVisible} />
-      {isLoadingSleep || isLoadingWeight ? (
+      {isLoadingSleep || isLoadingWeight || isLoadingWorkout ? (
         <p>Adatok betöltése</p>
       ) : (
-        <Carousel sleepData={sleepData} weightData={weightData} />
+        <Carousel
+          sleepData={sleepData}
+          weightData={weightData}
+          workoutData={workoutData}
+        />
       )}
     </div>
   );

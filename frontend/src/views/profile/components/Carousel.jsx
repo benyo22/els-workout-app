@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Slider from "react-slick";
 
-export const Carousel = ({ sleepData, weightData }) => {
+export const Carousel = ({ sleepData, weightData, workoutData }) => {
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -19,6 +19,7 @@ export const Carousel = ({ sleepData, weightData }) => {
     }, 0);
 
   const maxWeightCount = weightData.length;
+  const maxWorkoutCount = workoutData.length;
 
   return (
     <div className="mt-6">
@@ -26,7 +27,7 @@ export const Carousel = ({ sleepData, weightData }) => {
         {/* Workouts */}
         <div className="p-4 bg-primary-blue text-primary-white rounded-lg shadow-md flex flex-col items-center">
           <h3 className="text-lg font-bold">Edzés</h3>
-          <p className="text-xl font-semibold">{12}</p>
+          <p className="text-xl font-semibold">{maxWorkoutCount}</p>
           <p className="text-sm">Összes edzés Bejegyzés</p>
         </div>
 

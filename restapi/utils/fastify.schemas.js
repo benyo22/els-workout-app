@@ -82,6 +82,25 @@ const addWeightSchema = {
   },
 };
 
+const addWorkoutSchema = {
+  body: {
+    type: "object",
+    properties: {
+      name: { type: "string" },
+      date: { type: "string", format: "date-time" },
+    },
+  },
+};
+
+const closeWorkoutSchema = {
+  body: {
+    type: "object",
+    properties: {
+      isCompleted: { type: "boolean" },
+    },
+  },
+};
+
 module.exports = {
   registerSchema,
   loginSchema,
@@ -90,4 +109,6 @@ module.exports = {
   getUserSchema,
   deleteUserSchema,
   addSleepSchema,
+  addWorkoutSchema,
+  closeWorkoutSchema,
 };
