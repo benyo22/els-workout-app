@@ -46,11 +46,9 @@ module.exports = async (fastify, options) => {
     { schema: closeWorkoutSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { id } = request.params;
-      const { isCompleted } = request.body;
-
       const workoutData = await Workout.findByPk(id);
 
-      workoutData.isCompleted = isCompleted;
+      workoutData.isCompleted = true;
 
       await workoutData.save();
 

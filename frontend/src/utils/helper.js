@@ -1,3 +1,3 @@
-export const isObjectEmpty = (objectName) => {
-  return JSON.stringify(objectName) === "{}";
+export const isObjectEmpty = (obj) => {
+  return JSON.stringify(obj) === "{}";
 };

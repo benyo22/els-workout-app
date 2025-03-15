@@ -35,8 +35,8 @@ fastify.register(require("@fastify/jwt"), {
 fastify.decorate("auth", async function (request, reply) {
   try {
     await request.jwtVerify();
-  } catch (err) {
-    reply.send(err);
+  } catch (error) {
+    reply.send(error);
   }
 });
 

@@ -1,5 +1,5 @@
-const isObjectEmpty = (objectName) => {
-  return JSON.stringify(objectName) === "{}";
+const isObjectEmpty = (obj) => {
+  return JSON.stringify(obj) === "{}";
 };
 
 const validateEmail = (email) => {

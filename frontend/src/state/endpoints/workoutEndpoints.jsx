@@ -18,10 +18,9 @@ export const workoutEndpoints = elsApi.injectEndpoints({
       invalidatesTags: ["Workouts"],
     }),
     closeWorkoutById: builder.mutation({
-      query: ({ id, data }) => ({
+      query: (id) => ({
         url: `workout/${id}`,
         method: "PATCH",
-        body: data,
       }),
       invalidatesTags: ["Workouts"],
     }),

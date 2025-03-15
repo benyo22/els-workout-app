@@ -45,6 +45,7 @@ export const WorkoutList = () => {
   const handleWorkoutClose = async (rowData) => {
     // if already finished workout we dont send unneccesary requests
     if (rowData.isCompleted) return;
+    const id = rowData.id;
     confirmDialog({
       message:
         "Biztosan lezárod az edzést? Utána már nem szerkesztheted és ez nem visszafordítható!",
@@ -52,10 +53,7 @@ export const WorkoutList = () => {
       acceptLabel: "Igen",
       acceptClassName: "p-button-danger",
       rejectLabel: "Nem",
-      accept: async () => {
-        const data = { isCompleted: true };
-        await closeWorkout({ id: rowData.id, data });
-      },
+      accept: async () => await closeWorkout(id),
     });
   };
 
@@ -94,9 +92,9 @@ export const WorkoutList = () => {
 
   const isCompletedTemplate = (rowData) =>
     rowData.isCompleted ? (
-      <FaCircleCheck color="green" size={25} />
+      <FaCircleCheck color="#31dcb7" size={25} />
     ) : (
-      <FaCircleXmark color="red" size={25} />
+      <FaCircleXmark color="#fb2c36" size={25} />
     );
 
   return (

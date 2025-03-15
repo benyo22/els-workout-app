@@ -62,7 +62,8 @@ module.exports = async (fastify, options) => {
     if (!username || !password)
       errors.required = "A *-al jelölt mezők megadása kötelező";
 
-    const user = await User.findOne({ where: { username } });
+    const trimmedUsername = username.trim();
+    const user = await User.findOne({ where: { username: trimmedUsername } });
     if (!user) errors.username = "A felhasználó nem található";
 
     // return early if there are errors

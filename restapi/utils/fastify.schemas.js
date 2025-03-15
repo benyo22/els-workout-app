@@ -76,7 +76,7 @@ const addWeightSchema = {
   body: {
     type: "object",
     properties: {
-      weight: { type: "double" },
+      weight: { type: "number" },
       date: { type: "string", format: "date-time" },
     },
   },
@@ -92,15 +92,6 @@ const addWorkoutSchema = {
   },
 };
 
-const closeWorkoutSchema = {
-  body: {
-    type: "object",
-    properties: {
-      isCompleted: { type: "boolean" },
-    },
-  },
-};
-
 module.exports = {
   registerSchema,
   loginSchema,
@@ -109,6 +100,6 @@ module.exports = {
   getUserSchema,
   deleteUserSchema,
   addSleepSchema,
+  addWeightSchema,
   addWorkoutSchema,
-  closeWorkoutSchema,
 };
