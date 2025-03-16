@@ -3,33 +3,23 @@ import { elsApi } from "../elsApiSlice";
 export const authEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation({
-      query: ({ name, age, email, username, password }) => ({
+      query: (credentials) => ({
         url: "register",
         method: "POST",
-        body: {
-          name,
-          age,
-          email,
-          username,
-          password,
-        },
+        body: credentials,
       }),
     }),
     login: builder.mutation({
-      query: ({ username, password }) => ({
+      query: (credentials) => ({
         url: "login",
         method: "POST",
-        body: {
-          username,
-          password,
-        },
+        body: credentials,
       }),
     }),
     logout: builder.mutation({
       query: () => ({
         url: "logout",
         method: "POST",
-        credentials: "include",
       }),
     }),
   }),

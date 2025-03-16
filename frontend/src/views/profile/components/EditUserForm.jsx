@@ -64,7 +64,7 @@ export const EditUserForm = ({ visible, setVisible }) => {
         onHide={() => setVisible(false)}
         position="right"
         content={
-          <div className="flex flex-col bg-primary-white w-full p-6 rounded-lg shadow-lg items-center justify-center">
+          <div className="profile-edit-form">
             <h2 className="text-xl font-bold mb-5">Profil szerkesztése</h2>
             <NameInput name={name} handleInput={handleInput} />
 

@@ -22,7 +22,7 @@ export const Profile = () => {
     useGetWorkoutByUserIdQuery(userId);
 
   return (
-    <div className="w-full max-w-sm md:max-w-md shadow-lg rounded-xl p-6 border border-primary-grey">
+    <div className="profile-card">
       <UserData showEditForm={() => setVisible(true)} />
       <EditUserForm visible={visible} setVisible={setVisible} />
       {isLoadingSleep || isLoadingWeight || isLoadingWorkout ? (

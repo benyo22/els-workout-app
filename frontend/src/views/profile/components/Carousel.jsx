@@ -10,6 +10,7 @@ export const Carousel = ({ sleepData, weightData, workoutData }) => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
+    arrows: false,
   };
 
   const maxSleepHour = sleepData
@@ -41,7 +42,7 @@ export const Carousel = ({ sleepData, weightData, workoutData }) => {
         {/* Sleep */}
         <div className="p-4 bg-third-blue text-primary-white rounded-lg shadow-md flex flex-col items-center">
           <h3 className="text-lg font-bold">Alvás</h3>
-          <p className="text-xl font-semibold">{maxSleepHour} hrs</p>
+          <p className="text-xl font-semibold">{maxSleepHour} óra</p>
           <p className="text-sm">Összes alvás</p>
         </div>
 

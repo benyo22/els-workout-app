@@ -48,7 +48,7 @@ const UserAvatar = () => {
         <div className="p-1 font-bold text-xl border-b cursor-default">
           Felhasználó:{" "}
           <span
-            className="hover:text-primary-green cursor-pointer"
+            className="dropdown-menu-username"
             onClick={() => navigate("profile")}
           >
             {username}
@@ -58,7 +58,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaSignOutAlt className="mr-0.5" /> Kijelentkezés
         </div>
       ),
@@ -75,7 +75,7 @@ const UserAvatar = () => {
       label: (
         <div className="p-1 font-bold text-xl border-b cursor-default">
           Felhasználó:{" "}
-          <span className="hover:text-primary-green">{username}</span>
+          <span className="dropdown-menu-username">{username}</span>
         </div>
       ),
       command: () => {
@@ -84,7 +84,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaHome className="mr-2" /> Kezdőlap
         </div>
       ),
@@ -94,7 +94,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaTrophy className="mr-2" /> Edzés
         </div>
       ),
@@ -104,7 +104,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaAppleAlt className="mr-2" /> Étkezés
         </div>
       ),
@@ -114,7 +114,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaMoon className="mr-2" /> Alvás
         </div>
       ),
@@ -124,7 +124,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaBalanceScale className="mr-2" /> Súly
         </div>
       ),
@@ -134,7 +134,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaChartBar className="mr-2" /> Statisztika
         </div>
       ),
@@ -144,7 +144,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaUserEdit className="mr-2" /> Profil
         </div>
       ),
@@ -154,7 +154,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaCog className="mr-2" /> Beállítások
         </div>
       ),
@@ -164,7 +164,7 @@ const UserAvatar = () => {
     },
     {
       label: (
-        <div className="text-xl hover:text-primary-blue mt-2 ml-2 flex items-center">
+        <div className="dropdown-menu-link">
           <FaSignOutAlt className="mr-0.5" /> Kijelentkezés
         </div>
       ),
@@ -180,7 +180,7 @@ const UserAvatar = () => {
     <div>
       <Avatar
         icon={<FaUser size={20} />}
-        className="flex items-center justify-center text-primary-white my-2 md:mr-2 bg-gradient-to-b from-primary-blue to-third-blue rounded-full w-14 h-14 hover:cursor-pointer hover:scale-105 hover:shadow-lg hover:from-primary-blue hover:to-primary-green transition-all duration-400 "
+        className="user-avatar"
         shape="circle"
         size="xlarge"
         onClick={(e) => menu.current.toggle(e)}

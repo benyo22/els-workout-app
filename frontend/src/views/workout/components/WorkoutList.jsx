@@ -92,13 +92,16 @@ export const WorkoutList = () => {
 
   const isCompletedTemplate = (rowData) =>
     rowData.isCompleted ? (
-      <FaCircleCheck color="#31dcb7" size={25} />
+      <FaCircleCheck className="text-primary-green" size={25} />
     ) : (
-      <FaCircleXmark color="#fb2c36" size={25} />
+      <FaCircleXmark
+        className="text-secondary-red dark:text-primary-red"
+        size={25}
+      />
     );
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 bg-primary-white shadow-md rounded-lg border border-primary-grey">
+    <div className="list-container">
       <h2 className="text-2xl font-bold mb-4">Edzés Napló</h2>
       <Button
         label=" Új Edzés"

@@ -57,7 +57,7 @@ export const SleepList = () => {
   const qualityTemplate = (rowData) => sleepQualityLabels[rowData.quality];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 bg-primary-white shadow-md rounded-lg border border-primary-grey">
+    <div className="list-container">
       <h2 className="text-2xl font-bold mb-4">Alvás Napló</h2>
       <Button
         label="Új Bejegyzés"

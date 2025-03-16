@@ -14,7 +14,7 @@ export const Settings = () => {
   const [errors, setErrors] = useState({});
 
   return (
-    <div className="w-full max-w-sm md:max-w-md h-[420px] shadow-lg rounded-xl p-6 border border-primary-grey">
+    <div className="settings-container">
       <TabView>
         <TabPanel
           header="Jelszó frissítése"

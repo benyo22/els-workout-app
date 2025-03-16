@@ -1,17 +1,21 @@
 import { useEffect } from "react";
-import { MoonIcon, SunIcon } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleDarkMode } from "../../state/slices/darkModeSlice";
+
+import {
+  selectDarkMode,
+  toggleDarkMode,
+} from "../../state/slices/darkModeSlice";
+import { FaSun, FaMoon } from "react-icons/fa6";
 
 export const DarkModeToggle = () => {
   const dispatch = useDispatch();
-  const darkMode = useSelector((state) => state.darkMode.darkMode);
+  const darkMode = useSelector(selectDarkMode);
 
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     }
   }, [darkMode]);
 
@@ -21,9 +25,9 @@ export const DarkModeToggle = () => {
     <button
       onClick={() => dispatch(toggleDarkMode())}
       className="p-2 rounded-lg transition-colors duration-300 
-      bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white"
+      bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white mr-5"
     >
-      {darkMode ? <SunIcon size={20} /> : <MoonIcon size={20} />}
+      {darkMode ? <FaSun /> : <FaMoon />}
     </button>
   );
 };

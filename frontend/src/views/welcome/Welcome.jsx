@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+
 import {
   setLoginActive,
   setRegisterActive,
 } from "../../state/slices/authViewSlice";
-import { NavLink } from "react-router-dom";
+import { DarkModeToggle } from "../darkmode/DarkModeToggle";
 
 import { FeatureCard } from "./components/FeatureCard";
 import { FaDumbbell, FaUtensils, FaBed, FaChartLine } from "react-icons/fa";
@@ -13,10 +15,13 @@ export const Welcome = () => {
 
   return (
     <div className="h-screen w-screen text-primary-white flex flex-col items-center">
-      <header className="w-full bg-primary-blue py-6 px-6 flex items-center shadow-md">
-        <h2 className="text-2xl font-bold text-primary-green">
+      <header className="welcome-header">
+        <h2 className="text-2xl font-bold text-primary-green ">
           Eat Lift Sleep
         </h2>
+        <div className="ml-5">
+          <DarkModeToggle />
+        </div>
       </header>
 
       <main className="w-full max-w-4xl text-center py-20 px-4">

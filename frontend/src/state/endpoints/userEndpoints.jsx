@@ -3,7 +3,7 @@ import { elsApi } from "../elsApiSlice";
 export const userEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
     getUserByUsername: builder.query({
-      query: ({ id }) => ({
+      query: (id) => ({
         url: `user/${id}`,
       }),
       providesTags: ["Users"],
