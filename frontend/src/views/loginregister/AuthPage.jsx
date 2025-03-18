@@ -24,9 +24,11 @@ export const AuthPage = () => {
   return (
     <div className="h-screen w-screen flex flex-col items-center">
       <header className="auth-page-header">
-        <h2 className="auth-page-header-h2">Eat Lift Sleep</h2>
-        <div className="ml-5">
-          <DarkModeToggle />
+        <div className="flex">
+          <h2 className="auth-page-header-h2">Eat Lift Sleep</h2>
+          <div className="ml-5">
+            <DarkModeToggle />
+          </div>
         </div>
         <NavLink to="/" className="welcome-menu-home-page-link">
           Főoldal
