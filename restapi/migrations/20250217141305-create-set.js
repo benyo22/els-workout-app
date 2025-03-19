@@ -9,10 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      workoutExerciseId: {
+      userId: {
         allowNull: false,
         references: {
-          model: "workoutExercises",
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
+        type: Sequelize.INTEGER,
+      },
+      exerciseId: {
+        allowNull: false,
+        references: {
+          model: "exercises",
           key: "id",
         },
         onUpdate: "cascade",
@@ -24,16 +34,18 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       reps: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      duration: {
         type: Sequelize.INTEGER,
       },
       weight: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      dropSet: {
+      type: {
         allowNull: false,
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.ENUM("warm-up", "dropset", "failure"),
       },
       createdAt: {
         allowNull: false,

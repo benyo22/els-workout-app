@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         through: "workoutExercises",
         foreignKey: "exerciseId",
       });
-      this.hasMany(models.WorkoutExercise, { foreignKey: "exerciseId" });
+      this.hasMany(models.Set, { foreignKey: "exerciseId" });
     }
   }
   Exercise.init(
@@ -16,17 +16,30 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      type: {
+      bodyPart: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(
+          "core",
+          "arms",
+          "back",
+          "chest",
+          "legs",
+          "shoulders",
+          "other",
+          "full body,",
+          "cardio"
+        ),
       },
-      muscle: {
+      category: {
         allowNull: false,
-        type: DataTypes.STRING,
-      },
-      equipment: {
-        allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(
+          "barbell",
+          "dumbell",
+          "machine/other",
+          "bodyweight",
+          "cardio",
+          "duration"
+        ),
       },
     },
     {

@@ -37,7 +37,7 @@ export const WorkoutList = () => {
       acceptLabel: "Igen",
       acceptClassName: "p-button-danger",
       rejectLabel: "Nem",
-      accept: async () => await deleteWorkout(id),
+      accept: async () => await deleteWorkout({ workoutId: id }),
     });
   };
 
@@ -45,7 +45,7 @@ export const WorkoutList = () => {
   const handleWorkoutClose = async (rowData) => {
     // if already finished workout we dont send unneccesary requests
     if (rowData.isCompleted) return;
-    const id = rowData.id;
+    const workoutId = rowData.id;
     confirmDialog({
       message:
         "Biztosan lezárod az edzést? Utána már nem szerkesztheted és ez nem visszafordítható!",
@@ -53,7 +53,7 @@ export const WorkoutList = () => {
       acceptLabel: "Igen",
       acceptClassName: "p-button-danger",
       rejectLabel: "Nem",
-      accept: async () => await closeWorkout(id),
+      accept: async () => await closeWorkout(workoutId),
     });
   };
 

@@ -18,7 +18,15 @@ const baseQueryWithAuth = async (args, api, extraOptions) => {
 
 export const elsApi = createApi({
   reducerPath: "elsApi",
-  tagTypes: ["Users", "Workouts", "Sleep", "Weights", "Meals"],
+  tagTypes: [
+    "Users",
+    "Workouts",
+    "Exercises",
+    "Sets",
+    "Sleep",
+    "Weights",
+    "Meals",
+  ],
   baseQuery: baseQueryWithAuth,
   endpoints: () => ({}),
 });

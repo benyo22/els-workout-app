@@ -61,7 +61,7 @@ const deleteUserSchema = {
   },
 };
 
-const addSleepSchema = {
+const createSleepSchema = {
   body: {
     type: "object",
     properties: {
@@ -72,7 +72,7 @@ const addSleepSchema = {
   },
 };
 
-const addWeightSchema = {
+const createWeightSchema = {
   body: {
     type: "object",
     properties: {
@@ -82,12 +82,36 @@ const addWeightSchema = {
   },
 };
 
-const addWorkoutSchema = {
+const createWorkoutSchema = {
   body: {
     type: "object",
     properties: {
       name: { type: "string" },
       date: { type: "string", format: "date-time" },
+    },
+  },
+};
+
+const createExerciseSchema = {
+  body: {
+    type: "object",
+    properties: {
+      name: { type: "string" },
+      bodyPart: { type: "string" },
+      category: { type: "string" },
+    },
+  },
+};
+
+const createSetSchema = {
+  body: {
+    type: "object",
+    properties: {
+      setNumber: { type: "integer" },
+      reps: { type: "integer" },
+      duration: { type: "integer" },
+      weight: { type: "integer" },
+      type: { type: "string" },
     },
   },
 };
@@ -99,7 +123,9 @@ module.exports = {
   updatePasswordSchema,
   getUserSchema,
   deleteUserSchema,
-  addSleepSchema,
-  addWeightSchema,
-  addWorkoutSchema,
+  createSleepSchema,
+  createWeightSchema,
+  createWorkoutSchema,
+  createExerciseSchema,
+  createSetSchema,
 };

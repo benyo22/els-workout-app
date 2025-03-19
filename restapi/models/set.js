@@ -3,17 +3,30 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Set extends Model {
     static associate(models) {
-      this.belongsTo(models.WorkoutExercise, {
-        foreignKey: "workoutExerciseId",
+      this.belongsTo(models.User, {
+        foreignKey: "userId",
+      });
+      this.belongsTo(models.Exercise, {
+        foreignKey: "exerciseId",
       });
     }
   }
   Set.init(
     {
-      workoutExerciseId: {
+      userId: {
         allowNull: false,
         references: {
-          model: "workoutExercises",
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
+        type: DataTypes.INTEGER,
+      },
+      exerciseId: {
+        allowNull: false,
+        references: {
+          model: "exercises",
           key: "id",
         },
         onUpdate: "cascade",
@@ -25,16 +38,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       reps: {
-        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      duration: {
         type: DataTypes.INTEGER,
       },
       weight: {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      dropSet: {
+      type: {
         allowNull: false,
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.ENUM("warm-up", "dropset", "failure"),
       },
     },
     {

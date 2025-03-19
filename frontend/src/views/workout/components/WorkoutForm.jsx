@@ -25,7 +25,7 @@ export const WorkoutForm = ({ onClose, userId }) => {
       return;
     }
 
-    await createWorkout({ id: userId, data: formData });
+    await createWorkout({ userId, data: formData });
     onClose();
   };
 

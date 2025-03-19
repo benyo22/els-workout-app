@@ -13,17 +13,30 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      type: {
+      bodyPart: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM(
+          "core",
+          "arms",
+          "back",
+          "chest",
+          "legs",
+          "shoulders",
+          "other",
+          "full body,",
+          "cardio"
+        ),
       },
-      muscle: {
+      category: {
         allowNull: false,
-        type: Sequelize.STRING,
-      },
-      equipment: {
-        allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM(
+          "barbell",
+          "dumbell",
+          "machine/other",
+          "bodyweight",
+          "cardio",
+          "duration"
+        ),
       },
       createdAt: {
         allowNull: false,

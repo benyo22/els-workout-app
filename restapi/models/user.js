@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Weight, { foreignKey: "userId" });
       this.hasMany(models.Sleep, { foreignKey: "userId" });
       this.hasMany(models.Meal, { foreignKey: "userId" });
+      this.hasMany(models.Set, { foreignKey: "userId" });
     }
   }
   User.init(

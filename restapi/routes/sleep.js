@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
-const { User, Sleep } = require("../models");
+const { Sleep } = require("../models");
 const { where } = require("sequelize");
-const { addSleepSchema } = require("../utils/fastify.schemas");
+const { createSleepSchema } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
   //get all sleep data
@@ -19,7 +19,7 @@ module.exports = async (fastify, options) => {
   // add sleep data
   fastify.post(
     "/sleep/:id",
-    { schema: addSleepSchema, onRequest: [fastify.auth] },
+    { schema: createSleepSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { id: userId } = request.params;
       const { date, durationHour, quality } = request.body;
@@ -40,17 +40,13 @@ module.exports = async (fastify, options) => {
   // edit sleep data
   fastify.patch(
     "/sleep/:id",
-    { schema: addSleepSchema, onRequest: [fastify.auth] },
+    { schema: createSleepSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { id } = request.params;
       const { date, durationHour, quality } = request.body;
 
       const sleep = await Sleep.findByPk(id);
-      sleep.date = date;
-      sleep.durationHour = durationHour;
-      sleep.quality = quality;
-
-      await sleep.save();
+      await sleep.update({ date, durationHour, quality });
 
       return reply.send({ message: "Sleep updated!" });
     }

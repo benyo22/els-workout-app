@@ -2,17 +2,17 @@ const { StatusCodes } = require("http-status-codes");
 const { User, Workout } = require("../models");
 const { where } = require("sequelize");
 const {
-  addWorkoutSchema,
+  createWorkoutSchema,
   closeWorkoutSchema,
 } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
   //get all workout data
   fastify.get(
-    "/workout/:id",
+    "/workout/:userId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id: userId } = request.params;
+      const { userId } = request.params;
       const workoutData = await Workout.findAll({ where: { userId } });
 
       reply.send(workoutData);
@@ -21,16 +21,16 @@ module.exports = async (fastify, options) => {
 
   // add workout
   fastify.post(
-    "/workout/:id",
-    { schema: addWorkoutSchema, onRequest: [fastify.auth] },
+    "/workout/:userId",
+    { schema: createWorkoutSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id: userId } = request.params;
+      const { userId } = request.params;
       const { name, date } = request.body;
 
       await Workout.create({
         userId,
         name,
-        date,
+        date: new Date(date),
         isCompleted: false,
       });
 
@@ -42,11 +42,11 @@ module.exports = async (fastify, options) => {
 
   // close workout
   fastify.patch(
-    "/workout/:id",
+    "/workout/:workoutId",
     { schema: closeWorkoutSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id } = request.params;
-      const workoutData = await Workout.findByPk(id);
+      const { workoutId } = request.params;
+      const workoutData = await Workout.findByPk(workoutId);
 
       workoutData.isCompleted = true;
 
@@ -58,10 +58,10 @@ module.exports = async (fastify, options) => {
 
   //delete workout
   fastify.delete(
-    "/workout/:id",
+    "/workout/:workoutId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id } = request.params;
+      const { workoutId: id } = request.params;
       await Workout.destroy({ where: { id } });
 
       reply.send({

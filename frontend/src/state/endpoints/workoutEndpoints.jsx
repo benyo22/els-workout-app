@@ -3,30 +3,30 @@ import { elsApi } from "../elsApiSlice";
 export const workoutEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
     getWorkoutByUserId: builder.query({
-      query: (id) => ({
-        url: `workout/${id}`,
+      query: (userId) => ({
+        url: `workout/${userId}`,
       }),
       providesTags: ["Workouts"],
       transformResponse: (response) => response,
     }),
     createWorkoutWithUserId: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `workout/${id}`,
+      query: ({ userId, data }) => ({
+        url: `workout/${userId}`,
         method: "POST",
         body: data,
       }),
       invalidatesTags: ["Workouts"],
     }),
     closeWorkoutById: builder.mutation({
-      query: (id) => ({
-        url: `workout/${id}`,
+      query: (workoutId) => ({
+        url: `workout/${workoutId}`,
         method: "PATCH",
       }),
       invalidatesTags: ["Workouts"],
     }),
     deleteWorkoutById: builder.mutation({
-      query: (id) => ({
-        url: `workout/${id}`,
+      query: ({ workoutId }) => ({
+        url: `workout/${workoutId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Workouts"],

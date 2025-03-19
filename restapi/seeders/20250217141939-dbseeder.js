@@ -59,99 +59,82 @@ module.exports = {
 
     console.log(chalk.yellow("✅ Workouts seeded!"));
 
-    // Create WorkoutExercises (Many-to-Many)
-    const workoutExercises = [];
-    for (const workout of workouts) {
-      const selectedExercises = faker.helpers.arrayElements(exercises, 2); // Pick 2 random exercises per workout
+    // // Create Sets
+    // for (const workoutExercise of workoutExercises) {
+    //   const setCount = faker.number.int({ min: 2, max: 5 });
 
-      for (const exercise of selectedExercises) {
-        const workoutExercise = await WorkoutExercise.create({
-          workoutId: workout.id,
-          exerciseId: exercise.id,
-        });
+    //   for (let i = 0; i < setCount; i++) {
+    //     const set = await Set.create({
+    //       workoutExerciseId: workoutExercise.id,
+    //       setNumber: i + 1,
+    //       reps: faker.number.int({ min: 8, max: 15 }),
+    //       weight: faker.number.int({ min: 20, max: 100 }),
+    //       dropSet: faker.datatype.boolean(),
+    //     });
 
-        workoutExercises.push(workoutExercise);
-      }
-    }
+    //     // await workoutExercise.addSet(set);
+    //   }
+    // }
 
-    console.log(chalk.red("✅ WorkoutExercises seeded!"));
+    // console.log(chalk.cyan("✅ Sets seeded!"));
 
-    // Create Sets
-    for (const workoutExercise of workoutExercises) {
-      const setCount = faker.number.int({ min: 2, max: 5 });
+    // //Create meals
+    // const meals = [];
+    // for (const user of users) {
+    //   const mealCount = faker.number.int({ min: 1, max: 2 });
 
-      for (let i = 0; i < setCount; i++) {
-        const set = await Set.create({
-          workoutExerciseId: workoutExercise.id,
-          setNumber: i + 1,
-          reps: faker.number.int({ min: 8, max: 15 }),
-          weight: faker.number.int({ min: 20, max: 100 }),
-          dropSet: faker.datatype.boolean(),
-        });
+    //   for (let i = 0; i < mealCount; i++) {
+    //     const meal = await Meal.create({
+    //       userId: user.id,
+    //       name: `Meal ${i + 1}`,
+    //       type: faker.helpers.arrayElement([
+    //         "breakfast",
+    //         "lunch",
+    //         "dinner",
+    //         "snack",
+    //       ]),
+    //       date: faker.date.recent(),
+    //       totalCalories: faker.number.int({ min: 10, max: 100 }),
+    //       protein: faker.number.int({ min: 10, max: 100 }),
+    //       carbs: faker.number.int({ min: 10, max: 100 }),
+    //       fats: faker.number.int({ min: 10, max: 100 }),
+    //     });
 
-        // await workoutExercise.addSet(set);
-      }
-    }
+    //     meals.push(meal);
+    //   }
+    // }
 
-    console.log(chalk.cyan("✅ Sets seeded!"));
+    // console.log(chalk.black("✅ Meals seeded!"));
 
-    //Create meals
-    const meals = [];
-    for (const user of users) {
-      const mealCount = faker.number.int({ min: 1, max: 2 });
+    // //Create food
+    // const food = await Food.bulkCreate(
+    //   Array.from({ length: 5 }, (_, i) => ({
+    //     name: `Food ${i + 1}`,
+    //     caloriesPer100g: faker.number.int({ min: 10, max: 100 }),
+    //     proteinPer100g: faker.number.int({ min: 10, max: 100 }),
+    //     carbsPer100g: faker.number.int({ min: 10, max: 100 }),
+    //     fatsPer100g: faker.number.int({ min: 10, max: 100 }),
+    //   }))
+    // );
 
-      for (let i = 0; i < mealCount; i++) {
-        const meal = await Meal.create({
-          userId: user.id,
-          name: `Meal ${i + 1}`,
-          type: faker.helpers.arrayElement([
-            "breakfast",
-            "lunch",
-            "dinner",
-            "snack",
-          ]),
-          date: faker.date.recent(),
-          totalCalories: faker.number.int({ min: 10, max: 100 }),
-          protein: faker.number.int({ min: 10, max: 100 }),
-          carbs: faker.number.int({ min: 10, max: 100 }),
-          fats: faker.number.int({ min: 10, max: 100 }),
-        });
+    // console.log(chalk.blue("✅ Food seeded!"));
 
-        meals.push(meal);
-      }
-    }
+    // const mealFood = [];
+    // for (const meal of meals) {
+    //   const selectedFood = faker.helpers.arrayElements(food, 2);
 
-    console.log(chalk.black("✅ Meals seeded!"));
+    //   for (const food of selectedFood) {
+    //     const mf = await MealFood.create({
+    //       mealId: meal.id,
+    //       foodId: food.id,
+    //       quantityInGrams: faker.number.int({ min: 5, max: 10 }),
+    //     });
 
-    //Create food
-    const food = await Food.bulkCreate(
-      Array.from({ length: 5 }, (_, i) => ({
-        name: `Food ${i + 1}`,
-        caloriesPer100g: faker.number.int({ min: 10, max: 100 }),
-        proteinPer100g: faker.number.int({ min: 10, max: 100 }),
-        carbsPer100g: faker.number.int({ min: 10, max: 100 }),
-        fatsPer100g: faker.number.int({ min: 10, max: 100 }),
-      }))
-    );
+    //     mealFood.push(mf);
+    //   }
+    // }
 
-    console.log(chalk.blue("✅ Food seeded!"));
-
-    const mealFood = [];
-    for (const meal of meals) {
-      const selectedFood = faker.helpers.arrayElements(food, 2);
-
-      for (const food of selectedFood) {
-        const mf = await MealFood.create({
-          mealId: meal.id,
-          foodId: food.id,
-          quantityInGrams: faker.number.int({ min: 5, max: 10 }),
-        });
-
-        mealFood.push(mf);
-      }
-    }
-
-    console.log(chalk.green("✅ MealFood seeded!"));
+    // console.log(chalk.green("✅ MealFood seeded!"));
   },
 
   async down(queryInterface, Sequelize) {
