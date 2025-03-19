@@ -42,7 +42,7 @@ module.exports = async (fastify, options) => {
 
   // close workout
   fastify.patch(
-    "/workout/:workoutId",
+    "/workout-close/:workoutId",
     { schema: closeWorkoutSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { workoutId } = request.params;
@@ -53,6 +53,24 @@ module.exports = async (fastify, options) => {
       await workoutData.save();
 
       return reply.send({ message: "Workout closed!" });
+    }
+  );
+
+  // edit workout
+  fastify.patch(
+    "/workout-edit/:workoutId",
+    { schema: createWorkoutSchema, onRequest: [fastify.auth] },
+    async (request, reply) => {
+      const { workoutId } = request.params;
+      const { name, date } = request.body;
+      const workoutData = await Workout.findByPk(workoutId);
+
+      await workoutData.update({
+        name,
+        date: new Date(date),
+      });
+
+      return reply.send({ message: "Workout updated!" });
     }
   );
 

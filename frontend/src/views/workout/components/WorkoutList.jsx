@@ -22,12 +22,14 @@ import {
   useGetWorkoutByUserIdQuery,
 } from "../../../state/endpoints/workoutEndpoints";
 import { selectUserId } from "../../../state/slices/authSlice";
+import { Exercises } from "./Exercises";
 
 export const WorkoutList = () => {
   const userId = useSelector(selectUserId);
   const { data: workoutData, isLoading } = useGetWorkoutByUserIdQuery(userId);
 
   const [showForm, setShowForm] = useState(false);
+  const [selectedWorkout, setSelectedWorkout] = useState(null);
 
   const [deleteWorkout] = useDeleteWorkoutByIdMutation();
   const handleDelete = (id) => {
@@ -100,6 +102,11 @@ export const WorkoutList = () => {
       />
     );
 
+  const [visibleWorkout, setVisibleWorkout] = useState(false);
+  const onRowSelect = (event) => {
+    if (!event.data.isCompleted) setVisibleWorkout(true);
+  };
+
   return (
     <div className="list-container">
       <h2 className="text-2xl font-bold mb-4">Edzés Napló</h2>
@@ -124,6 +131,12 @@ export const WorkoutList = () => {
           scrollable
           scrollHeight="400px"
           removableSort
+          selectionMode="single"
+          selection={selectedWorkout}
+          onSelectionChange={(e) => setSelectedWorkout(e.value)}
+          dataKey="id"
+          onRowSelect={onRowSelect}
+          metaKeySelection={false}
         >
           <Column field="name" header="Név" sortable />
           <Column field="date" header="Dátum" sortable />
@@ -135,6 +148,13 @@ export const WorkoutList = () => {
       {showForm && (
         <WorkoutForm onClose={() => setShowForm(false)} userId={userId} />
       )}
+
+      <Exercises
+        visible={visibleWorkout}
+        setVisible={setVisibleWorkout}
+        selectedWorkout={selectedWorkout}
+        handleWorkoutDelete={handleDelete}
+      />
 
       <ConfirmDialog />
     </div>
