@@ -19,12 +19,10 @@ export const DarkModeToggle = () => {
     }
   }, [darkMode]);
 
-  console.log(darkMode);
-
   return (
     <button
       onClick={() => dispatch(toggleDarkMode())}
-      className="p-2 rounded-lg transition-colors duration-300 
+      className="p-2 rounded-lg transition-colors duration-300
       bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white mr-5"
     >
       {darkMode ? (

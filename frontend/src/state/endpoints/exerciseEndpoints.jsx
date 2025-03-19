@@ -18,7 +18,7 @@ export const exerciseEndpoints = elsApi.injectEndpoints({
     }),
     getExcercisesInWorkout: builder.query({
       query: (workoutId) => ({
-        url: `exercises/${workoutId}`,
+        url: `workout-exercises/${workoutId}`,
       }),
       providesTags: ["Exercises"],
       transformResponse: (response) => response,

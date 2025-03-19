@@ -104,12 +104,13 @@ export const WorkoutList = () => {
     <div className="list-container">
       <h2 className="text-2xl font-bold mb-4">Edzés Napló</h2>
       <Button
-        label=" Új Edzés"
+        label="Edzés elkezdése"
         icon={<FaPlus className="mr-1" />}
         className="edit-button flex items-center mb-2"
         onClick={() => {
           setShowForm(true);
         }}
+        disabled={workoutData?.some((w) => !w.isCompleted)}
         unstyled
       />
 

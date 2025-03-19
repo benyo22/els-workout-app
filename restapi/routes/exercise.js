@@ -28,7 +28,7 @@ module.exports = async (fastify, options) => {
 
   // get all exercise in a workout by workoutId
   fastify.get(
-    "/exercises/:workoutId",
+    "/workout-exercises/:workoutId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
       const { workoutId } = request.params;
