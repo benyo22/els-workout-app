@@ -6,16 +6,14 @@ import {
   useGetSleepByUserIdQuery,
   useDeleteSleepByIdMutation,
 } from "../../../state/endpoints/sleepEndpoints";
-
 import { sleepQualityLabels } from "../../../utils/data";
-
-import { FaPencil, FaTrashCan, FaPlus } from "react-icons/fa6";
+import { selectUserId } from "../../../state/slices/authSlice";
 
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
+import { FaPencil, FaTrashCan, FaPlus } from "react-icons/fa6";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { selectUserId } from "../../../state/slices/authSlice";
 
 export const SleepList = () => {
   const userId = useSelector(selectUserId);

@@ -30,7 +30,6 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       setNumber: {
-        allowNull: false,
         type: Sequelize.INTEGER,
       },
       reps: {
@@ -44,8 +43,10 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       type: {
-        allowNull: false,
         type: Sequelize.ENUM("warm-up", "dropset", "failure"),
+      },
+      distance: {
+        type: Sequelize.DOUBLE,
       },
       createdAt: {
         allowNull: false,

@@ -10,8 +10,8 @@ import { Form } from "./Form";
 
 export const SleepForm = ({ entry, onClose, userId }) => {
   const [error, setError] = useState(null);
-  const [createSleep] = useCreateSleepWithUserIdMutation();
   const [updateSleep] = useUpdateSleepByIdMutation();
+  const [createSleep] = useCreateSleepWithUserIdMutation();
   const [formData, setFormData] = useState({
     date: "",
     durationHour: "",
@@ -43,7 +43,7 @@ export const SleepForm = ({ entry, onClose, userId }) => {
     if (entry) {
       await updateSleep({ id: entry.id, data: formData });
     } else {
-      await createSleep({ id: userId, data: formData });
+      await createSleep({ userId, data: formData });
     }
     onClose();
   };

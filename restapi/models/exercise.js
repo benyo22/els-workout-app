@@ -26,8 +26,7 @@ module.exports = (sequelize, DataTypes) => {
           "legs",
           "shoulders",
           "other",
-          "full body,",
-          "cardio"
+          "full body"
         ),
       },
       category: {
@@ -38,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
           "machine/other",
           "bodyweight",
           "cardio",
-          "duration"
+          "duration",
+          "distance"
         ),
       },
     },

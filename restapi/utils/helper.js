@@ -16,8 +16,7 @@ const bodyParts = [
   "legs",
   "shoulders",
   "other",
-  "full body,",
-  "cardio",
+  "full body",
 ];
 const categories = [
   "barbell",
@@ -26,6 +25,7 @@ const categories = [
   "bodyweight",
   "cardio",
   "duration",
+  "distance",
 ];
 
 const setTypes = ["warm-up", "dropset", "failure"];

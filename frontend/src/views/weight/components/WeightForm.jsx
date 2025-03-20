@@ -10,8 +10,8 @@ import { Form } from "./Form";
 
 export const WeightForm = ({ entry, onClose, userId }) => {
   const [error, setError] = useState(null);
-  const [createWeight] = useCreateWeightWithUserIdMutation();
   const [updateWeight] = useUpdateWeightByIdMutation();
+  const [createWeight] = useCreateWeightWithUserIdMutation();
   const [formData, setFormData] = useState({
     weight: "",
     date: "",
@@ -41,7 +41,7 @@ export const WeightForm = ({ entry, onClose, userId }) => {
     if (entry) {
       await updateWeight({ id: entry.id, data: formData });
     } else {
-      await createWeight({ id: userId, data: formData });
+      await createWeight({ userId, data: formData });
     }
     onClose();
   };

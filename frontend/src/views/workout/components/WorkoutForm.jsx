@@ -19,7 +19,12 @@ export const WorkoutForm = ({ onClose, userId }) => {
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "name") {
+      if (value.length <= 30) setFormData({ ...formData, [name]: value });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async () => {
@@ -27,6 +32,10 @@ export const WorkoutForm = ({ onClose, userId }) => {
     if (!formData.name || !formData.date) {
       setError("Minden mezőt ki kell tölteni!");
       return;
+    }
+
+    if (formData.name.length > 30) {
+      setError("Az edzés neve maximum 30 ");
     }
 
     await createWorkout({ userId, data: formData });

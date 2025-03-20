@@ -16,132 +16,56 @@ const chalk = require("chalk");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // Create Users
-    const users = await User.bulkCreate(
-      Array.from({ length: 4 }, () => ({
-        name: faker.person.fullName(),
-        email: faker.internet.email(),
-        age: 12,
-        username: faker.internet.username(),
-        password: faker.internet.password(),
-      }))
-    );
+    const exercises = [
+      { name: "Fekvenyomás", bodyPart: "chest", category: "barbell" },
+      { name: "Guggolás", bodyPart: "legs", category: "barbell" },
+      { name: "Felhúzás", bodyPart: "back", category: "barbell" },
+      { name: "Vállból nyomás", bodyPart: "shoulders", category: "barbell" },
+      { name: "Evezés", bodyPart: "back", category: "barbell" },
+      { name: "Bicepsz", bodyPart: "arms", category: "dumbell" },
+      { name: "Tricepsz letolás", bodyPart: "arms", category: "dumbell" },
+      { name: "Oldalemelés", bodyPart: "shoulders", category: "dumbell" },
+      { name: "Dumbbell fekvenyomás", bodyPart: "chest", category: "dumbell" },
+      { name: "Dumbbell felhúzás", bodyPart: "back", category: "dumbell" },
+      { name: "Húzódzkodás", bodyPart: "back", category: "bodyweight" },
+      { name: "Fekvőtámasz", bodyPart: "chest", category: "bodyweight" },
+      { name: "Plank", bodyPart: "core", category: "duration" },
+      { name: "Felülés", bodyPart: "core", category: "bodyweight" },
+      { name: "Kitörés", bodyPart: "legs", category: "bodyweight" },
+      { name: "Burpee", bodyPart: "full body", category: "bodyweight" },
+      { name: "Box ugrás", bodyPart: "legs", category: "bodyweight" },
+      { name: "Doboz ugrás", bodyPart: "legs", category: "bodyweight" },
+      { name: "Ugrókötél", bodyPart: "legs", category: "duration" },
+      { name: "Futás", bodyPart: "legs", category: "distance" },
+      { name: "Kerékpározás", bodyPart: "legs", category: "cardio" },
+      { name: "Evezőgép", bodyPart: "full body", category: "distance" },
+      { name: "Úszás", bodyPart: "full body", category: "distance" },
+      { name: "Elliptikus tréner", bodyPart: "other", category: "duration" },
+      { name: "Séta", bodyPart: "legs", category: "duration" },
+      { name: "Lépcső gép", bodyPart: "legs", category: "duration" },
+      { name: "Russian Twist", bodyPart: "core", category: "bodyweight" },
+      { name: "Lógó lábemelés", bodyPart: "core", category: "bodyweight" },
+      { name: "Tolódzkodás", bodyPart: "chest", category: "bodyweight" },
+      { name: "Farmer séta", bodyPart: "full body", category: "dumbell" },
+      { name: "Szán tolás", bodyPart: "full body", category: "machine/other" },
+      { name: "Kötélcsapkodás", bodyPart: "full body", category: "cardio" },
+      { name: "Oldalsó plank", bodyPart: "core", category: "duration" },
+      {
+        name: "Kábeles tárogatás",
+        bodyPart: "chest",
+        category: "machine/other",
+      },
+      { name: "Face pulls", bodyPart: "shoulders", category: "machine/other" },
+      { name: "Lábemelés", bodyPart: "core", category: "bodyweight" },
+      { name: "Kalapács bicepsz", bodyPart: "arms", category: "dumbell" },
+    ];
 
-    console.log(chalk.green("✅ Users seeded!"));
+    await Exercise.bulkCreate(exercises);
 
-    // Create Exercises
-    const exercises = await Exercise.bulkCreate(
-      Array.from({ length: 5 }, (_, i) => ({
-        name: `Exercise ${i + 1}`,
-        type: faker.lorem.word(),
-        muscle: faker.lorem.word(),
-        equipment: faker.lorem.word(),
-      }))
-    );
-
-    console.log(chalk.blue("✅ Exercises seeded!"));
-
-    // Create Workouts
-    const workouts = [];
-    for (const user of users) {
-      const workoutCount = faker.number.int({ min: 1, max: 2 });
-
-      for (let i = 0; i < workoutCount; i++) {
-        const workout = await Workout.create({
-          userId: user.id,
-          name: `Workout ${i + 1}`,
-          date: faker.date.recent(),
-        });
-
-        workouts.push(workout);
-      }
-    }
-
-    console.log(chalk.yellow("✅ Workouts seeded!"));
-
-    // // Create Sets
-    // for (const workoutExercise of workoutExercises) {
-    //   const setCount = faker.number.int({ min: 2, max: 5 });
-
-    //   for (let i = 0; i < setCount; i++) {
-    //     const set = await Set.create({
-    //       workoutExerciseId: workoutExercise.id,
-    //       setNumber: i + 1,
-    //       reps: faker.number.int({ min: 8, max: 15 }),
-    //       weight: faker.number.int({ min: 20, max: 100 }),
-    //       dropSet: faker.datatype.boolean(),
-    //     });
-
-    //     // await workoutExercise.addSet(set);
-    //   }
-    // }
-
-    // console.log(chalk.cyan("✅ Sets seeded!"));
-
-    // //Create meals
-    // const meals = [];
-    // for (const user of users) {
-    //   const mealCount = faker.number.int({ min: 1, max: 2 });
-
-    //   for (let i = 0; i < mealCount; i++) {
-    //     const meal = await Meal.create({
-    //       userId: user.id,
-    //       name: `Meal ${i + 1}`,
-    //       type: faker.helpers.arrayElement([
-    //         "breakfast",
-    //         "lunch",
-    //         "dinner",
-    //         "snack",
-    //       ]),
-    //       date: faker.date.recent(),
-    //       totalCalories: faker.number.int({ min: 10, max: 100 }),
-    //       protein: faker.number.int({ min: 10, max: 100 }),
-    //       carbs: faker.number.int({ min: 10, max: 100 }),
-    //       fats: faker.number.int({ min: 10, max: 100 }),
-    //     });
-
-    //     meals.push(meal);
-    //   }
-    // }
-
-    // console.log(chalk.black("✅ Meals seeded!"));
-
-    // //Create food
-    // const food = await Food.bulkCreate(
-    //   Array.from({ length: 5 }, (_, i) => ({
-    //     name: `Food ${i + 1}`,
-    //     caloriesPer100g: faker.number.int({ min: 10, max: 100 }),
-    //     proteinPer100g: faker.number.int({ min: 10, max: 100 }),
-    //     carbsPer100g: faker.number.int({ min: 10, max: 100 }),
-    //     fatsPer100g: faker.number.int({ min: 10, max: 100 }),
-    //   }))
-    // );
-
-    // console.log(chalk.blue("✅ Food seeded!"));
-
-    // const mealFood = [];
-    // for (const meal of meals) {
-    //   const selectedFood = faker.helpers.arrayElements(food, 2);
-
-    //   for (const food of selectedFood) {
-    //     const mf = await MealFood.create({
-    //       mealId: meal.id,
-    //       foodId: food.id,
-    //       quantityInGrams: faker.number.int({ min: 5, max: 10 }),
-    //     });
-
-    //     mealFood.push(mf);
-    //   }
-    // }
-
-    // console.log(chalk.green("✅ MealFood seeded!"));
+    console.log(chalk.green("Exercises created!"));
   },
-
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete("Sets", null, {});
-    await queryInterface.bulkDelete("WorkoutExercises", null, {});
-    await queryInterface.bulkDelete("Workouts", null, {});
     await queryInterface.bulkDelete("Exercises", null, {});
-    await queryInterface.bulkDelete("Users", null, {});
   },
 };

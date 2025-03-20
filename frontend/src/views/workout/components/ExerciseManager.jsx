@@ -6,11 +6,14 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 
-export const Exercises = ({
+import { useAddExerciseToWorkoutMutation } from "../../../state/endpoints/exerciseEndpoints";
+
+export const ExerciseManager = ({
   visible,
   setVisible,
   selectedWorkout,
-  handleWorkoutDelete,
+  deleteWorkout,
+  finishWorkout,
 }) => {
   // const weekday = [
   //   "Vasárnap",
@@ -21,6 +24,7 @@ export const Exercises = ({
   //   "Péntek",
   //   "Szombat",
   // ];
+  const [addExercise] = useAddExerciseToWorkoutMutation();
 
   return (
     <Dialog
@@ -34,9 +38,20 @@ export const Exercises = ({
       }}
     >
       <div className="flex flex-col">
-        <p className="font-extrabold">{selectedWorkout?.date}</p>
+        <div className="flex justify-between">
+          <span className="font-extrabold">{selectedWorkout?.date}</span>
+          {!selectedWorkout?.isCompleted && (
+            <Button
+              label="Befejez"
+              className="bg-primary-green rounded-lg text-primary-white py-1 px-3 hover:bg-secondary-green hover:scale-101 hover:cursor-pointer dark:bg-dark-primary-green dark:hover:bg-dark-secondary-green transition-all duration-300 ease-out"
+              onClick={() => {
+                finishWorkout(selectedWorkout, () => setVisible(false));
+              }}
+              unstyled
+            />
+          )}
+        </div>
 
-        <h3>Exercises</h3>
         {selectedWorkout?.exercises?.map((exercise, index) => (
           <div key={index} className="mb-4">
             <h4 className="text-blue-500">{exercise.name}</h4>
@@ -65,18 +80,25 @@ export const Exercises = ({
           </div>
         ))}
 
-        <Button
-          label="Gyakorlat hozzáadása"
-          className="bg-primary-blue text-primary-white rounded-lg mt-4 py-2 hover:bg-secondary-blue hover:scale-101 hover:cursor-pointer transition-all ease-out dark:bg-dark-primary-blue dark:hover:bg-dark-secondary-blue"
-          onClick={() => addExercise(selectedWorkout?.id)}
-          unstyled
-        />
+        {!selectedWorkout?.isCompleted && (
+          <Button
+            label="Gyakorlat hozzáadása"
+            className="bg-primary-blue text-primary-white rounded-lg mt-15 py-2 hover:bg-secondary-blue hover:scale-101 hover:cursor-pointer transition-all duration-300 ease-out dark:bg-dark-primary-blue dark:hover:bg-dark-secondary-blue"
+            onClick={() =>
+              addExercise({
+                exerciseId: exercise.id,
+                workoutId: selectedWorkout?.id,
+              })
+            }
+            unstyled
+          />
+        )}
 
         <Button
           label="Edzés törlése"
-          className="bg-primary-red text-primary-white rounded-lg my-4 py-2 hover:bg-secondary-red hover:scale-101 hover:cursor-pointer transition-all ease-out"
-          onClick={async () => {
-            handleWorkoutDelete(selectedWorkout?.id);
+          className="bg-primary-red text-primary-white rounded-lg my-4 py-2 hover:bg-secondary-red hover:scale-101 hover:cursor-pointer transition-all duration-300 ease-out"
+          onClick={() => {
+            deleteWorkout(selectedWorkout?.id);
             setVisible(false);
           }}
           unstyled

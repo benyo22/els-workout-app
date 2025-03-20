@@ -17,7 +17,7 @@ export const workoutEndpoints = elsApi.injectEndpoints({
       }),
       invalidatesTags: ["Workouts"],
     }),
-    closeWorkoutById: builder.mutation({
+    finishWorkoutById: builder.mutation({
       query: (workoutId) => ({
         url: `workout-close/${workoutId}`,
         method: "PATCH",
@@ -45,7 +45,7 @@ export const workoutEndpoints = elsApi.injectEndpoints({
 export const {
   useGetWorkoutByUserIdQuery,
   useCreateWorkoutWithUserIdMutation,
-  useCloseWorkoutByIdMutation,
+  useFinishWorkoutByIdMutation,
   useEditWorkoutByIdMutation,
   useDeleteWorkoutByIdMutation,
 } = workoutEndpoints;

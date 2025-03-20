@@ -1,27 +1,26 @@
 const { StatusCodes } = require("http-status-codes");
 const { Sleep } = require("../models");
-const { where } = require("sequelize");
 const { createSleepSchema } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
   //get all sleep data
   fastify.get(
-    "/sleep/:id",
+    "/sleep/:userId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id: userId } = request.params;
+      const { userId } = request.params;
       const sleepData = await Sleep.findAll({ where: { userId } });
 
       reply.send(sleepData);
     }
   );
 
-  // add sleep data
+  // create sleep data
   fastify.post(
-    "/sleep/:id",
+    "/sleep/:userId",
     { schema: createSleepSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id: userId } = request.params;
+      const { userId } = request.params;
       const { date, durationHour, quality } = request.body;
 
       await Sleep.create({
@@ -38,7 +37,7 @@ module.exports = async (fastify, options) => {
   );
 
   // edit sleep data
-  fastify.patch(
+  fastify.put(
     "/sleep/:id",
     { schema: createSleepSchema, onRequest: [fastify.auth] },
     async (request, reply) => {

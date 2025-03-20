@@ -72,7 +72,7 @@
   }
 
   .logged-in-sidebar-els {
-    @apply text-primary-white text-4xl font-extrabold hover:text-primary-green hover:scale-105 transition duration-300 ease-in-out;
+    @apply text-primary-white text-4xl font-extrabold hover:text-primary-green hover:scale-101 transition duration-300 ease-in-out;
     @apply dark:hover:text-dark-primary-green;
   }
 
@@ -162,28 +162,28 @@
   }
 
   .welcome-menu-home-page-link {
-    @apply bg-primary-green text-primary-white md:mr-8 px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out cursor-pointer hover:scale-105;
+    @apply bg-primary-green text-primary-white md:mr-8 px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out cursor-pointer hover:scale-101;
     @apply dark:bg-dark-primary-green dark:hover:bg-dark-secondary-green;
   }
 
   /* ---------------------- Buttons ---------------------- */
   .login-button {
-    @apply bg-primary-green text-primary-white px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out cursor-pointer hover:scale-105;
+    @apply bg-primary-green text-primary-white px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out cursor-pointer hover:scale-101;
     @apply dark:bg-dark-primary-green dark:hover:bg-dark-secondary-green;
   }
 
   .register-button {
-    @apply bg-primary-white text-primary-blue px-6 py-3 font-bold rounded-lg hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer hover:scale-105;
+    @apply bg-primary-white text-primary-blue px-6 py-3 font-bold rounded-lg hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer hover:scale-101;
     @apply dark:text-dark-primary-blue;
   }
 
   .edit-button {
-    @apply bg-primary-blue p-3 rounded-full text-primary-white hover:bg-secondary-blue transition-all duration-400 cursor-pointer hover:scale-105;
+    @apply bg-primary-blue p-3 rounded-lg text-primary-white hover:bg-secondary-blue transition-all duration-300 cursor-pointer hover:scale-101;
     @apply dark:bg-dark-primary-blue dark:hover:bg-dark-secondary-blue;
   }
 
   .delete-button {
-    @apply bg-primary-red p-3 rounded-full w-[50%] text-primary-white hover:bg-secondary-red transition-all duration-400 cursor-pointer;
+    @apply bg-primary-red p-3 rounded-lg w-[50%] text-primary-white hover:bg-secondary-red transition-all duration-300 cursor-pointer;
   }
 
   .user-avatar {

@@ -1,27 +1,27 @@
 const { StatusCodes } = require("http-status-codes");
 const { User, Weight } = require("../models");
 const { where } = require("sequelize");
-const { createSleepSchema } = require("../utils/fastify.schemas");
+const { createWeightSchema } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
   //get all weight data
   fastify.get(
-    "/weight/:id",
+    "/weight/:userId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id: userId } = request.params;
+      const { userId } = request.params;
       const weightData = await Weight.findAll({ where: { userId } });
 
       reply.send(weightData);
     }
   );
 
-  // add weight data
+  // create weight data
   fastify.post(
-    "/weight/:id",
-    { schema: createSleepSchema, onRequest: [fastify.auth] },
+    "/weight/:userId",
+    { schema: createWeightSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id: userId } = request.params;
+      const { userId } = request.params;
       const { weight, date } = request.body;
 
       await Weight.create({
@@ -37,9 +37,9 @@ module.exports = async (fastify, options) => {
   );
 
   // update weight data
-  fastify.patch(
+  fastify.put(
     "/weight/:id",
-    { schema: createSleepSchema, onRequest: [fastify.auth] },
+    { schema: createWeightSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { id } = request.params;
       const { weight, date } = request.body;

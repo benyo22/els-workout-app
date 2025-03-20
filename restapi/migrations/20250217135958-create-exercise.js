@@ -23,8 +23,7 @@ module.exports = {
           "legs",
           "shoulders",
           "other",
-          "full body,",
-          "cardio"
+          "full body"
         ),
       },
       category: {
@@ -35,7 +34,8 @@ module.exports = {
           "machine/other",
           "bodyweight",
           "cardio",
-          "duration"
+          "duration",
+          "distance"
         ),
       },
       createdAt: {

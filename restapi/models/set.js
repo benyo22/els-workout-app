@@ -34,7 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       setNumber: {
-        allowNull: false,
         type: DataTypes.INTEGER,
       },
       reps: {
@@ -48,8 +47,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       type: {
-        allowNull: false,
         type: DataTypes.ENUM("warm-up", "dropset", "failure"),
+      },
+      distance: {
+        type: DataTypes.DOUBLE,
       },
     },
     {

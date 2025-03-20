@@ -3,15 +3,15 @@ import { elsApi } from "../elsApiSlice";
 export const weightEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
     getWeightByUserId: builder.query({
-      query: (id) => ({
-        url: `weight/${id}`,
+      query: (userId) => ({
+        url: `weight/${userId}`,
       }),
       providesTags: ["Weights"],
       transformResponse: (response) => response,
     }),
     createWeightWithUserId: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `weight/${id}`,
+      query: ({ userId, data }) => ({
+        url: `weight/${userId}`,
         method: "POST",
         body: data,
       }),
@@ -20,7 +20,7 @@ export const weightEndpoints = elsApi.injectEndpoints({
     updateWeightById: builder.mutation({
       query: ({ id, data }) => ({
         url: `weight/${id}`,
-        method: "PATCH",
+        method: "PUT",
         body: data,
       }),
       invalidatesTags: ["Weights"],
