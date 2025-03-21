@@ -11,11 +11,11 @@ import { useCreateWorkoutWithUserIdMutation } from "../../../state/endpoints/wor
 
 export const WorkoutForm = ({ onClose, userId }) => {
   const [error, setError] = useState(null);
-  const [createWorkout] = useCreateWorkoutWithUserIdMutation();
   const [formData, setFormData] = useState({
     name: "",
     date: "",
   });
+  const [createWorkout] = useCreateWorkoutWithUserIdMutation();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -35,7 +35,7 @@ export const WorkoutForm = ({ onClose, userId }) => {
     }
 
     if (formData.name.length > 30) {
-      setError("Az edzés neve maximum 30 ");
+      setError("Az edzés neve maximum 30 hosszú");
     }
 
     await createWorkout({ userId, data: formData });

@@ -21,11 +21,13 @@ const bodyParts = [
 const categories = [
   "barbell",
   "dumbell",
-  "machine/other",
+  "cable",
+  "machine",
   "bodyweight",
   "cardio",
   "duration",
   "distance",
+  "other",
 ];
 
 const setTypes = ["warm-up", "dropset", "failure"];

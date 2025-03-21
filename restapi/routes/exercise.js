@@ -123,16 +123,19 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  // delete an exercise
+  // delete an exercise from workout
   fastify.delete(
-    "/exercises/:id",
-    { onRequest: [fastify.auth] },
+    "/delete-exercise-from-workout/:exerciseId/:workoutId",
     async (request, reply) => {
-      const { id } = request.params;
-      const exercise = await Exercise.findByPk(id);
+      const { exerciseId, workoutId } = request.params;
+      const workout = await Workout.findByPk(workoutId);
+      const exercise = await Exercise.findByPk(exerciseId);
 
-      await exercise.destroy();
-      reply.send({ message: "Exercise deleted!" });
+      await workout.removeExercise(exercise);
+
+      return reply.send({
+        message: "Exercise removed from workout successfully.",
+      });
     }
   );
 };

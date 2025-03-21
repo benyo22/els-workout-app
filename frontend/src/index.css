@@ -27,6 +27,8 @@
 
   --color-dark-primary-blue: #5669c8;
   --color-dark-secondary-blue: #475ac2;
+
+  --color-dark-primary-red: #ff444d;
 }
 
 @layer components {
@@ -168,12 +170,12 @@
 
   /* ---------------------- Buttons ---------------------- */
   .login-button {
-    @apply bg-primary-green text-primary-white px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out cursor-pointer hover:scale-101;
-    @apply dark:bg-dark-primary-green dark:hover:bg-dark-secondary-green;
+    @apply bg-primary-green text-primary-white px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out cursor-pointer hover:scale-101 active:bg-secondary-green;
+    @apply dark:bg-dark-primary-green dark:hover:bg-dark-secondary-green dark:active:bg-secondary-green;
   }
 
   .register-button {
-    @apply bg-primary-white text-primary-blue px-6 py-3 font-bold rounded-lg hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer hover:scale-101;
+    @apply bg-primary-white text-primary-blue px-6 py-3 font-bold rounded-lg hover:bg-gray-200 active:bg-gray-200 transition duration-300 ease-in-out cursor-pointer hover:scale-101;
     @apply dark:text-dark-primary-blue;
   }
 
@@ -193,7 +195,7 @@
 
   /* ---------------------- Errors ---------------------- */
   .error-message {
-    @apply text-primary-red text-xs font-bold h-5;
+    @apply text-primary-red text-xs font-bold h-5 dark:text-dark-primary-red;
   }
 
   /* ---------------------- Inputs ---------------------- */
@@ -233,15 +235,15 @@
 
 /* ---------------------- Custom Scrollbar Styles ---------------------- */
 ::-webkit-scrollbar-track {
-  border: 1px solid #31dcb7;
+  border: 0px solid #3749a8;
   background-color: #fcfefd;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0px;
   background-color: #fcfefd;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #31dcb7;
+  background-color: #3749a8;
 }

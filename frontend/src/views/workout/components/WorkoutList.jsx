@@ -12,7 +12,7 @@ import {
   useFinishWorkoutByIdMutation,
   useGetWorkoutByUserIdQuery,
 } from "../../../state/endpoints/workoutEndpoints";
-import { ExerciseManager } from "./ExerciseManager";
+import { ExerciseManager } from "../../exercise/ExerciseManager";
 import { selectUserId } from "../../../state/slices/authSlice";
 
 export const WorkoutList = () => {
@@ -21,7 +21,7 @@ export const WorkoutList = () => {
   const [deleteWorkout] = useDeleteWorkoutByIdMutation();
   const { data: workoutData, isLoading } = useGetWorkoutByUserIdQuery(userId);
 
-  const [showForm, setShowForm] = useState(false);
+  const [newWorkoutForm, setNewWorkoutForm] = useState(false);
   const [visibleWorkout, setVisibleWorkout] = useState(false);
   const [selectedWorkout, setSelectedWorkout] = useState(null);
 
@@ -30,18 +30,17 @@ export const WorkoutList = () => {
       message,
       header: "Megerősítés",
       acceptLabel: "Igen",
-      acceptClassName: "p-button-danger",
       rejectLabel: "Nem",
       accept: onAccept,
     });
   };
 
-  const handleDelete = (id, onAccept) => {
+  const handleDelete = (workoutId, onAccept) => {
     const message = workoutData?.some((w) => !w.isCompleted)
       ? "Van már egy folyamatban lévő edzésed! Ha újat szeretnél indítani, akkor az törlődni fog. Biztos vagy benne?"
       : "Biztosan törölni szeretnéd ezt az edzést?";
     confirmAction(message, async () => {
-      await deleteWorkout({ workoutId: id });
+      await deleteWorkout(workoutId);
       onAccept?.();
     });
   };
@@ -62,9 +61,9 @@ export const WorkoutList = () => {
     const activeWorkout = workoutData?.find((w) => !w.isCompleted);
 
     if (activeWorkout) {
-      handleDelete(activeWorkout.id, () => setShowForm(true));
+      handleDelete(activeWorkout.id, () => setNewWorkoutForm(true));
     } else {
-      setShowForm(true);
+      setNewWorkoutForm(true);
     }
   };
 
@@ -83,22 +82,22 @@ export const WorkoutList = () => {
         <p>Adatok betöltése...</p>
       ) : (
         <WorkoutTable
-          workouts={workoutData}
+          workoutData={workoutData}
           selectedWorkout={selectedWorkout}
           setSelectedWorkout={setSelectedWorkout}
-          onDelete={handleDelete}
           onRowSelect={() => setVisibleWorkout(true)}
         />
       )}
 
-      {showForm && (
-        <WorkoutForm onClose={() => setShowForm(false)} userId={userId} />
+      {newWorkoutForm && (
+        <WorkoutForm onClose={() => setNewWorkoutForm(false)} userId={userId} />
       )}
 
       <ExerciseManager
         visible={visibleWorkout}
         setVisible={setVisibleWorkout}
         selectedWorkout={selectedWorkout}
+        setSelectedWorkout={setSelectedWorkout}
         deleteWorkout={handleDelete}
         finishWorkout={handleFinishWorkout}
       />

@@ -80,7 +80,7 @@ module.exports = async (fastify, options) => {
 
     const token = fastify.jwt.sign(
       { id: user.id, username },
-      { expiresIn: "1h" }
+      { expiresIn: "8h" }
     );
 
     reply
@@ -89,7 +89,7 @@ module.exports = async (fastify, options) => {
         secure: true,
         sameSite: "Strict",
         path: "/",
-        maxAge: 3600,
+        maxAge: 28800,
         signed: true,
       })
       .send({ message: "Login successful!", id: user.id, username });

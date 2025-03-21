@@ -34,11 +34,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM(
           "barbell",
           "dumbell",
-          "machine/other",
+          "cable",
+          "machine",
           "bodyweight",
           "cardio",
           "duration",
-          "distance"
+          "distance",
+          "other"
         ),
       },
     },
