@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import { InputText } from "primereact/inputtext";
+import { ErrorMessage } from "../../../helper/ErrorMessage";
 
 export const EmailInput = ({ email, handleInput, error }) => (
   <div className="flex flex-col gap-0.5">
-    <label>
-      Email {error && <span className="error-message">{error}</span>}
-    </label>
+    <label>Email {error && <ErrorMessage message={error} />}</label>
     <InputText
       id="email"
       name="email"

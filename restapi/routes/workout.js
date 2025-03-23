@@ -1,10 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
-const { User, Workout } = require("../models");
+const { Workout } = require("../models");
 const { where } = require("sequelize");
-const {
-  createWorkoutSchema,
-  closeWorkoutSchema,
-} = require("../utils/fastify.schemas");
+const { createWorkoutSchema } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
   //get all workout data
@@ -19,13 +16,25 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  // add workout
+  // create workout
   fastify.post(
     "/workout/:userId",
     { schema: createWorkoutSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { userId } = request.params;
       const { name, date } = request.body;
+
+      if (!name || !date) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Minden mezőt ki kell tölteni!" });
+      }
+
+      if (name.length > 30) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Az edzés neve maximum 30 hosszú lehet!" });
+      }
 
       await Workout.create({
         userId,
@@ -40,16 +49,15 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  // close workout
+  // finish workout
   fastify.patch(
     "/workout-close/:workoutId",
-    { schema: closeWorkoutSchema, onRequest: [fastify.auth] },
+    { onRequest: [fastify.auth] },
     async (request, reply) => {
       const { workoutId } = request.params;
       const workoutData = await Workout.findByPk(workoutId);
 
       workoutData.isCompleted = true;
-
       await workoutData.save();
 
       return reply.send({ message: "Workout closed!" });
@@ -74,7 +82,7 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  //delete workout
+  // delete workout
   fastify.delete(
     "/workout/:workoutId",
     { onRequest: [fastify.auth] },

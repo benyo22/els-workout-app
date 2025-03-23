@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -7,38 +8,31 @@ import { Calendar } from "primereact/calendar";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";
 
+import { ErrorMessage } from "../../helper/ErrorMessage";
+import { selectUserId } from "../../../state/slices/authSlice";
 import { useCreateWorkoutWithUserIdMutation } from "../../../state/endpoints/workoutEndpoints";
 
-export const WorkoutForm = ({ onClose, userId }) => {
-  const [error, setError] = useState(null);
+export const CreateWorkoutForm = ({ onClose }) => {
+  const userId = useSelector(selectUserId);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
-    date: "",
+    date: new Date(),
   });
   const [createWorkout] = useCreateWorkoutWithUserIdMutation();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-
-    if (name === "name") {
-      if (value.length <= 30) setFormData({ ...formData, [name]: value });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async () => {
-    setError(null);
-    if (!formData.name || !formData.date) {
-      setError("Minden mezőt ki kell tölteni!");
+    const result = await createWorkout({ userId, data: formData });
+
+    if (result.error?.data.error) {
+      setError(result.error.data.error);
       return;
     }
-
-    if (formData.name.length > 30) {
-      setError("Az edzés neve maximum 30 hosszú");
-    }
-
-    await createWorkout({ userId, data: formData });
     onClose();
   };
 
@@ -58,22 +52,26 @@ export const WorkoutForm = ({ onClose, userId }) => {
             name="name"
             value={formData.name}
             onChange={handleInput}
-            className="w-full"
+            className="input"
+            unstyled
           />
           <label htmlFor="name">Név</label>
         </FloatLabel>
 
-        {error && <span className="error-message">{error}</span>}
+        {error && <ErrorMessage message={error} />}
+
         <div className="flex justify-end gap-2">
           <Button
             label="Mégse"
             onClick={onClose}
-            className="p-button-secondary"
+            className="gray-button"
+            unstyled
           />
           <Button
             label="Létrehozás"
             onClick={handleSubmit}
-            className="p-button-success"
+            className="green-button"
+            unstyled
           />
         </div>
       </div>

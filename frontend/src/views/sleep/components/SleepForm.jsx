@@ -1,19 +1,26 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 
+import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+import { Calendar } from "primereact/calendar";
+import { Dropdown } from "primereact/dropdown";
+import { FloatLabel } from "primereact/floatlabel";
+import { InputNumber } from "primereact/inputnumber";
+
 import {
   useCreateSleepWithUserIdMutation,
   useUpdateSleepByIdMutation,
 } from "../../../state/endpoints/sleepEndpoints";
+import { ErrorMessage } from "../../helper/ErrorMessage";
+import { sleepQualityOptions } from "../../../utils/data";
 
-import { Form } from "./Form";
-
-export const SleepForm = ({ entry, onClose, userId }) => {
+export const SleepForm = ({ userId, entry, onClose }) => {
   const [error, setError] = useState(null);
   const [updateSleep] = useUpdateSleepByIdMutation();
   const [createSleep] = useCreateSleepWithUserIdMutation();
   const [formData, setFormData] = useState({
-    date: "",
+    date: new Date(),
     durationHour: "",
     quality: "",
   });
@@ -34,28 +41,72 @@ export const SleepForm = ({ entry, onClose, userId }) => {
   };
 
   const handleSubmit = async () => {
-    setError(null);
-    if (!formData.date || !formData.durationHour || !formData.quality) {
-      setError("Minden mezőt ki kell tölteni!");
+    let result = null;
+    if (entry) {
+      result = await updateSleep({ id: entry.id, data: formData });
+    } else {
+      result = await createSleep({ userId, data: formData });
+    }
+
+    if (result.error?.data.error) {
+      setError(result.error.data.error);
       return;
     }
 
-    if (entry) {
-      await updateSleep({ id: entry.id, data: formData });
-    } else {
-      await createSleep({ userId, data: formData });
-    }
     onClose();
   };
 
   return (
-    <Form
-      error={error}
-      handleInput={handleInput}
-      handleSubmit={handleSubmit}
-      formData={formData}
-      entry={entry}
-      onClose={onClose}
-    />
+    <Dialog
+      visible
+      onHide={onClose}
+      header={entry ? "Alvás szerkesztése" : "Új alvás bejegyzés"}
+      modal
+    >
+      <div className="flex flex-col gap-6">
+        <Calendar
+          name="date"
+          value={formData.date}
+          onChange={handleInput}
+          showIcon
+        />
+
+        <FloatLabel>
+          <InputNumber
+            id="durationHour"
+            name="durationHour"
+            value={formData.durationHour}
+            onValueChange={handleInput}
+            className="w-full"
+          />
+          <label htmlFor="durationHour">Alvás hossza (óra)</label>
+        </FloatLabel>
+
+        <Dropdown
+          name="quality"
+          value={formData.quality}
+          options={sleepQualityOptions}
+          onChange={handleInput}
+          placeholder="Alvás minősége"
+        />
+
+        {error && <ErrorMessage message={error} />}
+
+        <div className="flex justify-end gap-2">
+          <Button
+            label="Mégse"
+            onClick={onClose}
+            className="gray-button"
+            unstyled
+          />
+          <Button
+            label={entry ? "Mentés" : "Hozzáadás"}
+            onClick={handleSubmit}
+            className="green-button"
+            unstyled
+          />
+        </div>
+      </div>
+    </Dialog>
   );
 };

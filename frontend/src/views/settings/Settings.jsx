@@ -1,9 +1,8 @@
-import { TabView, TabPanel } from "primereact/tabview";
-
-import { FaKey, FaX } from "react-icons/fa6";
-
 import { useState } from "react";
 import { useSelector } from "react-redux";
+
+import { FaKey, FaX } from "react-icons/fa6";
+import { TabView, TabPanel } from "primereact/tabview";
 
 import { DeleteProfile } from "./components/DeleteProfile";
 import { selectUserId } from "../../state/slices/authSlice";
@@ -11,7 +10,7 @@ import { UpdatePassword } from "./components/UpdatePassword";
 
 export const Settings = () => {
   const userId = useSelector(selectUserId);
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState("");
 
   return (
     <div className="settings-container">
@@ -20,19 +19,11 @@ export const Settings = () => {
           header="Jelszó frissítése"
           leftIcon={<FaKey className="mr-1" />}
         >
-          <UpdatePassword
-            errors={errors}
-            setErrors={setErrors}
-            userId={userId}
-          />
+          <UpdatePassword error={error} setError={setError} userId={userId} />
         </TabPanel>
 
         <TabPanel header="Fiók törlése" leftIcon={<FaX className="mr-1" />}>
-          <DeleteProfile
-            errors={errors}
-            setErrors={setErrors}
-            userId={userId}
-          />
+          <DeleteProfile error={error} setError={setError} userId={userId} />
         </TabPanel>
       </TabView>
     </div>

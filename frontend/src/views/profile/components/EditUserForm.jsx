@@ -13,24 +13,34 @@ import { UsernameInput } from "./editcomponents/UsernameInput";
 import { selectUserId } from "../../../state/slices/authSlice";
 import { useUpdateUserByIdMutation } from "../../../state/endpoints/userEndpoints";
 
-export const EditUserForm = ({ visible, setVisible }) => {
+export const EditUserForm = ({ setVisible }) => {
+  const userId = useSelector(selectUserId);
+  const [errors, setErrors] = useState({});
   const [credentials, setCredentials] = useState({
     name: "",
     age: "",
     email: "",
     username: "",
   });
-  const { name, age, email, username } = credentials;
-  const [errors, setErrors] = useState({});
-
-  const userId = useSelector(selectUserId);
   const [updateUser] = useUpdateUserByIdMutation();
+  const { name, age, email, username } = credentials;
 
   const handleInput = (e) => {
     const { name, value } = e.target;
     setCredentials({
       ...credentials,
       [name]: value,
+    });
+  };
+
+  const onClose = () => {
+    setVisible(false);
+    setErrors({});
+    setCredentials({
+      name: "",
+      age: "",
+      email: "",
+      username: "",
     });
   };
 
@@ -45,23 +55,15 @@ export const EditUserForm = ({ visible, setVisible }) => {
       return;
     }
 
-    // if success, close the edit window
-    setVisible(false);
-    setErrors({});
-    setCredentials({
-      name: "",
-      age: "",
-      email: "",
-      username: "",
-    });
+    onClose();
   };
 
   return (
     <>
       <Dialog
-        visible={visible}
+        visible
         modal
-        onHide={() => setVisible(false)}
+        onHide={onClose}
         position="right"
         content={
           <div className="profile-edit-form">
@@ -79,25 +81,18 @@ export const EditUserForm = ({ visible, setVisible }) => {
               handleInput={handleInput}
               error={errors.email}
             />
-            <div className="flex flex-col md:flex-row w-full gap-3 mt-4">
-              <Button
-                label="Mentés"
-                className="p-button-success"
-                onClick={handleUpdate}
-              />
+            <div className="flex flex-col justify-end md:flex-row w-full gap-3 mt-4">
               <Button
                 label="Mégse"
-                className="p-button-secondary"
-                onClick={() => {
-                  setVisible(false);
-                  setErrors({});
-                  setCredentials({
-                    name: "",
-                    age: "",
-                    email: "",
-                    username: "",
-                  });
-                }}
+                onClick={onClose}
+                className="gray-button"
+                unstyled
+              />
+              <Button
+                label="Mentés"
+                onClick={handleUpdate}
+                className="green-button"
+                unstyled
               />
             </div>
           </div>

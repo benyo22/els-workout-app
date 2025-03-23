@@ -8,10 +8,8 @@ export const ExerciseManagerHeader = ({
   visible,
   setVisible,
 }) => (
-  <div className="flex justify-between">
-    <p className="mt-3 ml-2 font-semibold text-xl">
-      {workoutName || "Új edzés"}
-    </p>
+  <header className="flex justify-between">
+    <p className="mt-3 font-semibold text-xl">{workoutName || "Új edzés"}</p>
     <Button
       onClick={() => {
         if (!visible) return;
@@ -26,5 +24,5 @@ export const ExerciseManagerHeader = ({
     >
       <FaXmark />
     </Button>
-  </div>
+  </header>
 );

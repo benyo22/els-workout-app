@@ -7,7 +7,7 @@ export const WorkoutTable = ({
   workoutData,
   selectedWorkout,
   setSelectedWorkout,
-  onRowSelect,
+  onSelect,
 }) => {
   const isCompletedTemplate = (rowData) =>
     rowData.isCompleted ? (
@@ -30,7 +30,7 @@ export const WorkoutTable = ({
       selectionMode="single"
       selection={selectedWorkout}
       onSelectionChange={(e) => setSelectedWorkout(e.value)}
-      onRowSelect={onRowSelect}
+      onRowSelect={onSelect}
       metaKeySelection={false}
     >
       <Column field="name" header="Név" sortable />

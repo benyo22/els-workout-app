@@ -24,7 +24,7 @@ export const Profile = () => {
   return (
     <div className="profile-card">
       <UserData showEditForm={() => setVisible(true)} />
-      <EditUserForm visible={visible} setVisible={setVisible} />
+      {visible && <EditUserForm setVisible={setVisible} />}
       {isLoadingSleep || isLoadingWeight || isLoadingWorkout ? (
         <p>Adatok betöltése</p>
       ) : (

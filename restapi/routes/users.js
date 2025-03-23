@@ -25,13 +25,13 @@ module.exports = async (fastify, options) => {
 
       // validate input fields
       if (!name || !age || !email || !username || !password) {
-        errors.required = "A *-al jelölt mezők megadása kötelező";
+        errors.required = "A *-al jelölt mezők megadása kötelező!";
       }
-      if (username.length > 15) errors.username = "Max hossz: 15";
-      if (age < 14) errors.age = "Korhatár: 14év";
-      if (age > 99) errors.age = "Max 99 év";
-      if (!validateEmail(email)) errors.email = "Nem jó e-mail formátum";
-      if (password.length < 6) errors.password = "Jelszó legalább 6 karakter";
+      if (username.length > 15) errors.username = "Max hossz: 15!";
+      if (age < 14) errors.age = "Korhatár: 14év!";
+      if (age > 99) errors.age = "Max 99 év!";
+      if (!validateEmail(email)) errors.email = "Nem jó e-mail formátum!";
+      if (password.length < 6) errors.password = "Jelszó legalább 6 karakter!";
 
       // check if email or username is already taken
       const [takenEmail, takenUsername] = await Promise.all([
@@ -39,8 +39,8 @@ module.exports = async (fastify, options) => {
         User.findOne({ where: { username } }),
       ]);
 
-      if (takenEmail) errors.email = "E-mail már használatban";
-      if (takenUsername) errors.username = "Foglalt";
+      if (takenEmail) errors.email = "E-mail már használatban!";
+      if (takenUsername) errors.username = "Foglalt!";
 
       if (!isObjectEmpty(errors)) {
         return reply.status(StatusCodes.BAD_REQUEST).send({ error: errors });
@@ -60,11 +60,11 @@ module.exports = async (fastify, options) => {
 
     // validate input
     if (!username || !password)
-      errors.required = "A *-al jelölt mezők megadása kötelező";
+      errors.required = "A *-al jelölt mezők megadása kötelező!";
 
     const trimmedUsername = username.trim();
     const user = await User.findOne({ where: { username: trimmedUsername } });
-    if (!user) errors.username = "A felhasználó nem található";
+    if (!user) errors.username = "A felhasználó nem található!";
 
     // return early if there are errors
     if (!isObjectEmpty(errors))
@@ -74,7 +74,7 @@ module.exports = async (fastify, options) => {
     const isPasswordMatch = await argon2.verify(user.password, password);
     if (!isPasswordMatch) {
       return reply.status(StatusCodes.BAD_REQUEST).send({
-        error: { password: "Helytelen jelszó" },
+        error: { password: "Helytelen jelszó!" },
       });
     }
 
@@ -141,8 +141,8 @@ module.exports = async (fastify, options) => {
 
       // validate and update age
       if (age) {
-        if (age < 14) errors.age = "Korhatár: 14év";
-        else if (age > 99) errors.age = "Max 99 év";
+        if (age < 14) errors.age = "Korhatár: 14év!";
+        else if (age > 99) errors.age = "Max 99 év!";
         else if (age === 0) user.age = user.age;
         else user.age = age;
       }
@@ -150,11 +150,11 @@ module.exports = async (fastify, options) => {
       // validate and update username
       if (username) {
         if (username.length > 15) {
-          errors.username = "Max hossz: 15";
+          errors.username = "Max hossz: 15!";
         } else {
           const existingUsername = await User.findOne({ where: { username } });
           if (existingUsername && existingUsername.id !== user.id) {
-            errors.username = "Foglalt";
+            errors.username = "Foglalt!";
           } else {
             user.username = username;
           }
@@ -164,11 +164,11 @@ module.exports = async (fastify, options) => {
       // validate and update email
       if (email) {
         if (!validateEmail(email)) {
-          errors.email = "Nem jó e-mail formátum";
+          errors.email = "Nem jó e-mail formátum!";
         } else {
           const existingEmail = await User.findOne({ where: { email } });
           if (existingEmail && existingEmail.id !== user.id) {
-            errors.email = "E-mail használatban";
+            errors.email = "E-mail használatban!";
           } else {
             user.email = email;
           }
@@ -198,26 +198,26 @@ module.exports = async (fastify, options) => {
 
       if (!oldPassword || !newPassword) {
         return reply.status(StatusCodes.BAD_REQUEST).send({
-          error: { required: "A *-al jelölt mezők megadása kötelező" },
+          error: "A *-al jelölt mezők megadása kötelező!",
         });
       }
 
       const user = await User.findByPk(id);
       if (!user) {
         return reply.status(StatusCodes.NOT_FOUND).send({
-          error: { user: "Felhasználó nem található" },
+          error: "Felhasználó nem található!",
         });
       }
 
       if (!(await argon2.verify(user.password, oldPassword))) {
         return reply.status(StatusCodes.BAD_REQUEST).send({
-          error: { password: "Helytelen régi jelszó" },
+          error: "Helytelen régi jelszó!",
         });
       }
 
       if (newPassword.length < 6) {
         return reply.status(StatusCodes.BAD_REQUEST).send({
-          error: { password: "Jelszó legalább 6 karakter" },
+          error: "Jelszó legalább 6 karakter!",
         });
       }
 
@@ -236,14 +236,19 @@ module.exports = async (fastify, options) => {
       const { id } = request.params;
       const { password } = request.body;
       const user = await User.findByPk(id);
-      const errors = {};
+
+      if (!password) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Kérlek, add meg a jelszavad!" });
+      }
 
       // check if password matches saved one
       const isPasswordMatch = await argon2.verify(user.password, password);
-      if (!isPasswordMatch) errors.delete = "Helytelen jelszó";
-
-      if (!isObjectEmpty(errors)) {
-        return reply.status(StatusCodes.BAD_REQUEST).send({ error: errors });
+      if (!isPasswordMatch) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Helytelen jelszó!" });
       }
 
       await User.destroy({ where: { id } });

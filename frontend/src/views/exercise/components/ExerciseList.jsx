@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Button } from "primereact/button";
-import { FaTrashCan } from "react-icons/fa6";
+import { FaRegCircleXmark } from "react-icons/fa6";
 
 import { categoryLabels } from "../../../utils/data";
 import {
@@ -20,11 +20,10 @@ export const ExerciseList = ({ workout }) => {
       {exercisesInWorkout?.map((exercise, index) => (
         <div key={index}>
           <h4>
-            {exercise.name} (
+            {exercise.name}
             {["barbell", "dumbell", "cable", "machine"].includes(
               exercise.category
-            ) && categoryLabels[exercise.category]}
-            )
+            ) && ` (${categoryLabels[exercise.category]})`}
           </h4>
 
           <div className="p-4 border border-gray-300 rounded-lg flex justify-end">
@@ -49,15 +48,17 @@ export const ExerciseList = ({ workout }) => {
         ))} */}
             {!workout?.isCompleted && (
               <Button
-                icon={<FaTrashCan />}
-                className="p-button-rounded p-button-danger"
+                className="text-primary-red hover:text-secondary-red active:text-secondary-red hover:scale-101 cursor-pointer"
                 onClick={async () =>
                   await deleteExerciseFromWorkout({
                     exerciseId: exercise.id,
                     workoutId: workout?.id,
                   })
                 }
-              />
+                unstyled
+              >
+                <FaRegCircleXmark size={25} />
+              </Button>
             )}
           </div>
         </div>

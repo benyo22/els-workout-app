@@ -14,17 +14,18 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  // get exercise by id
-  fastify.get(
-    "/exercises/:id",
-    { onRequest: [fastify.auth] },
-    async (request, reply) => {
-      const { id } = request.params;
-      const exercise = await Exercise.findByPk(id);
+  //TODO: if i have time
+  // // get exercise by id
+  // fastify.get(
+  //   "/exercises/:id",
+  //   { onRequest: [fastify.auth] },
+  //   async (request, reply) => {
+  //     const { id } = request.params;
+  //     const exercise = await Exercise.findByPk(id);
 
-      reply.send(exercise);
-    }
-  );
+  //     reply.send(exercise);
+  //   }
+  // );
 
   // get all exercise in a workout by workoutId
   fastify.get(
@@ -51,22 +52,22 @@ module.exports = async (fastify, options) => {
     async (request, reply) => {
       const { name, bodyPart, category } = request.body;
 
+      if (!name) {
+        return reply
+          .status(StatusCodes.CONFLICT)
+          .send({ error: "Név megadása kötelező!" });
+      }
+
       if (!isGoodBodyPart(bodyPart)) {
         return reply
           .status(StatusCodes.CONFLICT)
-          .send({ error: "Nem jó testrész van megadva!" });
+          .send({ error: "Érvénytelen testrész!" });
       }
 
       if (!isGoodCategory(category)) {
         return reply
           .status(StatusCodes.CONFLICT)
-          .send({ error: "Nem jó kateógria!" });
-      }
-
-      // prevent duplicate exercises
-      const existingExercise = await Exercise.findOne({ where: { name } });
-      if (existingExercise) {
-        return reply.status(400).send({ message: "Exercise already exists!" });
+          .send({ error: "Érvénytelen kategória!" });
       }
 
       await Exercise.create({
@@ -79,32 +80,32 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  // update an exercise
-  fastify.patch(
-    "/exercises/:id",
-    { schema: createExerciseSchema, onRequest: [fastify.auth] },
-    async (request, reply) => {
-      const { id } = request.params;
-      const { name, bodyPart, category } = request.body;
+  // // update an exercise
+  // fastify.patch(
+  //   "/exercises/:id",
+  //   { schema: createExerciseSchema, onRequest: [fastify.auth] },
+  //   async (request, reply) => {
+  //     const { id } = request.params;
+  //     const { name, bodyPart, category } = request.body;
 
-      if (!isGoodBodyPart(bodyPart)) {
-        return reply
-          .status(StatusCodes.CONFLICT)
-          .send({ error: "Nem jó testrész van megadva!" });
-      }
+  //     if (!isGoodBodyPart(bodyPart)) {
+  //       return reply
+  //         .status(StatusCodes.CONFLICT)
+  //         .send({ error: "Nem jó testrész van megadva!" });
+  //     }
 
-      if (!isGoodCategory(category)) {
-        return reply
-          .status(StatusCodes.CONFLICT)
-          .send({ error: "Nem jó kateógria!" });
-      }
+  //     if (!isGoodCategory(category)) {
+  //       return reply
+  //         .status(StatusCodes.CONFLICT)
+  //         .send({ error: "Nem jó kateógria!" });
+  //     }
 
-      const exercise = await Exercise.findByPk(id);
+  //     const exercise = await Exercise.findByPk(id);
 
-      await exercise.update({ name, bodyPart, category });
-      reply.send({ message: "Exercise updated!" });
-    }
-  );
+  //     await exercise.update({ name, bodyPart, category });
+  //     reply.send({ message: "Exercise updated!" });
+  //   }
+  // );
 
   // add an exercise to a workout
   fastify.post(

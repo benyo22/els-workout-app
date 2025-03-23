@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
+import { FloatLabel } from "primereact/floatlabel";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 import { logout } from "../../../state/slices/authSlice";
@@ -12,19 +13,13 @@ import { setRegisterActive } from "../../../state/slices/authViewSlice";
 import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
 import { useDeleteUserByIdMutation } from "../../../state/endpoints/userEndpoints";
 
-export const DeleteProfile = ({ errors, setErrors, userId }) => {
+export const DeleteProfile = ({ error, setError, userId }) => {
   const dispatch = useDispatch();
   const [deletePassword, setDeletePassword] = useState("");
-
   const [sendLogout] = useLogoutMutation();
   const [deleteUser] = useDeleteUserByIdMutation();
 
   const handleDelete = async () => {
-    if (!deletePassword) {
-      setErrors({ delete: "Kérlek, add meg a jelszavad!" });
-      return;
-    }
-
     confirmDialog({
       message: "Biztosan törölni akarod a fiókodat? Ez nem visszavonható!",
       header: "Megerősítés",
@@ -38,7 +33,7 @@ export const DeleteProfile = ({ errors, setErrors, userId }) => {
         });
 
         if (result.error?.data.error) {
-          setErrors(result.error.data.error);
+          setError(result.error.data.error);
           return;
         }
 
@@ -50,27 +45,31 @@ export const DeleteProfile = ({ errors, setErrors, userId }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-2 pt-2">
+    <div className="flex flex-col">
       <h2 className="text-lg font-semibold text-red-600">Fiók törlése</h2>
-      <p className="text-sm text-gray-600 mb-2">
+      <p className="text-sm text-gray-600 dark:text-gray-300">
         A fiók törlése végleges, és nem visszavonható.
       </p>
-      <Password
-        id="password"
-        name="password"
-        placeholder="Jelszó megerősítése"
-        inputClassName="delete-input"
-        value={deletePassword}
-        onChange={(e) => setDeletePassword(e.target.value)}
-        feedback={false}
-        unstyled
-      />
-      {errors.delete && <ErrorMessage message={errors.delete} />}
+
+      <FloatLabel className="mt-8 mb-4">
+        <Password
+          id="password"
+          name="password"
+          inputClassName="delete-input"
+          value={deletePassword}
+          onChange={(e) => setDeletePassword(e.target.value)}
+          feedback={false}
+          unstyled
+        />
+        <label htmlFor="password">Jelszó megerősítése</label>
+      </FloatLabel>
+
+      {error && <ErrorMessage message={error} />}
 
       <Button
         label="Fiók törlése"
         onClick={handleDelete}
-        className="delete-button"
+        className="red-button mt-4"
         unstyled
       />
       <ConfirmDialog />

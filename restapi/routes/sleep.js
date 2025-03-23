@@ -23,6 +23,12 @@ module.exports = async (fastify, options) => {
       const { userId } = request.params;
       const { date, durationHour, quality } = request.body;
 
+      if (!date || !durationHour || !quality) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Minden mezőt ki kell tölteni!" });
+      }
+
       await Sleep.create({
         userId,
         date,
@@ -43,6 +49,12 @@ module.exports = async (fastify, options) => {
     async (request, reply) => {
       const { id } = request.params;
       const { date, durationHour, quality } = request.body;
+
+      if (!date || !durationHour || !quality) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Minden mezőt ki kell tölteni!" });
+      }
 
       const sleep = await Sleep.findByPk(id);
       await sleep.update({ date, durationHour, quality });

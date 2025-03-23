@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { User, Weight } = require("../models");
+const { Weight } = require("../models");
 const { where } = require("sequelize");
 const { createWeightSchema } = require("../utils/fastify.schemas");
 
@@ -22,7 +22,13 @@ module.exports = async (fastify, options) => {
     { schema: createWeightSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { userId } = request.params;
-      const { weight, date } = request.body;
+      const { date, weight } = request.body;
+
+      if (!weight || !date) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Minden mezőt ki kell tölteni!" });
+      }
 
       await Weight.create({
         userId,
@@ -42,7 +48,13 @@ module.exports = async (fastify, options) => {
     { schema: createWeightSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { id } = request.params;
-      const { weight, date } = request.body;
+      const { date, weight } = request.body;
+
+      if (!weight || !date) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Minden mezőt ki kell tölteni!" });
+      }
 
       const weightData = await Weight.findByPk(id);
       await weightData.update({ weight, date });
