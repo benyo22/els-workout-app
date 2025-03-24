@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       type: {
-        type: DataTypes.ENUM("warm-up", "dropset", "failure"),
+        type: DataTypes.ENUM("warm-up", "dropset", "failure", "/"),
       },
       distance: {
         type: DataTypes.DOUBLE,

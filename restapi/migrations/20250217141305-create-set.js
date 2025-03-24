@@ -36,7 +36,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       type: {
-        type: Sequelize.ENUM("warm-up", "dropset", "failure"),
+        type: Sequelize.ENUM("warm-up", "dropset", "failure", "/"),
       },
       distance: {
         type: Sequelize.DOUBLE,

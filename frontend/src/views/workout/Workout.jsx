@@ -69,7 +69,7 @@ export const Workout = () => {
   };
 
   return (
-    <main className="list-container">
+    <div className="list-container">
       <h2 className="text-2xl font-bold mb-4">Edzések</h2>
       <Button
         label="Edzés elkezdése"
@@ -94,16 +94,17 @@ export const Workout = () => {
         <CreateWorkoutForm onClose={() => setShowCreateWorkoutForm(false)} />
       )}
 
-      <ExerciseManager
-        visible={visibleWorkout}
-        setVisible={setVisibleWorkout}
-        selectedWorkout={selectedWorkout}
-        setSelectedWorkout={setSelectedWorkout}
-        deleteWorkout={handleDelete}
-        finishWorkout={handleFinishWorkout}
-      />
+      {visibleWorkout && (
+        <ExerciseManager
+          setVisible={setVisibleWorkout}
+          selectedWorkout={selectedWorkout}
+          setSelectedWorkout={setSelectedWorkout}
+          deleteWorkout={handleDelete}
+          finishWorkout={handleFinishWorkout}
+        />
+      )}
 
       <ConfirmDialog />
-    </main>
+    </div>
   );
 };

@@ -35,4 +35,9 @@ export const categoryLabels = {
   other: "Egyéb",
 };
 
-export const setTypes = ["warm-up", "dropset", "failure"];
+export const setTypes = {
+  "warm-up": "W",
+  dropset: "D",
+  failure: "F",
+  "/": "/",
+};

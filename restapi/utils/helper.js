@@ -40,7 +40,7 @@ const isGoodCategory = (category) => {
   return true;
 };
 
-const setTypes = ["warm-up", "dropset", "failure"];
+const setTypes = ["warm-up", "dropset", "failure", "/"];
 
 const isGoodSetType = (setType) => {
   if (!setTypes.includes(setType)) return false;

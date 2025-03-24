@@ -48,7 +48,7 @@ export const ExerciseList = ({ workout }) => {
             )}
           </div>
 
-          <div className="flex justify-between p-4 border border-gray-300 rounded-lg">
+          <div className="flex flex-col p-4 border border-gray-300 rounded-lg">
             <Sets
               exerciseId={exercise.id}
               workoutId={workout?.id}

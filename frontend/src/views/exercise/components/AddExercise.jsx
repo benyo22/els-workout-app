@@ -15,7 +15,7 @@ import {
 import { CreateExerciseForm } from "./CreateExerciseForm";
 import { bodyPartLabels, categoryLabels } from "../../../utils/data";
 
-export const AddExercise = ({ workoutId, visible, setVisible }) => {
+export const AddExercise = ({ workoutId, setVisible }) => {
   const [exercises, setExercises] = useState([]);
   const { data: exerciseData } = useGetAllExercisesQuery();
   const { data: exercisesInWorkout } =
@@ -71,10 +71,9 @@ export const AddExercise = ({ workoutId, visible, setVisible }) => {
 
   return (
     <>
-      <CreateExerciseForm
-        visible={showCreateExercise}
-        setVisible={setShowCreateExercise}
-      />
+      {showCreateExercise && (
+        <CreateExerciseForm setVisible={setShowCreateExercise} />
+      )}
 
       <Dialog
         header={
@@ -89,7 +88,6 @@ export const AddExercise = ({ workoutId, visible, setVisible }) => {
 
             <Button
               onClick={() => {
-                if (!visible) return;
                 setVisible(false);
               }}
               className="text-md text-[#6B7381] hover:bg-[#F2F4F7] rounded-full p-2 mt-2 mr-2 hover:cursor-pointer dark:hover:bg-[#242F3D] dark:text-[#9498A0]"
@@ -99,7 +97,8 @@ export const AddExercise = ({ workoutId, visible, setVisible }) => {
             </Button>
           </header>
         }
-        visible={visible}
+        modal
+        visible
         draggable={false}
         closable={false}
         closeOnEscape={false}

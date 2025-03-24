@@ -11,7 +11,7 @@ import { ErrorMessage } from "../../helper/ErrorMessage";
 import { bodyPartLabels, categoryLabels } from "../../../utils/data";
 import { useCreateExcerciseMutation } from "../../../state/endpoints/exerciseEndpoints";
 
-export const CreateExerciseForm = ({ visible, setVisible }) => {
+export const CreateExerciseForm = ({ setVisible }) => {
   const [createExcercise] = useCreateExcerciseMutation();
   const [errors, setErrors] = useState("");
   const [newExerciseData, setNewExerciseData] = useState({
@@ -57,7 +57,6 @@ export const CreateExerciseForm = ({ visible, setVisible }) => {
 
             <Button
               onClick={() => {
-                if (!visible) return;
                 setVisible(false);
                 resetForm();
               }}
@@ -68,7 +67,8 @@ export const CreateExerciseForm = ({ visible, setVisible }) => {
             </Button>
           </header>
         }
-        visible={visible}
+        modal
+        visible
         draggable={false}
         closable={false}
         closeOnEscape={false}
