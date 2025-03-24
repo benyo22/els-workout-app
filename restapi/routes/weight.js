@@ -4,7 +4,7 @@ const { where } = require("sequelize");
 const { createWeightSchema } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
-  //get all weight data
+  // get all weight data
   fastify.get(
     "/weight/:userId",
     { onRequest: [fastify.auth] },
@@ -44,10 +44,10 @@ module.exports = async (fastify, options) => {
 
   // update weight data
   fastify.put(
-    "/weight/:id",
+    "/weight/:weightId",
     { schema: createWeightSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id } = request.params;
+      const { weightId } = request.params;
       const { date, weight } = request.body;
 
       if (!weight || !date) {
@@ -56,7 +56,7 @@ module.exports = async (fastify, options) => {
           .send({ error: "Minden mezőt ki kell tölteni!" });
       }
 
-      const weightData = await Weight.findByPk(id);
+      const weightData = await Weight.findByPk(weightId);
       await weightData.update({ weight, date });
 
       return reply.send({ message: "Weight updated!" });
@@ -65,14 +65,14 @@ module.exports = async (fastify, options) => {
 
   //delete weight data
   fastify.delete(
-    "/weight/:id",
+    "/weight/:weightId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id } = request.params;
-      await Weight.destroy({ where: { id } });
+      const { weightId } = request.params;
+      await Weight.destroy({ where: { id: weightId } });
 
       reply.send({
-        message: `Deleted a weight with an id of ${id}!`,
+        message: `Deleted a weight with an id of ${weightId}!`,
       });
     }
   );

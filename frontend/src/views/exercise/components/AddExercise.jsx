@@ -103,7 +103,7 @@ export const AddExercise = ({ workoutId, visible, setVisible }) => {
         draggable={false}
         closable={false}
         closeOnEscape={false}
-        className="flex flex-col gap-y-6 bg-primary-white dark:bg-dark-medium shadow-lg border-1 border-primary-grey rounded-lg max-w-full w-full md:max-w-md h-[500px] 2xl:h-[700px] p-4"
+        className="flex flex-col gap-y-6 bg-primary-white dark:bg-dark-medium shadow-lg border-1 border-primary-grey rounded-lg max-w-full w-full md:max-w-md h-[700px] p-4"
         unstyled
       >
         {/* Search bar */}
@@ -147,7 +147,8 @@ export const AddExercise = ({ workoutId, visible, setVisible }) => {
         </div>
 
         {/* Exercises */}
-        <div className="flex flex-col gap-2 mt-8 max-h-[280px] 2xl:max-h-[480px] p-2 overflow-y-auto">
+        <h3 className="mt-4 font-bold">Gyakorlatok:</h3>
+        <div className="flex flex-col gap-2 mt-4 h-[450px] p-2 overflow-y-auto">
           {exercises.length === 0 ? (
             <div className="text-center text-gray-500 dark:text-gray-400">
               Nincs találat

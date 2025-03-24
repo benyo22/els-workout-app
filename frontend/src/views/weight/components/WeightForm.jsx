@@ -39,7 +39,7 @@ export const WeightForm = ({ userId, entry, onClose }) => {
   const handleSubmit = async () => {
     let result = null;
     if (entry) {
-      result = await updateWeight({ id: entry.id, data: formData });
+      result = await updateWeight({ weightId: entry.id, data: formData });
     } else {
       result = await createWeight({ userId, data: formData });
     }
@@ -67,7 +67,7 @@ export const WeightForm = ({ userId, entry, onClose }) => {
           showIcon
         />
 
-        <FloatLabel>
+        <FloatLabel className="mt-2">
           <InputNumber
             id="weight"
             name="weight"

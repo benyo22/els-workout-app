@@ -2,18 +2,17 @@ import { elsApi } from "../elsApiSlice";
 
 export const setEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
-    getSetsForExercise: builder.query({
-      query: (exerciseId) => ({
-        url: `sets/${exerciseId}`,
+    getSetsInExercise: builder.query({
+      query: ({ exerciseId, workoutId }) => ({
+        url: `sets/${exerciseId}/${workoutId}`,
       }),
       providesTags: ["Sets"],
       transformResponse: (response) => response,
     }),
     addSetToExercise: builder.mutation({
-      query: ({ exerciseId, userId, data }) => ({
-        url: `sets/${exerciseId}/${userId}`,
+      query: ({ exerciseId, workoutId }) => ({
+        url: `sets/${exerciseId}/${workoutId}`,
         method: "POST",
-        body: data,
       }),
       invalidatesTags: ["Sets"],
     }),
@@ -32,12 +31,20 @@ export const setEndpoints = elsApi.injectEndpoints({
       }),
       invalidatesTags: ["Sets"],
     }),
+    deleteAllSetsInExercise: builder.mutation({
+      query: ({ exerciseId, workoutId }) => ({
+        url: `sets-delete-all/${exerciseId}/${workoutId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Sets"],
+    }),
   }),
 });
 
 export const {
-  useGetSetsForExerciseQuery,
+  useGetSetsInExerciseQuery,
   useAddSetToExerciseMutation,
   useUpdateSetByIdMutation,
   useDeleteSetByIdMutation,
+  useDeleteAllSetsInExerciseMutation,
 } = setEndpoints;

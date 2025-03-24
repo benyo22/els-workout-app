@@ -43,7 +43,7 @@ export const SleepForm = ({ userId, entry, onClose }) => {
   const handleSubmit = async () => {
     let result = null;
     if (entry) {
-      result = await updateSleep({ id: entry.id, data: formData });
+      result = await updateSleep({ sleepId: entry.id, data: formData });
     } else {
       result = await createSleep({ userId, data: formData });
     }

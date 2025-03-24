@@ -18,16 +18,16 @@ export const sleepEndpoints = elsApi.injectEndpoints({
       invalidatesTags: ["Sleep"],
     }),
     updateSleepById: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `sleep/${id}`,
+      query: ({ sleepId, data }) => ({
+        url: `sleep/${sleepId}`,
         method: "PUT",
         body: data,
       }),
       invalidatesTags: ["Sleep"],
     }),
     deleteSleepById: builder.mutation({
-      query: (id) => ({
-        url: `sleep/${id}`,
+      query: (sleepId) => ({
+        url: `sleep/${sleepId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Sleep"],

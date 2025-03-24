@@ -3,7 +3,7 @@ const { Sleep } = require("../models");
 const { createSleepSchema } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
-  //get all sleep data
+  // get all sleep data
   fastify.get(
     "/sleep/:userId",
     { onRequest: [fastify.auth] },
@@ -42,12 +42,12 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  // edit sleep data
+  // update sleep data
   fastify.put(
-    "/sleep/:id",
+    "/sleep/:sleepId",
     { schema: createSleepSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id } = request.params;
+      const { sleepId } = request.params;
       const { date, durationHour, quality } = request.body;
 
       if (!date || !durationHour || !quality) {
@@ -56,23 +56,23 @@ module.exports = async (fastify, options) => {
           .send({ error: "Minden mezőt ki kell tölteni!" });
       }
 
-      const sleep = await Sleep.findByPk(id);
+      const sleep = await Sleep.findByPk(sleepId);
       await sleep.update({ date, durationHour, quality });
 
-      return reply.send({ message: "Sleep updated!" });
+      return reply.send({ message: `Sleep updated with an id of ${sleepId}!` });
     }
   );
 
   //delete sleep data
   fastify.delete(
-    "/sleep/:id",
+    "/sleep/:sleepId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { id } = request.params;
-      await Sleep.destroy({ where: { id } });
+      const { sleepId } = request.params;
+      await Sleep.destroy({ where: { id: sleepId } });
 
       reply.send({
-        message: `Deleted a sleep with an id of ${id}!`,
+        message: `Deleted a sleep with an id of ${sleepId}!`,
       });
     }
   );

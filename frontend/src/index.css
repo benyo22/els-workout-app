@@ -204,12 +204,12 @@
   }
 
   .blue-button {
-    @apply bg-primary-blue text-primary-white rounded-lg mt-15 py-2 hover:bg-secondary-blue active:bg-secondary-blue hover:scale-101 cursor-pointer transition-all duration-300 ease-out;
+    @apply bg-primary-blue text-primary-white rounded-lg py-2 hover:bg-secondary-blue active:bg-secondary-blue hover:scale-101 cursor-pointer transition-all duration-300 ease-out;
     @apply dark:bg-dark-primary-blue dark:hover:bg-dark-secondary-blue dark:active:bg-dark-secondary-blue;
   }
 
   .red-button {
-    @apply bg-primary-red text-primary-white rounded-lg my-4 py-2 hover:bg-secondary-red active:bg-primary-red hover:scale-101 cursor-pointer transition-all duration-300 ease-out;
+    @apply bg-primary-red text-primary-white rounded-lg py-2 hover:bg-secondary-red active:bg-primary-red hover:scale-101 cursor-pointer transition-all duration-300 ease-out;
   }
 
   /* ---------------------- Errors ---------------------- */

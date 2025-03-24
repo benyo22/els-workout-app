@@ -3,9 +3,6 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Set extends Model {
     static associate(models) {
-      this.belongsTo(models.User, {
-        foreignKey: "userId",
-      });
       this.belongsTo(models.Exercise, {
         foreignKey: "exerciseId",
       });
@@ -13,16 +10,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Set.init(
     {
-      userId: {
-        allowNull: false,
-        references: {
-          model: "users",
-          key: "id",
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade",
-        type: DataTypes.INTEGER,
-      },
       exerciseId: {
         allowNull: false,
         references: {
@@ -31,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         onUpdate: "cascade",
         onDelete: "cascade",
+        type: DataTypes.INTEGER,
+      },
+      workoutId: {
+        allowNull: false,
         type: DataTypes.INTEGER,
       },
       setNumber: {
@@ -43,7 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       weight: {
-        allowNull: false,
         type: DataTypes.INTEGER,
       },
       type: {

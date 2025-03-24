@@ -8,7 +8,7 @@ export const ExerciseManagerHeader = ({
   visible,
   setVisible,
 }) => (
-  <header className="flex justify-between">
+  <header className="flex justify-between sticky top-0">
     <p className="mt-3 font-semibold text-xl">{workoutName || "Új edzés"}</p>
     <Button
       onClick={() => {

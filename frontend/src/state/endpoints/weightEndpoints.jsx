@@ -18,16 +18,16 @@ export const weightEndpoints = elsApi.injectEndpoints({
       invalidatesTags: ["Weights"],
     }),
     updateWeightById: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `weight/${id}`,
+      query: ({ weightId, data }) => ({
+        url: `weight/${weightId}`,
         method: "PUT",
         body: data,
       }),
       invalidatesTags: ["Weights"],
     }),
     deleteWeightById: builder.mutation({
-      query: (id) => ({
-        url: `weight/${id}`,
+      query: (weightId) => ({
+        url: `weight/${weightId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Weights"],

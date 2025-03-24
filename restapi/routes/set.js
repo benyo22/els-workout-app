@@ -2,50 +2,41 @@ const { StatusCodes } = require("http-status-codes");
 const { Set, Exercise } = require("../models");
 const { isGoodSetType } = require("../utils/helper");
 const { createSetSchema } = require("../utils/fastify.schemas");
+const { where } = require("sequelize");
 
-async function setRoutes(fastify, options) {
+module.exports = async (fastify, options) => {
   // get all sets for an exercise
   fastify.get(
-    "/sets/:exerciseId",
+    "/sets/:exerciseId/:workoutId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { exerciseId } = request.params;
+      const { exerciseId, workoutId } = request.params;
 
-      const exercise = await Exercise.findByPk(exerciseId, {
-        include: {
-          model: Set,
-        },
-      });
+      const sets = await Set.findAll({ where: { exerciseId, workoutId } });
 
-      reply.send(exercise.Sets);
+      reply.send(sets);
     }
   );
 
   // add a new set to an exercise
   fastify.post(
-    "/sets/:exerciseId/:userId",
-    { schema: createSetSchema, onRequest: [fastify.auth] },
+    "/sets/:exerciseId/:workoutId",
+    { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { exerciseId, userId } = request.params;
-      const { setNumber, reps, duration, weight, type } = request.body;
-
-      if (!isGoodSetType(type)) {
-        return reply
-          .status(StatusCodes.CONFLICT)
-          .send({ error: "Nem jó szett típus!" });
-      }
+      const { exerciseId, workoutId } = request.params;
 
       await Set.create({
-        userId,
         exerciseId,
-        setNumber,
-        reps,
-        duration,
-        weight,
-        type,
+        workoutId,
+        setNumber: null,
+        reps: null,
+        weight: null,
+        duration: null,
+        distance: null,
+        type: null,
       });
 
-      reply.status(StatusCodes.CREATED);
+      reply.status(StatusCodes.CREATED).send({ message: "Set created!" });
     }
   );
 
@@ -55,22 +46,23 @@ async function setRoutes(fastify, options) {
     { schema: createSetSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { setId } = request.params;
-      const { setNumber, reps, duration, weight, type } = request.body;
+      const { setNumber, reps, weight, duration, distance, type } =
+        request.body;
 
-      if (!isGoodSetType) {
+      if (type && !isGoodSetType) {
         return reply
           .status(StatusCodes.CONFLICT)
           .send({ error: "Nem jó szett típus!" });
       }
 
       const set = await Set.findByPk(setId);
-      await set.update({ setNumber, reps, duration, weight, type });
+      await set.update({ setNumber, reps, weight, duration, distance, type });
 
       reply.send({ message: "Set updated!" });
     }
   );
 
-  // delete a set
+  // delete one set
   fastify.delete(
     "/sets/:setId",
     { onRequest: [fastify.auth] },
@@ -82,6 +74,20 @@ async function setRoutes(fastify, options) {
       reply.send({ message: "Set deleted!" });
     }
   );
-}
 
-module.exports = setRoutes;
+  // delete all sets in exercise
+  fastify.delete(
+    "/sets-delete-all/:exerciseId/:workoutId",
+    { onRequest: [fastify.auth] },
+    async (request, reply) => {
+      const { exerciseId, workoutId } = request.params;
+
+      const sets = await Set.findAll({ where: { exerciseId, workoutId } });
+      for (let i = 0; i < sets.length; i++) {
+        await Set.destroy({ where: { id: sets[i].id } });
+      }
+
+      reply.send({ message: "Sets in exercise deleted!" });
+    }
+  );
+};

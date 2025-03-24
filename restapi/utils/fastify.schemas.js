@@ -109,8 +109,9 @@ const createSetSchema = {
     properties: {
       setNumber: { type: "integer" },
       reps: { type: "integer" },
-      duration: { type: "integer" },
       weight: { type: "integer" },
+      duration: { type: "integer" },
+      distance: { type: "integer" },
       type: { type: "string" },
     },
   },

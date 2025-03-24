@@ -32,7 +32,7 @@ export const ExerciseManager = ({
       draggable={false}
       closable={false}
       closeOnEscape={false}
-      className="bg-primary-white shadow-lg border-1 border-primary-grey dark:bg-dark-medium rounded-lg max-w-full w-full md:max-w-md h-[500px] 2xl:h-[700px] p-4"
+      className="bg-primary-white shadow-lg border-1 border-primary-grey dark:bg-dark-medium rounded-lg max-w-full w-full md:max-w-md h-[700px] p-4 overflow-y-auto"
       unstyled
     >
       <main className="flex flex-col mt-4">
@@ -75,7 +75,7 @@ export const ExerciseManager = ({
         {!selectedWorkout?.isCompleted && (
           <Button
             label="Gyakorlat hozzáadása"
-            className="blue-button"
+            className="blue-button my-4"
             onClick={() => setShowAddExercise(true)}
             unstyled
           />
@@ -84,7 +84,7 @@ export const ExerciseManager = ({
         {/* Delete workout button */}
         <Button
           label="Edzés törlése"
-          className="red-button"
+          className="red-button my-4"
           onClick={() => {
             deleteWorkout(selectedWorkout?.id, () => setVisible(false));
           }}

@@ -9,16 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
-        allowNull: false,
-        references: {
-          model: "users",
-          key: "id",
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade",
-        type: Sequelize.INTEGER,
-      },
       exerciseId: {
         allowNull: false,
         references: {
@@ -27,6 +17,10 @@ module.exports = {
         },
         onUpdate: "cascade",
         onDelete: "cascade",
+        type: Sequelize.INTEGER,
+      },
+      workoutId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       setNumber: {
@@ -39,7 +33,6 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       weight: {
-        allowNull: false,
         type: Sequelize.INTEGER,
       },
       type: {

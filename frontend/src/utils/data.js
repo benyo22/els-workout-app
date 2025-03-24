@@ -34,3 +34,5 @@ export const categoryLabels = {
   distance: "Távolság",
   other: "Egyéb",
 };
+
+export const setTypes = ["warm-up", "dropset", "failure"];
