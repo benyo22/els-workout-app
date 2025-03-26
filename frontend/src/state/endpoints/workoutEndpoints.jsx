@@ -22,7 +22,7 @@ export const workoutEndpoints = elsApi.injectEndpoints({
         url: `workout-close/${workoutId}`,
         method: "PATCH",
       }),
-      invalidatesTags: ["Workouts"],
+      invalidatesTags: ["Workouts", "Sets", "Exercises"],
     }),
     editWorkoutById: builder.mutation({
       query: ({ workoutId, data }) => ({

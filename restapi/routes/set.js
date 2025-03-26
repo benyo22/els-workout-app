@@ -1,7 +1,10 @@
 const { StatusCodes } = require("http-status-codes");
 const { Set, Exercise } = require("../models");
 const { isGoodSetType } = require("../utils/helper");
-const { createSetSchema } = require("../utils/fastify.schemas");
+const {
+  createSetSchema,
+  bulkUpdateSetSchema,
+} = require("../utils/fastify.schemas");
 const { where } = require("sequelize");
 
 module.exports = async (fastify, options) => {
@@ -25,7 +28,22 @@ module.exports = async (fastify, options) => {
     async (request, reply) => {
       const { exerciseId, workoutId } = request.params;
 
-      await Set.create({
+      const exercise = await Exercise.findByPk(exerciseId);
+      const workout = await Exercise.findByPk(workoutId);
+
+      if (!exercise) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Gyakorlat nem létezik!" });
+      }
+
+      if (!workout) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Edzés nem létezik!" });
+      }
+
+      const set = await Set.create({
         exerciseId,
         workoutId,
         setNumber: null,
@@ -33,10 +51,9 @@ module.exports = async (fastify, options) => {
         weight: null,
         duration: null,
         distance: null,
-        type: null,
       });
 
-      reply.status(StatusCodes.CREATED).send({ message: "Set created!" });
+      reply.status(StatusCodes.CREATED).send(set);
     }
   );
 
@@ -56,9 +73,51 @@ module.exports = async (fastify, options) => {
       }
 
       const set = await Set.findByPk(setId);
+      if (!set) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Szett nem létezik!" });
+      }
       await set.update({ setNumber, reps, weight, duration, distance, type });
 
       reply.send({ message: "Set updated!" });
+    }
+  );
+
+  // bulk update sets
+  fastify.patch(
+    "/sets",
+    { schema: bulkUpdateSetSchema, onRequest: [fastify.auth] },
+    async (request, reply) => {
+      const sets = request.body;
+
+      for (const set of sets) {
+        if (set.type && !isGoodSetType(set.type)) {
+          return reply.status(StatusCodes.CONFLICT).send({
+            error: `Nem jó szett típus ${set.id}!`,
+          });
+        }
+      }
+
+      for (let i = 0; i < sets.length; i++) {
+        await Promise.all(
+          sets.map((set) =>
+            Set.update(
+              {
+                setNumber: set.setNumber,
+                reps: set.reps,
+                weight: set.weight,
+                duration: set.duration,
+                distance: set.distance,
+                type: set.type,
+              },
+              { where: { id: set.id } }
+            )
+          )
+        );
+      }
+
+      reply.status(StatusCodes.OK);
     }
   );
 

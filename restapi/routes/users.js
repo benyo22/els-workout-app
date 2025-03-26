@@ -236,6 +236,11 @@ module.exports = async (fastify, options) => {
       const { id } = request.params;
       const { password } = request.body;
       const user = await User.findByPk(id);
+      if (!user) {
+        return reply.status(StatusCodes.NOT_FOUND).send({
+          error: "Felhasználó nem található!",
+        });
+      }
 
       if (!password) {
         return reply

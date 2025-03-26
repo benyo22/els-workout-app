@@ -19,7 +19,7 @@ export const Sleep = () => {
 
   return (
     <div className="list-container">
-      <h2 className="text-2xl font-bold mb-4">Alvás Napló</h2>
+      <h2 className="text-2xl font-bold mb-4">Alvásaim</h2>
       <Button
         label="Új Bejegyzés"
         icon={<FaPlus className="mr-1" />}

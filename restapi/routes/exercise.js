@@ -80,7 +80,7 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  // // update an exercise
+  // update an exercise
   // fastify.patch(
   //   "/exercises/:id",
   //   { schema: createExerciseSchema, onRequest: [fastify.auth] },
@@ -124,9 +124,9 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  // delete an exercise from workout
+  // remove an exercise from workout
   fastify.delete(
-    "/delete-exercise-from-workout/:exerciseId/:workoutId",
+    "/remove-exercise-from-workout/:exerciseId/:workoutId",
     async (request, reply) => {
       const { exerciseId, workoutId } = request.params;
       const workout = await Workout.findByPk(workoutId);

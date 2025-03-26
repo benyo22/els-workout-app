@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { Workout } = require("../models");
+const { Workout, Exercise, Set } = require("../models");
 const { where } = require("sequelize");
 const { createWorkoutSchema } = require("../utils/fastify.schemas");
 
@@ -55,10 +55,47 @@ module.exports = async (fastify, options) => {
     { onRequest: [fastify.auth] },
     async (request, reply) => {
       const { workoutId } = request.params;
-      const workoutData = await Workout.findByPk(workoutId);
+      const workout = await Workout.findByPk(workoutId, {
+        include: {
+          model: Exercise,
+          through: { attributes: [] }, // exclude pivot table attributes
+        },
+      });
 
-      workoutData.isCompleted = true;
-      await workoutData.save();
+      workout.isCompleted = true;
+      await workout.save();
+
+      const exercises = workout.Exercises;
+
+      // remove empty sets
+      for (const exercise of exercises) {
+        const sets = await Set.findAll({
+          where: { exerciseId: exercise.id, workoutId },
+        });
+
+        for (const set of sets) {
+          if (
+            (set.reps === 0 || set.weight === 0) &&
+            set.duration === 0 &&
+            set.distance === 0
+          ) {
+            await Set.destroy({
+              where: { id: set.id },
+            });
+          }
+        }
+      }
+
+      // remove empty exercises
+      for (const exercise of exercises) {
+        const sets = await Set.findAll({
+          where: { exerciseId: exercise.id, workoutId },
+        });
+
+        if (sets.length === 0) {
+          await workout.removeExercise(exercise);
+        }
+      }
 
       return reply.send({ message: "Workout closed!" });
     }
@@ -87,11 +124,31 @@ module.exports = async (fastify, options) => {
     "/workout/:workoutId",
     { onRequest: [fastify.auth] },
     async (request, reply) => {
-      const { workoutId: id } = request.params;
-      await Workout.destroy({ where: { id } });
+      const { workoutId } = request.params;
+      const workout = await Workout.findByPk(workoutId, {
+        include: {
+          model: Exercise,
+          through: { attributes: [] }, // exclude pivot table attributes
+        },
+      });
+
+      // remove empty sets
+      const exercises = workout.Exercises;
+      for (const exercise of exercises) {
+        const sets = await Set.findAll({
+          where: { exerciseId: exercise.id, workoutId },
+        });
+
+        for (const set of sets) {
+          await Set.destroy({
+            where: { id: set.id },
+          });
+        }
+      }
+      await Workout.destroy({ where: { id: workoutId } });
 
       reply.send({
-        message: `Deleted a workout with an id of ${id}!`,
+        message: `Deleted a workout with an id of ${workoutId}!`,
       });
     }
   );

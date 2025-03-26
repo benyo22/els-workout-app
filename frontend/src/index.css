@@ -264,16 +264,25 @@
 }
 
 /* ---------------------- Custom Scrollbar Styles ---------------------- */
-::-webkit-scrollbar-track {
-  border: 0px solid #3749a8;
-  background-color: #fcfefd;
-}
 
-::-webkit-scrollbar {
-  width: 2px;
-  background-color: #fcfefd;
-}
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-::-webkit-scrollbar-thumb {
-  background-color: #3749a8;
+  ::-webkit-scrollbar-track {
+    border: 0px solid #3749a8;
+    background-color: #fcfefd;
+  }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+    background-color: #fcfefd;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #3749a8;
+  }
 }

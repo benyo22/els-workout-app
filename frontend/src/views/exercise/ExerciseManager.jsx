@@ -7,6 +7,7 @@ import { Dialog } from "primereact/dialog";
 
 import { AddExercise } from "./components/AddExercise";
 import { ExerciseList } from "./components/ExerciseList";
+import { useGetExcercisesInWorkoutQuery } from "../../state/endpoints/exerciseEndpoints";
 
 export const ExerciseManager = ({
   setVisible,
@@ -16,6 +17,20 @@ export const ExerciseManager = ({
   finishWorkout,
 }) => {
   const [showAddExercise, setShowAddExercise] = useState(false);
+  const { data: exercisesInWorkout } = useGetExcercisesInWorkoutQuery(
+    selectedWorkout?.id,
+    { skip: !selectedWorkout?.id }
+  );
+
+  const handleFinisWorkout = () => {
+    finishWorkout(selectedWorkout, () => {
+      setVisible(false);
+      // row selection works fine because of this
+      setTimeout(() => {
+        setSelectedWorkout(null);
+      }, 100);
+    });
+  };
 
   return (
     <Dialog
@@ -57,22 +72,17 @@ export const ExerciseManager = ({
             <Button
               label="Befejez"
               className="green-button"
-              onClick={() => {
-                finishWorkout(selectedWorkout, () => {
-                  setVisible(false);
-                  // row selection works fine because of this
-                  setTimeout(() => {
-                    setSelectedWorkout(null);
-                  }, 100);
-                });
-              }}
+              onClick={handleFinisWorkout}
               unstyled
             />
           )}
         </div>
 
         {/* Exercises in workout */}
-        <ExerciseList workout={selectedWorkout} />
+        <ExerciseList
+          workout={selectedWorkout}
+          exercisesInWorkout={exercisesInWorkout}
+        />
 
         {/* Adding exercises dialog */}
         {showAddExercise && (

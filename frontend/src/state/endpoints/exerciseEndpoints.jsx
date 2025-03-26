@@ -46,9 +46,9 @@ export const exerciseEndpoints = elsApi.injectEndpoints({
       }),
       invalidatesTags: ["Exercises"],
     }),
-    deleteExerciseFromWorkout: builder.mutation({
+    removeExerciseFromWorkout: builder.mutation({
       query: ({ exerciseId, workoutId }) => ({
-        url: `delete-exercise-from-workout/${exerciseId}/${workoutId}`,
+        url: `remove-exercise-from-workout/${exerciseId}/${workoutId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Exercises", "Workouts"],
@@ -63,5 +63,5 @@ export const {
   useCreateExcerciseMutation,
   useUpdateExerciseByIdMutation,
   useAddExerciseToWorkoutMutation,
-  useDeleteExerciseFromWorkoutMutation,
+  useRemoveExerciseFromWorkoutMutation,
 } = exerciseEndpoints;

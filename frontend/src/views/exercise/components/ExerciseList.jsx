@@ -2,20 +2,13 @@
 import { Button } from "primereact/button";
 
 import { Sets } from "../../set/Sets";
-import {
-  useDeleteExerciseFromWorkoutMutation,
-  useGetExcercisesInWorkoutQuery,
-} from "../../../state/endpoints/exerciseEndpoints";
 import { categoryLabels } from "../../../utils/data";
 import { useDeleteAllSetsInExerciseMutation } from "../../../state/endpoints/setEndpoints";
+import { useRemoveExerciseFromWorkoutMutation } from "../../../state/endpoints/exerciseEndpoints";
 
-export const ExerciseList = ({ workout }) => {
-  const { data: exercisesInWorkout } = useGetExcercisesInWorkoutQuery(
-    workout?.id,
-    { skip: !workout?.id }
-  );
+export const ExerciseList = ({ workout, exercisesInWorkout }) => {
   const [deleteAllSets] = useDeleteAllSetsInExerciseMutation();
-  const [deleteExerciseFromWorkout] = useDeleteExerciseFromWorkoutMutation();
+  const [deleteExerciseFromWorkout] = useRemoveExerciseFromWorkoutMutation();
 
   return (
     <section className="flex flex-col gap-y-4 mt-4 overflow-y-auto">
@@ -52,6 +45,7 @@ export const ExerciseList = ({ workout }) => {
             <Sets
               exerciseId={exercise.id}
               workoutId={workout?.id}
+              exerciseCategory={exercise.category}
               workoutIsCompleted={workout?.isCompleted}
             />
           </div>
