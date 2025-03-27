@@ -20,7 +20,9 @@ export const WeightRepsCategory = ({ set, workoutIsCompleted }) => {
             });
           }}
           value={set.weight === 0 ? "" : set.weight}
-          className="input w-30 h-7 mt-1 text-right"
+          className={`input w-30 h-7 mt-1 text-right ${
+            workoutIsCompleted ? "hover:shadow-none" : ""
+          }`}
           disabled={workoutIsCompleted}
         />
       </div>
@@ -39,7 +41,9 @@ export const WeightRepsCategory = ({ set, workoutIsCompleted }) => {
             });
           }}
           value={set.reps === 0 ? "" : set.reps}
-          className="input w-30 h-7 mt-1 text-right"
+          className={`input w-30 h-7 mt-1 text-right ${
+            workoutIsCompleted ? "hover:shadow-none" : ""
+          }`}
           disabled={workoutIsCompleted}
         />
       </div>

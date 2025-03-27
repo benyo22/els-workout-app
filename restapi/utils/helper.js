@@ -47,10 +47,17 @@ const isGoodSetType = (setType) => {
   return true;
 };
 
+// Errors ----------------------------------------------------------------------------
+const USER_NOT_FOUND_ERROR = "A Felhasználó nem található!";
+const ALL_REQUIRED_ERROR = "Minden mezőt ki kell tölteni!";
+
 module.exports = {
   isObjectEmpty,
   validateEmail,
   isGoodBodyPart,
   isGoodCategory,
   isGoodSetType,
+  // Errors
+  USER_NOT_FOUND_ERROR,
+  ALL_REQUIRED_ERROR,
 };

@@ -30,19 +30,19 @@ module.exports = (sequelize, DataTypes) => {
       reps: {
         type: DataTypes.INTEGER,
       },
-      duration: {
+      weight: {
         type: DataTypes.INTEGER,
       },
-      weight: {
+      distance: {
+        type: DataTypes.DOUBLE,
+      },
+      duration: {
         type: DataTypes.INTEGER,
       },
       type: {
         allowNull: false,
         defaultValue: "/",
         type: DataTypes.ENUM("warm-up", "dropset", "failure", "/"),
-      },
-      distance: {
-        type: DataTypes.DOUBLE,
       },
     },
     {

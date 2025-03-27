@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
-const { Sleep } = require("../models");
+const { Sleep, User } = require("../models");
 const { createSleepSchema } = require("../utils/fastify.schemas");
+const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/helper");
 
 module.exports = async (fastify, options) => {
   // get all sleep data
@@ -9,9 +10,17 @@ module.exports = async (fastify, options) => {
     { onRequest: [fastify.auth] },
     async (request, reply) => {
       const { userId } = request.params;
+
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: USER_NOT_FOUND_ERROR });
+      }
+
       const sleepData = await Sleep.findAll({ where: { userId } });
 
-      reply.send(sleepData);
+      return reply.send(sleepData);
     }
   );
 
@@ -21,18 +30,25 @@ module.exports = async (fastify, options) => {
     { schema: createSleepSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { userId } = request.params;
-      const { date, durationHour, quality } = request.body;
+      const { date, durationSec, quality } = request.body;
 
-      if (!date || !durationHour || !quality) {
+      const user = await User.findByPk(userId);
+      if (!user) {
         return reply
           .status(StatusCodes.BAD_REQUEST)
-          .send({ error: "Minden mezőt ki kell tölteni!" });
+          .send({ error: USER_NOT_FOUND_ERROR });
+      }
+
+      if (!date || !durationSec || !quality) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: ALL_REQUIRED_ERROR });
       }
 
       await Sleep.create({
         userId,
         date,
-        durationHour,
+        durationSec,
         quality,
       });
 
@@ -48,16 +64,16 @@ module.exports = async (fastify, options) => {
     { schema: createSleepSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { sleepId } = request.params;
-      const { date, durationHour, quality } = request.body;
+      const { date, durationSec, quality } = request.body;
 
-      if (!date || !durationHour || !quality) {
+      if (!date || !durationSec || !quality) {
         return reply
           .status(StatusCodes.BAD_REQUEST)
-          .send({ error: "Minden mezőt ki kell tölteni!" });
+          .send({ error: ALL_REQUIRED_ERROR });
       }
 
       const sleep = await Sleep.findByPk(sleepId);
-      await sleep.update({ date, durationHour, quality });
+      await sleep.update({ date, durationSec, quality });
 
       return reply.send({ message: `Sleep updated with an id of ${sleepId}!` });
     }

@@ -43,9 +43,11 @@ export const DurationCategory = ({ set, workoutIsCompleted }) => {
           id="duration"
           name="duration"
           type="number"
-          value={time.hh}
+          value={time.hh === 0 && !workoutIsCompleted ? "" : time.hh}
           onChange={(e) => handleChange(e, "hh")}
-          className="input w-10 h-7 mt-1 text-right"
+          className={`input w-10 h-7 mt-1 text-right ${
+            workoutIsCompleted ? "hover:shadow-none" : ""
+          }`}
           disabled={workoutIsCompleted}
         />
         <span>:</span>
@@ -53,9 +55,11 @@ export const DurationCategory = ({ set, workoutIsCompleted }) => {
           id="duration"
           name="duration"
           type="number"
-          value={time.mm}
+          value={time.mm === 0 && !workoutIsCompleted ? "" : time.mm}
           onChange={(e) => handleChange(e, "mm")}
-          className="input w-10 h-7 mt-1 text-right"
+          className={`input w-10 h-7 mt-1 text-right ${
+            workoutIsCompleted ? "hover:shadow-none" : ""
+          }`}
           disabled={workoutIsCompleted}
         />
         <span>:</span>
@@ -63,9 +67,11 @@ export const DurationCategory = ({ set, workoutIsCompleted }) => {
           id="duration"
           name="duration"
           type="number"
-          value={time.ss}
+          value={time.ss === 0 && !workoutIsCompleted ? "" : time.ss}
           onChange={(e) => handleChange(e, "ss")}
-          className="input w-10 h-7 mt-1 text-right"
+          className={`input w-10 h-7 mt-1 text-right ${
+            workoutIsCompleted ? "hover:shadow-none" : ""
+          }`}
           disabled={workoutIsCompleted}
         />
       </div>

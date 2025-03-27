@@ -27,7 +27,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATEONLY,
       },
-      isCompleted: {
+      isFinished: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
       },

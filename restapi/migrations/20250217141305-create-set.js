@@ -29,19 +29,19 @@ module.exports = {
       reps: {
         type: Sequelize.INTEGER,
       },
-      duration: {
+      weight: {
         type: Sequelize.INTEGER,
       },
-      weight: {
+      distance: {
+        type: Sequelize.DOUBLE,
+      },
+      duration: {
         type: Sequelize.INTEGER,
       },
       type: {
         allowNull: false,
         defaultValue: "/",
         type: Sequelize.ENUM("warm-up", "dropset", "failure", "/"),
-      },
-      distance: {
-        type: Sequelize.DOUBLE,
       },
       createdAt: {
         allowNull: false,

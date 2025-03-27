@@ -40,6 +40,15 @@ export const SleepTable = ({ sleepData, setShowForm, setEditingEntry }) => {
   );
 
   const qualityTemplate = (rowData) => sleepQualityLabels[rowData.quality];
+
+  const durationTemplate = (rowData) => {
+    const hours = Math.floor(rowData.durationSec / 3600);
+    const minutes = Math.floor((rowData.durationSec % 3600) / 60);
+    console.log(hours);
+
+    return `${hours} óra ${minutes} perc`;
+  };
+
   return (
     <DataTable
       value={sleepData}
@@ -48,9 +57,10 @@ export const SleepTable = ({ sleepData, setShowForm, setEditingEntry }) => {
       scrollable
       scrollHeight="400px"
       removableSort
+      emptyMessage="Még nincs feljegyzett alvás"
     >
       <Column field="date" header="Dátum" sortable />
-      <Column field="durationHour" header="Időtartam (óra)" sortable />
+      <Column body={durationTemplate} header="Időtartam" sortable />
       <Column body={qualityTemplate} header="Minőség" sortable />
       <Column body={actionsTemplate} header="Műveletek" />
     </DataTable>

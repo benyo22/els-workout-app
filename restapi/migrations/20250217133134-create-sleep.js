@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATEONLY,
       },
-      durationHour: {
+      durationSec: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
