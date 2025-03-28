@@ -126,7 +126,7 @@ module.exports = async (fastify, options) => {
 
       await workoutData.update({
         name,
-        date: new Date(date),
+        date: !date ? workoutData.date : new Date(date),
       });
 
       return reply.send({ message: "Workout updated!" });

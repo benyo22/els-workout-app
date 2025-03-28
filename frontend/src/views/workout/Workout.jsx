@@ -13,7 +13,7 @@ import {
 import { ErrorMessage } from "../helper/ErrorMessage";
 import { WorkoutTable } from "./components/WorkoutTable";
 import { selectUserId } from "../../state/slices/authSlice";
-import { ExerciseManager } from "../exercise/ExerciseManager";
+import { WorkoutManager } from "./components/WorkoutManager";
 import { CreateWorkoutForm } from "./components/CreateWorkoutForm";
 
 export const Workout = () => {
@@ -112,7 +112,7 @@ export const Workout = () => {
           )}
 
           {visibleWorkout && (
-            <ExerciseManager
+            <WorkoutManager
               setVisible={setVisibleWorkout}
               selectedWorkout={selectedWorkout}
               setSelectedWorkout={setSelectedWorkout}
