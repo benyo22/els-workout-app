@@ -1,7 +1,7 @@
+const { Weight, User } = require("../models");
 const { StatusCodes } = require("http-status-codes");
-const { Weight } = require("../models");
-const { where } = require("sequelize");
 const { createWeightSchema } = require("../utils/fastify.schemas");
+const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/helper");
 
 module.exports = async (fastify, options) => {
   // get all weight data
@@ -10,6 +10,14 @@ module.exports = async (fastify, options) => {
     { onRequest: [fastify.auth] },
     async (request, reply) => {
       const { userId } = request.params;
+
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: USER_NOT_FOUND_ERROR });
+      }
+
       const weightData = await Weight.findAll({ where: { userId } });
 
       reply.send(weightData);
@@ -24,10 +32,17 @@ module.exports = async (fastify, options) => {
       const { userId } = request.params;
       const { date, weight } = request.body;
 
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: USER_NOT_FOUND_ERROR });
+      }
+
       if (!weight || !date) {
         return reply
           .status(StatusCodes.BAD_REQUEST)
-          .send({ error: "Minden mezőt ki kell tölteni!" });
+          .send({ error: ALL_REQUIRED_ERROR });
       }
 
       await Weight.create({
@@ -53,7 +68,7 @@ module.exports = async (fastify, options) => {
       if (!weight || !date) {
         return reply
           .status(StatusCodes.BAD_REQUEST)
-          .send({ error: "Minden mezőt ki kell tölteni!" });
+          .send({ error: ALL_REQUIRED_ERROR });
       }
 
       const weightData = await Weight.findByPk(weightId);

@@ -44,7 +44,6 @@ export const SleepTable = ({ sleepData, setShowForm, setEditingEntry }) => {
   const durationTemplate = (rowData) => {
     const hours = Math.floor(rowData.durationSec / 3600);
     const minutes = Math.floor((rowData.durationSec % 3600) / 60);
-    console.log(hours);
 
     return `${hours} óra ${minutes} perc`;
   };
@@ -53,7 +52,7 @@ export const SleepTable = ({ sleepData, setShowForm, setEditingEntry }) => {
     <DataTable
       value={sleepData}
       paginator
-      rows={5}
+      rows={4}
       scrollable
       scrollHeight="400px"
       removableSort

@@ -38,17 +38,19 @@ export const WeightTable = ({ weightData, setShowForm, setEditingEntry }) => {
     </div>
   );
 
+  const weightTemplate = (rowData) => `${rowData.weight} kg`;
+
   return (
     <DataTable
       value={weightData}
       paginator
-      rows={5}
+      rows={4}
       scrollable
       scrollHeight="400px"
       removableSort
     >
-      <Column field="weight" header="Súly (kg)" sortable />
       <Column field="date" header="Dátum" sortable />
+      <Column body={weightTemplate} header="Súly" sortable />
       <Column body={actionsTemplate} header="Műveletek" />
     </DataTable>
   );

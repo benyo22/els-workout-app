@@ -15,14 +15,14 @@ export const Menu = () => {
   return (
     <>
       {/* Sidebar */}
-      <div className="sidebar">
+      <nav className="sidebar">
         <NavLink to="/" className="logged-in-sidebar-els">
           ELS
         </NavLink>
         <nav className="menu-options-container">
           <MenuOptions />
         </nav>
-      </div>
+      </nav>
 
       {/* Topbar */}
       <header className="topbar">

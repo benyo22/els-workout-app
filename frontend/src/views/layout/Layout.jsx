@@ -8,9 +8,9 @@ export const Layout = () => (
     <>
       <Menu />
 
-      <div className="authed-outlet-container">
+      <main className="authed-outlet-container">
         <Outlet />
-      </div>
+      </main>
 
       <Footer />
     </>

@@ -1,10 +1,13 @@
 const argon2 = require("argon2");
-var omit = require("object.omit");
-const { StatusCodes } = require("http-status-codes");
-
+const omit = require("object.omit");
 const { User } = require("../models");
-const { isObjectEmpty, validateEmail } = require("../utils/helper");
-
+const { StatusCodes } = require("http-status-codes");
+const {
+  isObjectEmpty,
+  validateEmail,
+  USER_NOT_FOUND_ERROR,
+  ALL_REQUIRED_ERROR,
+} = require("../utils/helper");
 const {
   registerSchema,
   loginSchema,
@@ -64,7 +67,7 @@ module.exports = async (fastify, options) => {
 
     const trimmedUsername = username.trim();
     const user = await User.findOne({ where: { username: trimmedUsername } });
-    if (!user) errors.username = "A felhasználó nem található!";
+    if (!user) errors.username = USER_NOT_FOUND_ERROR;
 
     // return early if there are errors
     if (!isObjectEmpty(errors))
@@ -110,7 +113,13 @@ module.exports = async (fastify, options) => {
     { schema: getUserSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { id } = request.params;
+
       const user = await User.findByPk(id);
+      if (!user) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: USER_NOT_FOUND_ERROR });
+      }
 
       //convert to plain object so omit works on it
       const userObject = user.get({ plain: true });
@@ -198,14 +207,14 @@ module.exports = async (fastify, options) => {
 
       if (!oldPassword || !newPassword) {
         return reply.status(StatusCodes.BAD_REQUEST).send({
-          error: "A *-al jelölt mezők megadása kötelező!",
+          error: ALL_REQUIRED_ERROR,
         });
       }
 
       const user = await User.findByPk(id);
       if (!user) {
         return reply.status(StatusCodes.NOT_FOUND).send({
-          error: "Felhasználó nem található!",
+          error: USER_NOT_FOUND_ERROR,
         });
       }
 
@@ -238,7 +247,7 @@ module.exports = async (fastify, options) => {
       const user = await User.findByPk(id);
       if (!user) {
         return reply.status(StatusCodes.NOT_FOUND).send({
-          error: "Felhasználó nem található!",
+          error: USER_NOT_FOUND_ERROR,
         });
       }
 
