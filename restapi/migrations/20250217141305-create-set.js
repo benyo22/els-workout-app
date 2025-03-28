@@ -21,6 +21,12 @@ module.exports = {
       },
       workoutId: {
         allowNull: false,
+        references: {
+          model: "workouts",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
         type: Sequelize.INTEGER,
       },
       setNumber: {

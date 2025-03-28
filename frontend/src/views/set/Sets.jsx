@@ -16,7 +16,7 @@ export const Sets = ({
   exerciseId,
   workoutId,
   exerciseCategory,
-  workoutIsCompleted,
+  workoutIsFinished,
 }) => {
   const [error, setError] = useState();
   const [deleteSet] = useDeleteSetByIdMutation();
@@ -75,14 +75,14 @@ export const Sets = ({
           handleDelete={handleDelete}
           setsInExercises={setsInExercises}
           exerciseCategory={exerciseCategory}
-          workoutIsCompleted={workoutIsCompleted}
+          workoutIsFinished={workoutIsFinished}
         />
       ))}
 
       <ErrorMessage message={error} />
 
       {/* Add new set to exercise button */}
-      {!workoutIsCompleted && (
+      {!workoutIsFinished && (
         <Button
           label="+ Szett hozzáadása"
           className="blue-button p-0 mt-4"

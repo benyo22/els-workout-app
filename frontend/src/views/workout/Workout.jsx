@@ -5,25 +5,31 @@ import { FaPlus } from "react-icons/fa6";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
-import { CreateWorkoutForm } from "./components/CreateWorkoutForm";
-import { WorkoutTable } from "./components/WorkoutTable";
 import {
   useDeleteWorkoutByIdMutation,
   useFinishWorkoutByIdMutation,
   useGetWorkoutByUserIdQuery,
 } from "../../state/endpoints/workoutEndpoints";
-import { ExerciseManager } from "../exercise/ExerciseManager";
+import { ErrorMessage } from "../helper/ErrorMessage";
+import { WorkoutTable } from "./components/WorkoutTable";
 import { selectUserId } from "../../state/slices/authSlice";
+import { ExerciseManager } from "../exercise/ExerciseManager";
+import { CreateWorkoutForm } from "./components/CreateWorkoutForm";
 
 export const Workout = () => {
   const userId = useSelector(selectUserId);
-  const [closeWorkout] = useFinishWorkoutByIdMutation();
+  const [finishWorkout] = useFinishWorkoutByIdMutation();
   const [deleteWorkout] = useDeleteWorkoutByIdMutation();
-  const { data: workoutData, isLoading } = useGetWorkoutByUserIdQuery(userId);
+  const {
+    data: workoutData,
+    isLoading,
+    isError,
+    error,
+  } = useGetWorkoutByUserIdQuery(userId);
 
-  const [showCreateWorkoutForm, setShowCreateWorkoutForm] = useState(false);
   const [visibleWorkout, setVisibleWorkout] = useState(false);
   const [selectedWorkout, setSelectedWorkout] = useState(null);
+  const [showCreateWorkoutForm, setShowCreateWorkoutForm] = useState(false);
 
   const confirmAction = (message, onAccept) => {
     confirmDialog({
@@ -35,11 +41,12 @@ export const Workout = () => {
     });
   };
 
-  const handleDelete = (workoutId, onAccept) => {
+  const handleDelete = (workoutId, onAccept, startingWorkout) => {
     const activeWorkout = workoutData?.find((w) => !w.isCompleted);
-    const message = activeWorkout
-      ? "Van már egy folyamatban lévő edzésed! Ha újat szeretnél indítani, akkor az törlődni fog. Biztos vagy benne?"
-      : "Biztosan törölni szeretnéd ezt az edzést?";
+    const message =
+      activeWorkout && startingWorkout
+        ? "Van már egy folyamatban lévő edzésed! Ha újat szeretnél indítani, akkor az törlődni fog! Biztos vagy benne?"
+        : "Biztosan törölni szeretnéd ezt az edzést?";
     confirmAction(message, async () => {
       await deleteWorkout(workoutId);
       onAccept?.();
@@ -47,64 +54,76 @@ export const Workout = () => {
   };
 
   const handleFinishWorkout = async (workout, onAccept) => {
-    if (workout.isCompleted) return;
+    if (workout.isFinished) return;
 
     confirmAction(
-      "Biztosan lezárod az edzést? Utána már nem szerkesztheted és ez nem visszafordítható!",
+      "Biztosan befejezed az edzést? Miután lezárod, már nem tudod módosítani, és ez a művelet nem visszavonható!",
       async () => {
-        await closeWorkout(workout.id);
+        await finishWorkout(workout.id);
         onAccept?.();
       }
     );
   };
 
   const handleStartWorkout = () => {
-    const activeWorkout = workoutData?.find((w) => !w.isCompleted);
-
+    const activeWorkout = workoutData?.find((w) => !w.isFinished);
+    const startingWorkout = true;
     if (activeWorkout) {
-      handleDelete(activeWorkout.id, () => setShowCreateWorkoutForm(true));
+      handleDelete(
+        activeWorkout.id,
+        () => setShowCreateWorkoutForm(true),
+        startingWorkout
+      );
     } else {
       setShowCreateWorkoutForm(true);
     }
   };
 
   return (
-    <div className="list-container">
-      <h2 className="text-2xl font-bold mb-4">Edzések</h2>
-      <Button
-        label="Edzés elkezdése"
-        icon={<FaPlus className="mr-1" />}
-        className="edit-button flex items-center mb-4"
-        onClick={handleStartWorkout}
-        unstyled
-      />
-
-      {isLoading ? (
-        <p>Adatok betöltése...</p>
+    <>
+      {isError ? (
+        <ErrorMessage message={error.data.error} />
       ) : (
-        <WorkoutTable
-          workoutData={workoutData}
-          selectedWorkout={selectedWorkout}
-          setSelectedWorkout={setSelectedWorkout}
-          onSelect={() => setVisibleWorkout(true)}
-        />
-      )}
+        <div className="list-container">
+          <h2 className="text-2xl font-bold mb-4">Edzések</h2>
+          <Button
+            label="Edzés elkezdése"
+            icon={<FaPlus className="mr-1" />}
+            className="edit-button flex items-center mb-4"
+            onClick={handleStartWorkout}
+            unstyled
+          />
 
-      {showCreateWorkoutForm && (
-        <CreateWorkoutForm onClose={() => setShowCreateWorkoutForm(false)} />
-      )}
+          {isLoading ? (
+            <p>Adatok betöltése...</p>
+          ) : (
+            <WorkoutTable
+              workoutData={workoutData}
+              selectedWorkout={selectedWorkout}
+              setSelectedWorkout={setSelectedWorkout}
+              onSelect={() => setVisibleWorkout(true)}
+            />
+          )}
 
-      {visibleWorkout && (
-        <ExerciseManager
-          setVisible={setVisibleWorkout}
-          selectedWorkout={selectedWorkout}
-          setSelectedWorkout={setSelectedWorkout}
-          deleteWorkout={handleDelete}
-          finishWorkout={handleFinishWorkout}
-        />
-      )}
+          {showCreateWorkoutForm && (
+            <CreateWorkoutForm
+              onClose={() => setShowCreateWorkoutForm(false)}
+            />
+          )}
 
-      <ConfirmDialog />
-    </div>
+          {visibleWorkout && (
+            <ExerciseManager
+              setVisible={setVisibleWorkout}
+              selectedWorkout={selectedWorkout}
+              setSelectedWorkout={setSelectedWorkout}
+              deleteWorkout={handleDelete}
+              finishWorkout={handleFinishWorkout}
+            />
+          )}
+
+          <ConfirmDialog />
+        </div>
+      )}
+    </>
   );
 };

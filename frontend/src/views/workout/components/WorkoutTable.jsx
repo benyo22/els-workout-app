@@ -10,7 +10,7 @@ export const WorkoutTable = ({
   onSelect,
 }) => {
   const isCompletedTemplate = (rowData) =>
-    rowData.isCompleted ? (
+    rowData.isFinished ? (
       <FaCircleCheck className="text-primary-green" size={25} />
     ) : (
       <FaCircleXmark

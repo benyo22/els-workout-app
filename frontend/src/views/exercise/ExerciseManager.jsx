@@ -68,7 +68,7 @@ export const ExerciseManager = ({
           <span className="font-extrabold">{selectedWorkout?.date}</span>
 
           {/* Finish workout button */}
-          {!selectedWorkout?.isCompleted && (
+          {!selectedWorkout?.isFinished && (
             <Button
               label="Befejez"
               className="green-button"
@@ -93,7 +93,7 @@ export const ExerciseManager = ({
         )}
 
         {/* Add exercise button */}
-        {!selectedWorkout?.isCompleted && (
+        {!selectedWorkout?.isFinished && (
           <Button
             label="Gyakorlat hozzáadása"
             className="blue-button my-4"

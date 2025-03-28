@@ -119,7 +119,7 @@ module.exports = async (fastify, options) => {
 
       await workout.addExercise(exercise);
       reply.send({
-        message: `Exercise added to workout with an id of ${workoutId}!`,
+        message: `Exercise (exerciseId:${exerciseId}) added to workout (workoutId:${workoutId})!`,
       });
     }
   );

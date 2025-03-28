@@ -4,7 +4,7 @@ import { Button } from "primereact/button";
 import { setTypes } from "../../../utils/data";
 import { useUpdateSetByIdMutation } from "../../../state/endpoints/setEndpoints";
 
-export const SetButton = ({ set, setsInExercises, workoutIsCompleted }) => {
+export const SetButton = ({ set, setsInExercises, workoutIsFinished }) => {
   const [updateSet] = useUpdateSetByIdMutation();
 
   const handleTypeChange = async () => {
@@ -38,7 +38,7 @@ export const SetButton = ({ set, setsInExercises, workoutIsCompleted }) => {
         label={setTypes[set.type] === "/" ? set.setNumber : setTypes[set.type]}
         onClick={handleTypeChange}
         className={`h-8 w-8 border-1 border-gray-200 hover:bg-gray-300 active:bg-gray-300 rounded-lg px-2 bg-gray-200 dark:bg-dark-light dark:hover:bg-gray-600 dark:active:bg-gray-600 ${
-          workoutIsCompleted ? "cursor-default" : "cursor-pointer"
+          workoutIsFinished ? "cursor-default" : "cursor-pointer"
         } ${
           set.type === "warm-up"
             ? "text-yellow-500 dark:text-yellow-300"
@@ -49,7 +49,7 @@ export const SetButton = ({ set, setsInExercises, workoutIsCompleted }) => {
             : "text-black dark:text-primary-white"
         }`}
         unstyled
-        disabled={workoutIsCompleted}
+        disabled={workoutIsFinished}
       />
     </div>
   );

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useUpdateSetByIdMutation } from "../../../state/endpoints/setEndpoints";
 
-export const DurationCategory = ({ set, workoutIsCompleted }) => {
+export const DurationCategory = ({ set, workoutIsFinished }) => {
   const [updateSet] = useUpdateSetByIdMutation();
 
   const getInitialValues = (totalSeconds) => {
@@ -43,36 +43,36 @@ export const DurationCategory = ({ set, workoutIsCompleted }) => {
           id="duration"
           name="duration"
           type="number"
-          value={time.hh === 0 && !workoutIsCompleted ? "" : time.hh}
+          value={time.hh === 0 && !workoutIsFinished ? "" : time.hh}
           onChange={(e) => handleChange(e, "hh")}
           className={`input w-10 h-7 mt-1 text-right ${
-            workoutIsCompleted ? "hover:shadow-none" : ""
+            workoutIsFinished ? "hover:shadow-none" : ""
           }`}
-          disabled={workoutIsCompleted}
+          disabled={workoutIsFinished}
         />
         <span>:</span>
         <input
           id="duration"
           name="duration"
           type="number"
-          value={time.mm === 0 && !workoutIsCompleted ? "" : time.mm}
+          value={time.mm === 0 && !workoutIsFinished ? "" : time.mm}
           onChange={(e) => handleChange(e, "mm")}
           className={`input w-10 h-7 mt-1 text-right ${
-            workoutIsCompleted ? "hover:shadow-none" : ""
+            workoutIsFinished ? "hover:shadow-none" : ""
           }`}
-          disabled={workoutIsCompleted}
+          disabled={workoutIsFinished}
         />
         <span>:</span>
         <input
           id="duration"
           name="duration"
           type="number"
-          value={time.ss === 0 && !workoutIsCompleted ? "" : time.ss}
+          value={time.ss === 0 && !workoutIsFinished ? "" : time.ss}
           onChange={(e) => handleChange(e, "ss")}
           className={`input w-10 h-7 mt-1 text-right ${
-            workoutIsCompleted ? "hover:shadow-none" : ""
+            workoutIsFinished ? "hover:shadow-none" : ""
           }`}
-          disabled={workoutIsCompleted}
+          disabled={workoutIsFinished}
         />
       </div>
     </div>

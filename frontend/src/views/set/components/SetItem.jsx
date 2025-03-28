@@ -12,30 +12,30 @@ export const SetItem = ({
   handleDelete,
   setsInExercises,
   exerciseCategory,
-  workoutIsCompleted,
+  workoutIsFinished,
 }) => {
   return (
     <div
       className={`flex justify-between items-center ${
-        workoutIsCompleted ? "" : "pb-4"
+        workoutIsFinished ? "" : "pb-4"
       }`}
     >
       <SetButton
         set={set}
         setsInExercises={setsInExercises}
-        workoutIsCompleted={workoutIsCompleted}
+        workoutIsFinished={workoutIsFinished}
       />
 
       {exerciseCategory === "distance" ? (
-        <DistanceCategory set={set} workoutIsCompleted={workoutIsCompleted} />
+        <DistanceCategory set={set} workoutIsFinished={workoutIsFinished} />
       ) : exerciseCategory === "duration" ? (
-        <DurationCategory set={set} workoutIsCompleted={workoutIsCompleted} />
+        <DurationCategory set={set} workoutIsFinished={workoutIsFinished} />
       ) : (
-        <WeightRepsCategory set={set} workoutIsCompleted={workoutIsCompleted} />
+        <WeightRepsCategory set={set} workoutIsFinished={workoutIsFinished} />
       )}
 
       {/* Delete set button */}
-      {!workoutIsCompleted && (
+      {!workoutIsFinished && (
         <Button
           className="text-primary-red hover:text-secondary-red active:text-secondary-red hover:scale-101 cursor-pointer"
           onClick={() => handleDelete(set.id)}

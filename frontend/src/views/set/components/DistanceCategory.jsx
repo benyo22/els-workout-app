@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { useUpdateSetByIdMutation } from "../../../state/endpoints/setEndpoints";
 
-export const DistanceCategory = ({ set, workoutIsCompleted }) => {
+export const DistanceCategory = ({ set, workoutIsFinished }) => {
   const [updateSet] = useUpdateSetByIdMutation();
 
   const getInitialValues = (totalMetes) => {
@@ -43,24 +43,24 @@ export const DistanceCategory = ({ set, workoutIsCompleted }) => {
           id="distance"
           name="distance"
           type="number"
-          value={distance.km === 0 && !workoutIsCompleted ? "" : distance.km}
+          value={distance.km === 0 && !workoutIsFinished ? "" : distance.km}
           onChange={(e) => handleChange(e, "km")}
           className={`input w-15 h-7 mt-1 text-right ${
-            workoutIsCompleted ? "hover:shadow-none" : ""
+            workoutIsFinished ? "hover:shadow-none" : ""
           }`}
-          disabled={workoutIsCompleted}
+          disabled={workoutIsFinished}
         />
         <span>km</span>
         <input
           id="distance"
           name="distance"
           type="number"
-          value={distance.m === 0 && !workoutIsCompleted ? "" : distance.m}
+          value={distance.m === 0 && !workoutIsFinished ? "" : distance.m}
           onChange={(e) => handleChange(e, "m")}
           className={`input w-15 h-7 mt-1 text-right ${
-            workoutIsCompleted ? "hover:shadow-none" : ""
+            workoutIsFinished ? "hover:shadow-none" : ""
           }`}
-          disabled={workoutIsCompleted}
+          disabled={workoutIsFinished}
         />
         <span>m</span>
       </div>

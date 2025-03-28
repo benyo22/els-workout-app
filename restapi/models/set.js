@@ -6,6 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Exercise, {
         foreignKey: "exerciseId",
       });
+      this.belongsTo(models.Workout, {
+        foreignKey: "workoutId",
+      });
     }
   }
   Set.init(
@@ -22,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       workoutId: {
         allowNull: false,
+        references: {
+          model: "workouts",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
         type: DataTypes.INTEGER,
       },
       setNumber: {

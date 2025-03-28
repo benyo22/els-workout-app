@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Calendar } from "primereact/calendar";
-import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";
+import { FloatLabel } from "primereact/floatlabel";
 
 import { ErrorMessage } from "../../helper/ErrorMessage";
 import { selectUserId } from "../../../state/slices/authSlice";

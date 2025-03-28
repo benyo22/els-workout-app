@@ -8,7 +8,7 @@ import { useRemoveExerciseFromWorkoutMutation } from "../../../state/endpoints/e
 
 export const ExerciseList = ({ workout, exercisesInWorkout }) => {
   const [deleteAllSets] = useDeleteAllSetsInExerciseMutation();
-  const [deleteExerciseFromWorkout] = useRemoveExerciseFromWorkoutMutation();
+  const [removeExerciseFromWorkout] = useRemoveExerciseFromWorkoutMutation();
 
   return (
     <section className="flex flex-col gap-y-4 mt-4 overflow-y-auto">
@@ -22,12 +22,12 @@ export const ExerciseList = ({ workout, exercisesInWorkout }) => {
               ) && ` (${categoryLabels[exercise.category]})`}
             </h4>
 
-            {!workout?.isCompleted && (
+            {!workout?.isFinished && (
               <Button
                 label="Gyakorlat törlése"
                 className="text-primary-red hover:text-secondary-red active:text-secondary-red cursor-pointer"
                 onClick={async () => {
-                  await deleteExerciseFromWorkout({
+                  await removeExerciseFromWorkout({
                     exerciseId: exercise.id,
                     workoutId: workout?.id,
                   });
@@ -46,7 +46,7 @@ export const ExerciseList = ({ workout, exercisesInWorkout }) => {
               exerciseId={exercise.id}
               workoutId={workout?.id}
               exerciseCategory={exercise.category}
-              workoutIsCompleted={workout?.isCompleted}
+              workoutIsFinished={workout?.isFinished}
             />
           </div>
         </div>

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useUpdateSetByIdMutation } from "../../../state/endpoints/setEndpoints";
 
-export const WeightRepsCategory = ({ set, workoutIsCompleted }) => {
+export const WeightRepsCategory = ({ set, workoutIsFinished }) => {
   const [updateSet] = useUpdateSetByIdMutation();
 
   return (
@@ -21,9 +21,9 @@ export const WeightRepsCategory = ({ set, workoutIsCompleted }) => {
           }}
           value={set.weight === 0 ? "" : set.weight}
           className={`input w-30 h-7 mt-1 text-right ${
-            workoutIsCompleted ? "hover:shadow-none" : ""
+            workoutIsFinished ? "hover:shadow-none" : ""
           }`}
-          disabled={workoutIsCompleted}
+          disabled={workoutIsFinished}
         />
       </div>
 
@@ -42,9 +42,9 @@ export const WeightRepsCategory = ({ set, workoutIsCompleted }) => {
           }}
           value={set.reps === 0 ? "" : set.reps}
           className={`input w-30 h-7 mt-1 text-right ${
-            workoutIsCompleted ? "hover:shadow-none" : ""
+            workoutIsFinished ? "hover:shadow-none" : ""
           }`}
-          disabled={workoutIsCompleted}
+          disabled={workoutIsFinished}
         />
       </div>
     </>

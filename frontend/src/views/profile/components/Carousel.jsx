@@ -14,16 +14,15 @@ export const Carousel = ({ sleepData, weightData, workoutData }) => {
   };
 
   const maxSleepHour = sleepData
-    .map((s) => s.durationSec)
+    ?.map((s) => s.durationSec)
     .reduce((accumulator, currentValue) => {
       return accumulator + currentValue;
     }, 0);
-  console.log(sleepData);
   const hours = Math.floor(maxSleepHour / 3600);
   const minutes = Math.floor((maxSleepHour % 3600) / 60);
 
-  const maxWeightCount = weightData.length;
-  const maxWorkoutCount = workoutData.length;
+  const maxWeightCount = weightData?.length;
+  const maxWorkoutCount = workoutData?.length;
 
   return (
     <div className="mt-6">

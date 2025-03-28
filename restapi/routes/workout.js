@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
-const { Workout, Exercise, Set } = require("../models");
-const { where } = require("sequelize");
+const { Workout, Exercise, Set, User } = require("../models");
 const { createWorkoutSchema } = require("../utils/fastify.schemas");
+const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/helper");
 
 module.exports = async (fastify, options) => {
   //get all workout data
@@ -10,6 +10,14 @@ module.exports = async (fastify, options) => {
     { onRequest: [fastify.auth] },
     async (request, reply) => {
       const { userId } = request.params;
+
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: USER_NOT_FOUND_ERROR });
+      }
+
       const workoutData = await Workout.findAll({ where: { userId } });
 
       reply.send(workoutData);
@@ -24,10 +32,17 @@ module.exports = async (fastify, options) => {
       const { userId } = request.params;
       const { name, date } = request.body;
 
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: USER_NOT_FOUND_ERROR });
+      }
+
       if (!name || !date) {
         return reply
           .status(StatusCodes.BAD_REQUEST)
-          .send({ error: "Minden mezőt ki kell tölteni!" });
+          .send({ error: ALL_REQUIRED_ERROR });
       }
 
       if (name.length > 30) {
@@ -40,7 +55,7 @@ module.exports = async (fastify, options) => {
         userId,
         name,
         date: new Date(date),
-        isCompleted: false,
+        isFinished: false,
       });
 
       return reply
@@ -62,11 +77,7 @@ module.exports = async (fastify, options) => {
         },
       });
 
-      workout.isCompleted = true;
-      await workout.save();
-
       const exercises = workout.Exercises;
-
       // remove empty sets
       for (const exercise of exercises) {
         const sets = await Set.findAll({
@@ -97,6 +108,9 @@ module.exports = async (fastify, options) => {
         }
       }
 
+      workout.isFinished = true;
+      await workout.save();
+
       return reply.send({ message: "Workout closed!" });
     }
   );
@@ -125,26 +139,7 @@ module.exports = async (fastify, options) => {
     { onRequest: [fastify.auth] },
     async (request, reply) => {
       const { workoutId } = request.params;
-      const workout = await Workout.findByPk(workoutId, {
-        include: {
-          model: Exercise,
-          through: { attributes: [] }, // exclude pivot table attributes
-        },
-      });
 
-      // remove empty sets
-      const exercises = workout.Exercises;
-      for (const exercise of exercises) {
-        const sets = await Set.findAll({
-          where: { exerciseId: exercise.id, workoutId },
-        });
-
-        for (const set of sets) {
-          await Set.destroy({
-            where: { id: set.id },
-          });
-        }
-      }
       await Workout.destroy({ where: { id: workoutId } });
 
       reply.send({

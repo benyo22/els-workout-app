@@ -22,7 +22,8 @@ export const workoutEndpoints = elsApi.injectEndpoints({
         url: `workout-close/${workoutId}`,
         method: "PATCH",
       }),
-      invalidatesTags: ["Workouts", "Sets", "Exercises"],
+      invalidatesTags: ["Workouts", "Exercises"],
+      // need "Exercises" in invalidatesTags, because after finishing a workout it removes empty exercises, and this way it shows automatically (no need for refresh)
     }),
     editWorkoutById: builder.mutation({
       query: ({ workoutId, data }) => ({

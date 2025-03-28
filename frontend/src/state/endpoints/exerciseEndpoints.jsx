@@ -51,7 +51,7 @@ export const exerciseEndpoints = elsApi.injectEndpoints({
         url: `remove-exercise-from-workout/${exerciseId}/${workoutId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Exercises", "Workouts"],
+      invalidatesTags: ["Exercises"],
     }),
   }),
 });

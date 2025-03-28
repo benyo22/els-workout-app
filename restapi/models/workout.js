@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         through: "workoutExercises",
         foreignKey: "workoutId",
       });
+      this.hasMany(models.Set, { foreignKey: "workoutId" });
     }
   }
   Workout.init(
