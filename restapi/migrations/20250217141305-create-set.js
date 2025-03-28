@@ -38,10 +38,10 @@ module.exports = {
       weight: {
         type: Sequelize.INTEGER,
       },
-      distance: {
+      distanceMeter: {
         type: Sequelize.DOUBLE,
       },
-      duration: {
+      durationSec: {
         type: Sequelize.INTEGER,
       },
       type: {

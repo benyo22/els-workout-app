@@ -12,11 +12,13 @@ export const DistanceCategory = ({ set, workoutIsFinished }) => {
     return { km, m };
   };
 
-  const [distance, setDistance] = useState(getInitialValues(set.distance || 0));
+  const [distance, setDistance] = useState(
+    getInitialValues(set.distanceMeter || 0)
+  );
 
   useEffect(() => {
-    setDistance(getInitialValues(set.distance || 0));
-  }, [set.distance]);
+    setDistance(getInitialValues(set.distanceMeter || 0));
+  }, [set.distanceMeter]);
 
   const handleChange = async (e, type) => {
     let value = parseInt(e.target.value) || 0;
@@ -31,7 +33,7 @@ export const DistanceCategory = ({ set, workoutIsFinished }) => {
 
     await updateSet({
       setId: set.id,
-      data: { distance: totalDistance },
+      data: { distanceMeter: totalDistance },
     });
   };
 

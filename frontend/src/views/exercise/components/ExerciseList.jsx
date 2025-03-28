@@ -24,7 +24,7 @@ export const ExerciseList = ({ workout, exercisesInWorkout }) => {
 
             {!workout?.isFinished && (
               <Button
-                label="Gyakorlat törlése"
+                label="Gyakorlat eltávolítása"
                 className="text-primary-red hover:text-secondary-red active:text-secondary-red cursor-pointer"
                 onClick={async () => {
                   await removeExerciseFromWorkout({

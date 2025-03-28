@@ -42,10 +42,10 @@ module.exports = (sequelize, DataTypes) => {
       weight: {
         type: DataTypes.INTEGER,
       },
-      distance: {
+      distanceMeter: {
         type: DataTypes.DOUBLE,
       },
-      duration: {
+      durationSec: {
         type: DataTypes.INTEGER,
       },
       type: {

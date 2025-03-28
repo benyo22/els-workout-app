@@ -88,7 +88,7 @@ export const WeightForm = ({ userId, entry, onClose }) => {
             unstyled
           />
           <Button
-            label={entry ? "Mentés" : "Hozzáadás"}
+            label={entry ? "Mentés" : "Rögzítés"}
             onClick={handleSubmit}
             className="green-button"
             unstyled

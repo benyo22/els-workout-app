@@ -128,7 +128,7 @@ export const SleepForm = ({ userId, entry, onClose }) => {
             unstyled
           />
           <Button
-            label={entry ? "Mentés" : "Hozzáadás"}
+            label={entry ? "Mentés" : "Rögzítés"}
             onClick={handleSubmit}
             className="green-button"
             unstyled

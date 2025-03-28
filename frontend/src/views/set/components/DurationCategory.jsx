@@ -12,11 +12,11 @@ export const DurationCategory = ({ set, workoutIsFinished }) => {
     return { hh, mm, ss };
   };
 
-  const [time, setTime] = useState(getInitialValues(set.duration || 0));
+  const [time, setTime] = useState(getInitialValues(set.durationSec || 0));
 
   useEffect(() => {
-    setTime(getInitialValues(set.duration || 0));
-  }, [set.duration]);
+    setTime(getInitialValues(set.durationSec || 0));
+  }, [set.durationSec]);
 
   const handleChange = async (e, type) => {
     let value = parseInt(e.target.value) || 0;
@@ -31,7 +31,7 @@ export const DurationCategory = ({ set, workoutIsFinished }) => {
 
     await updateSet({
       setId: set.id,
-      data: { duration: totalSeconds },
+      data: { durationSec: totalSeconds },
     });
   };
 
@@ -40,8 +40,8 @@ export const DurationCategory = ({ set, workoutIsFinished }) => {
       <p>Idő</p>
       <div className="flex items-center gap-x-0.5">
         <input
-          id="duration"
-          name="duration"
+          id="durationSec"
+          name="durationSec"
           type="number"
           value={time.hh === 0 && !workoutIsFinished ? "" : time.hh}
           onChange={(e) => handleChange(e, "hh")}
@@ -52,8 +52,8 @@ export const DurationCategory = ({ set, workoutIsFinished }) => {
         />
         <span>:</span>
         <input
-          id="duration"
-          name="duration"
+          id="durationSec"
+          name="durationSec"
           type="number"
           value={time.mm === 0 && !workoutIsFinished ? "" : time.mm}
           onChange={(e) => handleChange(e, "mm")}
@@ -64,8 +64,8 @@ export const DurationCategory = ({ set, workoutIsFinished }) => {
         />
         <span>:</span>
         <input
-          id="duration"
-          name="duration"
+          id="durationSec"
+          name="durationSec"
           type="number"
           value={time.ss === 0 && !workoutIsFinished ? "" : time.ss}
           onChange={(e) => handleChange(e, "ss")}

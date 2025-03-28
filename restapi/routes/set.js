@@ -49,8 +49,8 @@ module.exports = async (fastify, options) => {
         setNumber: null,
         reps: null,
         weight: null,
-        duration: null,
-        distance: null,
+        durationSec: null,
+        distanceMeter: null,
       });
 
       reply.status(StatusCodes.CREATED).send(set);
@@ -63,7 +63,7 @@ module.exports = async (fastify, options) => {
     { schema: createSetSchema, onRequest: [fastify.auth] },
     async (request, reply) => {
       const { setId } = request.params;
-      const { setNumber, reps, weight, duration, distance, type } =
+      const { setNumber, reps, weight, durationSec, distanceMeter, type } =
         request.body;
 
       if (type && !isGoodSetType) {
@@ -78,7 +78,14 @@ module.exports = async (fastify, options) => {
           .status(StatusCodes.BAD_REQUEST)
           .send({ error: "Szett nem létezik!" });
       }
-      await set.update({ setNumber, reps, weight, duration, distance, type });
+      await set.update({
+        setNumber,
+        reps,
+        weight,
+        durationSec,
+        distanceMeter,
+        type,
+      });
 
       reply.send({ message: "Set updated!" });
     }
@@ -107,8 +114,8 @@ module.exports = async (fastify, options) => {
                 setNumber: set.setNumber,
                 reps: set.reps,
                 weight: set.weight,
-                duration: set.duration,
-                distance: set.distance,
+                durationSec: set.durationSec,
+                distanceMeter: set.distanceMeter,
                 type: set.type,
               },
               { where: { id: set.id } }
