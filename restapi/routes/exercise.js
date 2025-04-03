@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { Exercise, Workout } = require("../models"); // Adjust the path as needed
+const { Exercise, Workout } = require("../models");
 const { createExerciseSchema } = require("../utils/fastify.schemas");
 const { isGoodBodyPart, isGoodCategory } = require("../utils/helper");
 

@@ -1,18 +1,16 @@
+import { useState } from "react";
+
 import { Chart } from "primereact/chart";
-import { FaUtensils, FaDumbbell, FaMoon, FaBalanceScale } from "react-icons/fa";
+// import { Button } from "primereact/button";
+import { TabView, TabPanel } from "primereact/tabview";
+import { FaTrophy, FaAppleAlt, FaMoon, FaBalanceScale } from "react-icons/fa";
+
+import { SleepStatistics } from "./components/SleepStatistics";
+import { WeightStatistics } from "./components/WeightStatistics";
+import { WorkoutStatistics } from "./components/WorkoutStatistics";
 
 export const Statistics = () => {
-  const sleepData = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-    datasets: [
-      {
-        label: "Hours",
-        data: [7, 6, 8, 5, 7.5],
-        borderColor: "#82ca9d",
-        fill: false,
-      },
-    ],
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const mealData = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
@@ -25,54 +23,75 @@ export const Statistics = () => {
     ],
   };
 
-  const weightData = {
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-    datasets: [
-      {
-        label: "Weight (kg)",
-        data: [75, 74.5, 74, 73.8],
-        borderColor: "#ff7300",
-        fill: false,
-      },
-    ],
-  };
-
-  const workoutData = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-    datasets: [
-      { label: "Sessions", data: [1, 0, 2, 1, 1], backgroundColor: "#4caf50" },
-    ],
-  };
-
   return (
-    <div className="p-6 grid gap-6 grid-cols-1 md:grid-cols-2">
-      <div className="bg-white p-4 shadow rounded-lg">
-        <h2 className="text-xl font-semibold mb-4 flex items-center">
-          <FaMoon className="mr-2" /> Alvási szokások
-        </h2>
-        <Chart type="line" data={sleepData} />
-      </div>
+    <>
+      <div className="settings-container">
+        {/* <div className="flex justify-between gap-x-4">
+          <Button
+            icon={<FaTrophy className="ml-1" />}
+            onClick={() => setActiveIndex(0)}
+            className={`flex justify-center items-center rounded-full cursor-pointer h-10 w-10 ${
+              activeIndex !== 0
+                ? "bg-primary-white text-black border-2 border-primary-blue hover:bg-secondary-blue active:bg-secondary-blue hover:text-primary-white dark:hover:bg-dark-secondary-blue dark:active:bg-dark-secondary-blue dark:bg-dark-light dark:text-primary-white"
+                : "bg-primary-blue text-primary-white hover:bg-secondary-blue active:bg-secondary-blue dark:bg-dark-primary-blue dark:hover:bg-secondary-blue dark:active:bg-secondary-blue"
+            }`}
+            unstyled
+          />
+          <Button
+            label="2"
+            onClick={() => setActiveIndex(1)}
+            className={`rounded-full cursor-pointer h-10 w-10 ${
+              activeIndex !== 1
+                ? "bg-primary-white text-black border-2 border-primary-blue hover:bg-secondary-blue active:bg-secondary-blue hover:text-primary-white dark:hover:bg-dark-secondary-blue dark:active:bg-dark-secondary-blue dark:bg-dark-light dark:text-primary-white"
+                : "bg-primary-blue text-primary-white hover:bg-secondary-blue active:bg-secondary-blue dark:bg-dark-primary-blue dark:hover:bg-secondary-blue dark:active:bg-secondary-blue"
+            }`}
+            unstyled
+          />
+          <Button
+            label="3"
+            onClick={() => setActiveIndex(2)}
+            className={`rounded-full cursor-pointer h-10 w-10 ${
+              activeIndex !== 2
+                ? "bg-primary-white text-black border-2 border-primary-blue hover:bg-secondary-blue active:bg-secondary-blue hover:text-primary-white dark:hover:bg-dark-secondary-blue dark:active:bg-dark-secondary-blue dark:bg-dark-light dark:text-primary-white"
+                : "bg-primary-blue text-primary-white hover:bg-secondary-blue active:bg-secondary-blue dark:bg-dark-primary-blue dark:hover:bg-secondary-blue dark:active:bg-secondary-blue"
+            }`}
+            unstyled
+          />
+          <Button
+            label="4"
+            onClick={() => setActiveIndex(3)}
+            className={`rounded-full cursor-pointer h-10 w-10 ${
+              activeIndex !== 3
+                ? "bg-primary-white text-black border-2 border-primary-blue hover:bg-secondary-blue active:bg-secondary-blue hover:text-primary-white dark:hover:bg-dark-secondary-blue dark:active:bg-dark-secondary-blue dark:bg-dark-light dark:text-primary-white"
+                : "bg-primary-blue text-primary-white hover:bg-secondary-blue active:bg-secondary-blue dark:bg-dark-primary-blue dark:hover:bg-secondary-blue dark:active:bg-secondary-blue"
+            }`}
+            unstyled
+          />
+        </div> */}
 
-      <div className="bg-white p-4 shadow rounded-lg">
-        <h2 className="text-xl font-semibold mb-4 flex items-center">
-          <FaUtensils className="mr-2" /> Étkezési szokások
-        </h2>
-        <Chart type="bar" data={mealData} />
-      </div>
+        <TabView
+          activeIndex={activeIndex}
+          onTabChange={(e) => setActiveIndex(e.index)}
+        >
+          <TabPanel leftIcon={<FaTrophy className="mr-1" />}>
+            <WorkoutStatistics />
+          </TabPanel>
 
-      <div className="bg-white p-4 shadow rounded-lg">
-        <h2 className="text-xl font-semibold mb-4 flex items-center">
-          <FaBalanceScale className="mr-2" /> Súly statisztika
-        </h2>
-        <Chart type="line" data={weightData} />
-      </div>
+          <TabPanel leftIcon={<FaAppleAlt className="mr-1" />}>
+            <div className="bg-white p-4 shadow rounded-lg">
+              <Chart type="bar" data={mealData} />
+            </div>
+          </TabPanel>
 
-      <div className="bg-white p-4 shadow rounded-lg">
-        <h2 className="text-xl font-semibold mb-4 flex items-center">
-          <FaDumbbell className="mr-2" /> Edzések
-        </h2>
-        <Chart type="bar" data={workoutData} />
+          <TabPanel leftIcon={<FaMoon className="mr-1" />}>
+            <SleepStatistics />
+          </TabPanel>
+
+          <TabPanel leftIcon={<FaBalanceScale className="mr-1" />}>
+            <WeightStatistics />
+          </TabPanel>
+        </TabView>
       </div>
-    </div>
+    </>
   );
 };

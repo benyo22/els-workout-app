@@ -41,3 +41,13 @@ export const setTypes = {
   failure: "F",
   "/": "/",
 };
+
+export const weekdays = [
+  "Vasárnap",
+  "Hétfő",
+  "Kedd",
+  "Szerda",
+  "Csütörtök",
+  "Péntek",
+  "Szombat",
+];

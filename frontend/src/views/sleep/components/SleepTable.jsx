@@ -6,6 +6,7 @@ import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import { confirmDialog } from "primereact/confirmdialog";
 
 import { sleepQualityLabels } from "../../../utils/data";
+import { formatSecToHourMin } from "../../../utils/helper";
 import { useDeleteSleepByIdMutation } from "../../../state/endpoints/sleepEndpoints";
 
 export const SleepTable = ({ sleepData, setShowForm, setEditingEntry }) => {
@@ -42,10 +43,7 @@ export const SleepTable = ({ sleepData, setShowForm, setEditingEntry }) => {
   const qualityTemplate = (rowData) => sleepQualityLabels[rowData.quality];
 
   const durationTemplate = (rowData) => {
-    const hours = Math.floor(rowData.durationSec / 3600);
-    const minutes = Math.floor((rowData.durationSec % 3600) / 60);
-
-    return `${hours} óra ${minutes} perc`;
+    return formatSecToHourMin(rowData.durationSec);
   };
 
   return (

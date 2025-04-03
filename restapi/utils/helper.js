@@ -30,6 +30,8 @@ const categories = [
   "other",
 ];
 
+const setTypes = ["warm-up", "dropset", "failure", "/"];
+
 const isGoodBodyPart = (bodyPart) => {
   if (!bodyParts.includes(bodyPart)) return false;
   return true;
@@ -39,8 +41,6 @@ const isGoodCategory = (category) => {
   if (!categories.includes(category)) return false;
   return true;
 };
-
-const setTypes = ["warm-up", "dropset", "failure", "/"];
 
 const isGoodSetType = (setType) => {
   if (!setTypes.includes(setType)) return false;

@@ -5,6 +5,7 @@ import { DataTable } from "primereact/datatable";
 import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import { confirmDialog } from "primereact/confirmdialog";
 
+import { formatWeight } from "../../../utils/helper";
 import { useDeleteWeightByIdMutation } from "../../../state/endpoints/weightEndpoints";
 
 export const WeightTable = ({ weightData, setShowForm, setEditingEntry }) => {
@@ -38,7 +39,7 @@ export const WeightTable = ({ weightData, setShowForm, setEditingEntry }) => {
     </div>
   );
 
-  const weightTemplate = (rowData) => `${rowData.weight} kg`;
+  const weightTemplate = (rowData) => formatWeight(rowData.weight);
 
   return (
     <DataTable
