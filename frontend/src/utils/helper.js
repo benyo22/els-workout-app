@@ -6,7 +6,7 @@ export const getStartOfWeek = (date) => {
 
 export const getEndOfWeek = (date) => {
   const d = new Date(date);
-  d.setDate(d.getDate() + (7 - d.getDay()));
+  d.setDate(d.getDate() + (7 - d.getDay() === 0 ? 7 : d.getDay()));
   return d;
 };
 

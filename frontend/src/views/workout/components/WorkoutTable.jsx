@@ -32,6 +32,7 @@ export const WorkoutTable = ({
       onSelectionChange={(e) => setSelectedWorkout(e.value)}
       onRowSelect={onSelect}
       metaKeySelection={false}
+      emptyMessage="Még nincs rögzített edzés"
     >
       <Column field="name" header="Név" sortable />
       <Column field="date" header="Dátum" sortable />

@@ -49,6 +49,7 @@ export const WeightTable = ({ weightData, setShowForm, setEditingEntry }) => {
       scrollable
       scrollHeight="400px"
       removableSort
+      emptyMessage="Még nincs súly adat"
     >
       <Column field="date" header="Dátum" sortable />
       <Column body={weightTemplate} header="Súly" sortable />
