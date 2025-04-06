@@ -6,7 +6,6 @@ import {
   FaAppleAlt,
   FaMoon,
   FaBalanceScale,
-  FaChartBar,
   FaUserEdit,
   FaCog,
 } from "react-icons/fa";
@@ -27,9 +26,6 @@ export const MenuOptions = () => (
     </NavLink>
     <NavLink to="weight" className="logged-in-menu-links">
       <FaBalanceScale className="mr-2" /> Súly
-    </NavLink>
-    <NavLink to="statistics" className="logged-in-menu-links">
-      <FaChartBar className="mr-2" /> Statisztika
     </NavLink>
     <NavLink to="profile" className="logged-in-menu-links">
       <FaUserEdit className="mr-2" /> Profil

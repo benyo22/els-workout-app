@@ -18,19 +18,19 @@ module.exports = (sequelize, DataTypes) => {
       },
       caloriesPer100g: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
       proteinPer100g: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
       carbsPer100g: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
       fatsPer100g: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
     },
     {

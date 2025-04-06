@@ -15,19 +15,19 @@ module.exports = {
       },
       caloriesPer100g: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
       },
       proteinPer100g: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
       },
       carbsPer100g: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
       },
       fatsPer100g: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
       },
       createdAt: {
         allowNull: false,

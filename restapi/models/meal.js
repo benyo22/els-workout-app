@@ -23,10 +23,6 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "cascade",
         type: DataTypes.INTEGER,
       },
-      name: {
-        allowNull: false,
-        type: DataTypes.STRING,
-      },
       type: {
         allowNull: false,
         type: DataTypes.ENUM("breakfast", "lunch", "dinner", "snack"),
@@ -35,21 +31,21 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      totalCalories: {
+      calories: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
       protein: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
       carbs: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
       fats: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
     },
     {

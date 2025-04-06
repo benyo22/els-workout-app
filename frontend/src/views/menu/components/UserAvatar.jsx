@@ -9,7 +9,6 @@ import {
   FaAppleAlt,
   FaMoon,
   FaBalanceScale,
-  FaChartBar,
   FaUserEdit,
   FaCog,
   FaSignOutAlt,
@@ -130,16 +129,6 @@ const UserAvatar = () => {
       ),
       command: () => {
         navigate("weight");
-      },
-    },
-    {
-      label: (
-        <div className="dropdown-menu-link">
-          <FaChartBar className="mr-2" /> Statisztika
-        </div>
-      ),
-      command: () => {
-        navigate("statistics");
       },
     },
     {

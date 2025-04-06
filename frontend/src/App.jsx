@@ -4,6 +4,7 @@ import { selectDarkMode } from "./state/slices/darkModeSlice";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import { Home } from "./views/home/Home";
+import { Meal } from "./views/meals/Meal";
 import { Sleep } from "./views/sleep/Sleep";
 import { Layout } from "./views/layout/Layout";
 import { Weight } from "./views/weight/Weight";
@@ -13,7 +14,6 @@ import { Workout } from "./views/workout/Workout";
 import { Settings } from "./views/settings/Settings";
 import { RequireAuth } from "./views/auth/RequireAuth";
 import { AuthPage } from "./views/loginregister/AuthPage";
-import { Statistics } from "./views/statistics/Statistics";
 import { WelcomeLayout } from "./views/welcomelayout/WelcomeLayout";
 import { RedirectIfAuthenticated } from "./views/auth/RedirectIfAuthenticated";
 
@@ -69,9 +69,9 @@ function App() {
           <Route element={<Layout />}>
             <Route path="home" index element={<Home />} />
             <Route path="workouts" element={<Workout />} />
+            <Route path="meals" element={<Meal />} />
             <Route path="sleep" element={<Sleep />} />
             <Route path="weight" element={<Weight />} />
-            <Route path="statistics" element={<Statistics />} />
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
           </Route>

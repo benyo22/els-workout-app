@@ -1,21 +1,26 @@
+/* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 
+import {
+  FaTable,
+  FaArrowAltCircleRight,
+  FaArrowAltCircleLeft,
+} from "react-icons/fa";
 import { Chart } from "primereact/chart";
 import { Button } from "primereact/button";
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
 import {
-  formatWeight,
   getEndOfWeek,
   getStartOfWeek,
-} from "../../../utils/helper";
-import { selectUserId } from "../../../state/slices/authSlice";
-import { useGetWeightByUserIdQuery } from "../../../state/endpoints/weightEndpoints";
+  formatSecToHourMin,
+} from "../../utils/helper";
+import { selectUserId } from "../../state/slices/authSlice";
+import { useGetSleepByUserIdQuery } from "../../state/endpoints/sleepEndpoints";
 
-export const WeightStatistics = () => {
+export const SleepStatistics = ({ setVisible }) => {
   const userId = useSelector(selectUserId);
-  const { data, isLoading } = useGetWeightByUserIdQuery(userId);
+  const { data, isLoading } = useGetSleepByUserIdQuery(userId);
   const [filteredData, setFilteredData] = useState(data);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -24,9 +29,9 @@ export const WeightStatistics = () => {
       const startOfWeek = getStartOfWeek(selectedDate);
       const endOfWeek = getEndOfWeek(selectedDate);
 
-      const weekData = data?.filter((weight) => {
-        const weightDate = new Date(weight.date);
-        return weightDate >= startOfWeek && weightDate <= endOfWeek;
+      const weekData = data?.filter((sleep) => {
+        const sleepDate = new Date(sleep.date);
+        return sleepDate >= startOfWeek && sleepDate <= endOfWeek;
       });
 
       const sortedWeekData = weekData?.sort(
@@ -58,17 +63,17 @@ export const WeightStatistics = () => {
     filterDataByWeek(nextWeek);
   };
 
-  const weightData = {
-    labels: filteredData?.map((weight) => {
-      const weekday = new Date(weight.date).toLocaleString("hu-HU", {
+  const sleepData = {
+    labels: filteredData?.map((sleep) => {
+      const weekday = new Date(sleep.date).toLocaleString("hu-HU", {
         weekday: "long",
       });
       return weekday.charAt(0).toUpperCase() + weekday.slice(1);
     }),
     datasets: [
       {
-        label: "Súly",
-        data: filteredData?.map((weight) => weight.weight),
+        label: "Óra",
+        data: filteredData?.map((sleep) => sleep.durationSec / 3600),
         borderColor: "#31dcb7",
         fill: false,
       },
@@ -81,7 +86,8 @@ export const WeightStatistics = () => {
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {
-            return formatWeight(tooltipItem.raw);
+            const durationSec = tooltipItem.raw * 3600;
+            return formatSecToHourMin(durationSec);
           },
         },
       },
@@ -113,9 +119,16 @@ export const WeightStatistics = () => {
               className="blue-button flex justify-center items-center h-10 w-10 rounded-full"
               unstyled
             />
+
+            <Button
+              icon={<FaTable className="ml-1" />}
+              onClick={() => setVisible(false)}
+              className="edit-button flex items-center mb-2"
+              unstyled
+            />
           </div>
 
-          <Chart type="line" data={weightData} options={chartOptions} />
+          <Chart type="line" data={sleepData} options={chartOptions} />
         </>
       )}
     </>

@@ -1,15 +1,20 @@
+/* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 
+import {
+  FaTable,
+  FaArrowAltCircleRight,
+  FaArrowAltCircleLeft,
+} from "react-icons/fa";
 import { Chart } from "primereact/chart";
 import { Button } from "primereact/button";
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
-import { getEndOfWeek, getStartOfWeek } from "../../../utils/helper";
-import { selectUserId } from "../../../state/slices/authSlice";
-import { useGetWorkoutByUserIdQuery } from "../../../state/endpoints/workoutEndpoints";
+import { getEndOfWeek, getStartOfWeek } from "../../utils/helper";
+import { selectUserId } from "../../state/slices/authSlice";
+import { useGetWorkoutByUserIdQuery } from "../../state/endpoints/workoutEndpoints";
 
-export const WorkoutStatistics = () => {
+export const WorkoutStatistics = ({ setVisible }) => {
   const userId = useSelector(selectUserId);
   const { data, isLoading } = useGetWorkoutByUserIdQuery(userId);
   const [filteredData, setFilteredData] = useState(data);
@@ -112,6 +117,13 @@ export const WorkoutStatistics = () => {
               icon={<FaArrowAltCircleRight className="ml-1" />}
               onClick={handleNextWeek}
               className="blue-button flex justify-center items-center h-10 w-10 rounded-full"
+              unstyled
+            />
+
+            <Button
+              icon={<FaTable className="ml-1" />}
+              onClick={() => setVisible(false)}
+              className="edit-button flex items-center mb-2"
               unstyled
             />
           </div>

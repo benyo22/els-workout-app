@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { FaPlus } from "react-icons/fa6";
 import { Button } from "primereact/button";
+import { FaChartLine, FaPlus } from "react-icons/fa6";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 import {
@@ -15,6 +15,7 @@ import { WorkoutTable } from "./components/WorkoutTable";
 import { selectUserId } from "../../state/slices/authSlice";
 import { WorkoutManager } from "./components/WorkoutManager";
 import { CreateWorkoutForm } from "./components/CreateWorkoutForm";
+import { WorkoutStatistics } from "../statistics/WorkoutStatistics";
 
 export const Workout = () => {
   const userId = useSelector(selectUserId);
@@ -28,6 +29,7 @@ export const Workout = () => {
   } = useGetWorkoutByUserIdQuery(userId);
 
   const [visibleWorkout, setVisibleWorkout] = useState(false);
+  const [showStatistics, setShowStatistics] = useState(false);
   const [selectedWorkout, setSelectedWorkout] = useState(null);
   const [showCreateWorkoutForm, setShowCreateWorkoutForm] = useState(false);
 
@@ -83,16 +85,30 @@ export const Workout = () => {
     <>
       {isError ? (
         <ErrorMessage message={error.data.error} />
+      ) : showStatistics ? (
+        <div className="settings-container h-[300px]">
+          <WorkoutStatistics setVisible={setShowStatistics} />
+        </div>
       ) : (
         <div className="list-container">
           <h2 className="text-2xl font-bold mb-4">Edzések</h2>
-          <Button
-            label="Edzés elkezdése"
-            icon={<FaPlus className="mr-1" />}
-            className="edit-button flex items-center mb-4"
-            onClick={handleStartWorkout}
-            unstyled
-          />
+
+          <div className="flex gap-x-4">
+            <Button
+              label="Edzés elkezdése"
+              icon={<FaPlus className="mr-1" />}
+              className="edit-button flex items-center mb-2"
+              onClick={handleStartWorkout}
+              unstyled
+            />
+
+            <Button
+              icon={<FaChartLine className="ml-1" />}
+              onClick={() => setShowStatistics(true)}
+              className="edit-button flex items-center mb-2"
+              unstyled
+            />
+          </div>
 
           {isLoading ? (
             <p>Adatok betöltése...</p>
