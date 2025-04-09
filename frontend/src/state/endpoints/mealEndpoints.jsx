@@ -2,7 +2,14 @@ import { elsApi } from "../elsApiSlice";
 
 export const mealEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
-    getMealByUserIdAndDate: builder.query({
+    getMealsByUserId: builder.query({
+      query: (userId) => ({
+        url: `meal/${userId}`,
+      }),
+      providesTags: ["Meals"],
+      transformResponse: (response) => response,
+    }),
+    getMealsByUserIdAndDate: builder.query({
       query: ({ userId, date }) => ({
         url: `meal/${userId}/${date}`,
       }),
@@ -35,7 +42,8 @@ export const mealEndpoints = elsApi.injectEndpoints({
 });
 
 export const {
-  useGetMealByUserIdAndDateQuery,
+  useGetMealsByUserIdQuery,
+  useGetMealsByUserIdAndDateQuery,
   useGetMacrosInMealsQuery,
   useCreateMealWithUserIdMutation,
   useDeleteMealByIdMutation,

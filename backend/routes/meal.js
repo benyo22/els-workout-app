@@ -9,6 +9,30 @@ const { Meal, Food, MealFood, User } = require("../models");
 const { createMealSchema } = require("../utils/fastify.schemas");
 
 module.exports = async (fastify, options) => {
+  //get all meal data
+  fastify.get(
+    "/meal/:userId",
+    { onRequest: [fastify.auth] },
+    async (request, reply) => {
+      const { userId } = request.params;
+
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: USER_NOT_FOUND_ERROR });
+      }
+
+      const mealData = await Meal.findAll({
+        where: {
+          userId,
+        },
+      });
+
+      reply.send(mealData);
+    }
+  );
+
   //get all meal data by date
   fastify.get(
     "/meal/:userId/:date",

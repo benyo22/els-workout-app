@@ -2,7 +2,7 @@ import { elsApi } from "../elsApiSlice";
 
 export const userEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
-    getUserByUsername: builder.query({
+    getUserById: builder.query({
       query: (id) => ({
         url: `user/${id}`,
       }),
@@ -37,7 +37,7 @@ export const userEndpoints = elsApi.injectEndpoints({
 });
 
 export const {
-  useGetUserByUsernameQuery,
+  useGetUserByIdQuery,
   useUpdateUserByIdMutation,
   useDeleteUserByIdMutation,
   useUpdatePasswordByIdMutation,

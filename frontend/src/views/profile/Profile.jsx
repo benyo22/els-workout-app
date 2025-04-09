@@ -10,6 +10,7 @@ import { selectUserId } from "../../state/slices/authSlice";
 import { useGetSleepByUserIdQuery } from "../../state/endpoints/sleepEndpoints";
 import { useGetWeightByUserIdQuery } from "../../state/endpoints/weightEndpoints";
 import { useGetWorkoutByUserIdQuery } from "../../state/endpoints/workoutEndpoints";
+import { useGetMealsByUserIdQuery } from "../../state/endpoints/mealEndpoints";
 
 export const Profile = () => {
   const [visible, setVisible] = useState(false);
@@ -31,10 +32,15 @@ export const Profile = () => {
     isLoading: isLoadingWorkout,
     isError: isErrorWorkout,
   } = useGetWorkoutByUserIdQuery(userId);
+  const {
+    data: mealData,
+    isLoading: isLoadingMeal,
+    isError: isErrorMeal,
+  } = useGetMealsByUserIdQuery(userId);
 
   return (
     <>
-      {isErrorSleep || isErrorWeight || isErrorWorkout ? (
+      {isErrorSleep || isErrorWeight || isErrorWorkout || isErrorMeal ? (
         <ErrorMessage message={error?.data.error} />
       ) : (
         <div className="profile-card">
@@ -42,13 +48,17 @@ export const Profile = () => {
 
           {visible && <EditUserForm setVisible={setVisible} />}
 
-          {isLoadingSleep || isLoadingWeight || isLoadingWorkout ? (
+          {isLoadingSleep ||
+          isLoadingWeight ||
+          isLoadingWorkout ||
+          isLoadingMeal ? (
             <p>Adatok betöltése</p>
           ) : (
             <Carousel
               sleepData={sleepData}
               weightData={weightData}
               workoutData={workoutData}
+              mealData={mealData}
             />
           )}
         </div>

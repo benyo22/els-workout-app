@@ -1,7 +1,3 @@
-const argon2 = require("argon2");
-const omit = require("object.omit");
-const { User } = require("../models");
-const { StatusCodes } = require("http-status-codes");
 const {
   isObjectEmpty,
   validateEmail,
@@ -16,6 +12,10 @@ const {
   getUserSchema,
   deleteUserSchema,
 } = require("../utils/fastify.schemas");
+const argon2 = require("argon2");
+const omit = require("object.omit");
+const { User } = require("../models");
+const { StatusCodes } = require("http-status-codes");
 
 module.exports = async (fastify, options) => {
   //register
@@ -141,9 +141,12 @@ module.exports = async (fastify, options) => {
     async (request, reply) => {
       const { id } = request.params;
       const { name, age, username, email } = request.body;
+      const errors = {};
 
       const user = await User.findByPk(id);
-      const errors = {};
+      if (!user) {
+        errors.username = USER_NOT_FOUND_ERROR;
+      }
 
       // update name if provided
       if (name) user.name = name;
@@ -205,16 +208,16 @@ module.exports = async (fastify, options) => {
       const { id } = request.params;
       const { oldPassword, newPassword } = request.body;
 
-      if (!oldPassword || !newPassword) {
-        return reply.status(StatusCodes.BAD_REQUEST).send({
-          error: ALL_REQUIRED_ERROR,
-        });
-      }
-
       const user = await User.findByPk(id);
       if (!user) {
         return reply.status(StatusCodes.NOT_FOUND).send({
           error: USER_NOT_FOUND_ERROR,
+        });
+      }
+
+      if (!oldPassword || !newPassword) {
+        return reply.status(StatusCodes.BAD_REQUEST).send({
+          error: ALL_REQUIRED_ERROR,
         });
       }
 

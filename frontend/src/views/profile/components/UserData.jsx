@@ -6,7 +6,7 @@ import { Button } from "primereact/button";
 
 import { ErrorMessage } from "../../helper/ErrorMessage";
 import { selectUserId } from "../../../state/slices/authSlice";
-import { useGetUserByUsernameQuery } from "../../../state/endpoints/userEndpoints";
+import { useGetUserByIdQuery } from "../../../state/endpoints/userEndpoints";
 
 export const UserData = ({ showEditForm }) => {
   const userId = useSelector(selectUserId);
@@ -15,7 +15,7 @@ export const UserData = ({ showEditForm }) => {
     isLoading,
     isError,
     error,
-  } = useGetUserByUsernameQuery(userId);
+  } = useGetUserByIdQuery(userId);
 
   return (
     <>

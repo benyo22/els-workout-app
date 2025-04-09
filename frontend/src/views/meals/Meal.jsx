@@ -6,7 +6,7 @@ import { Calendar } from "primereact/calendar";
 
 import { format } from "date-fns";
 import {
-  useGetMealByUserIdAndDateQuery,
+  useGetMealsByUserIdAndDateQuery,
   useCreateMealWithUserIdMutation,
 } from "../../state/endpoints/mealEndpoints";
 import { MealCard } from "./components/MealCard";
@@ -20,7 +20,7 @@ export const Meal = () => {
   const [error, setError] = useState(null);
   const [date, setDate] = useState(new Date());
   const formattedDate = format(date, "yyyy-MM-dd");
-  const { data: meals, isLoading } = useGetMealByUserIdAndDateQuery({
+  const { data: meals, isLoading } = useGetMealsByUserIdAndDateQuery({
     userId,
     date: formattedDate,
   });
