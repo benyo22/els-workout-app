@@ -1,0 +1,53 @@
+"use strict";
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class Exercise extends Model {
+    static associate(models) {
+      this.belongsToMany(models.Workout, {
+        through: "workoutExercises",
+        foreignKey: "exerciseId",
+      });
+      this.hasMany(models.Set, { foreignKey: "exerciseId" });
+    }
+  }
+  Exercise.init(
+    {
+      name: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      bodyPart: {
+        allowNull: false,
+        type: DataTypes.ENUM(
+          "core",
+          "arms",
+          "back",
+          "chest",
+          "legs",
+          "shoulders",
+          "other",
+          "full body"
+        ),
+      },
+      category: {
+        allowNull: false,
+        type: DataTypes.ENUM(
+          "barbell",
+          "dumbell",
+          "cable",
+          "machine",
+          "bodyweight",
+          "cardio",
+          "duration",
+          "distance",
+          "other"
+        ),
+      },
+    },
+    {
+      sequelize,
+      modelName: "Exercise",
+    }
+  );
+  return Exercise;
+};
