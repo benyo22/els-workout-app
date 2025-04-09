@@ -7,8 +7,9 @@ import {
 } from "../../state/slices/authViewSlice";
 import { DarkModeToggle } from "../darkmode/DarkModeToggle";
 
+import { FaBalanceScale } from "react-icons/fa";
 import { FeatureCard } from "./components/FeatureCard";
-import { FaDumbbell, FaUtensils, FaBed, FaChartLine } from "react-icons/fa";
+import { FaDumbbell, FaUtensils, FaBed, FaChartLine } from "react-icons/fa6";
 
 export const Welcome = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ export const Welcome = () => {
         </nav>
       </main>
 
-      <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-10">
+      <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 p-10">
         <FeatureCard
           icon={<FaDumbbell />}
           title="Edzések Nyomon Követése"
@@ -66,6 +67,11 @@ export const Welcome = () => {
           icon={<FaBed />}
           title="Alvás Javítása"
           description="Rögzítsd és fejleszd az alvási szokásaidat."
+        />
+        <FeatureCard
+          icon={<FaBalanceScale />}
+          title="Súly Nyomon Követése"
+          description="Rögzítsd és kövesd a súlyod változásait."
         />
         <FeatureCard
           icon={<FaChartLine />}
