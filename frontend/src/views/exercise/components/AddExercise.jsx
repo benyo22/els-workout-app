@@ -7,6 +7,7 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 
+import { ExerciseItem } from "./ExerciseItem";
 import {
   useAddExerciseToWorkoutMutation,
   useGetAllExercisesQuery,
@@ -79,12 +80,11 @@ export const AddExercise = ({ workoutId, setVisible }) => {
         header={
           <header className="flex justify-between">
             <Button
+              label="Új Gyakorlat"
               className="text-primary-blue cursor-pointer hover:text-third-blue mt-2 ml-2 dark:text-dark-primary-blue dark:hover:text-dark-secondary-blue"
               onClick={() => setShowCreateExercise(true)}
               unstyled
-            >
-              Új Gyakorlat
-            </Button>
+            />
 
             <Button
               onClick={() => {
@@ -166,22 +166,3 @@ export const AddExercise = ({ workoutId, setVisible }) => {
     </>
   );
 };
-
-const ExerciseItem = ({ exercise, onSelect }) => (
-  <div
-    className="flex items-center border-t border-b p-1 border-solid border-primary-grey hover:bg-gray-200 hover:cursor-pointer dark:hover:bg-gray-700 active:bg-gray-300 dark:active:bg-gray-700"
-    onClick={onSelect}
-  >
-    <div className="flex flex-col gap-1">
-      <span className="font-bold text-black dark:text-primary-white">
-        {exercise.name}
-      </span>
-      <div className="flex align-items-center gap-2">
-        <span className="text-gray-500 dark:text-gray-400">
-          {bodyPartLabels[exercise.bodyPart]} -{" "}
-          {categoryLabels[exercise.category]}
-        </span>
-      </div>
-    </div>
-  </div>
-);

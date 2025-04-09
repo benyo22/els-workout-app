@@ -51,3 +51,12 @@ export const weekdays = [
   "Péntek",
   "Szombat",
 ];
+
+export const mealTypes = ["breakfast", "lunch", "dinner", "snack"];
+
+export const mealLabels = {
+  breakfast: "Reggeli",
+  lunch: "Ebéd",
+  dinner: "Vacsora",
+  snack: "Snack",
+};

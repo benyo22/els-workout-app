@@ -100,34 +100,39 @@ export const SleepStatistics = ({ setVisible }) => {
         <p>Adatok betöltése...</p>
       ) : (
         <>
-          <div className="flex justify-around items-center">
-            <Button
-              icon={<FaArrowAltCircleLeft className="ml-1" />}
-              onClick={handlePreviousWeek}
-              className="blue-button flex justify-center items-center h-10 w-10 rounded-full"
-              unstyled
-            />
+          <div className="flex flex-col">
+            <div className="flex justify-between">
+              <h3 className="font-bold text-xl">Alvás statisztika</h3>
 
-            {/* Current week */}
-            <span className="">
-              Hét: {getStartOfWeek(selectedDate).toLocaleDateString("hu-HU")}
-            </span>
+              <Button
+                icon={<FaTable className="ml-1" />}
+                onClick={() => setVisible(false)}
+                className="edit-button flex items-center mb-2"
+                unstyled
+              />
+            </div>
 
-            <Button
-              icon={<FaArrowAltCircleRight className="ml-1" />}
-              onClick={handleNextWeek}
-              className="blue-button flex justify-center items-center h-10 w-10 rounded-full"
-              unstyled
-            />
+            <div className="flex justify-around">
+              <Button
+                icon={<FaArrowAltCircleLeft className="ml-1" />}
+                onClick={handlePreviousWeek}
+                className="blue-button flex justify-center items-center h-10 w-10 rounded-full"
+                unstyled
+              />
 
-            <Button
-              icon={<FaTable className="ml-1" />}
-              onClick={() => setVisible(false)}
-              className="edit-button flex items-center mb-2"
-              unstyled
-            />
+              {/* Current week */}
+              <span className="">
+                Hét: {getStartOfWeek(selectedDate).toLocaleDateString("hu-HU")}
+              </span>
+
+              <Button
+                icon={<FaArrowAltCircleRight className="ml-1" />}
+                onClick={handleNextWeek}
+                className="blue-button flex justify-center items-center h-10 w-10 rounded-full"
+                unstyled
+              />
+            </div>
           </div>
-
           <Chart type="line" data={sleepData} options={chartOptions} />
         </>
       )}

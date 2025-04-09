@@ -2,11 +2,18 @@
 import { Button } from "primereact/button";
 
 import { Sets } from "../../set/Sets";
+import {
+  useGetExcercisesInWorkoutQuery,
+  useRemoveExerciseFromWorkoutMutation,
+} from "../../../state/endpoints/exerciseEndpoints";
 import { categoryLabels } from "../../../utils/data";
 import { useDeleteAllSetsInExerciseMutation } from "../../../state/endpoints/setEndpoints";
-import { useRemoveExerciseFromWorkoutMutation } from "../../../state/endpoints/exerciseEndpoints";
 
-export const ExerciseList = ({ workout, exercisesInWorkout }) => {
+export const ExerciseList = ({ workout }) => {
+  const { data: exercisesInWorkout } = useGetExcercisesInWorkoutQuery(
+    workout?.id,
+    { skip: !workout?.id }
+  );
   const [deleteAllSets] = useDeleteAllSetsInExerciseMutation();
   const [removeExerciseFromWorkout] = useRemoveExerciseFromWorkoutMutation();
 

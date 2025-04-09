@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
+import { format } from "date-fns";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Calendar } from "primereact/calendar";
@@ -27,7 +28,11 @@ export const CreateWorkoutForm = ({ onClose }) => {
   };
 
   const handleSubmit = async () => {
-    const result = await createWorkout({ userId, data: formData });
+    const formattedDate = format(formData.date, "yyyy-MM-dd");
+    const result = await createWorkout({
+      userId,
+      data: { ...formData, date: formattedDate },
+    });
 
     if (result.error?.data.error) {
       setError(result.error.data.error);

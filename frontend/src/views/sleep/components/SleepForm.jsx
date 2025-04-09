@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 
+import { format } from "date-fns";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Calendar } from "primereact/calendar";
@@ -53,11 +54,18 @@ export const SleepForm = ({ userId, entry, onClose }) => {
   };
 
   const handleSubmit = async () => {
+    const formattedDate = format(formData.date, "yyyy-MM-dd");
     let result = null;
     if (entry) {
-      result = await updateSleep({ sleepId: entry.id, data: formData });
+      result = await updateSleep({
+        sleepId: entry.id,
+        data: { ...formData, date: formattedDate },
+      });
     } else {
-      result = await createSleep({ userId, data: formData });
+      result = await createSleep({
+        userId,
+        data: { ...formData, date: formattedDate },
+      });
     }
 
     if (result.error?.data.error) {

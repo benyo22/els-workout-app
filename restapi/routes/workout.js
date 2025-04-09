@@ -54,7 +54,7 @@ module.exports = async (fastify, options) => {
       await Workout.create({
         userId,
         name,
-        date: new Date(date),
+        date: date,
         isFinished: false,
       });
 

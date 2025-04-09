@@ -86,7 +86,7 @@ export const Workout = () => {
       {isError ? (
         <ErrorMessage message={error.data.error} />
       ) : showStatistics ? (
-        <div className="settings-container h-[300px]">
+        <div className="settings-container h-[340px]">
           <WorkoutStatistics setVisible={setShowStatistics} />
         </div>
       ) : (

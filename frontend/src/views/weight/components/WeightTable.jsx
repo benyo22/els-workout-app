@@ -52,7 +52,7 @@ export const WeightTable = ({ weightData, setShowForm, setEditingEntry }) => {
       emptyMessage="Még nincs súly adat"
     >
       <Column field="date" header="Dátum" sortable />
-      <Column body={weightTemplate} header="Súly" sortable />
+      <Column body={weightTemplate} header="Súly" />
       <Column body={actionsTemplate} header="Műveletek" />
     </DataTable>
   );

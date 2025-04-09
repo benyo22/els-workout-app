@@ -65,7 +65,7 @@ const createSleepSchema = {
   body: {
     type: "object",
     properties: {
-      date: { type: "string", format: "date-time" },
+      date: { type: "string", format: "date" },
       durationHour: { type: "integer" },
       quality: { type: "string" },
     },
@@ -77,7 +77,7 @@ const createWeightSchema = {
     type: "object",
     properties: {
       weight: { type: "number" },
-      date: { type: "string", format: "date-time" },
+      date: { type: "string", format: "date" },
     },
   },
 };
@@ -87,7 +87,7 @@ const createWorkoutSchema = {
     type: "object",
     properties: {
       name: { type: "string" },
-      date: { type: "string", format: "date-time" },
+      date: { type: "string", format: "date" },
     },
   },
 };
@@ -134,6 +134,16 @@ const bulkUpdateSetSchema = {
   },
 };
 
+const createMealSchema = {
+  body: {
+    type: "object",
+    properties: {
+      type: { type: "string" },
+      date: { type: "string", format: "date" },
+    },
+  },
+};
+
 module.exports = {
   registerSchema,
   loginSchema,
@@ -147,4 +157,5 @@ module.exports = {
   createExerciseSchema,
   createSetSchema,
   bulkUpdateSetSchema,
+  createMealSchema,
 };

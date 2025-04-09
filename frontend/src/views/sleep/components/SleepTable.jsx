@@ -57,8 +57,8 @@ export const SleepTable = ({ sleepData, setShowForm, setEditingEntry }) => {
       emptyMessage="Még nincs feljegyzett alvás"
     >
       <Column field="date" header="Dátum" sortable />
-      <Column body={durationTemplate} header="Időtartam" sortable />
-      <Column body={qualityTemplate} header="Minőség" sortable />
+      <Column body={durationTemplate} header="Időtartam" />
+      <Column body={qualityTemplate} header="Minőség" />
       <Column body={actionsTemplate} header="Műveletek" />
     </DataTable>
   );

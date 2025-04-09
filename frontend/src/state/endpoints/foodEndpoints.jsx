@@ -1,0 +1,68 @@
+import { elsApi } from "../elsApiSlice";
+
+export const foodEndpoints = elsApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getFoodQuantity: builder.query({
+      query: ({ foodId, mealId }) => ({
+        url: `food-quantity/${foodId}/${mealId}`,
+      }),
+      providesTags: ["Food"],
+      transformResponse: (response) => response,
+    }),
+    getAllFood: builder.query({
+      query: () => ({
+        url: "food",
+      }),
+      providesTags: ["Food"],
+      transformResponse: (response) => response,
+    }),
+    getAllFoodInMeal: builder.query({
+      query: (mealId) => ({
+        url: `meal-food/${mealId}`,
+      }),
+      providesTags: ["Food"],
+      transformResponse: (response) => response,
+    }),
+    addFoodToMeal: builder.mutation({
+      query: ({ foodId, mealId, quantityInGrams }) => ({
+        url: `food/${foodId}/${mealId}`,
+        method: "POST",
+        body: quantityInGrams,
+      }),
+      invalidatesTags: ["Food"],
+    }),
+    createFood: builder.mutation({
+      query: (data) => ({
+        url: "food",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Food"],
+    }),
+    editFoodQuantity: builder.mutation({
+      query: ({ foodId, mealId, quantityInGrams }) => ({
+        url: `food/${foodId}/${mealId}`,
+        method: "PATCH",
+        body: quantityInGrams,
+      }),
+      invalidatesTags: ["Food"],
+    }),
+    removeFoodFromMeal: builder.mutation({
+      query: ({ foodId, mealId }) => ({
+        url: `remove-food-from-meal/${foodId}/${mealId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Food"],
+    }),
+  }),
+});
+
+export const {
+  useGetFoodQuantityQuery,
+  useGetAllFoodQuery,
+  useGetAllFoodInMealQuery,
+  useAddFoodToMealMutation,
+  useCreateFoodMutation,
+  useEditFoodQuantityMutation,
+  useRemoveFoodFromMealMutation,
+} = foodEndpoints;

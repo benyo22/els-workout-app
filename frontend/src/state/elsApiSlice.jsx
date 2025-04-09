@@ -26,6 +26,7 @@ export const elsApi = createApi({
     "Sleep",
     "Weights",
     "Meals",
+    "Food",
   ],
   baseQuery: baseQueryWithAuth,
   endpoints: () => ({}),

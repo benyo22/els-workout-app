@@ -47,6 +47,23 @@ const isGoodSetType = (setType) => {
   return true;
 };
 
+const mealTypes = ["breakfast", "lunch", "dinner", "snack"];
+
+const isGoodMealType = (mealType) => {
+  if (!mealTypes.includes(mealType)) return false;
+  return true;
+};
+
+const calcNutrients = (food, quantityInGrams) => {
+  const calories = Math.floor(food.caloriesPer100g * (quantityInGrams / 100));
+  const protein = Math.floor(food.proteinPer100g * (quantityInGrams / 100));
+  const carbs = Math.floor(food.carbsPer100g * (quantityInGrams / 100));
+  const fats = Math.floor(food.fatsPer100g * (quantityInGrams / 100));
+  return { calories, protein, carbs, fats };
+};
+
+const MAX_INT = 2147483647;
+
 // Errors ----------------------------------------------------------------------------
 const USER_NOT_FOUND_ERROR = "A Felhasználó nem található!";
 const ALL_REQUIRED_ERROR = "Minden mezőt ki kell tölteni!";
@@ -57,6 +74,9 @@ module.exports = {
   isGoodBodyPart,
   isGoodCategory,
   isGoodSetType,
+  isGoodMealType,
+  MAX_INT,
+  calcNutrients,
   // Errors
   USER_NOT_FOUND_ERROR,
   ALL_REQUIRED_ERROR,

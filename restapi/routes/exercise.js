@@ -14,19 +14,6 @@ module.exports = async (fastify, options) => {
     }
   );
 
-  //TODO: if i have time
-  // // get exercise by id
-  // fastify.get(
-  //   "/exercises/:id",
-  //   { onRequest: [fastify.auth] },
-  //   async (request, reply) => {
-  //     const { id } = request.params;
-  //     const exercise = await Exercise.findByPk(id);
-
-  //     reply.send(exercise);
-  //   }
-  // );
-
   // get all exercise in a workout by workoutId
   fastify.get(
     "/workout-exercises/:workoutId",
@@ -79,33 +66,6 @@ module.exports = async (fastify, options) => {
       reply.status(StatusCodes.CREATED);
     }
   );
-
-  // update an exercise
-  // fastify.patch(
-  //   "/exercises/:id",
-  //   { schema: createExerciseSchema, onRequest: [fastify.auth] },
-  //   async (request, reply) => {
-  //     const { id } = request.params;
-  //     const { name, bodyPart, category } = request.body;
-
-  //     if (!isGoodBodyPart(bodyPart)) {
-  //       return reply
-  //         .status(StatusCodes.CONFLICT)
-  //         .send({ error: "Nem jó testrész van megadva!" });
-  //     }
-
-  //     if (!isGoodCategory(category)) {
-  //       return reply
-  //         .status(StatusCodes.CONFLICT)
-  //         .send({ error: "Nem jó kateógria!" });
-  //     }
-
-  //     const exercise = await Exercise.findByPk(id);
-
-  //     await exercise.update({ name, bodyPart, category });
-  //     reply.send({ message: "Exercise updated!" });
-  //   }
-  // );
 
   // add an exercise to a workout
   fastify.post(
