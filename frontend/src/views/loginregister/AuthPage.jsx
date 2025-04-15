@@ -31,7 +31,7 @@ export const AuthPage = () => {
           </div>
         </div>
         <NavLink to="/" className="welcome-menu-home-page-link">
-          Főoldal
+          Kezdőlap
         </NavLink>
       </header>
 
