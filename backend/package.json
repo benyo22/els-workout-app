@@ -15,7 +15,6 @@
   "license": "ISC",
   "description": "Node.js, Sequelize, MySQL and REST APIs with Fastify with CommonJS",
   "dependencies": {
-    "@faker-js/faker": "^9.5.0",
     "@fastify/autoload": "^6.1.0",
     "@fastify/cookie": "^11.0.2",
     "@fastify/cors": "^10.0.2",

@@ -73,6 +73,10 @@
     @apply relative flex items-center uppercase text-[1.2rem] font-semibold transition-[0.5s] z-[1] py-2 before:content-[''] before:absolute before:w-full before:h-full before:border-t-primary-green before:border-b-primary-green before:opacity-0 before:transition-[0.3s] before:border-y-2 before:border-solid before:scale-y-[2] before:left-0 before:top-0 after:content-[''] after:absolute after:w-full after:h-full after:opacity-0 after:transition-[0.3s] after:z-[-1] after:scale-0 after:left-0 after:top-0.5 hover:text-primary-green dark:hover:text-dark-primary-green hover:before:opacity-100 hover:before:scale-y-100 hover:after:opacity-100 hover:after:scale-y-100;
   }
 
+  .logged-in-menu-links-active {
+    @apply relative flex items-center uppercase text-[1.2rem] font-semibold transition-[0.5s] z-[1] py-2 before:content-[''] before:absolute before:w-full before:h-full before:border-t-primary-green before:border-b-primary-green before:transition-[0.3s] before:border-y-2 before:border-solid before:left-0 before:top-0 after:content-[''] after:absolute after:w-full after:h-full after:transition-[0.3s] after:z-[-1] after:scale-0 after:left-0 after:top-0.5 text-primary-green hover:text-dark-primary-green before:opacity-100 before:scale-y-100 after:opacity-100 after:scale-y-100;
+  }
+
   .logged-in-sidebar-els {
     @apply text-primary-white text-4xl font-extrabold hover:text-primary-green hover:scale-101 transition duration-300 ease-in-out;
     @apply dark:hover:text-dark-primary-green;

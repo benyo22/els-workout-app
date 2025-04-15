@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 
 import { LoginButton } from "./components/LoginButton";

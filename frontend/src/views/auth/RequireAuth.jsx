@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router";
 import { selectLoggedInUsername } from "../../state/slices/authSlice";
 
 // this prevents a not logged in user to go to pages that require auth

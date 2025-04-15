@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 import { FaBalanceScale } from "react-icons/fa";
 import { FaDumbbell, FaUtensils, FaBed } from "react-icons/fa6";

@@ -1,7 +1,7 @@
+import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Menu } from "primereact/menu";
 import {
   FaUser,
   FaHome,
@@ -13,15 +13,15 @@ import {
   FaCog,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { Menu } from "primereact/menu";
 import { Avatar } from "primereact/avatar";
 
-import { setLoginActive } from "../../../state/slices/authViewSlice";
-import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
 import {
   logout,
   selectLoggedInUsername,
 } from "../../../state/slices/authSlice";
-import { useNavigate } from "react-router-dom";
+import { setLoginActive } from "../../../state/slices/authViewSlice";
+import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
 
 const SMALL_DEVICE_WIDTH = 768;
 

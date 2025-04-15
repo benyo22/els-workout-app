@@ -1,5 +1,5 @@
+import { NavLink } from "react-router";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
 
 import {
   setLoginActive,
@@ -55,27 +55,27 @@ export const Welcome = () => {
       <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 p-10">
         <FeatureCard
           icon={<FaDumbbell />}
-          title="Edzések Nyomon Követése"
+          title="Edzés"
           description="Rögzítsd és elemezd az edzési rutinodat."
         />
         <FeatureCard
           icon={<FaUtensils />}
-          title="Táplálkozás Figyelése"
+          title="Táplálkozás"
           description="Kövesd nyomon az étkezéseidet és a kalóriabeviteled."
         />
         <FeatureCard
           icon={<FaBed />}
-          title="Alvás Javítása"
+          title="Alvás"
           description="Rögzítsd és fejleszd az alvási szokásaidat."
         />
         <FeatureCard
           icon={<FaBalanceScale />}
-          title="Súly Nyomon Követése"
+          title="Testtömeg"
           description="Rögzítsd és kövesd a súlyod változásait."
         />
         <FeatureCard
           icon={<FaChartLine />}
-          title="Részletes Elemzések"
+          title="Elemzések"
           description="Vizuális statisztikák a fejlődésed követésére."
         />
       </section>

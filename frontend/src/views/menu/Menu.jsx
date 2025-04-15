@@ -1,5 +1,5 @@
+import { NavLink } from "react-router";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 
 import UserAvatar from "./components/UserAvatar";
 import { MenuOptions } from "./components/MenuOptions";
