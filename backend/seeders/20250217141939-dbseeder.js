@@ -10,8 +10,8 @@ module.exports = {
     await Exercise.bulkCreate(exercises);
     console.log(chalk.green(`${exercises.length} exercises created!`));
 
-    await Food.bulkCreate(foods);
-    console.log(chalk.blue(`${foods.length} foods created!`));
+    await Food.bulkCreate(food);
+    console.log(chalk.blue(`${food.length} foods created!`));
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete("Sets", null, {});
