@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Button } from "primereact/button";
 import { FaRegCircleXmark } from "react-icons/fa6";
 
-import { FoodList } from "../../food/FoodList";
-import { mealLabels } from "../../../utils/data";
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { useGetAllFoodInMealQuery } from "../../../state/endpoints/foodEndpoints";
-import { useDeleteMealByIdMutation } from "../../../state/endpoints/mealEndpoints";
-import { EditFood } from "../../food/components/EditFood";
+import { mealLabels } from "@/utils/data";
+import { FoodList } from "@/views/food/FoodList";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { EditFood } from "@/views/food/components/EditFood";
+import { useGetAllFoodInMealQuery } from "@/api/endpoints/foodEndpoints";
+import { useDeleteMealByIdMutation } from "@/api/endpoints/mealEndpoints";
 
 export const MealCard = ({ meal }) => {
   const [error, setError] = useState(null);

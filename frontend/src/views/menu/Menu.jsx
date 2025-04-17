@@ -1,12 +1,11 @@
 import { NavLink } from "react-router";
 import { useSelector } from "react-redux";
 
-import UserAvatar from "./components/UserAvatar";
-import { MenuOptions } from "./components/MenuOptions";
-import { DarkModeToggle } from "../darkmode/DarkModeToggle";
-
-import { selectUserId } from "../../state/slices/authSlice";
-import { useGetWorkoutByUserIdQuery } from "../../state/endpoints/workoutEndpoints";
+import UserAvatar from "@/views/menu/components/UserAvatar";
+import { selectUserId } from "@/store/slices/authSlice";
+import { DarkModeToggle } from "@/views/darkmode/DarkModeToggle";
+import { MenuOptions } from "@/views/menu/components/MenuOptions";
+import { useGetWorkoutByUserIdQuery } from "@/api/endpoints/workoutEndpoints";
 
 export const Menu = () => {
   const userId = useSelector(selectUserId);

@@ -10,8 +10,8 @@ import {
   useGetFoodQuantityQuery,
   useEditFoodQuantityMutation,
   useRemoveFoodFromMealMutation,
-} from "../../../state/endpoints/foodEndpoints";
-import { ErrorMessage } from "../../helper/ErrorMessage";
+} from "@/api/endpoints/foodEndpoints";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
 export const EditFood = ({ foodId, mealId, setShowEditFood }) => {
   const { data: food, isLoading } = useGetFoodQuantityQuery({ foodId, mealId });

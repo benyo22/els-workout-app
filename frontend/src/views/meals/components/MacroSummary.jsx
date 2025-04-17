@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { useGetMacrosInMealsQuery } from "../../../state/endpoints/mealEndpoints";
+import { useGetMacrosInMealsQuery } from "@/api/endpoints/mealEndpoints";
 
 export const MacroSummary = ({ userId, date }) => {
   const { data: macros, isLoading } = useGetMacrosInMealsQuery({

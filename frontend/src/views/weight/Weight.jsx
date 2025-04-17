@@ -5,12 +5,12 @@ import { Button } from "primereact/button";
 import { FaPlus, FaChartLine } from "react-icons/fa6";
 import { ConfirmDialog } from "primereact/confirmdialog";
 
-import { WeightForm } from "./components/WeightForm";
-import { ErrorMessage } from "../helper/ErrorMessage";
-import { WeightTable } from "./components/WeightTable";
-import { selectUserId } from "../../state/slices/authSlice";
-import { WeightStatistics } from "../statistics/WeightStatistics";
-import { useGetWeightByUserIdQuery } from "../../state/endpoints/weightEndpoints";
+import { selectUserId } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { WeightForm } from "@/views/weight/components/WeightForm";
+import { WeightTable } from "@/views/weight/components/WeightTable";
+import { WeightStatistics } from "@/views/statistics/WeightStatistics";
+import { useGetWeightByUserIdQuery } from "@/api/endpoints/weightEndpoints";
 
 export const Weight = () => {
   const userId = useSelector(selectUserId);

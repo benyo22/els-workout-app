@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 
-import { Menu } from "../menu/Menu";
-import { Footer } from "../footer/Footer";
+import { Menu } from "@/views/menu/Menu";
+import { Footer } from "@/views/footer/Footer";
 
 export const Layout = () => (
   <div className="authed-layout-container">

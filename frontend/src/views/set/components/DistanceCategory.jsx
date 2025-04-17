@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
-import { useUpdateSetByIdMutation } from "../../../state/endpoints/setEndpoints";
+import { useUpdateSetByIdMutation } from "@/api/endpoints/setEndpoints";
 
 export const DistanceCategory = ({ set, workoutIsFinished }) => {
   const [updateSet] = useUpdateSetByIdMutation();

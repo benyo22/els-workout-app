@@ -6,8 +6,8 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { useCreateFoodMutation } from "../../../state/endpoints/foodEndpoints";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { useCreateFoodMutation } from "@/api/endpoints/foodEndpoints";
 
 export const CreateFood = ({ setShowCreateFood }) => {
   const [createFood] = useCreateFoodMutation();

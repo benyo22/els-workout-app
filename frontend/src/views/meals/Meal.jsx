@@ -8,12 +8,12 @@ import { format } from "date-fns";
 import {
   useGetMealsByUserIdAndDateQuery,
   useCreateMealWithUserIdMutation,
-} from "../../state/endpoints/mealEndpoints";
-import { MealCard } from "./components/MealCard";
-import { ErrorMessage } from "../helper/ErrorMessage";
-import { MacroSummary } from "./components/MacroSummary";
-import { mealLabels, mealTypes } from "../../utils/data";
-import { selectUserId } from "../../state/slices/authSlice";
+} from "@/api/endpoints/mealEndpoints";
+import { mealLabels, mealTypes } from "@/utils/data";
+import { selectUserId } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { MealCard } from "@/views/meals/components/MealCard";
+import { MacroSummary } from "@/views/meals/components/MacroSummary";
 
 export const Meal = () => {
   const userId = useSelector(selectUserId);
@@ -41,7 +41,7 @@ export const Meal = () => {
 
   return (
     <div className="flex flex-col dark:border-1 dark:border-primary-grey rounded-lg p-2">
-      <div className="h-[450px] 2xl:h-[700px] shadow-md rounded-lg p-4">
+      <div className="h-[450px] 3xl:h-[700px] shadow-md rounded-lg p-4">
         <h1 className="text-2xl font-bold mb-4">Étkezés</h1>
 
         <div className="mb-4">
@@ -71,7 +71,7 @@ export const Meal = () => {
         {isLoading ? (
           <p>Adatok betöltése...</p>
         ) : (
-          <div className="space-y-4 h-[250px] 2xl:h-[500px] overflow-auto">
+          <div className="space-y-4 h-[250px] 3xl:h-[500px] overflow-auto">
             {meals.map((meal) => (
               <MealCard key={meal.id} meal={meal} />
             ))}

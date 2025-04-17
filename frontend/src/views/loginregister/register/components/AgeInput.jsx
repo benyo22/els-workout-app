@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { ErrorMessage } from "../../../helper/ErrorMessage";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
 export const AgeInput = ({ age, handleInput, error }) => (
   <div className="flex flex-col gap-0.5">

@@ -5,7 +5,7 @@ import { FaXmark } from "react-icons/fa6";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 
-import { useUpdateWorkoutByIdMutation } from "../../../state/endpoints/workoutEndpoints";
+import { useUpdateWorkoutByIdMutation } from "@/api/endpoints/workoutEndpoints";
 
 export const WorkoutManagerHeader = ({
   setVisible,

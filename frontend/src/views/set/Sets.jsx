@@ -8,9 +8,9 @@ import {
   useBulkUpdateSetsMutation,
   useDeleteSetByIdMutation,
   useGetSetsInExerciseQuery,
-} from "../../state/endpoints/setEndpoints";
-import { SetItem } from "./components/SetItem";
-import { ErrorMessage } from "../helper/ErrorMessage";
+} from "@/api/endpoints/setEndpoints";
+import { SetItem } from "@/views/set/components/SetItem";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
 export const Sets = ({
   exerciseId,

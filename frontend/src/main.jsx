@@ -1,8 +1,8 @@
-import App from "./App.jsx";
+import App from "@/App.jsx";
+import { store, persistor } from "@/store/store.jsx";
 
 import { Provider } from "react-redux";
 import { createRoot } from "react-dom/client";
-import { store, persistor } from "./state/store.jsx";
 import { PersistGate } from "redux-persist/integration/react";
 
 import "./index.css";

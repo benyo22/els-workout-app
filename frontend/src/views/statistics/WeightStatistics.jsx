@@ -2,17 +2,14 @@
 import { useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 
-import {
-  FaTable,
-  FaArrowAltCircleRight,
-  FaArrowAltCircleLeft,
-} from "react-icons/fa";
 import { Chart } from "primereact/chart";
 import { Button } from "primereact/button";
+import { Calendar } from "primereact/calendar";
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
-import { selectUserId } from "../../state/slices/authSlice";
-import { formatWeight, getEndOfWeek, getStartOfWeek } from "../../utils/helper";
-import { useGetWeightByUserIdQuery } from "../../state/endpoints/weightEndpoints";
+import { selectUserId } from "@/store/slices/authSlice";
+import { formatWeight, getEndOfWeek, getStartOfWeek } from "@/utils/helper";
+import { useGetWeightByUserIdQuery } from "@/api/endpoints/weightEndpoints";
 
 export const WeightStatistics = ({ setVisible }) => {
   const userId = useSelector(selectUserId);
@@ -95,19 +92,19 @@ export const WeightStatistics = ({ setVisible }) => {
         <p>Adatok betöltése...</p>
       ) : (
         <>
-          <div className="flex flex-col">
+          <div className="flex flex-col justify-center">
             <div className="flex justify-between">
               <h3 className="font-bold text-xl">Súly statisztika</h3>
 
               <Button
-                icon={<FaTable className="ml-1" />}
+                label="Napló"
                 onClick={() => setVisible(false)}
-                className="edit-button flex items-center mb-2"
+                className="edit-button py-1 mb-4"
                 unstyled
               />
             </div>
 
-            <div className="flex justify-around">
+            <div className="flex justify-between items-center gap-x-1 md:gap-x-0">
               <Button
                 icon={<FaArrowAltCircleLeft className="ml-1" />}
                 onClick={handlePreviousWeek}
@@ -115,10 +112,12 @@ export const WeightStatistics = ({ setVisible }) => {
                 unstyled
               />
 
-              {/* Current week */}
-              <span className="">
-                Hét: {getStartOfWeek(selectedDate).toLocaleDateString("hu-HU")}
-              </span>
+              <Calendar
+                name="date"
+                value={getStartOfWeek(selectedDate)}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                showIcon
+              />
 
               <Button
                 icon={<FaArrowAltCircleRight className="ml-1" />}

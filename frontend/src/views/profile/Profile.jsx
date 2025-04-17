@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { Carousel } from "./components/Carousel";
-import { UserData } from "./components/UserData";
-import { EditUserForm } from "./components/EditUserForm";
-
-import { ErrorMessage } from "../helper/ErrorMessage";
-import { selectUserId } from "../../state/slices/authSlice";
-import { useGetSleepByUserIdQuery } from "../../state/endpoints/sleepEndpoints";
-import { useGetWeightByUserIdQuery } from "../../state/endpoints/weightEndpoints";
-import { useGetWorkoutByUserIdQuery } from "../../state/endpoints/workoutEndpoints";
-import { useGetMealsByUserIdQuery } from "../../state/endpoints/mealEndpoints";
+import { selectUserId } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { Carousel } from "@/views/profile/components/Carousel";
+import { UserData } from "@/views/profile/components/UserData";
+import { EditUserForm } from "@/views/profile/components/EditUserForm";
+import { useGetMealsByUserIdQuery } from "@/api/endpoints/mealEndpoints";
+import { useGetSleepByUserIdQuery } from "@/api/endpoints/sleepEndpoints";
+import { useGetWeightByUserIdQuery } from "@/api/endpoints/weightEndpoints";
+import { useGetWorkoutByUserIdQuery } from "@/api/endpoints/workoutEndpoints";
 
 export const Profile = () => {
   const [visible, setVisible] = useState(false);

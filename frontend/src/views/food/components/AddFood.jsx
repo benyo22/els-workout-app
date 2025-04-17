@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 
-import { useAddFoodToMealMutation } from "../../../state/endpoints/foodEndpoints";
-import { ErrorMessage } from "../../helper/ErrorMessage";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { useAddFoodToMealMutation } from "@/api/endpoints/foodEndpoints";
 
 export const AddFood = ({
   foodId,

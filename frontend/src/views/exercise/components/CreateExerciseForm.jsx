@@ -7,9 +7,9 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { bodyPartLabels, categoryLabels } from "../../../utils/data";
-import { useCreateExcerciseMutation } from "../../../state/endpoints/exerciseEndpoints";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { bodyPartLabels, categoryLabels } from "@/utils/data";
+import { useCreateExcerciseMutation } from "@/api/endpoints/exerciseEndpoints";
 
 export const CreateExerciseForm = ({ setVisible }) => {
   const [createExcercise] = useCreateExcerciseMutation();

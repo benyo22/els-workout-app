@@ -7,14 +7,14 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 
-import { ExerciseItem } from "./ExerciseItem";
 import {
   useAddExerciseToWorkoutMutation,
   useGetAllExercisesQuery,
   useGetExcercisesInWorkoutQuery,
-} from "../../../state/endpoints/exerciseEndpoints";
-import { CreateExerciseForm } from "./CreateExerciseForm";
-import { bodyPartLabels, categoryLabels } from "../../../utils/data";
+} from "@/api/endpoints/exerciseEndpoints";
+import { bodyPartLabels, categoryLabels } from "@/utils/data";
+import { ExerciseItem } from "@/views/exercise/components/ExerciseItem";
+import { CreateExerciseForm } from "@/views/exercise/components/CreateExerciseForm";
 
 export const AddExercise = ({ workoutId, setVisible }) => {
   const [exercises, setExercises] = useState([]);

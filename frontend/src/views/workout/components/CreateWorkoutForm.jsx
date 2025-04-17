@@ -9,9 +9,9 @@ import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { selectUserId } from "../../../state/slices/authSlice";
-import { useCreateWorkoutWithUserIdMutation } from "../../../state/endpoints/workoutEndpoints";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { selectUserId } from "@/store/slices/authSlice";
+import { useCreateWorkoutWithUserIdMutation } from "@/api/endpoints/workoutEndpoints";
 
 export const CreateWorkoutForm = ({ onClose }) => {
   const userId = useSelector(selectUserId);

@@ -1,15 +1,15 @@
 import { NavLink } from "react-router";
 import { useDispatch } from "react-redux";
 
+import { FaBalanceScale } from "react-icons/fa";
+import { FaDumbbell, FaUtensils, FaBed, FaChartLine } from "react-icons/fa6";
+
+import { FeatureCard } from "@/views/welcome/components/FeatureCard";
 import {
   setLoginActive,
   setRegisterActive,
-} from "../../state/slices/authViewSlice";
-import { DarkModeToggle } from "../darkmode/DarkModeToggle";
-
-import { FaBalanceScale } from "react-icons/fa";
-import { FeatureCard } from "./components/FeatureCard";
-import { FaDumbbell, FaUtensils, FaBed, FaChartLine } from "react-icons/fa6";
+} from "@/store/slices/authViewSlice";
+import { DarkModeToggle } from "@/views/darkmode/DarkModeToggle";
 
 export const Welcome = () => {
   const dispatch = useDispatch();

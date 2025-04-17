@@ -9,13 +9,13 @@ import {
   useDeleteWorkoutByIdMutation,
   useFinishWorkoutByIdMutation,
   useGetWorkoutByUserIdQuery,
-} from "../../state/endpoints/workoutEndpoints";
-import { ErrorMessage } from "../helper/ErrorMessage";
-import { WorkoutTable } from "./components/WorkoutTable";
-import { selectUserId } from "../../state/slices/authSlice";
-import { WorkoutManager } from "./components/WorkoutManager";
-import { CreateWorkoutForm } from "./components/CreateWorkoutForm";
-import { WorkoutStatistics } from "../statistics/WorkoutStatistics";
+} from "@/api/endpoints/workoutEndpoints";
+import { selectUserId } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { WorkoutTable } from "@/views/workout/components/WorkoutTable";
+import { WorkoutStatistics } from "@/views/statistics/WorkoutStatistics";
+import { WorkoutManager } from "@/views/workout/components/WorkoutManager";
+import { CreateWorkoutForm } from "@/views/workout/components/CreateWorkoutForm";
 
 export const Workout = () => {
   const userId = useSelector(selectUserId);

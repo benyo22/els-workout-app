@@ -5,12 +5,12 @@ import { Button } from "primereact/button";
 import { FaChartLine, FaPlus } from "react-icons/fa6";
 import { ConfirmDialog } from "primereact/confirmdialog";
 
-import { SleepForm } from "./components/SleepForm";
-import { SleepTable } from "./components/SleepTable";
-import { ErrorMessage } from "../helper/ErrorMessage";
-import { selectUserId } from "../../state/slices/authSlice";
-import { SleepStatistics } from "../statistics/SleepStatistics";
-import { useGetSleepByUserIdQuery } from "../../state/endpoints/sleepEndpoints";
+import { SleepForm } from "@/views/sleep/components/SleepForm";
+import { SleepTable } from "@/views/sleep//components/SleepTable";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { selectUserId } from "@/store/slices/authSlice";
+import { SleepStatistics } from "@/views/statistics/SleepStatistics";
+import { useGetSleepByUserIdQuery } from "@/api/endpoints/sleepEndpoints";
 
 export const Sleep = () => {
   const userId = useSelector(selectUserId);

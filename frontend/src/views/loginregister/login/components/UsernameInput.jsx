@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { InputText } from "primereact/inputtext";
-import { ErrorMessage } from "../../../helper/ErrorMessage";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
 export const UsernameInput = ({
   username,

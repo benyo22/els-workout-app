@@ -21,9 +21,3 @@ export const formatSecToHourMin = (durationSec) => {
 export const formatWeight = (weight) => {
   return `${weight} kg`;
 };
-
-// export const getHungarianISOString = (date) => {
-//   const offsetInMs = date.getTimezoneOffset() * 60 * 1000;
-//   const adjustedDate = new Date(date.getTime() - offsetInMs);
-//   return adjustedDate.toISOString();
-// };

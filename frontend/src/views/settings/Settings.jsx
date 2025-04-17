@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { FaKey, FaX } from "react-icons/fa6";
 import { TabView, TabPanel } from "primereact/tabview";
 
-import { DeleteProfile } from "./components/DeleteProfile";
-import { selectUserId } from "../../state/slices/authSlice";
-import { UpdatePassword } from "./components/UpdatePassword";
+import { selectUserId } from "@/store/slices/authSlice";
+import { DeleteProfile } from "@/views/settings/components/DeleteProfile";
+import { UpdatePassword } from "@/views/settings/components/UpdatePassword";
 
 export const Settings = () => {
   const userId = useSelector(selectUserId);

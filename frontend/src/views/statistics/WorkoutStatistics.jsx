@@ -2,17 +2,14 @@
 import { useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 
-import {
-  FaTable,
-  FaArrowAltCircleRight,
-  FaArrowAltCircleLeft,
-} from "react-icons/fa";
 import { Chart } from "primereact/chart";
 import { Button } from "primereact/button";
+import { Calendar } from "primereact/calendar";
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
-import { getEndOfWeek, getStartOfWeek } from "../../utils/helper";
-import { selectUserId } from "../../state/slices/authSlice";
-import { useGetWorkoutByUserIdQuery } from "../../state/endpoints/workoutEndpoints";
+import { selectUserId } from "@/store/slices/authSlice";
+import { getEndOfWeek, getStartOfWeek } from "@/utils/helper";
+import { useGetWorkoutByUserIdQuery } from "@/api/endpoints/workoutEndpoints";
 
 export const WorkoutStatistics = ({ setVisible }) => {
   const userId = useSelector(selectUserId);
@@ -105,7 +102,7 @@ export const WorkoutStatistics = ({ setVisible }) => {
               <h3 className="font-bold text-xl">Edzés statisztika</h3>
 
               <Button
-                icon={<FaTable className="ml-1" />}
+                label="Napló"
                 onClick={() => setVisible(false)}
                 className="edit-button flex items-center mb-2"
                 unstyled
@@ -120,10 +117,12 @@ export const WorkoutStatistics = ({ setVisible }) => {
                 unstyled
               />
 
-              {/* Current week */}
-              <span className="">
-                Hét: {getStartOfWeek(selectedDate).toLocaleDateString("hu-HU")}
-              </span>
+              <Calendar
+                name="date"
+                value={getStartOfWeek(selectedDate)}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                showIcon
+              />
 
               <Button
                 icon={<FaArrowAltCircleRight className="ml-1" />}

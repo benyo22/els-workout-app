@@ -16,12 +16,9 @@ import {
 import { Menu } from "primereact/menu";
 import { Avatar } from "primereact/avatar";
 
-import {
-  logout,
-  selectLoggedInUsername,
-} from "../../../state/slices/authSlice";
-import { setLoginActive } from "../../../state/slices/authViewSlice";
-import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
+import { setLoginActive } from "@/store/slices/authViewSlice";
+import { useLogoutMutation } from "@/api/endpoints/authEndpoints";
+import { logout, selectLoggedInUsername } from "@/store/slices/authSlice";
 
 const SMALL_DEVICE_WIDTH = 768;
 

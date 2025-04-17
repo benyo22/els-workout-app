@@ -1,16 +1,15 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 
-import { AgeInput } from "./components/AgeInput";
-import { NameInput } from "./components/NameInput";
-import { EmailInput } from "./components/EmailInput";
-import { UsernameInput } from "./components/UsernameInput";
-import { PasswordsInput } from "./components/PasswordsInput";
-import { RegisterButton } from "./components/RegisterButton";
-
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { setLoginActive } from "../../../state/slices/authViewSlice";
-import { useRegisterMutation } from "../../../state/endpoints/authEndpoints";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { setLoginActive } from "@/store/slices/authViewSlice";
+import { useRegisterMutation } from "@/api/endpoints/authEndpoints";
+import { AgeInput } from "@/views/loginregister/register/components/AgeInput";
+import { NameInput } from "@/views/loginregister/register/components/NameInput";
+import { EmailInput } from "@/views/loginregister/register/components/EmailInput";
+import { UsernameInput } from "@/views/loginregister/register/components/UsernameInput";
+import { PasswordsInput } from "@/views/loginregister/register/components/PasswordsInput";
+import { RegisterButton } from "@/views/loginregister/register/components/RegisterButton";
 
 export const Register = () => {
   const nameRef = useRef();

@@ -2,13 +2,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 
-import { LoginButton } from "./components/LoginButton";
-import { UsernameInput } from "./components/UsernameInput";
-import { PasswordsInput } from "./components/PasswordsInput";
-
-import { login } from "../../../state/slices/authSlice";
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { useLoginMutation } from "../../../state/endpoints/authEndpoints";
+import { login } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { useLoginMutation } from "@/api/endpoints/authEndpoints";
+import { LoginButton } from "@/views/loginregister/login/components/LoginButton";
+import { UsernameInput } from "@/views/loginregister/login/components/UsernameInput";
+import { PasswordsInput } from "@/views/loginregister/login/components/PasswordsInput";
 
 export const Login = () => {
   const usernameRef = useRef();

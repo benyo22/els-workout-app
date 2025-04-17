@@ -2,10 +2,10 @@
 import { Button } from "primereact/button";
 import { FaRegCircleXmark } from "react-icons/fa6";
 
-import { SetButton } from "./SetButton";
-import { WeightRepsCategory } from "./WeightRepsCategory";
-import { DistanceCategory } from "./DistanceCategory";
-import { DurationCategory } from "./DurationCategory";
+import { SetButton } from "@/views/set/components/SetButton";
+import { DistanceCategory } from "@/views/set/components/DistanceCategory";
+import { DurationCategory } from "@/views/set/components/DurationCategory";
+import { WeightRepsCategory } from "@/views/set/components/WeightRepsCategory";
 
 export const SetItem = ({
   set,

@@ -11,8 +11,8 @@ import { InputNumber } from "primereact/inputnumber";
 import {
   useUpdateWeightByIdMutation,
   useCreateWeightWithUserIdMutation,
-} from "../../../state/endpoints/weightEndpoints";
-import { ErrorMessage } from "../../helper/ErrorMessage";
+} from "@/api/endpoints/weightEndpoints";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
 export const WeightForm = ({ userId, entry, onClose }) => {
   const [error, setError] = useState(null);

@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { FaAt } from "react-icons/fa";
 import { Button } from "primereact/button";
 
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { selectUserId } from "../../../state/slices/authSlice";
-import { useGetUserByIdQuery } from "../../../state/endpoints/userEndpoints";
+import { selectUserId } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { useGetUserByIdQuery } from "@/api/endpoints/userEndpoints";
 
 export const UserData = ({ showEditForm }) => {
   const userId = useSelector(selectUserId);

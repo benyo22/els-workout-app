@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useUpdateSetByIdMutation } from "../../../state/endpoints/setEndpoints";
+import { useUpdateSetByIdMutation } from "@/api/endpoints/setEndpoints";
 
 export const WeightRepsCategory = ({ set, workoutIsFinished }) => {
   const [updateSet] = useUpdateSetByIdMutation();

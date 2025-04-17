@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { InputText } from "primereact/inputtext";
-import { ErrorMessage } from "../../../helper/ErrorMessage";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
 export const EmailInput = ({ email, handleInput, error }) => (
   <div className="flex flex-col gap-0.5">

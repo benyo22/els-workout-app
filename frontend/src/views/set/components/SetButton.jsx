@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Button } from "primereact/button";
 
-import { setTypes } from "../../../utils/data";
-import { useUpdateSetByIdMutation } from "../../../state/endpoints/setEndpoints";
+import { setTypes } from "@/utils/data";
+import { useUpdateSetByIdMutation } from "@/api/endpoints/setEndpoints";
 
 export const SetButton = ({ set, setsInExercises, workoutIsFinished }) => {
   const [updateSet] = useUpdateSetByIdMutation();

@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  selectDarkMode,
-  toggleDarkMode,
-} from "../../state/slices/darkModeSlice";
 import { FaSun, FaMoon } from "react-icons/fa6";
+
+import { selectDarkMode, toggleDarkMode } from "@/store/slices/darkModeSlice";
 
 export const DarkModeToggle = () => {
   const dispatch = useDispatch();

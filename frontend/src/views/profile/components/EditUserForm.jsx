@@ -5,13 +5,12 @@ import { useSelector } from "react-redux";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 
-import { AgeInput } from "./editcomponents/AgeInput";
-import { NameInput } from "./editcomponents/NameInput";
-import { EmailInput } from "./editcomponents/EmailInput";
-import { UsernameInput } from "./editcomponents/UsernameInput";
-
-import { selectUserId } from "../../../state/slices/authSlice";
-import { useUpdateUserByIdMutation } from "../../../state/endpoints/userEndpoints";
+import { selectUserId } from "@/store/slices/authSlice";
+import { useUpdateUserByIdMutation } from "@/api/endpoints/userEndpoints";
+import { AgeInput } from "@/views/profile/components/editcomponents/AgeInput";
+import { NameInput } from "@/views/profile/components/editcomponents/NameInput";
+import { EmailInput } from "@/views/profile/components/editcomponents/EmailInput";
+import { UsernameInput } from "@/views/profile/components/editcomponents/UsernameInput";
 
 export const EditUserForm = ({ setVisible }) => {
   const userId = useSelector(selectUserId);

@@ -7,11 +7,11 @@ import { Password } from "primereact/password";
 import { FloatLabel } from "primereact/floatlabel";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
-import { logout } from "../../../state/slices/authSlice";
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { setRegisterActive } from "../../../state/slices/authViewSlice";
-import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
-import { useDeleteUserByIdMutation } from "../../../state/endpoints/userEndpoints";
+import { logout } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { setRegisterActive } from "@/store/slices/authViewSlice";
+import { useLogoutMutation } from "@/api/endpoints/authEndpoints";
+import { useDeleteUserByIdMutation } from "@/api/endpoints/userEndpoints";
 
 export const DeleteProfile = ({ error, setError, userId }) => {
   const dispatch = useDispatch();

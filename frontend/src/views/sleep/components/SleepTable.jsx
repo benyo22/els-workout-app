@@ -5,9 +5,9 @@ import { DataTable } from "primereact/datatable";
 import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import { confirmDialog } from "primereact/confirmdialog";
 
-import { sleepQualityLabels } from "../../../utils/data";
-import { formatSecToHourMin } from "../../../utils/helper";
-import { useDeleteSleepByIdMutation } from "../../../state/endpoints/sleepEndpoints";
+import { sleepQualityLabels } from "@/utils/data";
+import { formatSecToHourMin } from "@/utils/helper";
+import { useDeleteSleepByIdMutation } from "@/api/endpoints/sleepEndpoints";
 
 export const SleepTable = ({ sleepData, setShowForm, setEditingEntry }) => {
   const [deleteSleep] = useDeleteSleepByIdMutation();

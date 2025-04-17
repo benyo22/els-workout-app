@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Button } from "primereact/button";
 
-import { Sets } from "../../set/Sets";
+import { Sets } from "@/views/set/Sets";
 import {
   useGetExcercisesInWorkoutQuery,
   useRemoveExerciseFromWorkoutMutation,
-} from "../../../state/endpoints/exerciseEndpoints";
-import { categoryLabels } from "../../../utils/data";
-import { useDeleteAllSetsInExerciseMutation } from "../../../state/endpoints/setEndpoints";
+} from "@/api/endpoints/exerciseEndpoints";
+import { categoryLabels } from "@/utils/data";
+import { useDeleteAllSetsInExerciseMutation } from "@/api/endpoints/setEndpoints";
 
 export const ExerciseList = ({ workout }) => {
   const { data: exercisesInWorkout } = useGetExcercisesInWorkoutQuery(

@@ -12,9 +12,9 @@ import { InputNumber } from "primereact/inputnumber";
 import {
   useCreateSleepWithUserIdMutation,
   useUpdateSleepByIdMutation,
-} from "../../../state/endpoints/sleepEndpoints";
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { sleepQualityOptions } from "../../../utils/data";
+} from "@/api/endpoints/sleepEndpoints";
+import { sleepQualityOptions } from "@/utils/data";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
 export const SleepForm = ({ userId, entry, onClose }) => {
   const [error, setError] = useState(null);

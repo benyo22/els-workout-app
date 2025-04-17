@@ -1,4 +1,4 @@
-import { logout } from "../state/slices/authSlice";
+import { logout } from "@/store/slices/authSlice";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({

@@ -1,4 +1,4 @@
-import { ErrorMessage } from "../../../helper/ErrorMessage";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
 // eslint-disable-next-line react/prop-types
 export const AgeInput = ({ age, handleInput, error }) => (

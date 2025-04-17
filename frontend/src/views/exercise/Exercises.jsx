@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { AddExercise } from "./components/AddExercise";
-import { ExerciseList } from "./components/ExerciseList";
+import { AddExercise } from "@/views/exercise/components/AddExercise";
+import { ExerciseList } from "@/views/exercise/components/ExerciseList";
 
 export const Exercises = ({
   selectedWorkout,

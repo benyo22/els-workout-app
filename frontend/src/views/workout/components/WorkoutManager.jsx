@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 
-import { Exercises } from "../../exercise/Exercises";
-import { WorkoutManagerHeader } from "./WorkoutManagerHeader";
+import { Exercises } from "@/views/exercise/Exercises";
+import { WorkoutManagerHeader } from "@/views/workout/components/WorkoutManagerHeader";
 
 export const WorkoutManager = ({
   setVisible,

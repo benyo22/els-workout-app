@@ -2,10 +2,10 @@ import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import { elsApi } from "./elsApiSlice";
-import { authReducer } from "./slices/authSlice";
-import { authViewReducer } from "./slices/authViewSlice";
-import { darkModeReducer } from "./slices/darkModeSlice";
+import { elsApi } from "@/api/elsApiSlice";
+import { authReducer } from "@/store/slices/authSlice";
+import { authViewReducer } from "@/store/slices/authViewSlice";
+import { darkModeReducer } from "@/store/slices/darkModeSlice";
 
 const persistConfig = {
   key: "root",

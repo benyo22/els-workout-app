@@ -7,11 +7,10 @@ import {
   selectLoginActive,
   setLoginActive,
   setRegisterActive,
-} from "../../state/slices/authViewSlice";
-
-import { Login } from "./login/Login";
-import { Register } from "./register/Register";
-import { DarkModeToggle } from "../darkmode/DarkModeToggle";
+} from "@/store/slices/authViewSlice";
+import { Login } from "@/views/loginregister/login/Login";
+import { DarkModeToggle } from "@/views/darkmode/DarkModeToggle";
+import { Register } from "@/views/loginregister/register/Register";
 
 export const AuthPage = () => {
   const dispatch = useDispatch();

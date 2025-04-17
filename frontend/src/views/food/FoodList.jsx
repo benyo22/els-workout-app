@@ -7,13 +7,13 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 
-import { FoodItem } from "./components/FoodItem";
+import { FoodItem } from "@/views/food/components/FoodItem";
 import {
   useGetAllFoodQuery,
   useGetAllFoodInMealQuery,
-} from "../../state/endpoints/foodEndpoints";
-import { AddFood } from "./components/AddFood";
-import { CreateFood } from "./components/CreateFood";
+} from "@/api/endpoints/foodEndpoints";
+import { AddFood } from "@/views/food/components/AddFood";
+import { CreateFood } from "@/views/food/components/CreateFood";
 
 export const FoodList = ({ mealId, setShowFoodList }) => {
   const [food, setFood] = useState([]);

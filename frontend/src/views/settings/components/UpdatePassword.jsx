@@ -6,11 +6,11 @@ import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { FloatLabel } from "primereact/floatlabel";
 
-import { ErrorMessage } from "../../helper/ErrorMessage";
-import { logout } from "../../../state/slices/authSlice";
-import { setLoginActive } from "../../../state/slices/authViewSlice";
-import { useLogoutMutation } from "../../../state/endpoints/authEndpoints";
-import { useUpdatePasswordByIdMutation } from "../../../state/endpoints/userEndpoints";
+import { logout } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
+import { setLoginActive } from "@/store/slices/authViewSlice";
+import { useLogoutMutation } from "@/api/endpoints/authEndpoints";
+import { useUpdatePasswordByIdMutation } from "@/api/endpoints/userEndpoints";
 
 export const UpdatePassword = ({ error, setError, userId }) => {
   const dispatch = useDispatch();

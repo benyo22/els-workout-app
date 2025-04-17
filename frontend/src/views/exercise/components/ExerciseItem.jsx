@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { bodyPartLabels, categoryLabels } from "../../../utils/data";
+import { bodyPartLabels, categoryLabels } from "@/utils/data";
 
 export const ExerciseItem = ({ exercise, onSelect }) => (
   <div
