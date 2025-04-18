@@ -5,10 +5,10 @@ import { Button } from "primereact/button";
 import { FaChartLine, FaPlus } from "react-icons/fa6";
 import { ConfirmDialog } from "primereact/confirmdialog";
 
+import { selectUserId } from "@/store/slices/authSlice";
+import { ErrorMessage } from "@/views/helper/ErrorMessage";
 import { SleepForm } from "@/views/sleep/components/SleepForm";
 import { SleepTable } from "@/views/sleep//components/SleepTable";
-import { ErrorMessage } from "@/views/helper/ErrorMessage";
-import { selectUserId } from "@/store/slices/authSlice";
 import { SleepStatistics } from "@/views/statistics/SleepStatistics";
 import { useGetSleepByUserIdQuery } from "@/api/endpoints/sleepEndpoints";
 
@@ -22,7 +22,7 @@ export const Sleep = () => {
   } = useGetSleepByUserIdQuery(userId);
 
   const [showForm, setShowForm] = useState(false);
-  const [editingEntry, setEditingEntry] = useState(null);
+  const [selectedSleep, setSelectedSleep] = useState(null);
   const [showStatistics, setShowStatistics] = useState(false);
 
   return (
@@ -43,7 +43,7 @@ export const Sleep = () => {
               icon={<FaPlus className="mr-1" />}
               className="edit-button flex items-center mb-2"
               onClick={() => {
-                setEditingEntry(null);
+                setSelectedSleep(null);
                 setShowForm(true);
               }}
               unstyled
@@ -62,16 +62,20 @@ export const Sleep = () => {
           ) : (
             <SleepTable
               sleepData={sleepData}
-              setShowForm={setShowForm}
-              setEditingEntry={setEditingEntry}
+              onSelect={() => setShowForm(true)}
+              selectedSleep={selectedSleep}
+              setSelectedSleep={setSelectedSleep}
             />
           )}
 
           {showForm && (
             <SleepForm
               userId={userId}
-              entry={editingEntry}
-              onClose={() => setShowForm(false)}
+              selectedSleep={selectedSleep}
+              onClose={() => {
+                setShowForm(false);
+                setSelectedSleep(null);
+              }}
             />
           )}
           <ConfirmDialog />

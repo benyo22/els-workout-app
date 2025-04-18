@@ -22,7 +22,7 @@ export const Weight = () => {
   } = useGetWeightByUserIdQuery(userId);
 
   const [showForm, setShowForm] = useState(false);
-  const [editingEntry, setEditingEntry] = useState(null);
+  const [selectedWeight, setSelectedWeight] = useState(null);
   const [showStatistics, setShowStatistics] = useState(false);
 
   return (
@@ -43,7 +43,7 @@ export const Weight = () => {
               icon={<FaPlus className="mr-1" />}
               className="edit-button flex items-center mb-2"
               onClick={() => {
-                setEditingEntry(null);
+                setSelectedWeight(null);
                 setShowForm(true);
               }}
               unstyled
@@ -62,16 +62,20 @@ export const Weight = () => {
           ) : (
             <WeightTable
               weightData={weightData}
-              setShowForm={setShowForm}
-              setEditingEntry={setEditingEntry}
+              onSelect={() => setShowForm(true)}
+              selectedWeight={selectedWeight}
+              setSelectedWeight={setSelectedWeight}
             />
           )}
 
           {showForm && (
             <WeightForm
               userId={userId}
-              entry={editingEntry}
-              onClose={() => setShowForm(false)}
+              selectedWeight={selectedWeight}
+              onClose={() => {
+                setShowForm(false);
+                setSelectedWeight(null);
+              }}
             />
           )}
           <ConfirmDialog />

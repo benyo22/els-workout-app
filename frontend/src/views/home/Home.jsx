@@ -8,11 +8,11 @@ export const Home = () => {
     <div className="p-8 bg-gradient-to-br from-primary-blue to-third-blue dark:from-dark-dark dark:to-dark-medium rounded-lg">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary-white dark:text-dark-primary-blue">
-          Üdv újra az ELS-ben! 💪
+          Üdv újra!
         </h1>
         <p className="text-lg text-gray-100 dark:text-dark-secondary-blue mb-8">
           Itt az ideje, hogy ma is tegyél magadért! Nézd meg az eddigi
-          haladásod, rögzíts új adatokat, vagy csak nézz körül.
+          haladásod, és indulhat a fejlődé!
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -21,7 +21,7 @@ export const Home = () => {
               <FaUtensils /> Étkezések
             </h2>
             <p className="text-gray-600 mb-4 dark:text-gray-200">
-              Kövesd, mit ettél ma, és rögzíts új ételeket.
+              Jegyezd fel mit ettél ma.
             </p>
             <NavLink to="/meals" className="blue-button px-4">
               Étkezések megtekintése
@@ -45,7 +45,7 @@ export const Home = () => {
               <FaBed /> Alvás
             </h2>
             <p className="text-gray-600 mb-4 dark:text-gray-200">
-              Rögzítsd az alvásod és kövesd a pihenésed minőségét.
+              Rögzítsd az alvásod!
             </p>
             <NavLink to="/sleep" className="blue-button px-4">
               Alvás naplózása
@@ -57,7 +57,7 @@ export const Home = () => {
               <FaBalanceScale /> Súly
             </h2>
             <p className="text-gray-600 mb-4 dark:text-gray-200">
-              Rögzítsd a súlyod és kövesd a fejlődséd.
+              Rögzítsd a mai súlyod!
             </p>
             <NavLink to="/weight" className="blue-button px-4">
               Súly naplózása

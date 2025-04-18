@@ -8,17 +8,20 @@ import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputNumber } from "primereact/inputnumber";
+import { confirmDialog } from "primereact/confirmdialog";
 
 import {
-  useCreateSleepWithUserIdMutation,
   useUpdateSleepByIdMutation,
+  useDeleteSleepByIdMutation,
+  useCreateSleepWithUserIdMutation,
 } from "@/api/endpoints/sleepEndpoints";
 import { sleepQualityOptions } from "@/utils/data";
 import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
-export const SleepForm = ({ userId, entry, onClose }) => {
+export const SleepForm = ({ userId, selectedSleep, onClose }) => {
   const [error, setError] = useState(null);
   const [updateSleep] = useUpdateSleepByIdMutation();
+  const [deleteSleep] = useDeleteSleepByIdMutation();
   const [createSleep] = useCreateSleepWithUserIdMutation();
   const [formData, setFormData] = useState({
     date: new Date(),
@@ -27,14 +30,14 @@ export const SleepForm = ({ userId, entry, onClose }) => {
   });
 
   useEffect(() => {
-    if (entry) {
+    if (selectedSleep) {
       setFormData({
-        date: new Date(entry.date),
-        durationSec: entry.durationSec,
-        quality: entry.quality,
+        date: new Date(selectedSleep.date),
+        durationSec: selectedSleep.durationSec,
+        quality: selectedSleep.quality,
       });
     }
-  }, [entry]);
+  }, [selectedSleep]);
 
   const handleTimeChange = (value, type) => {
     value = value || 0;
@@ -56,9 +59,9 @@ export const SleepForm = ({ userId, entry, onClose }) => {
   const handleSubmit = async () => {
     const formattedDate = format(formData.date, "yyyy-MM-dd");
     let result = null;
-    if (entry) {
+    if (selectedSleep) {
       result = await updateSleep({
-        sleepId: entry.id,
+        sleepId: selectedSleep.id,
         data: { ...formData, date: formattedDate },
       });
     } else {
@@ -76,6 +79,17 @@ export const SleepForm = ({ userId, entry, onClose }) => {
     onClose();
   };
 
+  const handleDelete = (id) => {
+    confirmDialog({
+      message: "Biztosan törölni szeretnéd ezt az alvási adatot?",
+      header: "Megerősítés",
+      acceptLabel: "Igen",
+      acceptClassName: "p-button-danger",
+      rejectLabel: "Nem",
+      accept: async () => await deleteSleep(id),
+    });
+  };
+
   const hours = Math.floor(formData.durationSec / 3600);
   const minutes = Math.floor((formData.durationSec % 3600) / 60);
 
@@ -83,7 +97,7 @@ export const SleepForm = ({ userId, entry, onClose }) => {
     <Dialog
       visible
       onHide={onClose}
-      header={entry ? "Alvás szerkesztése" : "Új alvás bejegyzés"}
+      header={selectedSleep ? "Alvás szerkesztése" : "Új alvás bejegyzés"}
       modal
     >
       <div className="flex flex-col gap-6">
@@ -135,8 +149,19 @@ export const SleepForm = ({ userId, entry, onClose }) => {
             className="gray-button"
             unstyled
           />
+          {selectedSleep && (
+            <Button
+              label="Törlés"
+              onClick={() => {
+                handleDelete(selectedSleep.id);
+                onClose();
+              }}
+              className="red-button px-2"
+              unstyled
+            />
+          )}
           <Button
-            label={entry ? "Mentés" : "Rögzítés"}
+            label={selectedSleep ? "Mentés" : "Rögzítés"}
             onClick={handleSubmit}
             className="green-button"
             unstyled

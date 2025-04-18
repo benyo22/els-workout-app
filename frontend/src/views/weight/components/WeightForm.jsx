@@ -7,16 +7,19 @@ import { Dialog } from "primereact/dialog";
 import { Calendar } from "primereact/calendar";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputNumber } from "primereact/inputnumber";
+import { confirmDialog } from "primereact/confirmdialog";
 
 import {
   useUpdateWeightByIdMutation,
+  useDeleteWeightByIdMutation,
   useCreateWeightWithUserIdMutation,
 } from "@/api/endpoints/weightEndpoints";
 import { ErrorMessage } from "@/views/helper/ErrorMessage";
 
-export const WeightForm = ({ userId, entry, onClose }) => {
+export const WeightForm = ({ userId, selectedWeight, onClose }) => {
   const [error, setError] = useState(null);
   const [updateWeight] = useUpdateWeightByIdMutation();
+  const [deleteWeight] = useDeleteWeightByIdMutation();
   const [createWeight] = useCreateWeightWithUserIdMutation();
   const [formData, setFormData] = useState({
     date: new Date(),
@@ -24,13 +27,13 @@ export const WeightForm = ({ userId, entry, onClose }) => {
   });
 
   useEffect(() => {
-    if (entry) {
+    if (selectedWeight) {
       setFormData({
-        weight: entry.weight,
-        date: new Date(entry.date),
+        weight: selectedWeight.weight,
+        date: new Date(selectedWeight.date),
       });
     }
-  }, [entry]);
+  }, [selectedWeight]);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -40,9 +43,9 @@ export const WeightForm = ({ userId, entry, onClose }) => {
   const handleSubmit = async () => {
     const formattedDate = format(formData.date, "yyyy-MM-dd");
     let result = null;
-    if (entry) {
+    if (selectedWeight) {
       result = await updateWeight({
-        weightId: entry.id,
+        weightId: selectedWeight.id,
         data: { ...formData, date: formattedDate },
       });
     } else {
@@ -60,11 +63,22 @@ export const WeightForm = ({ userId, entry, onClose }) => {
     onClose();
   };
 
+  const handleDelete = (id) => {
+    confirmDialog({
+      message: "Biztosan törölni szeretnéd ezt a súly adatot?",
+      header: "Megerősítés",
+      acceptLabel: "Igen",
+      acceptClassName: "p-button-danger",
+      rejectLabel: "Nem",
+      accept: async () => await deleteWeight(id),
+    });
+  };
+
   return (
     <Dialog
       visible
       onHide={onClose}
-      header={entry ? "Súly szerkesztése" : "Új súly bejegyzés"}
+      header={selectedWeight ? "Súly szerkesztése" : "Új súly bejegyzés"}
       modal
     >
       <div className="flex flex-col gap-y-4">
@@ -95,8 +109,19 @@ export const WeightForm = ({ userId, entry, onClose }) => {
             className="gray-button"
             unstyled
           />
+          {selectedWeight && (
+            <Button
+              label="Törlés"
+              onClick={() => {
+                handleDelete(selectedWeight.id);
+                onClose();
+              }}
+              className="red-button px-2"
+              unstyled
+            />
+          )}
           <Button
-            label={entry ? "Mentés" : "Rögzítés"}
+            label={selectedWeight ? "Mentés" : "Rögzítés"}
             onClick={handleSubmit}
             className="green-button"
             unstyled
