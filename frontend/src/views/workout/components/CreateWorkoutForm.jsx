@@ -73,7 +73,7 @@ export const CreateWorkoutForm = ({ onClose }) => {
             unstyled
           />
           <Button
-            label="Létrehozás"
+            label="Indítás"
             onClick={handleSubmit}
             className="green-button"
             unstyled

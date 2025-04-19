@@ -95,7 +95,7 @@ export const Workout = () => {
 
           <div className="flex gap-x-4">
             <Button
-              label="Edzés elkezdése"
+              label="Edzés indítása"
               icon={<FaPlus className="mr-1" />}
               className="edit-button flex items-center mb-2"
               onClick={handleStartWorkout}
