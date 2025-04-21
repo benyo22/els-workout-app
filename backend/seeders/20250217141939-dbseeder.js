@@ -2,7 +2,7 @@
 
 const chalk = require("chalk");
 const { Exercise, Food } = require("../models");
-const { exercises, food } = require("../utils/helper");
+const { exercises, food } = require("../utils/data");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

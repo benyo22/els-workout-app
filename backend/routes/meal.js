@@ -1,12 +1,8 @@
-const {
-  USER_NOT_FOUND_ERROR,
-  ALL_REQUIRED_ERROR,
-  isGoodMealType,
-  calcNutrients,
-} = require("../utils/helper");
 const { StatusCodes } = require("http-status-codes");
 const { Meal, Food, MealFood, User } = require("../models");
 const { createMealSchema } = require("../utils/fastify.schemas");
+const { isGoodMealType, calcNutrients } = require("../utils/helper");
+const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/data");
 
 module.exports = async (fastify, options) => {
   //get all meal data

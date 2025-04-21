@@ -1,11 +1,10 @@
-const { StatusCodes } = require("http-status-codes");
-const { Set, Exercise } = require("../models");
-const { isGoodSetType } = require("../utils/helper");
 const {
   createSetSchema,
   bulkUpdateSetSchema,
 } = require("../utils/fastify.schemas");
-const { where } = require("sequelize");
+const { Set, Exercise } = require("../models");
+const { StatusCodes } = require("http-status-codes");
+const { isGoodSetType } = require("../utils/helper");
 
 module.exports = async (fastify, options) => {
   // get all sets for an exercise

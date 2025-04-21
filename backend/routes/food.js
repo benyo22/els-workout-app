@@ -1,11 +1,7 @@
-const {
-  MAX_INT,
-  isGoodMealType,
-  ALL_REQUIRED_ERROR,
-} = require("../utils/helper");
 const { StatusCodes } = require("http-status-codes");
 const { Meal, Food, MealFood } = require("../models");
 const { createMealSchema } = require("../utils/fastify.schemas");
+const { MAX_INT, ALL_REQUIRED_ERROR } = require("../utils/data");
 
 module.exports = async (fastify, options) => {
   // get food quantity

@@ -1,7 +1,7 @@
 const { Sleep, User } = require("../models");
 const { StatusCodes } = require("http-status-codes");
 const { createSleepSchema } = require("../utils/fastify.schemas");
-const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/helper");
+const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/data");
 
 module.exports = async (fastify, options) => {
   // get all sleep data

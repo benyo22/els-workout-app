@@ -1,10 +1,4 @@
 const {
-  isObjectEmpty,
-  validateEmail,
-  USER_NOT_FOUND_ERROR,
-  ALL_REQUIRED_ERROR,
-} = require("../utils/helper");
-const {
   registerSchema,
   loginSchema,
   updateUserSchema,
@@ -16,6 +10,8 @@ const argon2 = require("argon2");
 const omit = require("object.omit");
 const { User } = require("../models");
 const { StatusCodes } = require("http-status-codes");
+const { isObjectEmpty, validateEmail } = require("../utils/helper");
+const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/data");
 
 module.exports = async (fastify, options) => {
   //register

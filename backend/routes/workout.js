@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const { Workout, Exercise, Set, User } = require("../models");
 const { createWorkoutSchema } = require("../utils/fastify.schemas");
-const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/helper");
+const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/data");
 
 module.exports = async (fastify, options) => {
   //get all workout data
