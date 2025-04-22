@@ -29,7 +29,7 @@ export const foodEndpoints = elsApi.injectEndpoints({
         method: "POST",
         body: quantityInGrams,
       }),
-      invalidatesTags: ["Food"],
+      invalidatesTags: ["Food", "Meals"],
     }),
     createFood: builder.mutation({
       query: (data) => ({
@@ -45,14 +45,14 @@ export const foodEndpoints = elsApi.injectEndpoints({
         method: "PATCH",
         body: quantityInGrams,
       }),
-      invalidatesTags: ["Food"],
+      invalidatesTags: ["Food", "Meals"],
     }),
     removeFoodFromMeal: builder.mutation({
       query: ({ foodId, mealId }) => ({
         url: `remove-food-from-meal/${foodId}/${mealId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Food"],
+      invalidatesTags: ["Food", "Meals"],
     }),
   }),
 });

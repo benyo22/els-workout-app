@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { Meal, Food, MealFood, User } = require("../models");
+const { Meal, User } = require("../models");
 const { createMealSchema } = require("../utils/fastify.schemas");
 const { isGoodMealType, calcNutrients } = require("../utils/helper");
 const { USER_NOT_FOUND_ERROR, ALL_REQUIRED_ERROR } = require("../utils/data");
@@ -51,51 +51,6 @@ module.exports = async (fastify, options) => {
       });
 
       reply.send(mealData);
-    }
-  );
-
-  //get all maros in a days meals by date
-  fastify.get(
-    "/meal-macros/:userId/:date",
-    { onRequest: [fastify.auth] },
-    async (request, reply) => {
-      const { userId, date } = request.params;
-
-      const user = await User.findByPk(userId);
-      if (!user) {
-        return reply
-          .status(StatusCodes.BAD_REQUEST)
-          .send({ error: USER_NOT_FOUND_ERROR });
-      }
-
-      const mealData = await Meal.findAll({
-        where: {
-          userId,
-          date,
-        },
-      });
-
-      const mealFood = await MealFood.findAll();
-
-      const mealsOnDate = mealFood.filter((mealFoodItem) =>
-        mealData.some((meal) => meal.id === mealFoodItem.mealId)
-      );
-
-      let macros = { calories: 0, protein: 0, carbs: 0, fats: 0 };
-      for (let i = 0; i < mealsOnDate.length; i++) {
-        const food = await Food.findByPk(mealsOnDate[i].foodId);
-
-        const { calories, protein, carbs, fats } = calcNutrients(
-          food,
-          mealsOnDate[i].quantityInGrams
-        );
-        macros.calories += calories;
-        macros.protein += protein;
-        macros.carbs += carbs;
-        macros.fats += fats;
-      }
-
-      reply.send(macros);
     }
   );
 

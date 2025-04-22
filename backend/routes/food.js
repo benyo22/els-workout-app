@@ -2,6 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const { Meal, Food, MealFood } = require("../models");
 const { createMealSchema } = require("../utils/fastify.schemas");
 const { MAX_INT, ALL_REQUIRED_ERROR } = require("../utils/data");
+const { calcNutrients } = require("../utils/helper");
 
 module.exports = async (fastify, options) => {
   // get food quantity
@@ -56,6 +57,14 @@ module.exports = async (fastify, options) => {
     async (request, reply) => {
       const { foodId, mealId } = request.params;
       const quantityInGrams = request.body;
+      const food = await Food.findByPk(foodId);
+      const mealData = await Meal.findByPk(mealId);
+
+      if (!mealData || !food) {
+        return reply
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ error: "Étkezés vagy étel nem található!" });
+      }
 
       if (!quantityInGrams) {
         return reply
@@ -73,6 +82,14 @@ module.exports = async (fastify, options) => {
         foodId,
         mealId,
         quantityInGrams,
+      });
+
+      const macros = calcNutrients(food, quantityInGrams);
+      await mealData.update({
+        calories: mealData.calories + macros.calories,
+        protein: mealData.protein + macros.protein,
+        carbs: mealData.carbs + macros.carbs,
+        fats: mealData.fats + macros.fats,
       });
 
       reply.send({
@@ -138,9 +155,11 @@ module.exports = async (fastify, options) => {
     async (request, reply) => {
       const { foodId, mealId } = request.params;
       const quantityInGrams = request.body;
-
+      const food = await Food.findByPk(foodId);
+      const meal = await Meal.findByPk(mealId);
       const mealFood = await MealFood.findAll({ where: { foodId, mealId } });
-      if (!mealFood) {
+
+      if (!mealFood || !food || !meal) {
         return reply
           .status(StatusCodes.BAD_REQUEST)
           .send({ error: "Nem létezik!" });
@@ -151,6 +170,23 @@ module.exports = async (fastify, options) => {
           .status(StatusCodes.BAD_REQUEST)
           .send({ error: "Túl nagy szám!" });
       }
+
+      const oldMacros = calcNutrients(food, mealFood[0].quantityInGrams);
+      const newMacros = calcNutrients(food, quantityInGrams);
+
+      const diff = {
+        calories: newMacros.calories - oldMacros.calories,
+        protein: newMacros.protein - oldMacros.protein,
+        carbs: newMacros.carbs - oldMacros.carbs,
+        fats: newMacros.fats - oldMacros.fats,
+      };
+
+      await meal.update({
+        calories: meal.calories + diff.calories,
+        protein: meal.protein + diff.protein,
+        carbs: meal.carbs + diff.carbs,
+        fats: meal.fats + diff.fats,
+      });
 
       await mealFood[0].update({ quantityInGrams });
 
@@ -165,6 +201,15 @@ module.exports = async (fastify, options) => {
       const { foodId, mealId } = request.params;
       const food = await Food.findByPk(foodId);
       const meal = await Meal.findByPk(mealId);
+      const mealFood = await MealFood.findAll({ where: { foodId, mealId } });
+
+      const macros = calcNutrients(food, mealFood[0].quantityInGrams);
+      await meal.update({
+        calories: meal.calories - macros.calories,
+        protein: meal.protein - macros.protein,
+        carbs: meal.carbs - macros.carbs,
+        fats: meal.fats - macros.fats,
+      });
 
       await meal.removeFood(food);
 

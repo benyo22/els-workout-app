@@ -16,13 +16,6 @@ export const mealEndpoints = elsApi.injectEndpoints({
       providesTags: ["Meals"],
       transformResponse: (response) => response,
     }),
-    getMacrosInMeals: builder.query({
-      query: ({ userId, date }) => ({
-        url: `meal-macros/${userId}/${date}`,
-      }),
-      providesTags: ["Meals", "Food"],
-      transformResponse: (response) => response,
-    }),
     createMealWithUserId: builder.mutation({
       query: ({ userId, data }) => ({
         url: `meal/${userId}`,
@@ -44,7 +37,6 @@ export const mealEndpoints = elsApi.injectEndpoints({
 export const {
   useGetMealsByUserIdQuery,
   useGetMealsByUserIdAndDateQuery,
-  useGetMacrosInMealsQuery,
   useCreateMealWithUserIdMutation,
   useDeleteMealByIdMutation,
 } = mealEndpoints;

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
-import { useGetMacrosInMealsQuery } from "@/api/endpoints/mealEndpoints";
+import { useGetMealsByUserIdAndDateQuery } from "@/api/endpoints/mealEndpoints";
 
 export const MacroSummary = ({ userId, date }) => {
-  const { data: macros, isLoading } = useGetMacrosInMealsQuery({
+  const { data: meal, isLoading } = useGetMealsByUserIdAndDateQuery({
     userId,
     date,
   });
@@ -18,10 +18,10 @@ export const MacroSummary = ({ userId, date }) => {
             Napi összesített értékek
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm font-medium">
-            <div>Kalória: {macros.calories} kcal</div>
-            <div>Fehérje: {macros.protein} g</div>
-            <div>Szénhidrát: {macros.carbs} g</div>
-            <div>Zsír: {macros.fats} g</div>
+            <div>Kalória: {meal[0]?.calories || 0} kcal</div>
+            <div>Fehérje: {meal[0]?.protein || 0} g</div>
+            <div>Szénhidrát: {meal[0]?.carbs || 0} g</div>
+            <div>Zsír: {meal[0]?.fats || 0} g</div>
           </div>
         </div>
       )}
