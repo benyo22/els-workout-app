@@ -31,14 +31,6 @@ export const exerciseEndpoints = elsApi.injectEndpoints({
       }),
       invalidatesTags: ["Exercises"],
     }),
-    // updateExerciseById: builder.mutation({
-    //   query: ({ id, data }) => ({
-    //     url: `exercises/${id}`,
-    //     method: "PATCH",
-    //     body: data,
-    //   }),
-    //   invalidatesTags: ["Exercises"],
-    // }),
     addExerciseToWorkout: builder.mutation({
       query: ({ exerciseId, workoutId }) => ({
         url: `exercises/${exerciseId}/${workoutId}`,
@@ -61,7 +53,6 @@ export const {
   useGetExerciseByIdQuery,
   useGetExcercisesInWorkoutQuery,
   useCreateExcerciseMutation,
-  useUpdateExerciseByIdMutation,
   useAddExerciseToWorkoutMutation,
   useRemoveExerciseFromWorkoutMutation,
 } = exerciseEndpoints;

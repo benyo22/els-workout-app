@@ -1,21 +1,23 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectDarkMode } from "@/store/slices/darkModeSlice";
+import { selectDarkMode } from "@store/slices/darkModeSlice";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
-import { Home } from "@/views/home/Home";
-import { Meal } from "@/views/meals/Meal";
-import { Sleep } from "@/views/sleep/Sleep";
-import { Layout } from "@/views/layout/Layout";
-import { Weight } from "@/views/weight/Weight";
-import { Profile } from "@/views/profile/Profile";
-import { Welcome } from "@/views/welcome/Welcome";
-import { Workout } from "@/views/workout/Workout";
-import { Settings } from "@/views/settings/Settings";
-import { RequireAuth } from "@/views/auth/RequireAuth";
-import { AuthPage } from "@/views/loginregister/AuthPage";
-import { WelcomeLayout } from "@/views/welcomelayout/WelcomeLayout";
-import { RedirectIfAuthenticated } from "@/views/auth/RedirectIfAuthenticated";
+import { Home } from "@pages";
+import { Meal } from "@pages";
+import { Sleep } from "@pages";
+import { Weight } from "@pages";
+import { Profile } from "@pages";
+import { Welcome } from "@pages";
+import { Workout } from "@pages";
+import { Settings } from "@pages";
+import { AuthenticationPage } from "@pages";
+
+import { RequireAuth } from "@features";
+import { RedirectIfAuthenticated } from "@features";
+
+import { Layout } from "@layouts";
+import { WelcomeLayout } from "@layouts";
 
 function App() {
   const darkMode = useSelector(selectDarkMode);
@@ -59,7 +61,7 @@ function App() {
           {/* Welcome layout (this is where users arrives first) */}
           <Route element={<WelcomeLayout />}>
             <Route index element={<Welcome />} />
-            <Route path="auth" element={<AuthPage />} />
+            <Route path="auth" element={<AuthenticationPage />} />
           </Route>
         </Route>
 

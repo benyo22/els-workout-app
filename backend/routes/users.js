@@ -24,7 +24,7 @@ module.exports = async (fastify, options) => {
 
       // validate input fields
       if (!name || !age || !email || !username || !password) {
-        errors.required = "A *-al jelölt mezők megadása kötelező!";
+        errors.required = ALL_REQUIRED_ERROR;
       }
       if (username.length > 15) errors.username = "Max hossz: 15!";
       if (age < 14) errors.age = "Korhatár: 14év!";
@@ -58,8 +58,7 @@ module.exports = async (fastify, options) => {
     const errors = {};
 
     // validate input
-    if (!username || !password)
-      errors.required = "A *-al jelölt mezők megadása kötelező!";
+    if (!username || !password) errors.required = ALL_REQUIRED_ERROR;
 
     const trimmedUsername = username.trim();
     const user = await User.findOne({ where: { username: trimmedUsername } });
