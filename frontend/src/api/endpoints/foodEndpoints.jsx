@@ -2,13 +2,6 @@ import { elsApi } from "../elsApiSlice";
 
 export const foodEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
-    getFoodQuantity: builder.query({
-      query: ({ foodId, mealId }) => ({
-        url: `food-quantity/${foodId}/${mealId}`,
-      }),
-      providesTags: ["Food"],
-      transformResponse: (response) => response,
-    }),
     getAllFood: builder.query({
       query: () => ({
         url: "food",
@@ -18,16 +11,23 @@ export const foodEndpoints = elsApi.injectEndpoints({
     }),
     getAllFoodInMeal: builder.query({
       query: (mealId) => ({
-        url: `meal-food/${mealId}`,
+        url: `food-in-meal/${mealId}`,
+      }),
+      providesTags: ["Food"],
+      transformResponse: (response) => response,
+    }),
+    getFoodQuantity: builder.query({
+      query: ({ foodId, mealId }) => ({
+        url: `food-quantity/${foodId}/${mealId}`,
       }),
       providesTags: ["Food"],
       transformResponse: (response) => response,
     }),
     addFoodToMeal: builder.mutation({
       query: ({ foodId, mealId, quantityInGrams }) => ({
-        url: `food/${foodId}/${mealId}`,
+        url: `add-food-to-meal/${foodId}/${mealId}`,
         method: "POST",
-        body: quantityInGrams,
+        body: { quantityInGrams },
       }),
       invalidatesTags: ["Food", "Meals"],
     }),
@@ -43,7 +43,7 @@ export const foodEndpoints = elsApi.injectEndpoints({
       query: ({ foodId, mealId, quantityInGrams }) => ({
         url: `food/${foodId}/${mealId}`,
         method: "PATCH",
-        body: quantityInGrams,
+        body: { quantityInGrams },
       }),
       invalidatesTags: ["Food", "Meals"],
     }),

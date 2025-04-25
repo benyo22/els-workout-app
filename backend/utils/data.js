@@ -1,4 +1,3 @@
-// Exercises ----------------------------------------------------------------------------
 const exercises = [
   { name: "Fekvenyomás", bodyPart: "chest", category: "barbell" },
   { name: "Guggolás", bodyPart: "legs", category: "barbell" },
@@ -43,7 +42,6 @@ const exercises = [
   { name: "Kalapács bicepsz", bodyPart: "arms", category: "dumbell" },
 ];
 
-// Food ----------------------------------------------------------------------------
 const food = [
   {
     name: "Alma",
@@ -278,19 +276,22 @@ const food = [
   },
 ];
 
-const MAX_INT = 2147483647;
-
-// Errors ----------------------------------------------------------------------------
-const USER_NOT_FOUND_ERROR = "A Felhasználó nem található!";
-const ALL_REQUIRED_ERROR = "Minden mezőt ki kell tölteni!";
+const CREATED_MESSAGE = "Created data!";
+const UPDATED_MESSAGE = "Updated data!";
+const REMOVED_MESSAGE = "Removed data!";
+const DELETED_MESSAGE = "Deleted data!";
+const REGISTER_MESSAGE = "Registered successfully!";
+const LOGIN_MESSAGE = "Logged in successfully!";
+const LOGOUT_MESSAGE = "Logged out successfully!";
 
 module.exports = {
-  // Exercises
   exercises,
-  // Food
   food,
-  MAX_INT,
-  // Errors
-  USER_NOT_FOUND_ERROR,
-  ALL_REQUIRED_ERROR,
+  CREATED_MESSAGE,
+  DELETED_MESSAGE,
+  REMOVED_MESSAGE,
+  UPDATED_MESSAGE,
+  REGISTER_MESSAGE,
+  LOGIN_MESSAGE,
+  LOGOUT_MESSAGE,
 };

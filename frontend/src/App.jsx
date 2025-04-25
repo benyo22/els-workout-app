@@ -1,21 +1,20 @@
+import { RedirectIfAuthenticated } from "@features/authentication/RedirectIfAuthenticated";
+import { RequireAuth } from "@features/authentication/RequireAuth";
+import { Layout } from "@layouts/Layout";
+import { WelcomeLayout } from "@layouts/WelcomeLayout";
+import { AuthenticationPage } from "@pages/AuthenticationPage";
+import { Home } from "@pages/Home";
+import { Meal } from "@pages/Meal";
+import { Profile } from "@pages/Profile";
+import { Settings } from "@pages/Settings";
+import { Sleep } from "@pages/Sleep";
+import { Weight } from "@pages/Weight";
+import { Welcome } from "@pages/Welcome";
+import { Workout } from "@pages/Workout";
+import { selectDarkMode } from "@store/slices/darkModeSlice";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectDarkMode } from "@/store/slices/darkModeSlice";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-
-import { Home } from "@/views/home/Home";
-import { Meal } from "@/views/meals/Meal";
-import { Sleep } from "@/views/sleep/Sleep";
-import { Layout } from "@/views/layout/Layout";
-import { Weight } from "@/views/weight/Weight";
-import { Profile } from "@/views/profile/Profile";
-import { Welcome } from "@/views/welcome/Welcome";
-import { Workout } from "@/views/workout/Workout";
-import { Settings } from "@/views/settings/Settings";
-import { RequireAuth } from "@/views/auth/RequireAuth";
-import { AuthPage } from "@/views/loginregister/AuthPage";
-import { WelcomeLayout } from "@/views/welcomelayout/WelcomeLayout";
-import { RedirectIfAuthenticated } from "@/views/auth/RedirectIfAuthenticated";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 
 function App() {
   const darkMode = useSelector(selectDarkMode);
@@ -37,13 +36,9 @@ function App() {
     removeTheme();
 
     if (darkMode) {
-      loadTheme(
-        "node_modules/primereact/resources/themes/lara-dark-blue/theme.css"
-      );
+      loadTheme("themes/lara-dark-blue/theme.css");
     } else {
-      loadTheme(
-        "node_modules/primereact/resources/themes/lara-light-blue/theme.css"
-      );
+      loadTheme("themes/lara-light-blue/theme.css");
     }
 
     return () => {
@@ -59,7 +54,7 @@ function App() {
           {/* Welcome layout (this is where users arrives first) */}
           <Route element={<WelcomeLayout />}>
             <Route index element={<Welcome />} />
-            <Route path="auth" element={<AuthPage />} />
+            <Route path="auth" element={<AuthenticationPage />} />
           </Route>
         </Route>
 
