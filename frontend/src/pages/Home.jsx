@@ -1,7 +1,6 @@
-import { NavLink } from "react-router";
-
 import { FaBalanceScale } from "react-icons/fa";
-import { FaDumbbell, FaUtensils, FaBed } from "react-icons/fa6";
+import { FaBed, FaDumbbell, FaUtensils } from "react-icons/fa6";
+import { NavLink } from "react-router";
 
 export const Home = () => {
   return (
@@ -23,10 +22,7 @@ export const Home = () => {
             <p className="text-gray-600 mb-4 dark:text-gray-200">
               Jegyezd fel mit ettél ma.
             </p>
-            <NavLink
-              to="/meals"
-              className="white-blue-button bg-primary-blue text-primary-white hover:bg-secondary-blue"
-            >
+            <NavLink to="/meals" className="blue-button px-4">
               Étkezések megtekintése
             </NavLink>
           </div>
@@ -38,10 +34,7 @@ export const Home = () => {
             <p className="text-gray-600 mb-4 dark:text-gray-200">
               Nézd meg a legutóbbi edzéseid vagy kezdj egy újat.
             </p>
-            <NavLink
-              to="/workouts"
-              className="white-blue-button bg-primary-blue text-primary-white hover:bg-secondary-blue"
-            >
+            <NavLink to="/workouts" className="blue-button px-4">
               Edzések megtekintése
             </NavLink>
           </div>
@@ -53,10 +46,7 @@ export const Home = () => {
             <p className="text-gray-600 mb-4 dark:text-gray-200">
               Rögzítsd az alvásod!
             </p>
-            <NavLink
-              to="/sleep"
-              className="white-blue-button bg-primary-blue text-primary-white hover:bg-secondary-blue"
-            >
+            <NavLink to="/sleep" className="blue-button px-4">
               Alvás naplózása
             </NavLink>
           </div>
@@ -68,10 +58,7 @@ export const Home = () => {
             <p className="text-gray-600 mb-4 dark:text-gray-200">
               Rögzítsd a mai súlyod!
             </p>
-            <NavLink
-              to="/weight"
-              className="white-blue-button bg-primary-blue text-primary-white hover:bg-secondary-blue"
-            >
+            <NavLink to="/weight" className="blue-button px-4">
               Súly naplózása
             </NavLink>
           </div>

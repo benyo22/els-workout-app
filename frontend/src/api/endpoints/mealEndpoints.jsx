@@ -11,7 +11,7 @@ export const mealEndpoints = elsApi.injectEndpoints({
     }),
     getMealsByUserIdAndDate: builder.query({
       query: ({ userId, date }) => ({
-        url: `meal/${userId}/${date}`,
+        url: `meal-by-date/${userId}/${date}`,
       }),
       providesTags: ["Meals"],
       transformResponse: (response) => response,

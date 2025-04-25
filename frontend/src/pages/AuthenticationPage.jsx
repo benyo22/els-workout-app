@@ -1,16 +1,14 @@
-import { NavLink } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-
-import { Button } from "primereact/button";
-
+import { Login } from "@features/authentication/Login";
+import { Register } from "@features/authentication/Register";
+import { DarkModeToggle } from "@features/darkmodetoggle/DarkModeToggle";
 import {
   selectLoginActive,
   setLoginActive,
   setRegisterActive,
 } from "@store/slices/authViewSlice";
-import { Login } from "@features";
-import { Register } from "@features";
-import { DarkModeToggle } from "@features";
+import { Button } from "primereact/button";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router";
 
 export const AuthenticationPage = () => {
   const dispatch = useDispatch();
@@ -57,7 +55,7 @@ export const AuthenticationPage = () => {
               </p>
               <Button
                 label="Regisztráció"
-                className="white-blue-button"
+                className="register-button"
                 onClick={toggleView}
                 unstyled
               />
@@ -88,7 +86,7 @@ export const AuthenticationPage = () => {
               </p>
               <Button
                 label="Bejelentkezés"
-                className="green-button"
+                className="login-button"
                 onClick={toggleView}
                 unstyled
               />

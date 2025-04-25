@@ -1,18 +1,18 @@
-export const sleepQualityOptions = [
+const sleepQualityOptions = [
   { label: "Rossz", value: "poor" },
   { label: "Átlagos", value: "average" },
   { label: "Jó", value: "good" },
   { label: "Kiváló", value: "excellent" },
 ];
 
-export const sleepQualityLabels = {
+const sleepQualityLabels = {
   poor: "Rossz",
   average: "Átlagos",
   good: "Jó",
   excellent: "Kiváló",
 };
 
-export const bodyPartLabels = {
+const bodyPartLabels = {
   core: "Törzs",
   arms: "Kar",
   back: "Hát",
@@ -23,7 +23,7 @@ export const bodyPartLabels = {
   "full body": "Teljes test",
 };
 
-export const categoryLabels = {
+const categoryLabels = {
   barbell: "Rúd",
   dumbell: "Kézi súlyzó",
   cable: "Kábel/Csiga",
@@ -35,18 +35,28 @@ export const categoryLabels = {
   other: "Egyéb",
 };
 
-export const setTypes = {
+const setTypes = {
   "warm-up": "W",
   dropset: "D",
   failure: "F",
   "/": "/",
 };
 
-export const mealTypes = ["breakfast", "lunch", "dinner", "snack"];
+const mealTypes = ["breakfast", "lunch", "dinner", "snack"];
 
-export const mealLabels = {
+const mealLabels = {
   breakfast: "Reggeli",
   lunch: "Ebéd",
   dinner: "Vacsora",
   snack: "Snack",
+};
+
+export {
+  bodyPartLabels,
+  categoryLabels,
+  mealLabels,
+  mealTypes,
+  setTypes,
+  sleepQualityLabels,
+  sleepQualityOptions,
 };

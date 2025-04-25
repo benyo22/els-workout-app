@@ -1,0 +1,46 @@
+const getUserSchema = {
+  params: {
+    type: "object",
+    properties: {
+      id: { type: "integer" },
+    },
+  },
+};
+
+const updateUserSchema = {
+  body: {
+    type: "object",
+    properties: {
+      name: { type: "string" },
+      age: { type: "integer" },
+      email: { type: "string" },
+      username: { type: "string" },
+    },
+  },
+};
+
+const updatePasswordSchema = {
+  body: {
+    type: "object",
+    properties: {
+      oldPassword: { type: "string" },
+      newPassword: { type: "string" },
+    },
+  },
+};
+
+const deleteUserSchema = {
+  body: {
+    type: "object",
+    properties: {
+      password: { type: "string" },
+    },
+  },
+};
+
+module.exports = {
+  deleteUserSchema,
+  getUserSchema,
+  updatePasswordSchema,
+  updateUserSchema,
+};

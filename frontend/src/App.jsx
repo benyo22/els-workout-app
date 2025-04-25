@@ -1,23 +1,20 @@
+import { RedirectIfAuthenticated } from "@features/authentication/RedirectIfAuthenticated";
+import { RequireAuth } from "@features/authentication/RequireAuth";
+import { Layout } from "@layouts/Layout";
+import { WelcomeLayout } from "@layouts/WelcomeLayout";
+import { AuthenticationPage } from "@pages/AuthenticationPage";
+import { Home } from "@pages/Home";
+import { Meal } from "@pages/Meal";
+import { Profile } from "@pages/Profile";
+import { Settings } from "@pages/Settings";
+import { Sleep } from "@pages/Sleep";
+import { Weight } from "@pages/Weight";
+import { Welcome } from "@pages/Welcome";
+import { Workout } from "@pages/Workout";
+import { selectDarkMode } from "@store/slices/darkModeSlice";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectDarkMode } from "@store/slices/darkModeSlice";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-
-import { Home } from "@pages";
-import { Meal } from "@pages";
-import { Sleep } from "@pages";
-import { Weight } from "@pages";
-import { Profile } from "@pages";
-import { Welcome } from "@pages";
-import { Workout } from "@pages";
-import { Settings } from "@pages";
-import { AuthenticationPage } from "@pages";
-
-import { RequireAuth } from "@features";
-import { RedirectIfAuthenticated } from "@features";
-
-import { Layout } from "@layouts";
-import { WelcomeLayout } from "@layouts";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 
 function App() {
   const darkMode = useSelector(selectDarkMode);

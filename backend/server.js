@@ -1,36 +1,17 @@
-const autoload = require("@fastify/autoload");
-const { join } = require("path");
 const chalk = require("chalk");
-require("dotenv").config();
+require("dotenv/config");
+const Fastify = require("fastify");
+const { autoload, autoLoadConfig } = require("./plugins/autoload.js");
+const { cookieConfig, fastifyCookie } = require("./plugins/cookie.js");
+const { corsConfig, fastifyCors } = require("./plugins/cors.js");
+const { fastifyJwt, jwtConfig } = require("./plugins/jwt.js");
 
-const fastify = require("fastify")({
-  logger: true,
-});
+const fastify = Fastify({ logger: true });
 
-// Load routes automatically -> scalability
-fastify.register(autoload, {
-  dir: join(__dirname, "routes"),
-});
-
-//Cors
-fastify.register(require("@fastify/cors"), {
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-  credentials: true,
-});
-
-// JWT auth
-fastify.register(require("@fastify/cookie"), {
-  secret: process.env.COOKIE_SECRET,
-});
-
-fastify.register(require("@fastify/jwt"), {
-  secret: process.env.JWT_SECRET,
-  cookie: {
-    cookieName: "token",
-    signed: true,
-  },
-});
+fastify.register(fastifyCors, corsConfig);
+fastify.register(autoload, autoLoadConfig);
+fastify.register(fastifyCookie, cookieConfig);
+fastify.register(fastifyJwt, jwtConfig);
 
 fastify.decorate("auth", async function (request, reply) {
   try {
@@ -40,12 +21,11 @@ fastify.decorate("auth", async function (request, reply) {
   }
 });
 
-// Start fastify app on port
 const port = process.env.FASTIFY_PORT;
 fastify.listen({ port }, (err, address) => {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
   }
-  console.log(chalk.green("Fastify app runs on:", address));
+  console.log(chalk.green("Fastify fastify runs on:", address));
 });

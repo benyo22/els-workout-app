@@ -1,9 +1,9 @@
-const {
-  createSetSchema,
-  bulkUpdateSetSchema,
-} = require("../utils/fastify.schemas");
-const { Set, Exercise } = require("../models");
 const { StatusCodes } = require("http-status-codes");
+const { Workout, Exercise, Set } = require("../models/index");
+const {
+  bulkUpdateSetSchema,
+  createSetSchema,
+} = require("../schemas/setSchemas");
 const { isGoodSetType } = require("../utils/helper");
 
 module.exports = async (fastify, options) => {
@@ -28,7 +28,7 @@ module.exports = async (fastify, options) => {
       const { exerciseId, workoutId } = request.params;
 
       const exercise = await Exercise.findByPk(exerciseId);
-      const workout = await Exercise.findByPk(workoutId);
+      const workout = await Workout.findByPk(workoutId);
 
       if (!exercise) {
         return reply

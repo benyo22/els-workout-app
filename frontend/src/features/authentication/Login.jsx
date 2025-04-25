@@ -1,13 +1,12 @@
+import { useLoginMutation } from "@api/endpoints/authEndpoints";
+import { ErrorMessage } from "@features/errormessage/ErrorMessage";
+import { login } from "@store/slices/authSlice";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { useEffect, useRef, useState } from "react";
-
-import { useLoginMutation } from "@api";
-import { ErrorMessage } from "@features";
-import { login } from "@store/slices/authSlice";
-import { TextInput } from "@components/form/TextInput";
-import { LabelButton } from "@/components/ui/LabelButton";
-import { PasswordInput } from "@/components/form/PasswordInput";
 
 export const Login = () => {
   const usernameRef = useRef();
@@ -15,7 +14,7 @@ export const Login = () => {
     username: "",
     password: "",
   });
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState(null);
   const { username, password } = credentials;
 
   const navigate = useNavigate();
@@ -39,8 +38,9 @@ export const Login = () => {
     e.preventDefault();
 
     const result = await sendLogin(credentials);
-    if (result.error) {
-      setErrors(result.error.data?.error);
+    if (result.error?.data.error) {
+      setError(result.error.data.error);
+      return;
     } else {
       dispatch(
         login({
@@ -48,7 +48,6 @@ export const Login = () => {
           username: result.data.username,
         })
       );
-      // navigating back to the main page if there is no error
       navigate("/home", { replace: true });
     }
   };
@@ -61,35 +60,38 @@ export const Login = () => {
         </h1>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col items-center gap-5 p-2">
-            <TextInput
-              label="Felhasználónév"
-              id="username"
-              name="username"
-              value={username}
-              onInput={handleInput}
-              ref={usernameRef}
-              className="login-input"
-              error={errors.username}
-              unstyled
-            />
+            <div className="flex flex-col gap-0.5">
+              <label>Felhasználónév</label>
+              <InputText
+                id="username"
+                name="username"
+                value={username}
+                onInput={handleInput}
+                ref={usernameRef}
+                className="login-input"
+                unstyled
+              />
+            </div>
 
-            <PasswordInput
-              label="Jelszó"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handleInput}
-              feedback={false}
-              inputClassName="login-input"
-              error={errors.password}
-            />
-            {errors.required ? (
-              <ErrorMessage message={errors.required} />
+            <div className="flex flex-col gap-0.5">
+              <label>Jelszó</label>
+              <Password
+                id="password"
+                name="password"
+                value={password}
+                onChange={handleInput}
+                feedback={false}
+                inputClassName="login-input"
+                unstyled
+              />
+            </div>
+            {error ? (
+              <ErrorMessage message={error} />
             ) : (
               // h-5 because then the ui doesnt move when the error message is displayed
               <span className="h-5"></span>
             )}
-            <LabelButton label="Bejelentkezés" className="green-button" />
+            <Button label="Bejelentkezés" className="login-button" unstyled />
           </div>
         </form>
       </div>

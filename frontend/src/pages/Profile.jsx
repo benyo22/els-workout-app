@@ -1,15 +1,14 @@
+import { selectUserId } from "@/store/slices/authSlice";
+import { useGetMealsByUserIdQuery } from "@api/endpoints/mealEndpoints";
+import { useGetSleepByUserIdQuery } from "@api/endpoints/sleepEndpoints";
+import { useGetWeightByUserIdQuery } from "@api/endpoints/weightEndpoints";
+import { useGetWorkoutByUserIdQuery } from "@api/endpoints/workoutEndpoints";
+import { ErrorMessage } from "@features/errormessage/ErrorMessage";
+import { Carousel } from "@features/profile/Carousel";
+import { EditUserForm } from "@features/profile/EditUserForm";
+import { UserData } from "@features/profile/UserData";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
-import { Carousel } from "@features";
-import { UserData } from "@features";
-import { ErrorMessage } from "@features";
-import { EditUserForm } from "@features";
-import { useGetMealsByUserIdQuery } from "@api";
-import { useGetSleepByUserIdQuery } from "@api";
-import { useGetWeightByUserIdQuery } from "@api";
-import { useGetWorkoutByUserIdQuery } from "@api";
-import { selectUserId } from "@/store/slices/authSlice";
 
 export const Profile = () => {
   const [visible, setVisible] = useState(false);

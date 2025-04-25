@@ -1,16 +1,14 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-
-import { Button } from "primereact/button";
-import { FaPlus, FaChartLine } from "react-icons/fa6";
-import { ConfirmDialog } from "primereact/confirmdialog";
-
-import { WeightForm } from "@features";
-import { WeightTable } from "@features";
-import { ErrorMessage } from "@features";
-import { WeightStatistics } from "@features";
-import { useGetWeightByUserIdQuery } from "@api";
+import { useGetWeightByUserIdQuery } from "@api/endpoints/weightEndpoints";
+import { ErrorMessage } from "@features/errormessage/ErrorMessage";
+import { WeightStatistics } from "@features/statistics/WeightStatistics";
+import { WeightForm } from "@features/weight/WeightForm";
+import { WeightTable } from "@features/weight/WeightTable";
 import { selectUserId } from "@store/slices/authSlice";
+import { Button } from "primereact/button";
+import { ConfirmDialog } from "primereact/confirmdialog";
+import { useState } from "react";
+import { FaChartLine } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 export const Weight = () => {
   const userId = useSelector(selectUserId);
@@ -39,8 +37,7 @@ export const Weight = () => {
 
           <div className="flex gap-x-4">
             <Button
-              label=" Új Bejegyzés"
-              icon={<FaPlus className="mr-1" />}
+              label="+ Új Bejegyzés"
               className="edit-button flex items-center mb-2"
               onClick={() => {
                 setSelectedWeight(null);

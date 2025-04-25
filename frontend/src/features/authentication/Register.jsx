@@ -1,14 +1,11 @@
-import { useDispatch } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-
-import { Button } from "primereact/button";
-
-import { ErrorMessage } from "@features";
-import { useRegisterMutation } from "@api";
-import { TextInput } from "@components/form";
-import { NumberInput } from "@components/form";
-import { PasswordInput } from "@components/form";
+import { useRegisterMutation } from "@api/endpoints/authEndpoints";
+import { ErrorMessage } from "@features/errormessage/ErrorMessage";
 import { setLoginActive } from "@store/slices/authViewSlice";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 export const Register = () => {
   const nameRef = useRef();
@@ -62,61 +59,84 @@ export const Register = () => {
           <div className="flex md:flex-row flex-col md:gap-5 p-2">
             {/* Left side */}
             <div className="flex flex-col">
-              <TextInput
-                label="Név"
-                id="name"
-                name="name"
-                value={name}
-                onInput={handleInput}
-                ref={nameRef}
-                className="register-input"
-              />
+              <div className="flex flex-col gap-0.5">
+                <label>Név</label>
+                <InputText
+                  id="name"
+                  name="name"
+                  value={name}
+                  onInput={handleInput}
+                  ref={nameRef}
+                  className="register-input"
+                  unstyled
+                />
+              </div>
 
-              <NumberInput
-                label="Kor"
-                type="number"
-                name="age"
-                id="age"
-                value={age}
-                onInput={handleInput}
-                className="register-input"
-                error={errors.age}
-              />
+              <div className="flex flex-col gap-0.5">
+                <label>
+                  Kor {errors.age && <ErrorMessage message={errors.age} />}
+                </label>
+                <input
+                  type="number"
+                  name="age"
+                  id="age"
+                  value={age}
+                  onInput={handleInput}
+                  className="register-input"
+                />
+              </div>
             </div>
 
             {/* Right side */}
             <div className="flex flex-col">
-              <TextInput
-                label="Felhasználónév"
-                id="username"
-                name="username"
-                value={username}
-                onInput={handleInput}
-                className="register-input"
-                error={errors.username}
-              />
-              <PasswordInput
-                label="Jelszó"
-                id="password"
-                name="password"
-                value={password}
-                onChange={handleInput}
-                feedback={false}
-                inputClassName="register-input"
-                error={errors.password}
-              />
+              <div className="flex flex-col gap-0.5">
+                <label>
+                  Felhasználónév{" "}
+                  {errors.username && (
+                    <ErrorMessage message={errors.username} />
+                  )}
+                </label>
+                <InputText
+                  id="username"
+                  name="username"
+                  value={username}
+                  onInput={handleInput}
+                  className="register-input"
+                  unstyled
+                />
+              </div>
+
+              <div className="flex flex-col gap-0.5">
+                <label>
+                  Jelszó{" "}
+                  {errors.password && (
+                    <ErrorMessage message={errors.password} />
+                  )}
+                </label>
+                <Password
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handleInput}
+                  feedback={false}
+                  inputClassName="register-input"
+                  unstyled
+                />
+              </div>
             </div>
           </div>
           <div className="flex flex-col items-center gap-5">
-            <div className="flex flex-col">
-              <TextInput
-                label="Email"
+            <div className="flex flex-col gap-0.5">
+              <label>
+                Email {errors.email && <ErrorMessage message={errors.email} />}
+              </label>
+              <InputText
                 id="email"
                 name="email"
                 value={email}
                 onInput={handleInput}
                 className="register-input"
-                error={errors.email}
+                unstyled
               />
             </div>
             {errors.required ? (
@@ -127,7 +147,7 @@ export const Register = () => {
             )}
             <Button
               label="Regisztrálok"
-              className="white-blue-button bg-primary-blue text-primary-white hover:bg-secondary-blue"
+              className="register-button bg-primary-blue text-primary-white hover:bg-secondary-blue active:bg-secondary-blue dark:bg-dark-primary-blue dark:hover:bg-dark-secondary-blue dark:active:bg-dark-secondary-blue"
               unstyled
             />
           </div>

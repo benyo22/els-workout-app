@@ -1,16 +1,14 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-
-import { Button } from "primereact/button";
-import { FaChartLine, FaPlus } from "react-icons/fa6";
-import { ConfirmDialog } from "primereact/confirmdialog";
-
-import { SleepForm } from "@features";
-import { SleepTable } from "@features";
-import { ErrorMessage } from "@features";
-import { SleepStatistics } from "@features";
-import { useGetSleepByUserIdQuery } from "@api";
+import { useGetSleepByUserIdQuery } from "@api/endpoints/sleepEndpoints";
+import { ErrorMessage } from "@features/errormessage/ErrorMessage";
+import { SleepForm } from "@features/sleep/SleepForm";
+import { SleepTable } from "@features/sleep/SleepTable";
+import { SleepStatistics } from "@features/statistics/SleepStatistics";
 import { selectUserId } from "@store/slices/authSlice";
+import { Button } from "primereact/button";
+import { ConfirmDialog } from "primereact/confirmdialog";
+import { useState } from "react";
+import { FaChartLine } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 export const Sleep = () => {
   const userId = useSelector(selectUserId);
@@ -39,8 +37,7 @@ export const Sleep = () => {
 
           <div className="flex gap-x-4">
             <Button
-              label=" Új Bejegyzés"
-              icon={<FaPlus className="mr-1" />}
+              label="+ Új Bejegyzés"
               className="edit-button flex items-center mb-2"
               onClick={() => {
                 setSelectedSleep(null);

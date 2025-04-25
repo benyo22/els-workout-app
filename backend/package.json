@@ -5,16 +5,14 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "migrate": "npx sequelize-cli db:migrate --config=config/config.js",
-    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all --config=config/config.js",
     "seed": "npx sequelize-cli db:seed:all --config=config/config.js",
-    "seed:undo:all": "npx sequelize-cli db:seed:undo:all",
-    "reset": "npx sequelize-cli db:migrate:undo:all --config=config/config.js && npx sequelize-cli db:migrate --config=config/config.js && npx sequelize-cli db:seed:all --config=config/config.js",
+    "migrate_seed": "npx sequelize-cli db:migrate --config=config/config.js && npm run seed",
+    "reset_db": "npx sequelize-cli db:migrate:undo:all --config=config/config.js && npx sequelize-cli db:migrate --config=config/config.js && npm run seed",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Farkas Bence",
   "license": "ISC",
-  "description": "Node.js, Sequelize, MySQL and REST APIs with Fastify with CommonJS",
+  "description": "Node.js, Sequelize, MySQL and REST APIs with Fastify with ESM",
   "dependencies": {
     "@fastify/autoload": "^6.1.0",
     "@fastify/cookie": "^11.0.2",

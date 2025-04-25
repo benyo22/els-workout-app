@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-
-import { FaKey, FaX } from "react-icons/fa6";
-import { TabView, TabPanel } from "primereact/tabview";
-
-import { DeleteProfile } from "@features";
-import { UpdatePassword } from "@features";
+import { DeleteProfile } from "@features/settings/DeleteProfile";
+import { UpdatePassword } from "@features/settings/UpdatePassword";
 import { selectUserId } from "@store/slices/authSlice";
+import { TabPanel, TabView } from "primereact/tabview";
+import { useState } from "react";
+import { FaKey, FaX } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 export const Settings = () => {
   const userId = useSelector(selectUserId);

@@ -1,9 +1,0 @@
-export { AuthenticationPage } from "./AuthenticationPage";
-export { Home } from "./Home";
-export { Meal } from "./Meal";
-export { Profile } from "./Profile";
-export { Settings } from "./Settings";
-export { Sleep } from "./Sleep";
-export { Weight } from "./Weight";
-export { Welcome } from "./Welcome";
-export { Workout } from "./Workout";

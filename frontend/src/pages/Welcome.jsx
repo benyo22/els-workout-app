@@ -1,12 +1,10 @@
-import { NavLink } from "react-router";
-import { useDispatch } from "react-redux";
-
-import { FaBalanceScale } from "react-icons/fa";
-import { FaDumbbell, FaUtensils, FaBed, FaChartLine } from "react-icons/fa6";
-
-import { FeatureCard } from "@features";
-import { DarkModeToggle } from "@features";
+import { DarkModeToggle } from "@features/darkmodetoggle/DarkModeToggle";
+import { FeatureCard } from "@features/featurecard/FeatureCard";
 import { setLoginActive, setRegisterActive } from "@store/slices/authViewSlice";
+import { FaBalanceScale } from "react-icons/fa";
+import { FaBed, FaChartLine, FaDumbbell, FaUtensils } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { NavLink } from "react-router";
 
 export const Welcome = () => {
   const dispatch = useDispatch();
@@ -34,14 +32,14 @@ export const Welcome = () => {
         <nav className="flex justify-center gap-4">
           <NavLink
             to="auth"
-            className="green-button"
+            className="login-button"
             onClick={() => dispatch(setLoginActive())}
           >
             Bejelentkezés
           </NavLink>
           <NavLink
             to="auth"
-            className="white-blue-button"
+            className="register-button"
             onClick={() => dispatch(setRegisterActive())}
           >
             Regisztráció

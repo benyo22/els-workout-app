@@ -8,7 +8,14 @@ const validateEmail = (email) => {
   );
 };
 
-// Exercises ----------------------------------------------------------------------------
+const calcNutrients = (food, quantityInGrams) => {
+  const calories = Math.floor(food.caloriesPer100g * (quantityInGrams / 100));
+  const protein = Math.floor(food.proteinPer100g * (quantityInGrams / 100));
+  const carbs = Math.floor(food.carbsPer100g * (quantityInGrams / 100));
+  const fats = Math.floor(food.fatsPer100g * (quantityInGrams / 100));
+  return { calories, protein, carbs, fats };
+};
+
 const bodyParts = [
   "core",
   "arms",
@@ -19,6 +26,11 @@ const bodyParts = [
   "other",
   "full body",
 ];
+const isGoodBodyPart = (bodyPart) => {
+  if (!bodyParts.includes(bodyPart)) return false;
+  return true;
+};
+
 const categories = [
   "barbell",
   "dumbell",
@@ -30,48 +42,29 @@ const categories = [
   "distance",
   "other",
 ];
-
-const setTypes = ["warm-up", "dropset", "failure", "/"];
-
-const isGoodBodyPart = (bodyPart) => {
-  if (!bodyParts.includes(bodyPart)) return false;
-  return true;
-};
-
 const isGoodCategory = (category) => {
   if (!categories.includes(category)) return false;
   return true;
 };
 
+const setTypes = ["warm-up", "dropset", "failure", "/"];
 const isGoodSetType = (setType) => {
   if (!setTypes.includes(setType)) return false;
   return true;
 };
 
-// Meals ----------------------------------------------------------------------------
 const mealTypes = ["breakfast", "lunch", "dinner", "snack"];
-
 const isGoodMealType = (mealType) => {
   if (!mealTypes.includes(mealType)) return false;
   return true;
 };
 
-const calcNutrients = (food, quantityInGrams) => {
-  const calories = Math.floor(food.caloriesPer100g * (quantityInGrams / 100));
-  const protein = Math.floor(food.proteinPer100g * (quantityInGrams / 100));
-  const carbs = Math.floor(food.carbsPer100g * (quantityInGrams / 100));
-  const fats = Math.floor(food.fatsPer100g * (quantityInGrams / 100));
-  return { calories, protein, carbs, fats };
-};
-
 module.exports = {
-  isObjectEmpty,
-  validateEmail,
-  // Exercises
+  calcNutrients,
   isGoodBodyPart,
   isGoodCategory,
-  isGoodSetType,
-  // Meals
   isGoodMealType,
-  calcNutrients,
+  isGoodSetType,
+  isObjectEmpty,
+  validateEmail,
 };

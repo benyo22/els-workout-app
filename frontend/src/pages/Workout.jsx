@@ -1,21 +1,19 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Button } from "primereact/button";
-
-import { FaChartLine, FaPlus } from "react-icons/fa6";
-import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-
 import {
   useDeleteWorkoutByIdMutation,
   useFinishWorkoutByIdMutation,
   useGetWorkoutByUserIdQuery,
-} from "@api";
-import { ErrorMessage } from "@features";
-import { WorkoutTable } from "@features";
-import { WorkoutManager } from "@features";
-import { WorkoutStatistics } from "@features";
-import { CreateWorkoutForm } from "@features";
+} from "@api/endpoints/workoutEndpoints";
+import { ErrorMessage } from "@features/errormessage/ErrorMessage";
+import { WorkoutStatistics } from "@features/statistics/WorkoutStatistics";
+import { CreateWorkoutForm } from "@features/workout/CreateWorkoutForm";
+import { WorkoutManager } from "@features/workout/WorkoutManager";
+import { WorkoutTable } from "@features/workout/WorkoutTable";
 import { selectUserId } from "@store/slices/authSlice";
+import { Button } from "primereact/button";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { useState } from "react";
+import { FaChartLine } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 export const Workout = () => {
   const userId = useSelector(selectUserId);
@@ -95,8 +93,7 @@ export const Workout = () => {
 
           <div className="flex gap-x-4">
             <Button
-              label="Edzés indítása"
-              icon={<FaPlus className="mr-1" />}
+              label="+ Edzés indítása"
               className="edit-button flex items-center mb-2"
               onClick={handleStartWorkout}
               unstyled
