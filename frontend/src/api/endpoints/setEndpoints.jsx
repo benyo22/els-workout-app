@@ -4,7 +4,7 @@ export const setEndpoints = elsApi.injectEndpoints({
   endpoints: (builder) => ({
     getSetsInExercise: builder.query({
       query: ({ exerciseId, workoutId }) => ({
-        url: `sets/${exerciseId}/${workoutId}`,
+        url: `sets-in-exercise/${exerciseId}/${workoutId}`,
       }),
       providesTags: ["Sets"],
       transformResponse: (response) => response,
@@ -12,13 +12,13 @@ export const setEndpoints = elsApi.injectEndpoints({
     // no need for "invalidatesTags: ["Sets"]" because after every creation bulkUpdateSets runs which has that tag and triggers the automatic refetch
     addSetToExercise: builder.mutation({
       query: ({ exerciseId, workoutId }) => ({
-        url: `sets/${exerciseId}/${workoutId}`,
+        url: `add-set-to-exercise/${exerciseId}/${workoutId}`,
         method: "POST",
       }),
     }),
     updateSetById: builder.mutation({
       query: ({ setId, data }) => ({
-        url: `sets/${setId}`,
+        url: `update-set/${setId}`,
         method: "PATCH",
         body: data,
       }),
@@ -26,7 +26,7 @@ export const setEndpoints = elsApi.injectEndpoints({
     }),
     bulkUpdateSets: builder.mutation({
       query: (data) => ({
-        url: "sets",
+        url: "update-multiple-sets",
         method: "PATCH",
         body: data,
       }),
@@ -35,13 +35,13 @@ export const setEndpoints = elsApi.injectEndpoints({
     // no need for "invalidatesTags: ["Sets"]" because after every delete bulkUpdateSets runs which has that tag and triggers the automatic refetch
     deleteSetById: builder.mutation({
       query: (setId) => ({
-        url: `sets/${setId}`,
+        url: `delete-set/${setId}`,
         method: "DELETE",
       }),
     }),
     deleteAllSetsInExercise: builder.mutation({
       query: ({ exerciseId, workoutId }) => ({
-        url: `sets-delete-all/${exerciseId}/${workoutId}`,
+        url: `delete-all-sets-in-exercise/${exerciseId}/${workoutId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Sets"],

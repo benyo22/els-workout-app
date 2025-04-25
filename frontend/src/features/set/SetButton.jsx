@@ -30,9 +30,6 @@ export const SetButton = ({ set, setsInExercises, workoutIsFinished }) => {
   return (
     <div className="flex flex-col items-center">
       <p>Szett</p>
-      {/* <p className="border-1 border-gray-300 rounded-lg px-2 bg-gray-200 dark:bg-dark-light mt-1">
-      {set.setNumber}
-    </p> */}
       <Button
         label={setTypes[set.type] === "/" ? set.setNumber : setTypes[set.type]}
         onClick={handleTypeChange}
