@@ -36,13 +36,9 @@ function App() {
     removeTheme();
 
     if (darkMode) {
-      loadTheme(
-        "node_modules/primereact/resources/themes/lara-dark-blue/theme.css"
-      );
+      loadTheme("themes/lara-dark-blue/theme.css");
     } else {
-      loadTheme(
-        "node_modules/primereact/resources/themes/lara-light-blue/theme.css"
-      );
+      loadTheme("themes/lara-light-blue/theme.css");
     }
 
     return () => {

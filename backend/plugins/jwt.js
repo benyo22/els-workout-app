@@ -4,7 +4,7 @@ const jwtConfig = {
   secret: "secret",
   cookie: {
     cookieName: "token",
-    signed: true,
+    signed: false,
   },
 };
 

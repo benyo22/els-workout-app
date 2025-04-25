@@ -1,8 +1,11 @@
 const fastifyCors = require("@fastify/cors");
 require("dotenv/config");
 
+const allowedOrigins =
+  process.env.NODE_ENV === "production" ? false : "http://localhost:5173";
+
 const corsConfig = {
-  origin: process.env.CORS_ORIGIN_URL,
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true,
 };

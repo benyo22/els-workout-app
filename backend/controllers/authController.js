@@ -78,11 +78,10 @@ const handleLogin = async (request, reply) => {
   return reply
     .setCookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
+      secure: false,
+      sameSite: "strict",
       path: "/",
       maxAge: 28800,
-      signed: true,
     })
     .send({ message: LOGIN_MESSAGE, id: user.id, username });
 };
