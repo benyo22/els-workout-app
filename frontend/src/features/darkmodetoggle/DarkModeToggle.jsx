@@ -22,9 +22,9 @@ export const DarkModeToggle = () => {
       bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white mr-5"
     >
       {darkMode ? (
-        <FaSun className="hover:text-yellow-300" />
+        <FaSun className="hover:text-yellow-300 active:text-yellow-300" />
       ) : (
-        <FaMoon className="hover:text-secondary-blue" />
+        <FaMoon className="hover:text-secondary-blue active:text-secondary-blue" />
       )}
     </button>
   );

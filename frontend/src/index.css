@@ -39,7 +39,7 @@
   }
 
   .authed-outlet-container {
-    @apply md:col-start-2 md:col-span-4 md:row-start-2 md:row-span-5 flex flex-1 items-center justify-center overflow-y-auto;
+    @apply md:col-start-2 md:col-span-4 md:row-start-2 md:row-span-5 md:flex flex-1 items-center justify-center overflow-y-auto;
     @apply dark:bg-dark-medium dark:text-primary-white;
   }
 
@@ -83,8 +83,8 @@
   }
 
   .dropdown-menu-link {
-    @apply text-xl hover:text-primary-blue  mt-2 ml-2 flex items-center;
-    @apply dark:hover:text-dark-primary-blue;
+    @apply text-xl hover:text-primary-blue active:text-primary-blue  mt-2 ml-2 flex items-center;
+    @apply dark:hover:text-dark-primary-blue dark:active:text-dark-primary-blue;
   }
 
   .dropdown-menu-username {
@@ -168,8 +168,8 @@
   }
 
   .welcome-menu-home-page-link {
-    @apply bg-primary-green text-primary-white md:mr-8 px-6 py-3 font-bold rounded-lg hover:bg-secondary-green transition duration-300 ease-in-out cursor-pointer hover:scale-101;
-    @apply dark:bg-dark-primary-green dark:hover:bg-dark-secondary-green;
+    @apply bg-primary-green text-primary-white md:mr-8 px-4 py-3 font-bold rounded-lg hover:bg-secondary-green active:bg-secondary-green transition duration-300 ease-in-out cursor-pointer hover:scale-101;
+    @apply dark:bg-dark-primary-green dark:hover:bg-dark-secondary-green dark:active:bg-dark-secondary-green;
   }
 
   /* ---------------------- Buttons ---------------------- */
@@ -184,17 +184,17 @@
   }
 
   .edit-button {
-    @apply bg-primary-blue p-3 rounded-lg text-primary-white hover:bg-secondary-blue transition-all duration-300 cursor-pointer hover:scale-101;
-    @apply dark:bg-dark-primary-blue dark:hover:bg-dark-secondary-blue;
+    @apply bg-primary-blue p-3 rounded-lg text-primary-white hover:bg-secondary-blue active:bg-secondary-blue transition-all duration-300 cursor-pointer hover:scale-101;
+    @apply dark:bg-dark-primary-blue dark:hover:bg-dark-secondary-blue dark:active:bg-dark-secondary-blue;
   }
 
   .delete-button {
-    @apply bg-primary-red p-3 rounded-lg w-[50%] text-primary-white hover:bg-secondary-red transition-all duration-300 cursor-pointer;
+    @apply bg-primary-red p-3 rounded-lg w-[50%] text-primary-white hover:bg-secondary-red active:bg-secondary-red transition-all duration-300 cursor-pointer;
   }
 
   .user-avatar {
-    @apply flex items-center justify-center text-primary-white my-2 md:mr-2 bg-gradient-to-b from-primary-blue to-third-blue rounded-full w-14 h-14 cursor-pointer hover:scale-105 hover:shadow-lg hover:from-primary-blue hover:to-primary-green transition-all duration-400;
-    @apply dark:bg-gradient-to-b dark:from-dark-light dark:to-gray-600 dark:text-primary-white dark:hover:from-dark-primary-blue dark:hover:to-dark-primary-green;
+    @apply flex items-center justify-center text-primary-white my-2 md:mr-2 bg-gradient-to-b from-primary-blue to-third-blue rounded-full w-14 h-14 cursor-pointer hover:scale-105 hover:shadow-lg hover:from-primary-blue active:from-primary-blue hover:to-primary-green active:to-primary-green transition-all duration-400;
+    @apply dark:bg-gradient-to-b dark:from-dark-light dark:to-gray-600 dark:text-primary-white dark:hover:from-dark-primary-blue dark:active:from-dark-primary-blue dark:hover:to-dark-primary-green dark:active:to-dark-primary-green;
   }
 
   .green-button {
@@ -213,7 +213,7 @@
   }
 
   .red-button {
-    @apply bg-primary-red text-primary-white rounded-lg py-2 hover:bg-secondary-red active:bg-primary-red hover:scale-101 cursor-pointer transition-all duration-300 ease-out;
+    @apply bg-primary-red text-primary-white rounded-lg py-2 hover:bg-secondary-red active:bg-secondary-red hover:scale-101 cursor-pointer transition-all duration-300 ease-out;
   }
 
   /* ---------------------- Errors ---------------------- */

@@ -1,13 +1,16 @@
+import { selectLoggedInUsername } from "@store/slices/authSlice";
 import { FaBalanceScale } from "react-icons/fa";
 import { FaBed, FaDumbbell, FaUtensils } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router";
 
 export const Home = () => {
+  const username = useSelector(selectLoggedInUsername);
   return (
-    <div className="p-8 bg-gradient-to-br from-primary-blue to-third-blue dark:from-dark-dark dark:to-dark-medium rounded-lg">
+    <div className="p-8 bg-gradient-to-br from-primary-blue to-third-blue dark:from-dark-dark dark:to-dark-medium md:rounded-lg">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary-white dark:text-dark-primary-blue">
-          Üdv újra!
+          Üdv újra {username}!
         </h1>
         <p className="text-lg text-gray-100 dark:text-dark-secondary-blue mb-8">
           Itt az ideje, hogy ma is tegyél magadért! Nézd meg az eddigi

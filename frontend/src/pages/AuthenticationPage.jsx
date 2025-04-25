@@ -23,7 +23,7 @@ export const AuthenticationPage = () => {
       <header className="auth-page-header">
         <div className="flex">
           <h2 className="auth-page-header-h2">Eat Lift Sleep</h2>
-          <div className="ml-5">
+          <div className="ml-4">
             <DarkModeToggle />
           </div>
         </div>

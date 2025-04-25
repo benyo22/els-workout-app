@@ -39,7 +39,7 @@ export const Meal = () => {
 
   return (
     <div className="flex flex-col dark:border-1 dark:border-primary-grey rounded-lg p-2">
-      <div className="h-[450px] 3xl:h-[700px] shadow-md rounded-lg p-4">
+      <div className="h-[500px] 3xl:h-[700px] shadow-md rounded-lg p-4">
         <h1 className="text-2xl font-bold mb-4 mt-4 md:mt-0">Étkezés</h1>
 
         <div className="mb-4">
@@ -69,7 +69,7 @@ export const Meal = () => {
         {isLoading ? (
           <p>Adatok betöltése...</p>
         ) : (
-          <div className="space-y-4 h-[250px] 3xl:h-[500px] overflow-auto">
+          <div className="space-y-4 h-[200px] sm:h-[250px] md:h-[300px] 3xl:h-[500px] overflow-auto">
             {meals.map((meal) => (
               <MealCard key={meal.id} meal={meal} />
             ))}
