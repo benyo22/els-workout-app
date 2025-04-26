@@ -27,18 +27,22 @@ module.exports = async (fastify, options) => {
     { schema: createSetSchema, onRequest: [fastify.auth] },
     handleUpdateSet
   );
-  fastify.patch("/update-multiple-sets", {
-    schema: bulkUpdateSetSchema,
-    onRequest: [fastify.auth],
-    handleBulkUpdateSets,
-  });
+  fastify.patch(
+    "/update-multiple-sets",
+    {
+      schema: bulkUpdateSetSchema,
+      onRequest: [fastify.auth],
+    },
+    handleBulkUpdateSets
+  );
   fastify.delete(
     "/delete-set/:setId",
     { onRequest: [fastify.auth] },
     handleDeleteSet
   );
-  fastify.delete("/delete-all-sets-in-exercise/:exerciseId/:workoutId", {
-    onRequest: [fastify.auth],
-    handleDeleteAllSetsInExercise,
-  });
+  fastify.delete(
+    "/delete-all-sets-in-exercise/:exerciseId/:workoutId",
+    { onRequest: [fastify.auth] },
+    handleDeleteAllSetsInExercise
+  );
 };

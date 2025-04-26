@@ -9,9 +9,11 @@ const {
   fastifyStatic,
   fastifyStaticConfig,
 } = require("./plugins/fastifyStatic.js");
+const { rateLimit, rateLimitConfig } = require("./plugins/rateLimit.js");
 
 const fastify = Fastify({ logger: true });
 
+fastify.register(rateLimit, rateLimitConfig);
 fastify.register(fastifyCors, corsConfig);
 fastify.register(autoload, autoLoadConfig);
 fastify.register(fastifyCookie, cookieConfig);

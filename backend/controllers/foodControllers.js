@@ -76,7 +76,7 @@ const handleAddFoodToMeal = async (request, reply) => {
   });
 
   return reply.send({
-    message: `Food with an id of ${foodId} has been added to meal with an id of ${mealId}!`,
+    message: "Added food to meal successfully!",
   });
 };
 

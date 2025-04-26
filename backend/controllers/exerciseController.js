@@ -68,7 +68,7 @@ const handleAddExerciseToWorkout = async (request, reply) => {
 
   await workout.addExercise(exercise);
   return reply.send({
-    message: `Exercise (exerciseId:${exerciseId}) added to workout (workoutId:${workoutId})!`,
+    message: "Added exercise to workout successfully",
   });
 };
 

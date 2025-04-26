@@ -128,7 +128,7 @@ const handleDeleteAllSetsInExercise = async (request, reply) => {
     await Set.destroy({ where: { id: sets[i].id } });
   }
 
-  return reply.send({ message: "Sets in exercise deleted!" });
+  return deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
 };
 
 module.exports = {
