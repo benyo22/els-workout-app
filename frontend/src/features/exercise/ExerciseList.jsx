@@ -17,7 +17,7 @@ export const ExerciseList = ({ workout }) => {
   const [removeExerciseFromWorkout] = useRemoveExerciseFromWorkoutMutation();
 
   return (
-    <section className="flex flex-col gap-y-4 mt-4 overflow-y-auto">
+    <section className="flex flex-col w-full gap-y-4 mt-4 overflow-y-auto">
       {exercisesInWorkout?.map((exercise, index) => (
         <div key={index}>
           <div className="flex justify-between">

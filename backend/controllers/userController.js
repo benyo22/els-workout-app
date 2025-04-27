@@ -27,7 +27,7 @@ const handleGetUser = async (request, reply) => {
     "updatedAt",
   ]);
 
-  return reply.send(filteredUser);
+  reply.send(filteredUser);
 };
 
 const handleUpdateUser = async (request, reply) => {
@@ -87,7 +87,7 @@ const handleUpdateUser = async (request, reply) => {
 
   await user.save();
 
-  return updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
+  updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
 };
 
 const handleUpdatePassword = async (request, reply) => {
@@ -121,7 +121,7 @@ const handleUpdatePassword = async (request, reply) => {
   user.password = await argon2.hash(newPassword, { type: argon2.argon2id });
   await user.save();
 
-  return updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
+  updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
 };
 
 const handleDeleteUser = async (request, reply) => {
@@ -152,7 +152,7 @@ const handleDeleteUser = async (request, reply) => {
 
   await user.destroy();
 
-  return deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
+  deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
 };
 
 module.exports = {

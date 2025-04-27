@@ -42,7 +42,7 @@ const handleRegister = async (request, reply) => {
   }
 
   await User.create({ name, age, email, username, password });
-  return createdReply(reply, StatusCodes.CREATED, REGISTER_MESSAGE);
+  createdReply(reply, StatusCodes.CREATED, REGISTER_MESSAGE);
 };
 
 const handleLogin = async (request, reply) => {
@@ -75,7 +75,7 @@ const handleLogin = async (request, reply) => {
     { expiresIn: "8h" }
   );
 
-  return reply
+  reply
     .setCookie("token", token, {
       httpOnly: true,
       secure: false,
@@ -87,7 +87,7 @@ const handleLogin = async (request, reply) => {
 };
 
 const handleLogout = async (request, reply) => {
-  return reply.clearCookie("token").send({ message: LOGOUT_MESSAGE });
+  reply.clearCookie("token").send({ message: LOGOUT_MESSAGE });
 };
 
 module.exports = { handleRegister, handleLogin, handleLogout };

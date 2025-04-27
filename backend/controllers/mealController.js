@@ -27,7 +27,7 @@ const handleGetAllMeals = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  return reply.send(mealData);
+  reply.send(mealData);
 };
 
 const handleGetMealsByDate = async (request, reply) => {
@@ -48,7 +48,7 @@ const handleGetMealsByDate = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  return reply.send(mealData);
+  reply.send(mealData);
 };
 
 const handleCreateMeal = async (request, reply) => {
@@ -77,7 +77,7 @@ const handleCreateMeal = async (request, reply) => {
     fats: 0,
   });
 
-  return createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
+  createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
 };
 
 const handleDeleteMeal = async (request, reply) => {
@@ -89,7 +89,7 @@ const handleDeleteMeal = async (request, reply) => {
 
   await meal.destroy();
 
-  return deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
+  deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
 };
 
 module.exports = {

@@ -29,7 +29,7 @@ const handleGetAllSleep = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  return reply.send(sleepData);
+  reply.send(sleepData);
 };
 
 const handleCreateSleep = async (request, reply) => {
@@ -51,7 +51,7 @@ const handleCreateSleep = async (request, reply) => {
     quality,
   });
 
-  return createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
+  createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
 };
 
 const handleUpdateSleep = async (request, reply) => {
@@ -67,7 +67,7 @@ const handleUpdateSleep = async (request, reply) => {
   }
   await sleep.update({ date, durationSec, quality });
 
-  return updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
+  updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
 };
 
 const handleDeleteSleep = async (request, reply) => {
@@ -78,7 +78,7 @@ const handleDeleteSleep = async (request, reply) => {
   }
   await sleep.destroy();
 
-  return deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
+  deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
 };
 
 module.exports = {

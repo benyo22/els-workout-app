@@ -29,7 +29,7 @@ const handleGetAllWeight = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  return reply.send(weightData);
+  reply.send(weightData);
 };
 
 const handleCreateWeight = async (request, reply) => {
@@ -50,7 +50,7 @@ const handleCreateWeight = async (request, reply) => {
     date,
   });
 
-  return createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
+  createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
 };
 
 const handleUpdateWeight = async (request, reply) => {
@@ -67,7 +67,7 @@ const handleUpdateWeight = async (request, reply) => {
   }
   await weightData.update({ weight, date });
 
-  return updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
+  updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
 };
 
 const handleDeleteWeight = async (request, reply) => {
@@ -78,7 +78,7 @@ const handleDeleteWeight = async (request, reply) => {
   }
   await weight.destroy();
 
-  return deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
+  deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
 };
 
 module.exports = {

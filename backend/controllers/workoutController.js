@@ -57,7 +57,7 @@ const handleCreateWorkout = async (request, reply) => {
     isFinished: false,
   });
 
-  return createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
+  createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
 };
 
 const handleFinishWorkout = async (request, reply) => {
@@ -81,9 +81,9 @@ const handleFinishWorkout = async (request, reply) => {
 
     for (const set of sets) {
       if (
-        (set.reps === 0 || set.weight === 0) &&
-        set.duration === 0 &&
-        set.distance === 0
+        (!set.reps || !set.weight) &&
+        !set.durationSec &&
+        !set.distanceMeter
       ) {
         await Set.destroy({
           where: { id: set.id },
@@ -106,7 +106,7 @@ const handleFinishWorkout = async (request, reply) => {
   workout.isFinished = true;
   await workout.save();
 
-  return reply.send({ message: "Workout closed!" });
+  reply.send({ message: "Workout closed!" });
 };
 
 const handleUpdateWorkout = async (request, reply) => {
@@ -122,7 +122,7 @@ const handleUpdateWorkout = async (request, reply) => {
     date: !date ? workout.date : new Date(date),
   });
 
-  return updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
+  updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
 };
 
 const handleDeletWorkout = async (request, reply) => {
@@ -133,7 +133,7 @@ const handleDeletWorkout = async (request, reply) => {
   }
   await workout.destroy();
 
-  return deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
+  deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
 };
 
 module.exports = {

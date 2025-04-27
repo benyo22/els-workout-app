@@ -19,7 +19,7 @@ const handleGetAllFood = async (request, reply) => {
   if (!food) {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
-  return reply.send(food);
+  reply.send(food);
 };
 
 const handleGetFoodInMeal = async (request, reply) => {
@@ -34,7 +34,7 @@ const handleGetFoodInMeal = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  return reply.send(meal.Food);
+  reply.send(meal.Food);
 };
 
 const handleGetFoodQuantity = async (request, reply) => {
@@ -44,7 +44,7 @@ const handleGetFoodQuantity = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  return reply.send(mealFood);
+  reply.send(mealFood);
 };
 
 const handleAddFoodToMeal = async (request, reply) => {
@@ -75,7 +75,7 @@ const handleAddFoodToMeal = async (request, reply) => {
     fats: meal.fats + macros.fats,
   });
 
-  return reply.send({
+  reply.send({
     message: "Added food to meal successfully!",
   });
 };
@@ -102,7 +102,7 @@ const handleCreateFood = async (request, reply) => {
     fatsPer100g,
   });
 
-  return createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
+  createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
 };
 
 const handleUpdateFoodQuantity = async (request, reply) => {
@@ -135,7 +135,7 @@ const handleUpdateFoodQuantity = async (request, reply) => {
 
   await mealFood[0].update({ quantityInGrams });
 
-  return updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
+  updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
 };
 
 const handleRemoveFoodFromMeal = async (request, reply) => {
@@ -158,7 +158,7 @@ const handleRemoveFoodFromMeal = async (request, reply) => {
 
   await meal.removeFood(food);
 
-  return removedReply(reply, StatusCodes.OK, REMOVED_MESSAGE);
+  removedReply(reply, StatusCodes.OK, REMOVED_MESSAGE);
 };
 
 module.exports = {

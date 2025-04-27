@@ -1,21 +1,12 @@
 const { StatusCodes } = require("http-status-codes");
 const { Workout, Exercise, Set } = require("../models/index");
 const { isGoodSetType } = require("../utils/helper");
-const {
-  CREATED_MESSAGE,
-  UPDATED_MESSAGE,
-  DELETED_MESSAGE,
-} = require("../utils/data");
+const { UPDATED_MESSAGE, DELETED_MESSAGE } = require("../utils/data");
 const {
   DATA_NOT_FOUND_ERROR,
   NOT_VALID_DATA_ERROR,
 } = require("../utils/error");
-const {
-  errorReply,
-  createdReply,
-  updatedReply,
-  deletedReply,
-} = require("../utils/reply");
+const { errorReply, updatedReply, deletedReply } = require("../utils/reply");
 
 const handleGetSetsInExercise = async (request, reply) => {
   const { exerciseId, workoutId } = request.params;
@@ -25,7 +16,7 @@ const handleGetSetsInExercise = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  return reply.send(sets);
+  reply.send(sets);
 };
 
 const handleAddSetToExercise = async (request, reply) => {
@@ -47,7 +38,7 @@ const handleAddSetToExercise = async (request, reply) => {
     distanceMeter: null,
   });
 
-  return createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
+  reply.status(StatusCodes.CREATED).send(set);
 };
 
 const handleUpdateSet = async (request, reply) => {
@@ -72,7 +63,7 @@ const handleUpdateSet = async (request, reply) => {
     type,
   });
 
-  return updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
+  updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
 };
 
 const handleBulkUpdateSets = async (request, reply) => {
@@ -102,7 +93,7 @@ const handleBulkUpdateSets = async (request, reply) => {
     );
   }
 
-  return reply.code(StatusCodes.OK);
+  reply.status(StatusCodes.OK);
 };
 
 const handleDeleteSet = async (request, reply) => {
@@ -114,7 +105,7 @@ const handleDeleteSet = async (request, reply) => {
 
   await set.destroy();
 
-  return deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
+  deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
 };
 
 const handleDeleteAllSetsInExercise = async (request, reply) => {
@@ -128,7 +119,7 @@ const handleDeleteAllSetsInExercise = async (request, reply) => {
     await Set.destroy({ where: { id: sets[i].id } });
   }
 
-  return deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
+  deletedReply(reply, StatusCodes.OK, DELETED_MESSAGE);
 };
 
 module.exports = {

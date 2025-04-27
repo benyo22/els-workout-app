@@ -47,6 +47,7 @@ export const UpdatePassword = ({ error, setError, userId }) => {
           label="Régi jelszó*"
           value={passwords.oldPassword}
           onChange={handleInput}
+          feedback={false}
         />
         <label htmlFor="oldPassword">Régi jelszó</label>
       </FloatLabel>
@@ -58,6 +59,7 @@ export const UpdatePassword = ({ error, setError, userId }) => {
           label="Új jelszó*"
           value={passwords.newPassword}
           onChange={handleInput}
+          feedback={false}
         />
         <label htmlFor="newPassword">Új jelszó</label>
       </FloatLabel>

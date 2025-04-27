@@ -7,13 +7,14 @@ const {
 } = require("../utils/error");
 const { errorReply, createdReply, removedReply } = require("../utils/reply");
 const { CREATED_MESSAGE, REMOVED_MESSAGE } = require("../utils/data");
+const { isGoodCategory, isGoodBodyPart } = require("../utils/helper");
 
 const handleGetAllExercises = async (request, reply) => {
   const exercises = await Exercise.findAll();
   if (!exercises) {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
-  return reply.send(exercises);
+  reply.send(exercises);
 };
 
 const handleGetExercisesInWorkout = async (request, reply) => {
@@ -30,7 +31,7 @@ const handleGetExercisesInWorkout = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  return reply.send(workout.Exercises);
+  reply.send(workout.Exercises);
 };
 
 const handleCreateExercise = async (request, reply) => {
@@ -54,7 +55,7 @@ const handleCreateExercise = async (request, reply) => {
     category,
   });
 
-  return createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
+  createdReply(reply, StatusCodes.CREATED, CREATED_MESSAGE);
 };
 
 const handleAddExerciseToWorkout = async (request, reply) => {
@@ -67,7 +68,7 @@ const handleAddExerciseToWorkout = async (request, reply) => {
   }
 
   await workout.addExercise(exercise);
-  return reply.send({
+  reply.send({
     message: "Added exercise to workout successfully",
   });
 };
@@ -83,7 +84,7 @@ const handleRemoveExerciseFromWorkout = async (request, reply) => {
 
   await workout.removeExercise(exercise);
 
-  return removedReply(reply, StatusCodes.OK, REMOVED_MESSAGE);
+  removedReply(reply, StatusCodes.OK, REMOVED_MESSAGE);
 };
 
 module.exports = {
