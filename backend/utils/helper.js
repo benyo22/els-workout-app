@@ -59,6 +59,12 @@ const isGoodMealType = (mealType) => {
   return true;
 };
 
+const sleepQualities = ["poor", "average", "good", "excellent"];
+const isGoodSleepQuality = (sleepQuality) => {
+  if (!sleepQualities.includes(sleepQuality)) return false;
+  return true;
+};
+
 module.exports = {
   calcNutrients,
   isGoodBodyPart,
@@ -67,4 +73,5 @@ module.exports = {
   isGoodSetType,
   isObjectEmpty,
   validateEmail,
+  isGoodSleepQuality,
 };

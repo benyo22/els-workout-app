@@ -4,6 +4,7 @@ const {
   ALL_REQUIRED_ERROR,
   USER_NOT_FOUND_ERROR,
   DATA_NOT_FOUND_ERROR,
+  NOT_VALID_DATA_ERROR,
 } = require("../utils/error");
 const {
   CREATED_MESSAGE,
@@ -16,6 +17,7 @@ const {
   updatedReply,
   deletedReply,
 } = require("../utils/reply");
+const { isGoodSleepQuality } = require("../utils/helper");
 
 const handleGetAllSleep = async (request, reply) => {
   const { userId } = request.params;
@@ -42,6 +44,10 @@ const handleCreateSleep = async (request, reply) => {
   const user = await User.findByPk(userId);
   if (!user) {
     return errorReply(reply, StatusCodes.NOT_FOUND, USER_NOT_FOUND_ERROR);
+  }
+
+  if (!isGoodSleepQuality(quality)) {
+    return errorReply(reply, StatusCodes.BAD_REQUEST, NOT_VALID_DATA_ERROR);
   }
 
   await Sleep.create({

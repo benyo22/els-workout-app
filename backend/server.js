@@ -1,4 +1,3 @@
-const chalk = require("chalk");
 require("dotenv/config");
 const Fastify = require("fastify");
 const { autoload, autoLoadConfig } = require("./plugins/autoload.js");
@@ -9,14 +8,16 @@ const {
   fastifyStatic,
   fastifyStaticConfig,
 } = require("./plugins/fastifyStatic.js");
+const { rateLimitConfig, rateLimit } = require("./plugins/rateLimit.js");
 
-const fastify = Fastify({ logger: true });
+const fastify = Fastify({ logger: !process.env.NODE_ENV === "production" });
 
 fastify.register(fastifyCors, corsConfig);
 fastify.register(autoload, autoLoadConfig);
 fastify.register(fastifyCookie, cookieConfig);
 fastify.register(fastifyJwt, jwtConfig);
 fastify.register(fastifyStatic, fastifyStaticConfig);
+fastify.register(rateLimit, rateLimitConfig);
 
 fastify.setNotFoundHandler((request, reply) => {
   reply.sendFile("index.html");
@@ -30,11 +31,4 @@ fastify.decorate("auth", async function (request, reply) {
   }
 });
 
-const port = 3000;
-fastify.listen({ port }, (err, address) => {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
-  console.log(chalk.green("Fastify fastify runs on:", address));
-});
+module.exports = { fastify };

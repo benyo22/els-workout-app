@@ -4,8 +4,12 @@ import { useSelector } from "react-redux";
 
 export const ThemeProvider = () => {
   const darkMode = useSelector(selectDarkMode);
-
   useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
     const themeLinkId = "dynamic-theme";
 
     const loadTheme = (theme) => {
