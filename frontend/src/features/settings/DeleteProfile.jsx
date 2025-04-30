@@ -57,6 +57,7 @@ export const DeleteProfile = ({ error, setError, userId }) => {
           value={deletePassword}
           onChange={(e) => setDeletePassword(e.target.value)}
           feedback={false}
+          unstyled
         />
         <label htmlFor="password">Jelszó megerősítése</label>
       </FloatLabel>

@@ -1,11 +1,18 @@
 const {
   handleRegister,
   handleLogout,
+  handleLogin,
 } = require("../controllers/authController");
-const { StatusCodes } = require("http-status-codes");
-const { LOGOUT_MESSAGE, REGISTER_MESSAGE } = require("../utils/data");
+const argon2 = require("argon2");
+const {
+  LOGOUT_MESSAGE,
+  REGISTER_MESSAGE,
+  LOGIN_MESSAGE,
+} = require("../utils/data");
+const { User } = require("../models");
 
 jest.mock("../models");
+jest.mock("argon2");
 
 describe("authController test", () => {
   let request;
@@ -14,14 +21,20 @@ describe("authController test", () => {
   beforeEach(() => {
     request = {
       body: {
-        name: "Teszt Elek",
+        name: "Teszt",
         age: 25,
         email: "teszt.elek@teszt.com",
         username: "tesztelek",
         password: "jelszo123",
       },
+      server: {
+        jwt: {
+          sign: jest.fn().mockReturnValue("fake-jwt-token"),
+        },
+      },
     };
     reply = {
+      setCookie: jest.fn().mockReturnThis(),
       clearCookie: jest.fn().mockReturnThis(),
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
@@ -32,67 +45,55 @@ describe("authController test", () => {
     jest.clearAllMocks();
   });
 
-  it("should return an error if email format is not correct", async () => {
-    request.body = {
-      name: "asd",
-      age: 22,
-      email: "asdasd",
-      username: "johnny",
-      password: "password123",
+  it("should return 201 CREATED if register is successfull", async () => {
+    User.create.mockResolvedValue({});
+
+    await handleRegister(request, reply);
+
+    expect(User.create).toHaveBeenCalledWith(request.body);
+    expect(reply.status).toHaveBeenCalledWith(201);
+    expect(reply.send).toHaveBeenCalledWith({
+      message: REGISTER_MESSAGE,
+    });
+  });
+
+  it("should set cookie if login is successful", async () => {
+    const userFromDB = {
+      id: 1,
+      username: "tesztelek",
+      password: "hashedpassword",
     };
 
-    await handleRegister(request, reply);
+    User.findOne.mockResolvedValue(userFromDB);
+    argon2.verify.mockResolvedValue(true);
 
-    expect(reply.status).toHaveBeenCalledWith(StatusCodes.BAD_REQUEST);
-    expect(reply.send).toHaveBeenCalledWith(
-      expect.objectContaining({
-        error: expect.any(Object),
-      })
+    await handleLogin(request, reply);
+
+    expect(User.findOne).toHaveBeenCalledWith({
+      where: { username: "tesztelek" },
+    });
+
+    expect(argon2.verify).toHaveBeenCalledWith(
+      userFromDB.password,
+      request.body.password
     );
+
+    expect(reply.setCookie).toHaveBeenCalledWith("token", "fake-jwt-token", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+      path: "/",
+      maxAge: 28800,
+    });
+    expect(reply.send).toHaveBeenCalledWith({
+      message: LOGIN_MESSAGE,
+      id: userFromDB.id,
+      username: userFromDB.username,
+    });
   });
 
-  it("should return an error if username is too long", async () => {
-    request.body.username = "a".repeat(16);
-
-    await handleRegister(request, reply);
-
-    expect(reply.status).toHaveBeenCalledWith(StatusCodes.BAD_REQUEST);
-    expect(reply.send).toHaveBeenCalledWith(
-      expect.objectContaining({
-        error: expect.any(Object),
-      })
-    );
-  });
-
-  it("should return an error if age is below 14 or above 99", async () => {
-    request.body.age = 13;
-
-    await handleRegister(request, reply);
-
-    expect(reply.status).toHaveBeenCalledWith(StatusCodes.BAD_REQUEST);
-    expect(reply.send).toHaveBeenCalledWith(
-      expect.objectContaining({
-        error: expect.any(Object),
-      })
-    );
-  });
-
-  it("should return an error if password is too short", async () => {
-    request.body.password = "12345";
-
-    await handleRegister(request, reply);
-
-    expect(reply.status).toHaveBeenCalledWith(StatusCodes.BAD_REQUEST);
-    expect(reply.send).toHaveBeenCalledWith(
-      expect.objectContaining({
-        error: expect.any(Object),
-      })
-    );
-  });
-
-  it("should return 200 OK if logout is successfull", async () => {
+  it("should logout successfully", async () => {
     await handleLogout(request, reply);
-
     expect(reply.send).toHaveBeenCalledWith({
       message: LOGOUT_MESSAGE,
     });

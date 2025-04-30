@@ -66,6 +66,9 @@ const handleUpdateSleep = async (request, reply) => {
   if (!date || !durationSec || !quality) {
     return errorReply(reply, StatusCodes.NOT_FOUND, ALL_REQUIRED_ERROR);
   }
+  if (!isGoodSleepQuality(quality)) {
+    return errorReply(reply, StatusCodes.BAD_REQUEST, NOT_VALID_DATA_ERROR);
+  }
 
   const sleep = await Sleep.findByPk(sleepId);
   if (!sleep) {

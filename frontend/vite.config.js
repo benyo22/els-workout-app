@@ -7,7 +7,6 @@ import { defineConfig } from "vite";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// https://vite.dev/config/
 export default defineConfig({
   base: "/",
   plugins: [react(), tailwindcss()],
@@ -21,7 +20,6 @@ export default defineConfig({
       "@pages": path.resolve(__dirname, "./src/pages"),
       "@layouts": path.resolve(__dirname, "./src/layouts"),
       "@features": path.resolve(__dirname, "./src/features"),
-      "@components": path.resolve(__dirname, "./src/components"),
     },
   },
 });

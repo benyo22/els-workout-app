@@ -1,7 +1,7 @@
 const fastifyJwt = require("@fastify/jwt");
 
 const jwtConfig = {
-  secret: "secret",
+  secret: "hypersupersecretjwt",
   cookie: {
     cookieName: "token",
     signed: false,

@@ -37,7 +37,8 @@ export const UserData = ({ showEditForm }) => {
 
           <div className="user-info-age-email-container">
             <p className="user-info-p">
-              <span className="user-info-age-email">Age:</span> {userInfo?.age}
+              <span className="user-info-age-email">Életkor:</span>{" "}
+              {userInfo?.age}
             </p>
             <p className="user-info-p">
               <span className="user-info-age-email">Email:</span>{" "}

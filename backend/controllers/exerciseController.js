@@ -10,7 +10,7 @@ const { CREATED_MESSAGE, REMOVED_MESSAGE } = require("../utils/data");
 const { isGoodCategory, isGoodBodyPart } = require("../utils/helper");
 
 const handleGetAllExercises = async (request, reply) => {
-  const exercises = await Exercise.findAll();
+  const exercises = await Exercise.findAll({ order: [["name", "ASC"]] });
   if (!exercises) {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }

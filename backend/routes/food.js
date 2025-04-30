@@ -10,7 +10,7 @@ const {
   handleUpdateFoodQuantity,
   handleRemoveFoodFromMeal,
   handleGetFoodQuantity,
-} = require("../controllers/foodControllers");
+} = require("../controllers/foodController");
 
 module.exports = async (fastify, options) => {
   fastify.get("/food", { onRequest: [fastify.auth] }, handleGetAllFood);

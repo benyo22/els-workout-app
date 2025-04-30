@@ -1,7 +1,7 @@
 const fastifyCookie = require("@fastify/cookie");
 
 const cookieConfig = {
-  secret: "secret",
+  secret: "hypersupersecretcookie",
 };
 
 module.exports = { cookieConfig, fastifyCookie };

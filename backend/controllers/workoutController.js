@@ -72,37 +72,6 @@ const handleFinishWorkout = async (request, reply) => {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
 
-  const exercises = workout.Exercises;
-  // remove empty sets
-  for (const exercise of exercises) {
-    const sets = await Set.findAll({
-      where: { exerciseId: exercise.id, workoutId },
-    });
-
-    for (const set of sets) {
-      if (
-        (!set.reps || !set.weight) &&
-        !set.durationSec &&
-        !set.distanceMeter
-      ) {
-        await Set.destroy({
-          where: { id: set.id },
-        });
-      }
-    }
-  }
-
-  // remove empty exercises
-  for (const exercise of exercises) {
-    const sets = await Set.findAll({
-      where: { exerciseId: exercise.id, workoutId },
-    });
-
-    if (sets.length === 0) {
-      await workout.removeExercise(exercise);
-    }
-  }
-
   workout.isFinished = true;
   await workout.save();
 

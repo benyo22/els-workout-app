@@ -3,8 +3,8 @@ import { useGetAllFoodInMealQuery } from "@api/endpoints/foodEndpoints";
 import { useDeleteMealByIdMutation } from "@api/endpoints/mealEndpoints";
 import { mealLabels } from "@data/data";
 import { ErrorMessage } from "@features/errormessage/ErrorMessage";
-import { EditFood } from "@features/food/EditFood";
-import { FoodList } from "@features/food/FoodList";
+import { Food } from "@features/food/Food";
+import { FoodItemInMeal } from "@features/food/FoodItemInMeal";
 import { Button } from "primereact/button";
 import { useState } from "react";
 import { FaRegCircleXmark } from "react-icons/fa6";
@@ -27,34 +27,16 @@ export const MealCard = ({ meal }) => {
     }
   };
 
-  const calcNutrients = (food) => {
-    const calories = Math.floor(
-      food.caloriesPer100g * (food.MealFood.quantityInGrams / 100)
-    );
-    const protein = Math.floor(
-      food.proteinPer100g * (food.MealFood.quantityInGrams / 100)
-    );
-    const carbs = Math.floor(
-      food.carbsPer100g * (food.MealFood.quantityInGrams / 100)
-    );
-    const fats = Math.floor(
-      food.fatsPer100g * (food.MealFood.quantityInGrams / 100)
-    );
-    return { calories, protein, carbs, fats };
-  };
   return (
     <>
-      {showFoodList && (
-        <FoodList mealId={meal.id} setShowFoodList={setShowFoodList} />
-      )}
-
-      {showEditFood && (
-        <EditFood
-          foodId={foodId}
-          mealId={meal.id}
-          setShowEditFood={setShowEditFood}
-        />
-      )}
+      <Food
+        showFoodList={showFoodList}
+        setShowFoodList={setShowFoodList}
+        showEditFood={showEditFood}
+        setShowEditFood={setShowEditFood}
+        mealId={meal.id}
+        foodId={foodId}
+      />
 
       <div className="p-4 bg-primary-white rounded-lg shadow dark:bg-dark-dark">
         <div className="flex justify-between">
@@ -73,54 +55,14 @@ export const MealCard = ({ meal }) => {
         </div>
 
         <ul className="mb-2">
-          {foodInMeal?.map((food) => {
-            const { calories, protein, carbs, fats } = calcNutrients(food);
-            return (
-              <li
-                key={food.id}
-                className="flex justify-between items-center px-4 py-1 border rounded-lg my-4 hover:bg-gray-200 active:bg-gray-200 dark:hover:bg-dark-light dark:active:bg-dark-light cursor-pointer transition-all duration-200"
-                onClick={() => {
-                  setFoodId(food.id);
-                  setShowEditFood(true);
-                }}
-              >
-                {/* Quantity */}
-                <span className="text-xl font-medium text-gray-700 dark:text-primary-white">
-                  {food.MealFood.quantityInGrams} g
-                </span>
-
-                {/* Food Name */}
-                <span className="text-xl font-semibold text-gray-800 dark:text-primary-white">
-                  {food.name}
-                </span>
-
-                {/* Nutrients */}
-                <div className="flex items-center space-x-4 text-gray-600 dark:text-primary-white">
-                  {/* Calories */}
-                  <span className="font-medium text-xl text-orange-500">
-                    {calories} kcal
-                  </span>
-
-                  <div className="flex flex-col">
-                    {/* Protein */}
-                    <span className="font-medium text-secondary-green dark:text-dark-secondary-green">
-                      {protein}g F
-                    </span>
-
-                    {/* Carbs */}
-                    <span className="font-medium text-yellow-500">
-                      {carbs}g SZ
-                    </span>
-
-                    {/* Fats */}
-                    <span className="font-medium text-primary-blue dark:text-dark-primary-blue">
-                      {fats}g ZS
-                    </span>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
+          {foodInMeal?.map((food) => (
+            <FoodItemInMeal
+              key={food.id}
+              food={food}
+              setFoodId={setFoodId}
+              setShowEditFood={setShowEditFood}
+            />
+          ))}
         </ul>
         <Button
           label="+ Étel hozzáadása"

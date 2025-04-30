@@ -10,14 +10,14 @@ const {
 } = require("./plugins/fastifyStatic.js");
 const { rateLimitConfig, rateLimit } = require("./plugins/rateLimit.js");
 
-const fastify = Fastify({ logger: !process.env.NODE_ENV === "production" });
+const fastify = Fastify({ logger: true });
 
+fastify.register(rateLimit, rateLimitConfig);
 fastify.register(fastifyCors, corsConfig);
 fastify.register(autoload, autoLoadConfig);
 fastify.register(fastifyCookie, cookieConfig);
 fastify.register(fastifyJwt, jwtConfig);
 fastify.register(fastifyStatic, fastifyStaticConfig);
-fastify.register(rateLimit, rateLimitConfig);
 
 fastify.setNotFoundHandler((request, reply) => {
   reply.sendFile("index.html");

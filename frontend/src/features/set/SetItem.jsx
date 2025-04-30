@@ -27,7 +27,7 @@ export const SetItem = ({
 
       {exerciseCategory === "distance" ? (
         <DistanceCategory set={set} workoutIsFinished={workoutIsFinished} />
-      ) : exerciseCategory === "duration" ? (
+      ) : exerciseCategory === "duration" || exerciseCategory === "cardio" ? (
         <DurationCategory set={set} workoutIsFinished={workoutIsFinished} />
       ) : (
         <WeightRepsCategory set={set} workoutIsFinished={workoutIsFinished} />

@@ -14,7 +14,7 @@ export const Home = () => {
         </h1>
         <p className="text-lg text-gray-100 dark:text-dark-secondary-blue mb-8">
           Itt az ideje, hogy ma is tegyél magadért! Nézd meg az eddigi
-          haladásod, és indulhat a fejlődé!
+          haladásod, és indulhat a fejlődés!
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

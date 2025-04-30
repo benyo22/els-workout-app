@@ -15,7 +15,7 @@ const {
 } = require("../utils/reply");
 
 const handleGetAllFood = async (request, reply) => {
-  const food = await Food.findAll();
+  const food = await Food.findAll({ order: [["name", "ASC"]] });
   if (!food) {
     return errorReply(reply, StatusCodes.NOT_FOUND, DATA_NOT_FOUND_ERROR);
   }
