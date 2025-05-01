@@ -49,6 +49,7 @@ export const EditUserForm = ({ setVisible }) => {
 
     if (result.error?.data.error) {
       setErrors(result.error.data.error);
+
       return;
     }
 
@@ -88,7 +89,7 @@ export const EditUserForm = ({ setVisible }) => {
                 max={150}
               />
               <label htmlFor="age" className="font-bold">
-                Életkor
+                Életkor {errors.age && <ErrorMessage message={errors.age} />}
               </label>
             </FloatLabel>
 

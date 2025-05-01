@@ -64,7 +64,7 @@ const handleUpdateSleep = async (request, reply) => {
   const { sleepId } = request.params;
   const { date, durationSec, quality } = request.body;
   if (!date || !durationSec || !quality) {
-    return errorReply(reply, StatusCodes.NOT_FOUND, ALL_REQUIRED_ERROR);
+    return errorReply(reply, StatusCodes.BAD_REQUEST, ALL_REQUIRED_ERROR);
   }
   if (!isGoodSleepQuality(quality)) {
     return errorReply(reply, StatusCodes.BAD_REQUEST, NOT_VALID_DATA_ERROR);

@@ -46,7 +46,7 @@ const handleUpdateSet = async (request, reply) => {
   const { setNumber, reps, weight, durationSec, distanceMeter, type } =
     request.body;
 
-  if (type && !isGoodSetType) {
+  if (type && !isGoodSetType(type)) {
     return errorReply(reply, StatusCodes.CONFLICT, NOT_VALID_DATA_ERROR);
   }
 
@@ -75,25 +75,23 @@ const handleBulkUpdateSets = async (request, reply) => {
     }
   }
 
-  for (let i = 0; i < sets.length; i++) {
-    await Promise.all(
-      sets.map((set) =>
-        Set.update(
-          {
-            setNumber: set.setNumber,
-            reps: set.reps,
-            weight: set.weight,
-            durationSec: set.durationSec,
-            distanceMeter: set.distanceMeter,
-            type: set.type,
-          },
-          { where: { id: set.id } }
-        )
+  await Promise.all(
+    sets.map((set) =>
+      Set.update(
+        {
+          setNumber: set.setNumber,
+          reps: set.reps,
+          weight: set.weight,
+          durationSec: set.durationSec,
+          distanceMeter: set.distanceMeter,
+          type: set.type,
+        },
+        { where: { id: set.id } }
       )
-    );
-  }
+    )
+  );
 
-  reply.status(StatusCodes.OK);
+  updatedReply(reply, StatusCodes.OK, UPDATED_MESSAGE);
 };
 
 const handleDeleteSet = async (request, reply) => {
