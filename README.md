@@ -37,4 +37,4 @@ nyissunk egy terminált a projekt gyökérmappájában, majd írjuk be sorban, e
 - npm run prod-setup
 
 ## License
-Ez a projekt **MIT License** alatt érhető el.
+All Rights Reserved © 2025 Bence
