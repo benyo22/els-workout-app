@@ -1,5 +1,4 @@
-# ELS (EatLiftSleep) személyre szabott edzés
-és étrend menedzser
+# ELS (EatLiftSleep) személyre szabott edzés és étrend menedzser
 
 ## Projekt leírás
 Az **ELS (EatLiftSleep)** egy személyre szabott fitness alkalmazás, amely lehetővé teszi a felhasználók számára az **edzés, étkezés, súly és alvás nyomon követését**. Az alkalmazás célja, hogy átfogó képet nyújtson a felhasználók életmódjáról, elősegítse az egészséges szokások kialakítását, és motiválja őket a fejlődésre.
