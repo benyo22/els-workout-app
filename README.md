@@ -27,7 +27,7 @@ Főbb funkciók:
 - CRUD funkciók edzés, étkezés, súly és alvás modulokra
 
 ## Futtatás
-Szükséges hozzá egy MySQL szerver futtatása a számítógépen illetve egy adatbázis.
+Szükséges hozzá egy MySQL szerver futtatása a számítógépen illetve egy adatbázis séma létrehozása bármilyen néven.
 Miután letöltöttük és kicsomagoltuk a ZIP fájlt (vagy klónoztuk a repót),
 nyissunk egy terminált a projekt gyökérmappájában, majd írjuk be sorban, egymás után a következő parancsokat:
 - cd frontend
