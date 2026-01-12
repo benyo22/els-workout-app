@@ -18,7 +18,7 @@ A projekt **diplomamunkaként készült**, elsődleges célja egy modern webes a
 
 ### Edzésnapló
 - Edzések rögzítése
-- Gyakorlatok és terhelések kezelése
+- Gyakorlatok kezelése
 - Időbeli visszakereshetőség
 
 ### Étkezésnapló
@@ -29,7 +29,6 @@ A projekt **diplomamunkaként készült**, elsődleges célja egy modern webes a
 ### Testsúly és alvás
 - Testsúly változásának követése
 - Alvásidő rögzítése
-- Idősoros adatok kezelése
 
 ---
 
@@ -52,12 +51,12 @@ A projekt **diplomamunkaként készült**, elsődleges célja egy modern webes a
 ## Architektúra
 - Elkülönített frontend és backend
 - REST végpontok entitásonként
-- Relációs adatmodell (felhasználó-centrikus)
 - Környezeti változókkal konfigurálható backend
 
 A rendszer kialakítása lehetővé teszi későbbi bővítések megvalósítását (pl. analitika, ajánlórendszer, vizualizációk).
 
 ---
+
 ## Futtatás helyben
 
 ### Előfeltételek
@@ -91,12 +90,6 @@ npm run prod-setup
 
 The project was developed as a **BSc thesis**, with the primary goal of designing and implementing a modern web application architecture based on a real-world problem domain.
 
-The focus of the project is on:
-- structured lifestyle data modeling
-- scalable REST API design
-- modern frontend state management
-- a solid foundation for future analytics and decision-support features
-
 ---
 
 ## Core Features
@@ -107,7 +100,7 @@ The focus of the project is on:
 
 ### Workout Tracking
 - Logging workout sessions
-- Managing exercises and loads
+- Managing exercises
 - Historical workout data access
 
 ### Nutrition Tracking
@@ -118,7 +111,6 @@ The focus of the project is on:
 ### Body Weight & Sleep
 - Body weight tracking over time
 - Sleep duration logging
-- Time-series data handling
 
 ---
 
@@ -143,7 +135,6 @@ The focus of the project is on:
 ## Architecture
 - Decoupled frontend and backend
 - Entity-based REST endpoints
-- User-centric relational data model
 - Environment-based configuration
 
 The architecture is designed to support future extensions such as analytics, data visualization, and recommendation logic.
