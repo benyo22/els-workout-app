@@ -162,5 +162,6 @@ cp .env.example .env
 npm run prod-setup
 ```
 
-## License
-MIT License
+## 📄 License
+
+This project is available under the **MIT License**. See the [LICENSE](LICENSE) file for more info.
