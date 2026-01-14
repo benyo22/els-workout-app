@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "prod-setup": "npm i && npm run migrate && npm run seed && npm run prod",
+    "dev-setup": "npm i && npm run migrate && npm run seed && npm run dev",
     "prod": "cross-env NODE_ENV=production node server.js",
     "seed": "npx sequelize-cli db:seed:all --config=config/db.js",
     "migrate": "npx sequelize-cli db:migrate --config=config/db.js",
