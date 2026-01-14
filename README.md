@@ -69,13 +69,13 @@ A rendszer kialakítása lehetővé teszi későbbi bővítések megvalósítás
 ```bash
 # frontend
 cd frontend
-npm run install-and-build
+npm i
 
 # backend
 cd ../backend
 cp .env.example .env
 # .env fájl kitöltése adatbázis adatokkal
-npm run prod-setup
+npm run dev-setup
 ```
 
 ---
@@ -153,13 +153,13 @@ The architecture is designed to support future extensions such as analytics, dat
 ```bash
 # frontend
 cd frontend
-npm run install-and-build
+npm i
 
 # backend
 cd ../backend
 cp .env.example .env
 # Fill in database credentials in the .env file
-npm run prod-setup
+npm run dev-setup
 ```
 
 ## 📄 License
