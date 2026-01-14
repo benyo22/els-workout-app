@@ -70,7 +70,9 @@ A rendszer kialakítása lehetővé teszi későbbi bővítések megvalósítás
 # frontend
 cd frontend
 npm i
+npm run dev
 
+Másik terminálban:
 # backend
 cd ../backend
 cp .env.example .env
@@ -154,7 +156,9 @@ The architecture is designed to support future extensions such as analytics, dat
 # frontend
 cd frontend
 npm i
+npm run dev
 
+Open an other terminal:
 # backend
 cd ../backend
 cp .env.example .env
