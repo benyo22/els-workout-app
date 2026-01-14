@@ -74,7 +74,7 @@ npm run dev
 
 Másik terminálban:
 # backend
-cd ../backend
+cd backend
 cp .env.example .env
 # .env fájl kitöltése adatbázis adatokkal
 npm run dev-setup
@@ -160,7 +160,7 @@ npm run dev
 
 Open an other terminal:
 # backend
-cd ../backend
+cd backend
 cp .env.example .env
 # Fill in database credentials in the .env file
 npm run dev-setup
