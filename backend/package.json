@@ -1,12 +1,12 @@
 {
   "name": "restapi",
   "version": "1.0.0",
-  "main": "start.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon start.js",
-    "start": "node start.js",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
     "prod-setup": "npm i && npm run migrate && npm run seed && npm run prod",
-    "prod": "cross-env NODE_ENV=production node start.js",
+    "prod": "cross-env NODE_ENV=production node server.js",
     "seed": "npx sequelize-cli db:seed:all --config=config/db.js",
     "migrate": "npx sequelize-cli db:migrate --config=config/db.js",
     "reset_db": "npx sequelize-cli db:migrate:undo:all --config=config/db.js && npm run migrate && npm run seed",
